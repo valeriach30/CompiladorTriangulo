@@ -309,7 +309,6 @@ public class Parser {
 //        commandAST = new LetCommand(dAST, cAST, commandPos);
 //      }
 //      break;
-      //1. Eliminar comando vacio.
     case Token.NIL:
       {
         acceptIt();
@@ -332,16 +331,16 @@ public class Parser {
 //      }
 //      break;
     //  2. Eliminar while
-    case Token.WHILE:
-      {
-        acceptIt();
-        Expression eAST = parseExpression();
-        accept(Token.DO);
-        Command cAST = parseSingleCommand();
-        finish(commandPos);
-        commandAST = new WhileCommand(eAST, cAST, commandPos);
-      }
-      break;
+//    case Token.WHILE:
+//      {
+//        acceptIt();
+//        Expression eAST = parseExpression();
+//        accept(Token.DO);
+//        Command cAST = parseSingleCommand();
+//        finish(commandPos);
+//        commandAST = new WhileCommand(eAST, cAST, commandPos);
+//      }
+//      break;
 
 //    case Token.SEMICOLON:
 //    case Token.END:
