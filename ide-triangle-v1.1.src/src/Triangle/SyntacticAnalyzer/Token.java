@@ -77,7 +77,7 @@ final class Token extends Object {
     IF			= 11,
     IN			= 12,
     LET			= 13,
-    NIL                 = 14,
+    NIL                 = 14, // Agregar NIL
     OF			= 15,
     PROC		= 16,
     RECORD		= 17,
@@ -121,7 +121,7 @@ final class Token extends Object {
     "if",
     "in",
     "let",
-    "nil",
+    "nil",          // Agregar NIL
     "of",
     "proc",
     "record",
