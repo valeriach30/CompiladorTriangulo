@@ -309,7 +309,15 @@ public class Parser {
         commandAST = new LetCommand(dAST, cAST, commandPos);
       }
       break;
-
+      
+    case Token.NIL:
+      {
+        acceptIt();
+        finish(commandPos);
+        commandAST = new EmptyCommand(commandPos);
+      }
+      break;
+      
     case Token.IF:
       {
         acceptIt();
