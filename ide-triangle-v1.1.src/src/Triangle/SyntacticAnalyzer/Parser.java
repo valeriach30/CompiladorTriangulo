@@ -292,24 +292,24 @@ public class Parser {
         }
       }
       break;
-
-    case Token.BEGIN:
-      acceptIt();
-      commandAST = parseCommand();
-      accept(Token.END);
-      break;
-
-    case Token.LET:
-      {
-        acceptIt();
-        Declaration dAST = parseDeclaration();
-        accept(Token.IN);
-        Command cAST = parseSingleCommand();
-        finish(commandPos);
-        commandAST = new LetCommand(dAST, cAST, commandPos);
-      }
-      break;
-      
+      //2. Eliminar begin
+//    case Token.BEGIN:
+//      acceptIt();
+//      commandAST = parseCommand();
+//      accept(Token.END);
+//      break;
+      //2. Eliminar let
+//    case Token.LET:
+//      {
+//        acceptIt();
+//        Declaration dAST = parseDeclaration();
+//        accept(Token.IN);
+//        Command cAST = parseSingleCommand();
+//        finish(commandPos);
+//        commandAST = new LetCommand(dAST, cAST, commandPos);
+//      }
+//      break;
+      //1. Eliminar comando vacio.
     case Token.NIL:
       {
         acceptIt();
@@ -318,19 +318,20 @@ public class Parser {
       }
       break;
       
-    case Token.IF:
-      {
-        acceptIt();
-        Expression eAST = parseExpression();
-        accept(Token.THEN);
-        Command c1AST = parseSingleCommand();
-        accept(Token.ELSE);
-        Command c2AST = parseSingleCommand();
-        finish(commandPos);
-        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
-      }
-      break;
-
+      //2. Eliminar if
+//    case Token.IF:
+//      {
+//        acceptIt();
+//        Expression eAST = parseExpression();
+//        accept(Token.THEN);
+//        Command c1AST = parseSingleCommand();
+//        accept(Token.ELSE);
+//        Command c2AST = parseSingleCommand();
+//        finish(commandPos);
+//        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
+//      }
+//      break;
+    //  2. Eliminar while
     case Token.WHILE:
       {
         acceptIt();
@@ -342,10 +343,10 @@ public class Parser {
       }
       break;
 
-    case Token.SEMICOLON:
-    case Token.END:
-    case Token.ELSE:
-    case Token.IN:
+//    case Token.SEMICOLON:
+//    case Token.END:
+//    case Token.ELSE:
+//    case Token.IN:
     case Token.EOT:
 
       finish(commandPos);
