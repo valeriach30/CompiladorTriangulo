@@ -317,6 +317,13 @@ public class Parser {
       }
       break;
       
+    case Token.LOOP:
+      {
+        acceptIt();
+        finish(commandPos);
+        commandAST = new EmptyCommand(commandPos);
+      }
+      break;
       //2. Eliminar if
 //    case Token.IF:
 //      {
