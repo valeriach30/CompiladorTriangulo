@@ -5,27 +5,21 @@
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
-
 /**
  *
  * @author Vale
  */
-
-import Triangle.SyntacticAnalyzer.SourcePosition;
-
-public class LoopCommand extends Command {
- 
-    
-  public LoopCommand (Identifier iAST, SourcePosition thePosition) {
+public class LoopCommandAST1 extends Command{
+    public LoopCommandAST1 (Identifier iAST, WhileCommand WhileVarAST, SourcePosition thePosition) {
     super (thePosition);
     I = iAST;
+    WhileVar = WhileVarAST;
   }
 
-  @Override
   public Object visit(Visitor v, Object o) {
-    return v.visitLoopCommand(this, o);
+    return v.visitLoopCommandAST1(this, o);
   }
 
   public Identifier I;
-
+  public WhileCommand WhileVar;
 }

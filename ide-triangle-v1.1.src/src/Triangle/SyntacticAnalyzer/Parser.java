@@ -49,6 +49,8 @@ import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
+import Triangle.AbstractSyntaxTrees.LoopCommand;
+import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -334,21 +336,33 @@ public class Parser {
     case Token.LOOP:
       {
         acceptIt();
-        
-        // Aceptar el identificador
         Identifier iAST = parseIdentifier();
         
-        //Expression eAST = parseExpression();
-        
-        // Determinar que le sigue al for
+        // Determinar que sigue despues del for 
         switch(currentToken.kind){
             case Token.WHILE: {
+                // Crear el segundo arbol
                 acceptIt();
-                //WhileCommand WhileVar = whileDo(commandPos);
-                //Command cAST = parseSingleCommand();
-                //finish(commandPos);
-                //commandAST = new WhileCommand(eAST, cAST, commandPos);
+                WhileCommand WhileVar = whileDo(commandPos);
+                commandAST = new LoopCommandAST1(iAST, WhileVar, commandPos);
+                break;
             }
+            /*
+            
+            case Token.UNTIL: {
+                
+            }
+            case Token.DO: {
+            
+            }
+            case Token.FOR: {
+            
+            }
+            
+            */
+            default:
+                syntacticError("Expected while, do, until or for here", currentToken.spelling);
+                break;
         }
       }
       break;
@@ -1013,4 +1027,36 @@ public class Parser {
     }
     return fieldAST;
   }
+
+    private LoopCommand ParseLoopCommand(SourcePosition commandPos) throws SyntaxError {
+        return null;
+    }
+
+    private WhileCommand whileDo(SourcePosition commandPos) throws SyntaxError{
+        
+        start(commandPos);
+        WhileCommand commandAST = null;
+        
+        // Obtener la expresion
+        Expression eAST = parseExpression();
+        
+        // Aceptar el command
+        accept(Token.DO);
+        Command cAST = parseCommand();
+        
+        // End
+        if(currentToken.kind == Token.END){
+            acceptIt();
+            finish(commandPos);
+            commandAST = new WhileCommand (eAST, cAST, commandPos);
+        }
+        
+        // Error
+        else{
+            syntacticError("Expected END here", currentToken.spelling);
+        }
+        
+        // Retornar el arbol
+        return commandAST;
+    }
 }

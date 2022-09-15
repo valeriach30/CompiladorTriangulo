@@ -38,6 +38,7 @@ import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommand;
+import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -441,6 +442,11 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitLoopCommand(LoopCommand ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return(createBinary("Loop Command", ast.I, ast.I));
+    }
+
+    @Override
+    public Object visitLoopCommandAST1(LoopCommandAST1 ast, Object o) {
+        return(createBinary("Loop Command", ast.I, ast.WhileVar));
     }
 }
