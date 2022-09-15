@@ -292,23 +292,35 @@ public class Parser {
         }
       }
       break;
-      //2. Eliminar begin
-//    case Token.BEGIN:
-//      acceptIt();
-//      commandAST = parseCommand();
-//      accept(Token.END);
-//      break;
-      //2. Eliminar let
-//    case Token.LET:
-//      {
-//        acceptIt();
-//        Declaration dAST = parseDeclaration();
-//        accept(Token.IN);
-//        Command cAST = parseSingleCommand();
-//        finish(commandPos);
-//        commandAST = new LetCommand(dAST, cAST, commandPos);
-//      }
-//      break;
+      
+    // -------------------------------- ELIMINAR --------------------------------
+      
+    // Eliminar begin
+    
+    /*
+    case Token.BEGIN:
+      acceptIt();
+      commandAST = parseCommand();
+      accept(Token.END);
+      break;
+    */  
+      
+    // Eliminar let
+      
+    /*
+    case Token.LET:
+      {
+        acceptIt();
+        Declaration dAST = parseDeclaration();
+        accept(Token.IN);
+        Command cAST = parseSingleCommand();
+        finish(commandPos);
+        commandAST = new LetCommand(dAST, cAST, commandPos);
+      }
+      break;
+    */
+      
+    // -------------------------------- NIL --------------------------------
     case Token.NIL:
       {
         acceptIt();
@@ -317,6 +329,8 @@ public class Parser {
       }
       break;
       
+    // -------------------------------- LOOP --------------------------------
+
     case Token.LOOP:
       {
         acceptIt();
@@ -324,35 +338,47 @@ public class Parser {
         commandAST = new EmptyCommand(commandPos);
       }
       break;
-      //2. Eliminar if
-//    case Token.IF:
-//      {
-//        acceptIt();
-//        Expression eAST = parseExpression();
-//        accept(Token.THEN);
-//        Command c1AST = parseSingleCommand();
-//        accept(Token.ELSE);
-//        Command c2AST = parseSingleCommand();
-//        finish(commandPos);
-//        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
-//      }
-//      break;
-    //  2. Eliminar while
-//    case Token.WHILE:
-//      {
-//        acceptIt();
-//        Expression eAST = parseExpression();
-//        accept(Token.DO);
-//        Command cAST = parseSingleCommand();
-//        finish(commandPos);
-//        commandAST = new WhileCommand(eAST, cAST, commandPos);
-//      }
-//      break;
+      
+      
+    // -------------------------------- ELIMINAR --------------------------------
+    
+    // Eliminar if
 
-//    case Token.SEMICOLON:
-//    case Token.END:
-//    case Token.ELSE:
-//    case Token.IN:
+    /*
+    case Token.IF:
+      {
+        acceptIt();
+        Expression eAST = parseExpression();
+        accept(Token.THEN);
+        Command c1AST = parseSingleCommand();
+        accept(Token.ELSE);
+        Command c2AST = parseSingleCommand();
+        finish(commandPos);
+        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
+      }
+      break;
+    */
+      
+    // Eliminar while
+     
+    /*
+    case Token.WHILE:
+      {
+        acceptIt();
+        Expression eAST = parseExpression();
+        accept(Token.DO);
+        Command cAST = parseSingleCommand();
+        finish(commandPos);
+        commandAST = new WhileCommand(eAST, cAST, commandPos);
+      }
+      break;
+
+    case Token.SEMICOLON:
+    case Token.END:
+    case Token.ELSE:
+    case Token.IN:
+    */
+      
     case Token.EOT:
 
       finish(commandPos);
