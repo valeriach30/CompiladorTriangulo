@@ -334,8 +334,22 @@ public class Parser {
     case Token.LOOP:
       {
         acceptIt();
-        finish(commandPos);
-        commandAST = new EmptyCommand(commandPos);
+        
+        // Aceptar el identificador
+        Identifier iAST = parseIdentifier();
+        
+        //Expression eAST = parseExpression();
+        
+        // Determinar que le sigue al for
+        switch(currentToken.kind){
+            case Token.WHILE: {
+                acceptIt();
+                //WhileCommand WhileVar = whileDo(commandPos);
+                //Command cAST = parseSingleCommand();
+                //finish(commandPos);
+                //commandAST = new WhileCommand(eAST, cAST, commandPos);
+            }
+        }
       }
       break;
       
