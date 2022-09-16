@@ -335,26 +335,53 @@ public class Parser {
     case Token.LOOP:
       {
         acceptIt();
+        // Agarrar el identificador como AST
         Identifier iAST = parseIdentifier();
         
         // Determinar que sigue despues del for 
         switch(currentToken.kind){
+            
+            // --------------------------------> Caso 1 <--------------------------------
+            // "loop" [ Identifier ] "while" Expression "do" Command "end"
+            
             case Token.WHILE: {
-                // Crear el segundo arbol
+                // Crear el primer arbol
                 acceptIt();
                 WhileCommand WhileVar = whileDo(commandPos);
+                // Crear el arbol final
                 commandAST = new LoopCommandAST1(iAST, WhileVar, commandPos);
                 break;
             }
+            
             /*
             
+            // --------------------------------> Caso 2 <--------------------------------
+            // "loop" [ Identifier ] "until" Expression "do" Command "end"
+
             case Token.UNTIL: {
                 
+                
             }
-            case Token.DO: {
             
+            // ------------------------------> Caso 3 y 4 <------------------------------
+            case Token.DO: {
+                // "loop" [ Identifier ] "do" Command "while" Expression "end"
+|               
+                // "loop" [ Identifier ] "do" Command "until" Expression "end"
             }
+            
+            // ----------------------------> Resto de casos <-----------------------------
             case Token.FOR: {
+            // "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
+            //      "do" Command "end"
+            
+            // "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
+            //      "while" Expression "do" Command "end"
+            
+            // "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
+            //      "until" Expression "do" Command "end"
+            
+            // "loop" [ Identifier ] "for" Identifier "in" Expression "do" Command "end"
             
             }
             
