@@ -458,6 +458,6 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
-        return(createTernary("Loop For From To Do Command", aThis.ForFrom, aThis.E, aThis.Do));
+        return(createQuaternary("Loop For From To Do Command",aThis.I, aThis.ForFrom, aThis.E, aThis.Do));
     }
 }

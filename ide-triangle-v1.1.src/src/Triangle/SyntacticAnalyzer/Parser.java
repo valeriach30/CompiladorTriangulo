@@ -394,7 +394,6 @@ public class Parser {
             case Token.FOR: {
                 acceptIt();
                 // Agarrar el identificador
-                start(commandPos);
                 Identifier iAST2 = parseIdentifier();
                 
                 switch(currentToken.kind){
@@ -420,7 +419,8 @@ public class Parser {
                             case Token.DO:{
                                 acceptIt();
                                 DoCommand Dovar = ParseDoCommand(commandPos);
-                                commandAST = new ForFromAST1(ForFromVar, eAST, Dovar, commandPos);
+                                
+                                commandAST = new ForFromAST1(iAST, ForFromVar, eAST, Dovar, commandPos);
                                 break;
                             }
                             
