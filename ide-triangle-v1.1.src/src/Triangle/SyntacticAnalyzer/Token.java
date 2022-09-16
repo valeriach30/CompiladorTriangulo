@@ -136,8 +136,8 @@ final class Token extends Object {
     "then",
     "to",           // Agregar TO
     "type",
+    "until",        // Agregar UNTIL    
     "var",
-    "until",        // Agregar UNTIL
     "while",
     ".",
     ":",
