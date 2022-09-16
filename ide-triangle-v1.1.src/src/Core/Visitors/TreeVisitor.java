@@ -41,6 +41,7 @@ import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
+import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -66,6 +67,7 @@ import Triangle.AbstractSyntaxTrees.SubscriptVname;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
+import Triangle.AbstractSyntaxTrees.UntilCommand;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
@@ -442,6 +444,7 @@ public class TreeVisitor implements Visitor {
     }
     // </editor-fold>
 
+    // -------------------------------------------- NUEVOS --------------------------------------------
     @Override
     public Object visitLoopCommandAST1(LoopCommandAST1 ast, Object o) {
         return(createBinary("Loop Command", ast.I, ast.WhileVar));
@@ -449,7 +452,8 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitForFromCommand(ForFromCommand aThis, Object o) {
-        return(createBinary("For From Command", aThis.I, aThis.E));}
+        return(createBinary("For From Command", aThis.I, aThis.E));
+    }
 
     @Override
     public Object visitDoCommandAST(DoCommand aThis, Object o) {
@@ -458,6 +462,16 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
-        return(createQuaternary("Loop For From To Do Command",aThis.I, aThis.ForFrom, aThis.E, aThis.Do));
+        return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.Do));
+    }
+
+    @Override
+    public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
+        return(createBinary("Loop Command", aThis.I, aThis.UntilVar));
+    }
+
+    @Override
+    public Object visitUntilCommand(UntilCommand aThis, Object o) {
+        return(createBinary("Until Command", aThis.I, aThis.C));
     }
 }

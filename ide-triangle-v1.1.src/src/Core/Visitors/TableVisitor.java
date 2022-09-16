@@ -41,6 +41,7 @@ import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
+import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -66,6 +67,7 @@ import Triangle.AbstractSyntaxTrees.SubscriptVname;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
+import Triangle.AbstractSyntaxTrees.UntilCommand;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
@@ -629,21 +631,50 @@ public class TableVisitor implements Visitor {
 
     @Override
     public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        aThis.I.visit(this, null);
+        aThis.WhileVar.visit(this, null);
+      
+        return(null);
     }
 
     @Override
     public Object visitForFromCommand(ForFromCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        aThis.I.visit(this, null);
+        aThis.E.visit(this, null);
+      
+        return(null);
     }
 
     @Override
     public Object visitDoCommandAST(DoCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        aThis.C.visit(this, null);
+      
+        return(null);
     }
 
     @Override
     public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        aThis.I.visit(this, null);
+        aThis.E.visit(this, null);
+        aThis.ForFrom.visit(this, null);
+        aThis.Do.visit(this, null);
+        
+        return(null);
+    }
+
+    @Override
+    public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
+        aThis.I.visit(this, null);
+        aThis.UntilVar.visit(this, null);
+      
+        return(null);
+    }
+
+    @Override
+    public Object visitUntilCommand(UntilCommand aThis, Object o) {
+        aThis.I.visit(this, null);
+        aThis.C.visit(this, null);
+      
+        return(null);
     }
 }

@@ -5,21 +5,25 @@
 package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
+
+
 /**
  *
  * @author Vale
  */
-public class LoopCommandAST1 extends Command{
-   public LoopCommandAST1 (Identifier iAST, WhileCommand WhileVarAST, SourcePosition thePosition) {
+public class UntilCommand extends Command{
+
+  public UntilCommand (Expression iAST, Command cAST, SourcePosition thePosition) {
     super (thePosition);
     I = iAST;
-    WhileVar = WhileVarAST;
+    C = cAST;
   }
 
   public Object visit(Visitor v, Object o) {
-    return v.visitLoopCommandAST1(this, o);
+    return v.visitUntilCommand(this, o);
   }
 
-  public Identifier I;
-  public WhileCommand WhileVar;
+  public Expression I;
+  public Command C;
+    
 }

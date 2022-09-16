@@ -1,0 +1,4 @@
+! Programa con error, falta el end
+loop x 
+until x < 10 
+do x:= x + 1 

@@ -53,6 +53,7 @@ import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
+import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -79,6 +80,7 @@ import Triangle.AbstractSyntaxTrees.SubscriptVname;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.TypeDenoter;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
+import Triangle.AbstractSyntaxTrees.UntilCommand;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
@@ -354,7 +356,7 @@ public class Parser {
         // Agarrar el identificador como AST
         Identifier iAST = parseIdentifier();
         
-        // Determinar que sigue despues del for 
+        // Determinar que sigue despues del loop 
         switch(currentToken.kind){
             
             // --------------------------------> Caso 1 <--------------------------------
@@ -369,19 +371,21 @@ public class Parser {
                 break;
             }
             
-            /*
+            
             
             // --------------------------------> Caso 2 <--------------------------------
             // "loop" [ Identifier ] "until" Expression "do" Command "end"
 
             case Token.UNTIL: {
-                // Crear el primer arbol
                 acceptIt();
+                // Crear el primer arbol
                 UntilCommand UntilVar = UntilDo(commandPos);
                 // Crear el arbol final
                 commandAST = new LoopUntilDoAST(iAST, UntilVar, commandPos);
+                break;
             }
             
+            /*
             // ------------------------------> Caso 3 y 4 <------------------------------
             case Token.DO: {
                 // "loop" [ Identifier ] "do" Command "while" Expression "end"
@@ -420,7 +424,6 @@ public class Parser {
                             case Token.DO:{
                                 acceptIt();
                                 DoCommand Dovar = ParseDoCommand(commandPos);
-                                
                                 commandAST = new ForFromAST1(iAST, ForFromVar, eAST, Dovar, commandPos);
                                 break;
                             }
@@ -460,8 +463,6 @@ public class Parser {
                 }
             break;
             }
-            
-            
             default:
                 syntacticError("Expected while, do, until or for here", currentToken.spelling);
                 break;
@@ -1176,6 +1177,33 @@ public class Parser {
             finish(commandPos);
             commandAST = new DoCommand(cAST, commandPos);
         }
+        return commandAST;
+    }
+
+    private UntilCommand UntilDo(SourcePosition commandPos) throws SyntaxError {
+        start(commandPos);
+        UntilCommand commandAST = null;
+        
+        // Obtener la expresion
+        Expression eAST = parseExpression();
+        
+        // Aceptar el command
+        accept(Token.DO);
+        Command cAST = parseCommand();
+        
+        // End
+        if(currentToken.kind == Token.END){
+            acceptIt();
+            finish(commandPos);
+            commandAST = new UntilCommand(eAST, cAST, commandPos);
+        }
+        
+        // Error
+        else{
+            syntacticError("Expected END here", currentToken.spelling);
+        }
+        
+        // Retornar el arbol
         return commandAST;
     }
 }
