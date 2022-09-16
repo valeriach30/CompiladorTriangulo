@@ -319,7 +319,7 @@ public class Parser {
         commandAST = new LetCommand(dAST, cAST, commandPos);
       }
       break;
-    */
+    */  
       
     // -------------------------------- NIL --------------------------------
     case Token.NIL:
@@ -329,6 +329,19 @@ public class Parser {
         commandAST = new EmptyCommand(commandPos);
       }
       break;
+      
+    // -------------------------------- LET --------------------------------
+    case Token.LET:
+      {
+        acceptIt();
+        Declaration dAST = parseDeclaration();
+        accept(Token.IN);
+        Command cAST = parseSingleCommand();
+        accept(Token.END);
+        finish(commandPos);
+        commandAST = new LetCommand(dAST, cAST, commandPos);
+      }
+      break;  
       
     // -------------------------------- LOOP --------------------------------
 
@@ -359,8 +372,11 @@ public class Parser {
             // "loop" [ Identifier ] "until" Expression "do" Command "end"
 
             case Token.UNTIL: {
-                
-                
+                // Crear el primer arbol
+                acceptIt();
+                UntilCommand UntilVar = UntilDo(commandPos);
+                // Crear el arbol final
+                commandAST = new LoopUntilDoAST(iAST, UntilVar, commandPos);
             }
             
             // ------------------------------> Caso 3 y 4 <------------------------------

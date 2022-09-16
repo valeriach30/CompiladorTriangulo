@@ -1,4 +1,4 @@
-! Let command successful test
+ ! Let command successful test
 
 let
    proc p() ~ let
