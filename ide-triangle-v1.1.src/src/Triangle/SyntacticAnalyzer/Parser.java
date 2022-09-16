@@ -49,7 +49,6 @@ import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
-import Triangle.AbstractSyntaxTrees.LoopCommand;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
@@ -1027,10 +1026,6 @@ public class Parser {
     }
     return fieldAST;
   }
-
-    private LoopCommand ParseLoopCommand(SourcePosition commandPos) throws SyntaxError {
-        return null;
-    }
 
     private WhileCommand whileDo(SourcePosition commandPos) throws SyntaxError{
         

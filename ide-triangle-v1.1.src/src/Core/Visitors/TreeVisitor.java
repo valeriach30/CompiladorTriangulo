@@ -37,7 +37,6 @@ import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
-import Triangle.AbstractSyntaxTrees.LoopCommand;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
@@ -439,11 +438,6 @@ public class TreeVisitor implements Visitor {
         return(t);             
     }
     // </editor-fold>
-
-    @Override
-    public Object visitLoopCommand(LoopCommand ast, Object o) {
-        return(createBinary("Loop Command", ast.I, ast.I));
-    }
 
     @Override
     public Object visitLoopCommandAST1(LoopCommandAST1 ast, Object o) {

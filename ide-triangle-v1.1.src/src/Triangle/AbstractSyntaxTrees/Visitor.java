@@ -24,7 +24,7 @@ public interface Visitor {
   public abstract Object visitLetCommand(LetCommand ast, Object o);
   public abstract Object visitSequentialCommand(SequentialCommand ast, Object o);
   public abstract Object visitWhileCommand(WhileCommand ast, Object o);
-  public abstract Object visitLoopCommand(LoopCommand ast, Object o);
+  public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o);
 
 
   // Expressions
@@ -105,6 +105,6 @@ public interface Visitor {
   // Programs
   public abstract Object visitProgram(Program ast, Object o);
 
-  public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o);
+  
 
 }
