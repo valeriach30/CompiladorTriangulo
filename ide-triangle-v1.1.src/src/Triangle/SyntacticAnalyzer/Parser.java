@@ -431,6 +431,7 @@ public class Parser {
                                   "while" Expression "do" Command "end"
                             */
                             case Token.WHILE:{
+                                acceptIt();
                                 break;
                             }
                             
@@ -441,6 +442,7 @@ public class Parser {
                             */
                             
                             case Token.UNTIL:{
+                                acceptIt();
                                 break;
                             }
                         }
@@ -448,10 +450,12 @@ public class Parser {
                     }
                     case Token.IN: {
                         // "loop" [ Identifier ] "for" Identifier "in" Expression "do" Command "end"
+                        acceptIt();
                         break;
                     }
                     default: 
                         syntacticError("Expected from or in here", currentToken.spelling);
+                        acceptIt();
                         break;
                 }
             break;
