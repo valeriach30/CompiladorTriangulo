@@ -20,12 +20,15 @@ import Triangle.AbstractSyntaxTrees.CharacterLiteral;
 import Triangle.AbstractSyntaxTrees.ConstActualParameter;
 import Triangle.AbstractSyntaxTrees.ConstDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
+import Triangle.AbstractSyntaxTrees.DoCommand;
 import Triangle.AbstractSyntaxTrees.DotVname;
 import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForFromAST1;
+import Triangle.AbstractSyntaxTrees.ForFromCommand;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -442,5 +445,19 @@ public class TreeVisitor implements Visitor {
     @Override
     public Object visitLoopCommandAST1(LoopCommandAST1 ast, Object o) {
         return(createBinary("Loop Command", ast.I, ast.WhileVar));
+    }
+
+    @Override
+    public Object visitForFromCommand(ForFromCommand aThis, Object o) {
+        return(createBinary("For From Command", aThis.I, aThis.E));}
+
+    @Override
+    public Object visitDoCommandAST(DoCommand aThis, Object o) {
+        return(createUnary("Do Command", aThis.C));
+    }
+
+    @Override
+    public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
+        return(createTernary("Loop For From To Do Command", aThis.ForFrom, aThis.E, aThis.Do));
     }
 }

@@ -73,39 +73,43 @@ final class Token extends Object {
     DO			= 7,
     ELSE		= 8,
     END			= 9,
-    FUNC		= 10,
-    IF			= 11,
-    IN			= 12,
-    LET			= 13,
-    LOOP                = 14,
-    NIL                 = 15, // Agregar NIL
-    OF			= 16,
-    PROC		= 17,
-    RECORD		= 18,
-    THEN		= 19,
-    TYPE		= 20,
-    VAR			= 21,
-    WHILE		= 22,
+    FOR                 = 10, // Agregar FOR
+    FROM                = 11, // Agregar FROM     
+    FUNC		= 12,
+    IF			= 13,
+    IN			= 14,
+    LET			= 15,
+    LOOP                = 16, // Agregar LOOP
+    NIL                 = 17, // Agregar NIL
+    OF			= 18,
+    PROC		= 19,
+    RECORD		= 20,
+    THEN		= 21,
+    TO                  = 22, // Agregar TO
+    TYPE		= 23,
+    UNTIL               = 24, // Agregar UNTIL
+    VAR			= 25,
+    WHILE		= 26,
 
     // punctuation...
-    DOT			= 23,
-    COLON		= 24,
-    SEMICOLON           = 25,
-    COMMA		= 26,
-    BECOMES		= 27,
-    IS			= 28,
+    DOT			= 27,
+    COLON		= 28,
+    SEMICOLON           = 29,
+    COMMA		= 30,
+    BECOMES		= 31,
+    IS			= 32,
 
     // brackets...
-    LPAREN		= 29,
-    RPAREN		= 30,
-    LBRACKET            = 31,
-    RBRACKET            = 32,
-    LCURLY		= 33,
-    RCURLY		= 34,
+    LPAREN		= 33,
+    RPAREN		= 34,
+    LBRACKET            = 35,
+    RBRACKET            = 36,
+    LCURLY		= 37,
+    RCURLY		= 38,
 
     // special tokens...
-    EOT			= 35,
-    ERROR		= 36;
+    EOT			= 39,
+    ERROR		= 40;
 
   private static String[] tokenTable = new String[] {
     "<int>",
@@ -118,6 +122,8 @@ final class Token extends Object {
     "do",
     "else",
     "end",
+    "for",          // Agregar FOR
+    "from",         // Agregar FROM
     "func",
     "if",
     "in",
@@ -128,8 +134,10 @@ final class Token extends Object {
     "proc",
     "record",
     "then",
+    "to",           // Agregar TO
     "type",
     "var",
+    "until",        // Agregar UNTIL
     "while",
     ".",
     ":",

@@ -31,12 +31,15 @@ import Triangle.AbstractSyntaxTrees.ConstActualParameter;
 import Triangle.AbstractSyntaxTrees.ConstDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
 import Triangle.AbstractSyntaxTrees.Declaration;
+import Triangle.AbstractSyntaxTrees.DoCommand;
 import Triangle.AbstractSyntaxTrees.DotVname;
 import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.Expression;
 import Triangle.AbstractSyntaxTrees.FieldTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForFromAST1;
+import Triangle.AbstractSyntaxTrees.ForFromCommand;
 import Triangle.AbstractSyntaxTrees.FormalParameter;
 import Triangle.AbstractSyntaxTrees.FormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
@@ -385,23 +388,74 @@ public class Parser {
 |               
                 // "loop" [ Identifier ] "do" Command "until" Expression "end"
             }
+            */
             
             // ----------------------------> Resto de casos <-----------------------------
             case Token.FOR: {
-            // "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
-            //      "do" Command "end"
-            
-            // "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
-            //      "while" Expression "do" Command "end"
-            
-            // "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
-            //      "until" Expression "do" Command "end"
-            
-            // "loop" [ Identifier ] "for" Identifier "in" Expression "do" Command "end"
-            
+                acceptIt();
+                // Agarrar el identificador
+                start(commandPos);
+                Identifier iAST2 = parseIdentifier();
+                
+                switch(currentToken.kind){
+                    case Token.FROM: {
+                                               
+                        // Se obtiene el primer arbol ("for" Identifier "from" Expression)
+                        ForFromCommand ForFromVar = ParseForFromCommand(commandPos, iAST2);
+                        
+                        // Aceptar el token to
+                        accept(Token.TO);
+                        
+                        // Guardar la expresion
+                        Expression eAST = parseExpression();
+                        
+                        // Construir la ultima parte del arbol
+                        switch(currentToken.kind){
+                            
+                            // ------------------ Caso 5 ------------------
+                        
+                            /* "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
+                                "do" Command "end"
+                            */
+                            case Token.DO:{
+                                acceptIt();
+                                DoCommand Dovar = ParseDoCommand(commandPos);
+                                commandAST = new ForFromAST1(ForFromVar, eAST, Dovar, commandPos);
+                                break;
+                            }
+                            
+                            // ------------------ Caso 6 ------------------
+                            
+                            /*  "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
+                                  "while" Expression "do" Command "end"
+                            */
+                            case Token.WHILE:{
+                                break;
+                            }
+                            
+                            // ------------------ Caso 7 ------------------
+                            
+                            /*  "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
+                                 "until" Expression "do" Command "end"
+                            */
+                            
+                            case Token.UNTIL:{
+                                break;
+                            }
+                        }
+                    break;
+                    }
+                    case Token.IN: {
+                        // "loop" [ Identifier ] "for" Identifier "in" Expression "do" Command "end"
+                        break;
+                    }
+                    default: 
+                        syntacticError("Expected from or in here", currentToken.spelling);
+                        break;
+                }
             }
             
-            */
+            
             default:
                 syntacticError("Expected while, do, until or for here", currentToken.spelling);
                 break;
@@ -1095,6 +1149,27 @@ public class Parser {
         }
         
         // Retornar el arbol
+        return commandAST;
+    }
+
+    private ForFromCommand ParseForFromCommand(SourcePosition commandPos, Identifier iAST2) throws SyntaxError {
+        start(commandPos);
+        ForFromCommand commandAST = null;
+        Expression eAST = parseExpression();
+        finish(commandPos);
+        commandAST = new ForFromCommand(iAST2, eAST, commandPos);
+        return commandAST;
+    }
+
+    private DoCommand ParseDoCommand(SourcePosition commandPos) throws SyntaxError {
+        start(commandPos);
+        DoCommand commandAST = null;
+        Command cAST = parseCommand();
+        if(currentToken.kind == Token.END){
+            acceptIt();
+            finish(commandPos);
+            commandAST = new DoCommand(cAST, commandPos);
+        }
         return commandAST;
     }
 }

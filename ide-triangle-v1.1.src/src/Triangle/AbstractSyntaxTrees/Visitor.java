@@ -24,8 +24,10 @@ public interface Visitor {
   public abstract Object visitLetCommand(LetCommand ast, Object o);
   public abstract Object visitSequentialCommand(SequentialCommand ast, Object o);
   public abstract Object visitWhileCommand(WhileCommand ast, Object o);
-  public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o);
-
+  public abstract Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o);
+  public abstract Object visitForFromCommand(ForFromCommand aThis, Object o);
+  public abstract Object visitDoCommandAST(DoCommand aThis, Object o);
+  public abstract Object visitForFromAST1(ForFromAST1 aThis, Object o);
 
   // Expressions
   public abstract Object visitArrayExpression(ArrayExpression ast, Object o);
@@ -39,7 +41,7 @@ public interface Visitor {
   public abstract Object visitRecordExpression(RecordExpression ast, Object o);
   public abstract Object visitUnaryExpression(UnaryExpression ast, Object o);
   public abstract Object visitVnameExpression(VnameExpression ast, Object o);
-
+  
   // Declarations
   public abstract Object visitBinaryOperatorDeclaration(BinaryOperatorDeclaration ast, Object o);
   public abstract Object visitConstDeclaration(ConstDeclaration ast, Object o);
@@ -105,6 +107,10 @@ public interface Visitor {
   // Programs
   public abstract Object visitProgram(Program ast, Object o);
 
+  
+    
+
+  
   
 
 }
