@@ -398,7 +398,8 @@ public class Parser {
                 
                 switch(currentToken.kind){
                     case Token.FROM: {
-                                               
+                        
+                        acceptIt();
                         // Se obtiene el primer arbol ("for" Identifier "from" Expression)
                         ForFromCommand ForFromVar = ParseForFromCommand(commandPos, iAST2);
                         
@@ -453,6 +454,7 @@ public class Parser {
                         syntacticError("Expected from or in here", currentToken.spelling);
                         break;
                 }
+            break;
             }
             
             
