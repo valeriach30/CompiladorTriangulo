@@ -41,6 +41,7 @@ import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
+import Triangle.AbstractSyntaxTrees.LoopForFromWhile;
 import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
 import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
@@ -497,5 +498,10 @@ public class TreeVisitor implements Visitor {
     @Override
     public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
         return(createTernary("Loop Command",aThis.I , aThis.C, aThis.UntilEnd));
+    }
+
+    @Override
+    public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
+        return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.whileV));
     }
 }

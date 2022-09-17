@@ -53,6 +53,7 @@ import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
+import Triangle.AbstractSyntaxTrees.LoopForFromWhile;
 import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
 import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
@@ -441,7 +442,7 @@ public class Parser {
                         
                         acceptIt();
                         // Se obtiene el primer arbol ("for" Identifier "from" Expression)
-                        ForFromCommand ForFromVar = ParseForFromCommand(commandPos, iAST2);
+                        ForFromCommand ForFromAST = ParseForFromCommand(commandPos, iAST2);
                         
                         // Aceptar el token to
                         accept(Token.TO);
@@ -455,29 +456,35 @@ public class Parser {
                             // ------------------ Caso 5 ------------------
                         
                             /* "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
-                                "do" Command "end"
+                               "do" Command "end"
                             */
                             case Token.DO:{
                                 acceptIt();
-                                DoCommand Dovar = ParseDoCommand(commandPos);
-                                commandAST = new ForFromAST1(iAST, ForFromVar, eAST, Dovar, commandPos);
+                                DoCommand DoAST = ParseDoCommand(commandPos);
+                                commandAST = new ForFromAST1(iAST, ForFromAST, 
+                                             eAST, DoAST, commandPos);
                                 break;
                             }
                             
                             // ------------------ Caso 6 ------------------
                             
                             /*  "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
-                                  "while" Expression "do" Command "end"
+                                "while" Expression "do" Command "end"
                             */
                             case Token.WHILE:{
                                 acceptIt();
+                                // Crear el ast del while
+                                 WhileCommand WhileAST = whileDo(commandPos);
+                                // Crear el arbol final
+                                commandAST = new LoopForFromWhile(iAST, ForFromAST,
+                                             eAST, WhileAST, commandPos);
                                 break;
                             }
                             
                             // ------------------ Caso 7 ------------------
                             
                             /*  "loop" [ Identifier ] "for" Identifier "from" Expression "to" Expression
-                                 "until" Expression "do" Command "end"
+                                "until" Expression "do" Command "end"
                             */
                             
                             case Token.UNTIL:{

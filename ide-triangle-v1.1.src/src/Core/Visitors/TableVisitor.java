@@ -41,6 +41,7 @@ import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
+import Triangle.AbstractSyntaxTrees.LoopForFromWhile;
 import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
 import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
@@ -711,4 +712,13 @@ public class TableVisitor implements Visitor {
       
         return(null);    
     }
+
+    @Override
+    public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
+        aThis.I.visit(this, null);
+        aThis.E.visit(this, null);
+        aThis.ForFrom.visit(this, null);
+        aThis.whileV.visit(this, null);
+        
+        return(null);}
 }
