@@ -42,6 +42,7 @@ import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
+import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -74,6 +75,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.AbstractSyntaxTrees.WhileEndCommand;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -473,5 +475,15 @@ public class TreeVisitor implements Visitor {
     @Override
     public Object visitUntilCommand(UntilCommand aThis, Object o) {
         return(createBinary("Until Command", aThis.I, aThis.C));
+    }
+
+    @Override
+    public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) {
+        return(createUnary("While Command", aThis.E));
+    }
+
+    @Override
+    public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
+        return(createBinary("Loop Command", aThis.C, aThis.WhileV));
     }
 }

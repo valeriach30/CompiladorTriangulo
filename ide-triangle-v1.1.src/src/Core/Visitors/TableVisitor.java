@@ -42,6 +42,7 @@ import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
+import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -74,6 +75,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.AbstractSyntaxTrees.WhileEndCommand;
 import Triangle.CodeGenerator.Field;
 import Triangle.CodeGenerator.KnownAddress;
 import Triangle.CodeGenerator.KnownRoutine;
@@ -677,4 +679,17 @@ public class TableVisitor implements Visitor {
       
         return(null);
     }
+
+    @Override
+    public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) {
+        aThis.E.visit(this, null);
+      
+        return(null);}
+
+    @Override
+    public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
+        aThis.WhileV.visit(this, null);
+        aThis.C.visit(this, null);
+      
+        return(null);}
 }

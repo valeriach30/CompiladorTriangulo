@@ -54,6 +54,7 @@ import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
+import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -87,6 +88,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.AbstractSyntaxTrees.WhileEndCommand;
 
 public class Parser {
 
@@ -385,14 +387,35 @@ public class Parser {
                 break;
             }
             
-            /*
+            
             // ------------------------------> Caso 3 y 4 <------------------------------
             case Token.DO: {
+                acceptIt();
+                
+                // Aceptar el command
+                Command cAST = parseCommand();
+                
+                // Determinar que sigue despues del command
+                switch(currentToken.kind){
+                    case Token.WHILE:{
+                        acceptIt();
+                        // Crear el arbol del while
+                        WhileEndCommand WhileVar = whileEnd(commandPos);
+                        // Crear el arbol final
+                        commandAST = new LoopWhileEndAST(cAST, WhileVar, commandPos);
+                        break;
+                    }
+                    case Token.UNTIL:{
+                        acceptIt();
+                        break;
+                    }    
+                }
                 // "loop" [ Identifier ] "do" Command "while" Expression "end"
-|               
+               
                 // "loop" [ Identifier ] "do" Command "until" Expression "end"
+                break;
             }
-            */
+            
             
             // ----------------------------> Resto de casos <-----------------------------
             case Token.FOR: {
@@ -1196,6 +1219,29 @@ public class Parser {
             acceptIt();
             finish(commandPos);
             commandAST = new UntilCommand(eAST, cAST, commandPos);
+        }
+        
+        // Error
+        else{
+            syntacticError("Expected END here", currentToken.spelling);
+        }
+        
+        // Retornar el arbol
+        return commandAST;
+    }
+
+    private WhileEndCommand whileEnd(SourcePosition commandPos) throws SyntaxError {
+        start(commandPos);
+        WhileEndCommand commandAST = null;
+        
+        // Obtener la expresion
+        Expression eAST = parseExpression();
+        
+        // End
+        if(currentToken.kind == Token.END){
+            acceptIt();
+            finish(commandPos);
+            commandAST = new WhileEndCommand (eAST, commandPos);
         }
         
         // Error
