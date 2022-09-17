@@ -35,6 +35,7 @@ public interface Visitor {
   public abstract Object visitUntilEndCommand(UntilEndCommand aThis, Object o);
   public abstract Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o);
   public abstract Object visitForFromWhile(LoopForFromWhile aThis, Object o);
+  public abstract Object visitForFromUntil(LoopForFromUntil aThis, Object o);
   // Expressions
   public abstract Object visitArrayExpression(ArrayExpression ast, Object o);
   public abstract Object visitBinaryExpression(BinaryExpression ast, Object o);

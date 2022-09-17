@@ -53,6 +53,7 @@ import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
+import Triangle.AbstractSyntaxTrees.LoopForFromUntil;
 import Triangle.AbstractSyntaxTrees.LoopForFromWhile;
 import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
@@ -474,7 +475,7 @@ public class Parser {
                             case Token.WHILE:{
                                 acceptIt();
                                 // Crear el ast del while
-                                 WhileCommand WhileAST = whileDo(commandPos);
+                                WhileCommand WhileAST = whileDo(commandPos);
                                 // Crear el arbol final
                                 commandAST = new LoopForFromWhile(iAST, ForFromAST,
                                              eAST, WhileAST, commandPos);
@@ -489,6 +490,11 @@ public class Parser {
                             
                             case Token.UNTIL:{
                                 acceptIt();
+                                // Crear el ast del until
+                                UntilCommand UntilAST = UntilDo(commandPos);
+                                // Crear el arbol final
+                                commandAST = new LoopForFromUntil(iAST, ForFromAST, 
+                                             eAST, UntilAST, commandPos);
                                 break;
                             }
                         }
