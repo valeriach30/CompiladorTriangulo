@@ -361,7 +361,8 @@ public class Parser {
     case Token.LOOP:
       {
         acceptIt();
-        // Agarrar el identificador como AST
+
+        // Agarrar el identificador 
         Identifier iAST = parseIdentifier();
         
         // Determinar que sigue despues del loop 
@@ -544,7 +545,6 @@ public class Parser {
       }
       break;
       
-      
     // -------------------------------- ELIMINAR --------------------------------
     
     // Eliminar if
@@ -582,14 +582,15 @@ public class Parser {
     case Token.END:
     case Token.ELSE:
     case Token.IN:
-    */
+    
       
     case Token.EOT:
 
       finish(commandPos);
       commandAST = new EmptyCommand(commandPos);
       break;
-
+    */
+      
     default:
       syntacticError("\"%\" cannot start a command",
         currentToken.spelling);
