@@ -29,6 +29,8 @@ import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ForFromAST1;
 import Triangle.AbstractSyntaxTrees.ForFromCommand;
+import Triangle.AbstractSyntaxTrees.ForInCommand;
+import Triangle.AbstractSyntaxTrees.ForInDo;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -509,5 +511,15 @@ public class TreeVisitor implements Visitor {
     @Override
     public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
         return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.untilV));
+    }
+
+    @Override
+    public Object visitForInCommand(ForInCommand aThis, Object o) {
+        return(createBinary("For In Command", aThis.I, aThis.E));
+    }
+
+    @Override
+    public Object visitForInDoCommand(ForInDo aThis, Object o) {
+        return(createTernary("Loop Command", aThis.I, aThis.forAST, aThis.C));
     }
 }

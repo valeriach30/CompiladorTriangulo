@@ -40,6 +40,8 @@ import Triangle.AbstractSyntaxTrees.Expression;
 import Triangle.AbstractSyntaxTrees.FieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ForFromAST1;
 import Triangle.AbstractSyntaxTrees.ForFromCommand;
+import Triangle.AbstractSyntaxTrees.ForInCommand;
+import Triangle.AbstractSyntaxTrees.ForInDo;
 import Triangle.AbstractSyntaxTrees.FormalParameter;
 import Triangle.AbstractSyntaxTrees.FormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
@@ -502,7 +504,30 @@ public class Parser {
                     }
                     case Token.IN: {
                         // "loop" [ Identifier ] "for" Identifier "in" Expression "do" Command "end"
+                        
                         acceptIt();
+                        
+                        // Se obtiene el primer arbol ("for" Identifier "in" Expression)
+                        ForInCommand ForInAST = ParseForInCommand(commandPos, iAST2);
+                        
+                        // Obtener el segundo ast
+                        
+                        // Aceptar el token do
+                        accept(Token.DO);
+                        
+                        // Guardar el comando
+                        Command cAST = parseCommand();
+                        
+                        // End
+                        if(currentToken.kind == Token.END){
+                            acceptIt();
+                            finish(commandPos);
+                            commandAST = new ForInDo (iAST, ForInAST, cAST, commandPos);
+                        }
+                        // Error
+                        else{
+                            syntacticError("Expected END here", currentToken.spelling);
+                        }
                         break;
                     }
                     default: 
@@ -1300,4 +1325,13 @@ public class Parser {
         
         // Retornar el arbol
         return commandAST;}
+
+    private ForInCommand ParseForInCommand(SourcePosition commandPos, Identifier iAST2) throws SyntaxError {
+        start(commandPos);
+        ForInCommand commandAST = null;
+        Expression eAST = parseExpression();
+        finish(commandPos);
+        commandAST = new ForInCommand(iAST2, eAST, commandPos);
+        return commandAST;
+    }
 }

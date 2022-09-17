@@ -29,6 +29,8 @@ import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ForFromAST1;
 import Triangle.AbstractSyntaxTrees.ForFromCommand;
+import Triangle.AbstractSyntaxTrees.ForInCommand;
+import Triangle.AbstractSyntaxTrees.ForInDo;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -731,6 +733,23 @@ public class TableVisitor implements Visitor {
         aThis.ForFrom.visit(this, null);
         aThis.untilV.visit(this, null);
         
+        return(null);
+    }
+
+    @Override
+    public Object visitForInCommand(ForInCommand aThis, Object o) {
+        aThis.I.visit(this, null);
+        aThis.E.visit(this, null);
+      
+        return(null);
+    }
+
+    @Override
+    public Object visitForInDoCommand(ForInDo aThis, Object o) {
+        aThis.I.visit(this, null);
+        aThis.forAST.visit(this, null);
+        aThis.C.visit(this, null);
+      
         return(null);
     }
 }

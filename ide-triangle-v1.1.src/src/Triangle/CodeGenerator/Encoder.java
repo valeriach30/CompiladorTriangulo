@@ -49,6 +49,8 @@ import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ForFromAST1;
 import Triangle.AbstractSyntaxTrees.ForFromCommand;
+import Triangle.AbstractSyntaxTrees.ForInCommand;
+import Triangle.AbstractSyntaxTrees.ForInDo;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -61,6 +63,7 @@ import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
+import Triangle.AbstractSyntaxTrees.LoopForFromUntil;
 import Triangle.AbstractSyntaxTrees.LoopForFromWhile;
 import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
@@ -1059,6 +1062,21 @@ public final class Encoder implements Visitor {
 
     @Override
     public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object visitForInCommand(ForInCommand aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object visitForInDoCommand(ForInDo aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
