@@ -10,20 +10,20 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  *
  * @author Vale
  */
-public class LoopWhileEndAST extends Command{
-
-    public LoopWhileEndAST(Identifier iAST, Command cAST, WhileEndCommand WhileVar, SourcePosition commandPos) {
+public class LoopUntilEndAST extends Command{
+    
+    public LoopUntilEndAST(Identifier iAST, Command cAST, UntilEndCommand UntilAST, SourcePosition commandPos) {
         super(commandPos);
         C = cAST;
         I = iAST;
-        WhileV = WhileVar;
+        UntilEnd = UntilAST;
     }
     
     public Object visit(Visitor v, Object o) {
-        return v.visitLooopWhileEndCommand(this, o);
+        return v.visitLooopUntilEndCommand(this, o);
     }
 
     public Command C;
     public Identifier I;
-    public WhileEndCommand WhileV;
+    public UntilEndCommand UntilEnd;
 }

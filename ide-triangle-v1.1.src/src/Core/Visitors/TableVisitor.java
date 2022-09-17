@@ -42,6 +42,7 @@ import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
+import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
 import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
@@ -69,6 +70,7 @@ import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.UntilCommand;
+import Triangle.AbstractSyntaxTrees.UntilEndCommand;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
@@ -684,7 +686,8 @@ public class TableVisitor implements Visitor {
     public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) {
         aThis.E.visit(this, null);
       
-        return(null);}
+        return(null);
+    }
 
     @Override
     public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
@@ -692,4 +695,20 @@ public class TableVisitor implements Visitor {
         aThis.C.visit(this, null);
       
         return(null);}
+
+    @Override
+    public Object visitUntilEndCommand(UntilEndCommand aThis, Object o) {
+        aThis.E.visit(this, null);
+      
+        return(null);
+    }
+
+    @Override
+    public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
+        aThis.I.visit(this, null);
+        aThis.C.visit(this, null);
+        aThis.UntilEnd.visit(this, null);
+      
+        return(null);    
+    }
 }

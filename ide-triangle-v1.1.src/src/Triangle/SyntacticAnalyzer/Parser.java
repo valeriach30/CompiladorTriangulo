@@ -54,6 +54,7 @@ import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
+import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
 import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
@@ -82,6 +83,7 @@ import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.TypeDenoter;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UntilCommand;
+import Triangle.AbstractSyntaxTrees.UntilEndCommand;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
@@ -367,9 +369,9 @@ public class Parser {
             case Token.WHILE: {
                 // Crear el primer arbol
                 acceptIt();
-                WhileCommand WhileVar = whileDo(commandPos);
+                WhileCommand WhileAST = whileDo(commandPos);
                 // Crear el arbol final
-                commandAST = new LoopCommandAST1(iAST, WhileVar, commandPos);
+                commandAST = new LoopCommandAST1(iAST, WhileAST, commandPos);
                 break;
             }
             
@@ -381,9 +383,9 @@ public class Parser {
             case Token.UNTIL: {
                 acceptIt();
                 // Crear el primer arbol
-                UntilCommand UntilVar = UntilDo(commandPos);
+                UntilCommand UntilAST = UntilDo(commandPos);
                 // Crear el arbol final
-                commandAST = new LoopUntilDoAST(iAST, UntilVar, commandPos);
+                commandAST = new LoopUntilDoAST(iAST, UntilAST, commandPos);
                 break;
             }
             
@@ -397,22 +399,33 @@ public class Parser {
                 
                 // Determinar que sigue despues del command
                 switch(currentToken.kind){
+                    
+                    // ------------------ Caso 3 ------------------
+                    
+                    // "loop" [ Identifier ] "do" Command "while" Expression "end"
+                    
                     case Token.WHILE:{
                         acceptIt();
                         // Crear el arbol del while
-                        WhileEndCommand WhileVar = whileEnd(commandPos);
+                        WhileEndCommand WhileAST = whileEnd(commandPos); 
                         // Crear el arbol final
-                        commandAST = new LoopWhileEndAST(cAST, WhileVar, commandPos);
+                        commandAST = new LoopWhileEndAST(iAST, cAST, WhileAST, commandPos);
                         break;
                     }
+                    
+                    // ------------------ Caso 4 ------------------
+                    
+                    // "loop" [ Identifier ] "do" Command "until" Expression "end"
+                    
                     case Token.UNTIL:{
                         acceptIt();
+                        // Crear el arbol del until
+                        UntilEndCommand UntilAST = UntilEnd(commandPos);
+                        // Crear el arbol final
+                        commandAST = new LoopUntilEndAST(iAST, cAST, UntilAST, commandPos);
                         break;
                     }    
                 }
-                // "loop" [ Identifier ] "do" Command "while" Expression "end"
-               
-                // "loop" [ Identifier ] "do" Command "until" Expression "end"
                 break;
             }
             
@@ -1252,4 +1265,26 @@ public class Parser {
         // Retornar el arbol
         return commandAST;
     }
+
+    private UntilEndCommand UntilEnd(SourcePosition commandPos) throws SyntaxError {
+        start(commandPos);
+        UntilEndCommand commandAST = null;
+        
+        // Obtener la expresion
+        Expression eAST = parseExpression();
+        
+        // End
+        if(currentToken.kind == Token.END){
+            acceptIt();
+            finish(commandPos);
+            commandAST = new UntilEndCommand (eAST, commandPos);
+        }
+        
+        // Error
+        else{
+            syntacticError("Expected END here", currentToken.spelling);
+        }
+        
+        // Retornar el arbol
+        return commandAST;}
 }
