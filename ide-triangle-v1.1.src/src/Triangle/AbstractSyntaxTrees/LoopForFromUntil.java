@@ -20,6 +20,14 @@ public class LoopForFromUntil extends Command{
         untilV = untilAST;
     }
     
+    public LoopForFromUntil(ForFromCommand ForFromVar, Expression eAST, UntilCommand untilAST, SourcePosition thePosition) {
+        super (thePosition);
+        I = null;
+        ForFrom = ForFromVar;    
+        E = eAST;
+        untilV = untilAST;
+    }
+    
     @Override
     public Object visit(Visitor v, Object o) {
       return v.visitForFromUntil(this, o);

@@ -235,6 +235,21 @@ public class Parser {
     return I;
   }
 
+
+  Identifier parseIdentifierOptional() throws SyntaxError {
+    Identifier I = null;
+
+    if (currentToken.kind == Token.IDENTIFIER) {
+      previousTokenPosition = currentToken.position;
+      String spelling = currentToken.spelling;
+      I = new Identifier(spelling, previousTokenPosition);
+      currentToken = lexicalAnalyser.scan();
+    } else {
+      I = null;
+    }
+    return I;
+  }
+  
 // parseOperator parses an operator, and constructs a leaf AST to
 // represent it.
 
@@ -363,7 +378,7 @@ public class Parser {
         acceptIt();
 
         // Agarrar el identificador 
-        Identifier iAST = parseIdentifier();
+        Identifier iAST = parseIdentifierOptional();
         
         // Determinar que sigue despues del loop 
         switch(currentToken.kind){

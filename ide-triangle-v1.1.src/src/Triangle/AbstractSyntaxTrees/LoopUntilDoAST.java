@@ -16,7 +16,12 @@ public class LoopUntilDoAST extends Command {
     I = iAST;
     UntilVar = UntilVarAST;
   }
-
+  public LoopUntilDoAST (UntilCommand UntilVarAST, SourcePosition thePosition) {
+    super (thePosition);
+    I = null;
+    UntilVar = UntilVarAST;
+  }
+  
   public Object visit(Visitor v, Object o) {
     return v.visitLoopUntilDoAST(this, o);
   }

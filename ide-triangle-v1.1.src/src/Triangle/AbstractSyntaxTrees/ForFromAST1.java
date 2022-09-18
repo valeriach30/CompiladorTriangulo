@@ -17,6 +17,13 @@ public class ForFromAST1 extends Command{
         E = eAST;
         Do = Dovar;
     }
+    public ForFromAST1(ForFromCommand ForFromVar, Expression eAST, DoCommand Dovar, SourcePosition thePosition) {
+        super (thePosition);
+        I = null;
+        ForFrom = ForFromVar;    
+        E = eAST;
+        Do = Dovar;
+    }
     
     public Object visit(Visitor v, Object o) {
       return v.visitForFromAST1(this, o);

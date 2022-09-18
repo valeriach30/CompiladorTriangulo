@@ -19,6 +19,12 @@ public class LoopUntilEndAST extends Command{
         UntilEnd = UntilAST;
     }
     
+    public LoopUntilEndAST(Command cAST, UntilEndCommand UntilAST, SourcePosition commandPos) {
+        super(commandPos);
+        C = cAST;
+        I = null;
+        UntilEnd = UntilAST;
+    }
     public Object visit(Visitor v, Object o) {
         return v.visitLooopUntilEndCommand(this, o);
     }

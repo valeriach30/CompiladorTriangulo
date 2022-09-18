@@ -19,6 +19,13 @@ public class LoopWhileEndAST extends Command{
         WhileV = WhileVar;
     }
     
+    public LoopWhileEndAST(Command cAST, WhileEndCommand WhileVar, SourcePosition commandPos) {
+        super(commandPos);
+        C = cAST;
+        I = null;
+        WhileV = WhileVar;
+    }
+    
     public Object visit(Visitor v, Object o) {
         return v.visitLooopWhileEndCommand(this, o);
     }

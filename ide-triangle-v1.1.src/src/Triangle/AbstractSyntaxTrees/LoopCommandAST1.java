@@ -10,12 +10,19 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  * @author Vale
  */
 public class LoopCommandAST1 extends Command{
-   public LoopCommandAST1 (Identifier iAST, WhileCommand WhileVarAST, SourcePosition thePosition) {
+  public LoopCommandAST1 (Identifier iAST, WhileCommand WhileVarAST, SourcePosition thePosition) {
     super (thePosition);
     I = iAST;
     WhileVar = WhileVarAST;
   }
-
+  
+  // Constructor que se utiliza cuando el iAST es nulo
+  public LoopCommandAST1 (WhileCommand WhileVarAST, SourcePosition thePosition) {
+    super (thePosition);
+    I = null;
+    WhileVar = WhileVarAST;
+  }
+  
   public Object visit(Visitor v, Object o) {
     return v.visitLoopCommandAST1(this, o);
   }

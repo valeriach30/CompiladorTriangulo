@@ -16,6 +16,14 @@ public class ForInDo extends Command{
         I = iAST;
         C = cAST;    
     }
+    
+    public ForInDo(ForInCommand ForInAST, Command cAST, SourcePosition commandPos) {
+        super (commandPos);
+        forAST = ForInAST;
+        I = null;
+        C = cAST;    
+    }
+    
     public Object visit(Visitor v, Object o) {
         return v.visitForInDoCommand(this, o);
     }

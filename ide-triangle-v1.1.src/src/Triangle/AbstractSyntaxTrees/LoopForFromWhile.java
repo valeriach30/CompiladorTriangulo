@@ -19,7 +19,13 @@ public class LoopForFromWhile extends Command{
         E = eAST;
         whileV = whileAST;
     }
-    
+    public LoopForFromWhile(ForFromCommand ForFromVar, Expression eAST, WhileCommand whileAST, SourcePosition thePosition) {
+        super (thePosition);
+        I = null;
+        ForFrom = ForFromVar;    
+        E = eAST;
+        whileV = whileAST;
+    }
     @Override
     public Object visit(Visitor v, Object o) {
       return v.visitForFromWhile(this, o);

@@ -455,7 +455,12 @@ public class TreeVisitor implements Visitor {
     // -------------------------------------------- NUEVOS --------------------------------------------
     @Override
     public Object visitLoopCommandAST1(LoopCommandAST1 ast, Object o) {
-        return(createBinary("Loop Command", ast.I, ast.WhileVar));
+        if(ast.I == null){
+            return(createUnary("Loop Command", ast.WhileVar));
+        }
+        else{
+            return(createBinary("Loop Command", ast.I, ast.WhileVar));
+        }
     }
 
     @Override
@@ -470,17 +475,27 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
-        return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.Do));
+        if(aThis.I == null){
+            return(createTernary("Loop Command", aThis.ForFrom, aThis.E, aThis.Do));
+        }
+        else{
+            return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.Do));
+        }
     }
 
     @Override
     public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
-        return(createBinary("Loop Command", aThis.I, aThis.UntilVar));
+        if(aThis.I == null){
+            return(createUnary("Loop Command", aThis.UntilVar));
+        }
+        else{
+            return(createBinary("Loop Command", aThis.I, aThis.UntilVar));
+        }
     }
 
     @Override
     public Object visitUntilCommand(UntilCommand aThis, Object o) {
-        return(createBinary("Until Command", aThis.I, aThis.C));
+        return(createBinary("Until Do Command", aThis.I, aThis.C));
     }
 
     @Override
@@ -490,7 +505,12 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
-        return(createTernary("Loop Command",aThis.I , aThis.C, aThis.WhileV));
+        if(aThis.I == null){
+            return(createBinary("Loop Command", aThis.C, aThis.WhileV));
+        }
+        else{
+            return(createTernary("Loop Command", aThis.I, aThis.C, aThis.WhileV));
+        }
     }
 
     @Override
@@ -500,17 +520,32 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
-        return(createTernary("Loop Command",aThis.I , aThis.C, aThis.UntilEnd));
+        if(aThis.I == null){
+            return(createBinary("Loop Command", aThis.C, aThis.UntilEnd));
+        }
+        else{
+            return(createTernary("Loop Command",aThis.I , aThis.C, aThis.UntilEnd));
+        }
     }
 
     @Override
     public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
-        return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.whileV));
+        if(aThis.I == null){
+            return(createTernary("Loop Command",aThis.ForFrom, aThis.E, aThis.whileV));
+        }
+        else{
+            return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.whileV));
+        }
     }
 
     @Override
     public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
-        return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.untilV));
+        if(aThis.I == null){
+            return(createTernary("Loop Command",aThis.ForFrom, aThis.E, aThis.untilV));
+        }
+        else{
+            return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.untilV));
+        }
     }
 
     @Override
@@ -520,6 +555,11 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitForInDoCommand(ForInDo aThis, Object o) {
-        return(createTernary("Loop Command", aThis.I, aThis.forAST, aThis.C));
+        if(aThis.I == null){
+            return(createBinary("Loop Command", aThis.forAST, aThis.C));
+        }
+        else{
+            return(createTernary("Loop Command", aThis.I, aThis.forAST, aThis.C));
+        }
     }
 }
