@@ -417,6 +417,10 @@ public class Parser {
                 // Aceptar el command
                 Command cAST = parseCommand();
                 
+                // Crear AST del Do
+                DoCommand DoAST;
+                DoAST = new DoCommand(cAST, commandPos);
+                
                 // Determinar que sigue despues del command
                 switch(currentToken.kind){
                     
@@ -429,7 +433,7 @@ public class Parser {
                         // Crear el arbol del while
                         WhileEndCommand WhileAST = whileEnd(commandPos); 
                         // Crear el arbol final
-                        commandAST = new LoopWhileEndAST(iAST, cAST, WhileAST, commandPos);
+                        commandAST = new LoopWhileEndAST(iAST, DoAST, WhileAST, commandPos);
                         break;
                     }
                     
@@ -442,7 +446,7 @@ public class Parser {
                         // Crear el arbol del until
                         UntilEndCommand UntilAST = UntilEnd(commandPos);
                         // Crear el arbol final
-                        commandAST = new LoopUntilEndAST(iAST, cAST, UntilAST, commandPos);
+                        commandAST = new LoopUntilEndAST(iAST, DoAST, UntilAST, commandPos);
                         break;
                     }    
                 }
@@ -479,9 +483,9 @@ public class Parser {
                             */
                             case Token.DO:{
                                 acceptIt();
-                                DoCommand DoAST = ParseDoCommand(commandPos);
+                                DoCommand DoAST2 = ParseDoCommand(commandPos);
                                 commandAST = new ForFromAST1(iAST, ForFromAST, 
-                                             eAST, DoAST, commandPos);
+                                             eAST, DoAST2, commandPos);
                                 break;
                             }
                             
@@ -534,11 +538,15 @@ public class Parser {
                         // Guardar el comando
                         Command cAST = parseCommand();
                         
+                        // Crear AST del Do
+                        DoCommand DoAST;
+                        DoAST = new DoCommand(cAST, commandPos);
+                        
                         // End
                         if(currentToken.kind == Token.END){
                             acceptIt();
                             finish(commandPos);
-                            commandAST = new ForInDo (iAST, ForInAST, cAST, commandPos);
+                            commandAST = new ForInDo (iAST, ForInAST, DoAST, commandPos);
                         }
                         // Error
                         else{
@@ -1233,11 +1241,15 @@ public class Parser {
         accept(Token.DO);
         Command cAST = parseCommand();
         
+        // Crear AST del Do
+        DoCommand DoAST;
+        DoAST = new DoCommand(cAST, commandPos);
+        
         // End
         if(currentToken.kind == Token.END){
             acceptIt();
             finish(commandPos);
-            commandAST = new WhileCommand (eAST, cAST, commandPos);
+            commandAST = new WhileCommand (eAST, DoAST, commandPos);
         }
         
         // Error
@@ -1281,11 +1293,15 @@ public class Parser {
         accept(Token.DO);
         Command cAST = parseCommand();
         
+        // Crear AST del Do
+        DoCommand DoAST;
+        DoAST = new DoCommand(cAST, commandPos);
+        
         // End
         if(currentToken.kind == Token.END){
             acceptIt();
             finish(commandPos);
-            commandAST = new UntilCommand(eAST, cAST, commandPos);
+            commandAST = new UntilCommand(eAST, DoAST, commandPos);
         }
         
         // Error
