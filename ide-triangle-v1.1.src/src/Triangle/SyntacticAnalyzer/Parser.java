@@ -1233,6 +1233,12 @@ public class Parser {
     return fieldAST;
   }
 
+///////////////////////////////////////////////////////////////////////////////
+//
+// FUNCIONES DE APOYO PARA SINGLE COMMAND
+//
+///////////////////////////////////////////////////////////////////////////////
+  
     private WhileCommand whileDo(SourcePosition commandPos) throws SyntaxError{
         
         start(commandPos);
