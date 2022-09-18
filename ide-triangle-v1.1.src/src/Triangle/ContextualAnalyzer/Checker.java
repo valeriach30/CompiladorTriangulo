@@ -86,6 +86,7 @@ import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
 import Triangle.AbstractSyntaxTrees.Terminal;
+import Triangle.AbstractSyntaxTrees.ToCommand;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.TypeDenoter;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
@@ -1020,6 +1021,11 @@ public final class Checker implements Visitor {
 
     @Override
     public Object visitForInDoCommand(ForInDo aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object visitToCommandAST(ToCommand aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

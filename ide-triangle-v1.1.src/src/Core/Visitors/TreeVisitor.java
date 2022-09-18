@@ -70,6 +70,7 @@ import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
+import Triangle.AbstractSyntaxTrees.ToCommand;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
@@ -561,5 +562,10 @@ public class TreeVisitor implements Visitor {
         else{
             return(createTernary("Loop Command", aThis.I, aThis.forAST, aThis.C));
         }
+    }
+
+    @Override
+    public Object visitToCommandAST(ToCommand aThis, Object o) {
+        return(createUnary("To Command", aThis.E));
     }
 }

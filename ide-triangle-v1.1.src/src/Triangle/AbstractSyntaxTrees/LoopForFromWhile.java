@@ -12,14 +12,14 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  */
 public class LoopForFromWhile extends Command{
 
-    public LoopForFromWhile(Identifier iAST, ForFromCommand ForFromVar, Expression eAST, WhileCommand whileAST, SourcePosition thePosition) {
+    public LoopForFromWhile(Identifier iAST, ForFromCommand ForFromVar, ToCommand eAST, WhileCommand whileAST, SourcePosition thePosition) {
         super (thePosition);
         I = iAST;
         ForFrom = ForFromVar;    
         E = eAST;
         whileV = whileAST;
     }
-    public LoopForFromWhile(ForFromCommand ForFromVar, Expression eAST, WhileCommand whileAST, SourcePosition thePosition) {
+    public LoopForFromWhile(ForFromCommand ForFromVar, ToCommand eAST, WhileCommand whileAST, SourcePosition thePosition) {
         super (thePosition);
         I = null;
         ForFrom = ForFromVar;    
@@ -32,7 +32,7 @@ public class LoopForFromWhile extends Command{
     }
 
     public ForFromCommand ForFrom;   
-    public Expression E;
+    public ToCommand E;
     public WhileCommand whileV;
     public Identifier I;    
 }

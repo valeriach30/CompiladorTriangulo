@@ -70,6 +70,7 @@ import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
+import Triangle.AbstractSyntaxTrees.ToCommand;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
@@ -749,6 +750,13 @@ public class TableVisitor implements Visitor {
         aThis.I.visit(this, null);
         aThis.forAST.visit(this, null);
         aThis.C.visit(this, null);
+      
+        return(null);
+    }
+
+    @Override
+    public Object visitToCommandAST(ToCommand aThis, Object o) {
+        aThis.E.visit(this, null);
       
         return(null);
     }

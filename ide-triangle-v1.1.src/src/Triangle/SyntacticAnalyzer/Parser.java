@@ -95,6 +95,7 @@ import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 import Triangle.AbstractSyntaxTrees.WhileEndCommand;
+import Triangle.AbstractSyntaxTrees.ToCommand;
 
 public class Parser {
 
@@ -473,6 +474,9 @@ public class Parser {
                         // Guardar la expresion
                         Expression eAST = parseExpression();
                         
+                        // Crear el AST del To
+                        ToCommand ToAST = new ToCommand(eAST, commandPos);
+                        
                         // Construir la ultima parte del arbol
                         switch(currentToken.kind){
                             
@@ -485,7 +489,7 @@ public class Parser {
                                 acceptIt();
                                 DoCommand DoAST2 = ParseDoCommand(commandPos);
                                 commandAST = new ForFromAST1(iAST, ForFromAST, 
-                                             eAST, DoAST2, commandPos);
+                                             ToAST, DoAST2, commandPos);
                                 break;
                             }
                             
@@ -500,7 +504,7 @@ public class Parser {
                                 WhileCommand WhileAST = whileDo(commandPos);
                                 // Crear el arbol final
                                 commandAST = new LoopForFromWhile(iAST, ForFromAST,
-                                             eAST, WhileAST, commandPos);
+                                             ToAST, WhileAST, commandPos);
                                 break;
                             }
                             
@@ -516,7 +520,7 @@ public class Parser {
                                 UntilCommand UntilAST = UntilDo(commandPos);
                                 // Crear el arbol final
                                 commandAST = new LoopForFromUntil(iAST, ForFromAST, 
-                                             eAST, UntilAST, commandPos);
+                                             ToAST, UntilAST, commandPos);
                                 break;
                             }
                         }

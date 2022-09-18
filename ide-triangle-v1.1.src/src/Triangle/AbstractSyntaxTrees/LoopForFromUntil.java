@@ -12,7 +12,7 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  */
 public class LoopForFromUntil extends Command{
 
-    public LoopForFromUntil(Identifier iAST, ForFromCommand ForFromVar, Expression eAST, UntilCommand untilAST, SourcePosition thePosition) {
+    public LoopForFromUntil(Identifier iAST, ForFromCommand ForFromVar, ToCommand eAST, UntilCommand untilAST, SourcePosition thePosition) {
         super (thePosition);
         I = iAST;
         ForFrom = ForFromVar;    
@@ -20,7 +20,7 @@ public class LoopForFromUntil extends Command{
         untilV = untilAST;
     }
     
-    public LoopForFromUntil(ForFromCommand ForFromVar, Expression eAST, UntilCommand untilAST, SourcePosition thePosition) {
+    public LoopForFromUntil(ForFromCommand ForFromVar, ToCommand eAST, UntilCommand untilAST, SourcePosition thePosition) {
         super (thePosition);
         I = null;
         ForFrom = ForFromVar;    
@@ -34,7 +34,7 @@ public class LoopForFromUntil extends Command{
     }
 
     public ForFromCommand ForFrom;   
-    public Expression E;
+    public ToCommand E;
     public UntilCommand untilV;
     public Identifier I;        
 }

@@ -10,14 +10,14 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  */
 public class ForFromAST1 extends Command{
 
-    public ForFromAST1(Identifier iAST, ForFromCommand ForFromVar, Expression eAST, DoCommand Dovar, SourcePosition thePosition) {
+    public ForFromAST1(Identifier iAST, ForFromCommand ForFromVar, ToCommand eAST, DoCommand Dovar, SourcePosition thePosition) {
         super (thePosition);
         I = iAST;
         ForFrom = ForFromVar;    
         E = eAST;
         Do = Dovar;
     }
-    public ForFromAST1(ForFromCommand ForFromVar, Expression eAST, DoCommand Dovar, SourcePosition thePosition) {
+    public ForFromAST1(ForFromCommand ForFromVar, ToCommand eAST, DoCommand Dovar, SourcePosition thePosition) {
         super (thePosition);
         I = null;
         ForFrom = ForFromVar;    
@@ -30,7 +30,7 @@ public class ForFromAST1 extends Command{
     }
 
     public ForFromCommand ForFrom;   
-    public Expression E;
+    public ToCommand E;
     public DoCommand Do;
     public Identifier I;
 }
