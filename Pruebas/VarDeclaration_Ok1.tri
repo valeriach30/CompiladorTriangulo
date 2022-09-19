@@ -1,0 +1,11 @@
+! Declaracion de variable con init
+
+let
+
+  var a init a < 1
+
+in
+
+  putint (a)
+
+end

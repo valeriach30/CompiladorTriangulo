@@ -1,0 +1,11 @@
+! Declaracion de variable
+
+let
+
+  var a : Integer
+
+in
+
+  putint (a)
+
+end

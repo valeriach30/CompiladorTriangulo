@@ -78,6 +78,7 @@ import Triangle.AbstractSyntaxTrees.UntilCommand;
 import Triangle.AbstractSyntaxTrees.UntilEndCommand;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarDeclarationInit;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
@@ -567,5 +568,10 @@ public class TreeVisitor implements Visitor {
     @Override
     public Object visitToCommandAST(ToCommand aThis, Object o) {
         return(createUnary("To Command", aThis.E));
+    }
+
+    @Override
+    public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
+        return(createBinary("Variable Declaration", aThis.I, aThis.E));
     }
 }

@@ -96,6 +96,7 @@ import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 import Triangle.AbstractSyntaxTrees.WhileEndCommand;
 import Triangle.AbstractSyntaxTrees.ToCommand;
+import Triangle.AbstractSyntaxTrees.VarDeclarationInit;
 
 public class Parser {
 
@@ -898,10 +899,26 @@ public class Parser {
       {
         acceptIt();
         Identifier iAST = parseIdentifier();
-        accept(Token.COLON);
-        TypeDenoter tAST = parseTypeDenoter();
-        finish(declarationPos);
-        declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
+        // Determinar que token sigue
+        switch(currentToken.kind){
+            case Token.COLON: {
+                accept(Token.COLON);
+                TypeDenoter tAST = parseTypeDenoter();
+                finish(declarationPos);
+                declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
+                break;
+            }
+            case Token.INIT:{
+                accept(Token.INIT);
+                Expression eAST = parseExpression();
+                finish(declarationPos);
+                declarationAST = new VarDeclarationInit(iAST, eAST, declarationPos);
+                break;
+            }
+            default:{
+                syntacticError("Expected ':' or 'init' after the identifier", currentToken.spelling);
+            }
+        }
       }
       break;
 
