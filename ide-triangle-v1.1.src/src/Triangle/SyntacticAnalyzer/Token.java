@@ -68,48 +68,56 @@ final class Token extends Object {
 
     // reserved words - must be in alphabetical order...
     ARRAY		= 4,
-    BEGIN		= 5,
-    CONST		= 6,
-    DO			= 7,
-    ELSE		= 8,
-    END			= 9,
-    FOR                 = 10, // Agregar FOR
-    FROM                = 11, // Agregar FROM     
-    FUNC		= 12,
-    IF			= 13,
-    IN			= 14,
-    LET			= 15,
-    LOOP                = 16, // Agregar LOOP
-    NIL                 = 17, // Agregar NIL
-    OF			= 18,
-    PROC		= 19,
-    RECORD		= 20,
-    THEN		= 21,
-    TO                  = 22, // Agregar TO
-    TYPE		= 23,
-    UNTIL               = 24, // Agregar UNTIL
-    VAR			= 25,
-    WHILE		= 26,
+    //BEGIN		= 5, ELIMINAR BEGIN
+    CONST		= 5,
+    DO			= 6,
+    ELSE		= 7,
+    END			= 8,
+    FOR                 = 9, // Agregar FOR
+    FROM                = 10, // Agregar FROM     
+    FUNC		= 11,
+    IF			= 12,
+    IN			= 13,
+    INIT                = 14, // Agregar INIT
+    LEAVE               = 15, // Agregar LEAVE
+    LET			= 16,
+    LOCAL               = 17, // Agregar LOCAL
+    LOOP                = 18, // Agregar LOOP
+    NEXT                = 19, // Agregar NEXT
+    NIL                 = 20, // Agregar NIL
+    OF			= 21,
+    PROC		= 22,
+    REC                 = 23, // Agregar REC
+    RECORD		= 24,
+    RETURN              = 25, // Agregar RETURN
+    SELECT              = 26, // Agregar SELECT
+    THEN		= 27,
+    TO                  = 28, // Agregar TO
+    TYPE		= 29,
+    UNTIL               = 30, // Agregar UNTIL
+    VAR			= 31,
+    WHEN                = 32, // Agregar WHEN
+    WHILE		= 33,
 
     // punctuation...
-    DOT			= 27,
-    COLON		= 28,
-    SEMICOLON           = 29,
-    COMMA		= 30,
-    BECOMES		= 31,
-    IS			= 32,
+    DOT			= 34,
+    COLON		= 35,
+    SEMICOLON           = 36,
+    COMMA		= 37,
+    BECOMES		= 38,
+    IS			= 39,
 
     // brackets...
-    LPAREN		= 33,
-    RPAREN		= 34,
-    LBRACKET            = 35,
-    RBRACKET            = 36,
-    LCURLY		= 37,
-    RCURLY		= 38,
+    LPAREN		= 40,
+    RPAREN		= 41,
+    LBRACKET            = 42,
+    RBRACKET            = 43,
+    LCURLY		= 44,
+    RCURLY		= 45,
 
     // special tokens...
-    EOT			= 39,
-    ERROR		= 40;
+    EOT			= 46,
+    ERROR		= 47;
 
   private static String[] tokenTable = new String[] {
     "<int>",
@@ -117,7 +125,6 @@ final class Token extends Object {
     "<identifier>",
     "<operator>",
     "array",
-    "begin",
     "const",
     "do",
     "else",
@@ -127,17 +134,25 @@ final class Token extends Object {
     "func",
     "if",
     "in",
+    "init",         // Agregar INIT
+    "leave",        // Agregar LEAVE
     "let",
+    "local",        // Agregar LOCAL
     "loop",         // Agregar LOOP
+    "next",         // Agregar NEXT
     "nil",          // Agregar NIL
     "of",
     "proc",
+    "rec",          // Agregar REC
     "record",
+    "return",       // Agregar RETURN
+    "select",       // Agregar SELECT
     "then",
     "to",           // Agregar TO
     "type",
     "until",        // Agregar UNTIL    
     "var",
+    "when",         // Agregar WHEN
     "while",
     ".",
     ":",
