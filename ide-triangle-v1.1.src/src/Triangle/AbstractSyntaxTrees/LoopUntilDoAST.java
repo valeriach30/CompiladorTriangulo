@@ -8,7 +8,7 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 /**
  *
- * @author Vale
+ * @author Valeria Chinchilla
  */
 public class LoopUntilDoAST extends Command {
   public LoopUntilDoAST (Identifier iAST, UntilCommand UntilVarAST, SourcePosition thePosition) {

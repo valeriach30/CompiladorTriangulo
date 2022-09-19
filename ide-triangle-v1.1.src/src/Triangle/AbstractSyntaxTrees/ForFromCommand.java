@@ -8,7 +8,7 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 /**
  *
- * @author Vale
+ * @author Valeria Chinchilla
  */
 public class ForFromCommand extends Command{
   public ForFromCommand (Identifier iAST, Expression eAST, SourcePosition thePosition) {

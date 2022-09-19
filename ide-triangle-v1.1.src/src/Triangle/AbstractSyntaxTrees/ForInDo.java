@@ -6,7 +6,7 @@ package Triangle.AbstractSyntaxTrees;
 import Triangle.SyntacticAnalyzer.SourcePosition;
 /**
  *
- * @author Vale
+ * @author Valeria Chinchilla
  */
 public class ForInDo extends Command{
 

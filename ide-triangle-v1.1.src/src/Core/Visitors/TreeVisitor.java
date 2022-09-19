@@ -455,6 +455,7 @@ public class TreeVisitor implements Visitor {
     // </editor-fold>
 
     // -------------------------------------------- NUEVOS --------------------------------------------
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitLoopCommandAST1(LoopCommandAST1 ast, Object o) {
         if(ast.I == null){
@@ -464,17 +465,20 @@ public class TreeVisitor implements Visitor {
             return(createBinary("Loop Command", ast.I, ast.WhileVar));
         }
     }
-
+    
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitForFromCommand(ForFromCommand aThis, Object o) {
         return(createBinary("For From Command", aThis.I, aThis.E));
     }
-
+    
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitDoCommandAST(DoCommand aThis, Object o) {
         return(createUnary("Do Command", aThis.C));
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
         if(aThis.I == null){
@@ -485,6 +489,7 @@ public class TreeVisitor implements Visitor {
         }
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
         if(aThis.I == null){
@@ -495,16 +500,19 @@ public class TreeVisitor implements Visitor {
         }
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitUntilCommand(UntilCommand aThis, Object o) {
         return(createBinary("Until Command", aThis.I, aThis.C));
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) {
         return(createUnary("While Command", aThis.E));
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
         if(aThis.I == null){
@@ -515,11 +523,13 @@ public class TreeVisitor implements Visitor {
         }
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitUntilEndCommand(UntilEndCommand aThis, Object o) {
         return(createUnary("Until Command", aThis.E));
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
         if(aThis.I == null){
@@ -530,6 +540,7 @@ public class TreeVisitor implements Visitor {
         }
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
         if(aThis.I == null){
@@ -540,6 +551,7 @@ public class TreeVisitor implements Visitor {
         }
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
         if(aThis.I == null){
@@ -550,11 +562,13 @@ public class TreeVisitor implements Visitor {
         }
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitForInCommand(ForInCommand aThis, Object o) {
         return(createBinary("For In Command", aThis.I, aThis.E));
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitForInDoCommand(ForInDo aThis, Object o) {
         if(aThis.I == null){
@@ -565,11 +579,13 @@ public class TreeVisitor implements Visitor {
         }
     }
 
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitToCommandAST(ToCommand aThis, Object o) {
         return(createUnary("To Command", aThis.E));
     }
-
+    
+    // Autor : Valeria Chinchilla
     @Override
     public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
         return(createBinary("Variable Declaration", aThis.I, aThis.E));

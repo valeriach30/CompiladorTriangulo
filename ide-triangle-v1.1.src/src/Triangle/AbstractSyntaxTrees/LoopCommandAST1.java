@@ -7,7 +7,7 @@ package Triangle.AbstractSyntaxTrees;
 import Triangle.SyntacticAnalyzer.SourcePosition;
 /**
  *
- * @author Vale
+ * @author Valeria Chinchilla
  */
 public class LoopCommandAST1 extends Command{
   public LoopCommandAST1 (Identifier iAST, WhileCommand WhileVarAST, SourcePosition thePosition) {

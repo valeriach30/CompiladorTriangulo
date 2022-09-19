@@ -8,7 +8,7 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 /**
  *
- * @author Vale
+ * @author Valeria Chinchilla
  */
 public class DoCommand extends Command{
    public DoCommand (Command cAST, SourcePosition thePosition) {

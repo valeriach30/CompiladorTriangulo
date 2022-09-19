@@ -352,6 +352,7 @@ public class Parser {
     */  
       
     // -------------------------------- NIL --------------------------------
+    // Autor : Valeria Chinchilla
     case Token.NIL:
       {
         acceptIt();
@@ -397,8 +398,8 @@ public class Parser {
     }
     
     // -------------------------------- LOOP -----------------------------------
-
-    case Token.LOOP:
+    // Autor : Valeria Chinchilla
+    case Token.LOOP: 
       {
         acceptIt();
 
@@ -925,8 +926,8 @@ public class Parser {
         declarationAST = new ConstDeclaration(iAST, eAST, declarationPos);
       }
       break;
-
-    case Token.VAR:
+    
+    case Token.VAR: // Autor : Valeria Chinchilla
       {
         acceptIt();
         Identifier iAST = parseIdentifier();
@@ -1298,7 +1299,8 @@ public class Parser {
 // FUNCIONES DE APOYO PARA SINGLE COMMAND
 //
 ///////////////////////////////////////////////////////////////////////////////
-  
+    
+    // Autor : Valeria Chinchilla
     private WhileCommand whileDo(SourcePosition commandPos) throws SyntaxError{
         
         start(commandPos);
@@ -1330,7 +1332,8 @@ public class Parser {
         // Retornar el arbol
         return commandAST;
     }
-
+    
+    // Autor : Valeria Chinchilla
     private ForFromCommand ParseForFromCommand(SourcePosition commandPos, Identifier iAST2) throws SyntaxError {
         start(commandPos);
         ForFromCommand commandAST = null;
@@ -1339,7 +1342,8 @@ public class Parser {
         commandAST = new ForFromCommand(iAST2, eAST, commandPos);
         return commandAST;
     }
-
+    
+    // Autor : Valeria Chinchilla
     private DoCommand ParseDoCommand(SourcePosition commandPos) throws SyntaxError {
         start(commandPos);
         DoCommand commandAST = null;
@@ -1352,6 +1356,7 @@ public class Parser {
         return commandAST;
     }
 
+    // Autor : Valeria Chinchilla
     private UntilCommand UntilDo(SourcePosition commandPos) throws SyntaxError {
         start(commandPos);
         UntilCommand commandAST = null;
@@ -1383,6 +1388,7 @@ public class Parser {
         return commandAST;
     }
 
+    // Autor : Valeria Chinchilla
     private WhileEndCommand whileEnd(SourcePosition commandPos) throws SyntaxError {
         start(commandPos);
         WhileEndCommand commandAST = null;
@@ -1405,7 +1411,8 @@ public class Parser {
         // Retornar el arbol
         return commandAST;
     }
-
+    
+    // Autor : Valeria Chinchilla
     private UntilEndCommand UntilEnd(SourcePosition commandPos) throws SyntaxError {
         start(commandPos);
         UntilEndCommand commandAST = null;
@@ -1427,7 +1434,8 @@ public class Parser {
         
         // Retornar el arbol
         return commandAST;}
-
+    
+    // Autor : Valeria Chinchilla
     private ForInCommand ParseForInCommand(SourcePosition commandPos, Identifier iAST2) throws SyntaxError {
         start(commandPos);
         ForInCommand commandAST = null;

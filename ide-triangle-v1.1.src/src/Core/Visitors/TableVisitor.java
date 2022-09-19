@@ -640,7 +640,7 @@ public class TableVisitor implements Visitor {
     // </editor-fold>
 
     @Override
-    public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) {
+    public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.WhileVar.visit(this, null);
       
@@ -648,7 +648,7 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitForFromCommand(ForFromCommand aThis, Object o) {
+    public Object visitForFromCommand(ForFromCommand aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.E.visit(this, null);
       
@@ -656,14 +656,14 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitDoCommandAST(DoCommand aThis, Object o) {
+    public Object visitDoCommandAST(DoCommand aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.C.visit(this, null);
       
         return(null);
     }
 
     @Override
-    public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
+    public Object visitForFromAST1(ForFromAST1 aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.E.visit(this, null);
         aThis.ForFrom.visit(this, null);
@@ -673,7 +673,7 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
+    public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.UntilVar.visit(this, null);
       
@@ -681,7 +681,7 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitUntilCommand(UntilCommand aThis, Object o) {
+    public Object visitUntilCommand(UntilCommand aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.C.visit(this, null);
       
@@ -689,28 +689,28 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) {
+    public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.E.visit(this, null);
       
         return(null);
     }
 
     @Override
-    public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
+    public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.WhileV.visit(this, null);
         aThis.C.visit(this, null);
       
         return(null);}
 
     @Override
-    public Object visitUntilEndCommand(UntilEndCommand aThis, Object o) {
+    public Object visitUntilEndCommand(UntilEndCommand aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.E.visit(this, null);
       
         return(null);
     }
 
     @Override
-    public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
+    public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.C.visit(this, null);
         aThis.UntilEnd.visit(this, null);
@@ -719,7 +719,7 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
+    public Object visitForFromWhile(LoopForFromWhile aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.E.visit(this, null);
         aThis.ForFrom.visit(this, null);
@@ -729,7 +729,7 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
+    public Object visitForFromUntil(LoopForFromUntil aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.E.visit(this, null);
         aThis.ForFrom.visit(this, null);
@@ -739,7 +739,7 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitForInCommand(ForInCommand aThis, Object o) {
+    public Object visitForInCommand(ForInCommand aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.E.visit(this, null);
       
@@ -747,7 +747,7 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitForInDoCommand(ForInDo aThis, Object o) {
+    public Object visitForInDoCommand(ForInDo aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.forAST.visit(this, null);
         aThis.C.visit(this, null);
@@ -756,14 +756,14 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitToCommandAST(ToCommand aThis, Object o) {
+    public Object visitToCommandAST(ToCommand aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.E.visit(this, null);
       
         return(null);
     }
 
     @Override
-    public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
+    public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) { // Autor : Valeria Chinchilla
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -57,7 +57,7 @@ final class Token extends Object {
   }
 
   // Token classes...
-
+  // Autor : Valeria Chinchilla
   public static final int
 
     // literals, identifiers, operators...
@@ -119,8 +119,8 @@ final class Token extends Object {
     // special tokens...
     EOT			= 47,
     ERROR		= 48;
-
-  private static String[] tokenTable = new String[] {
+  
+  private static String[] tokenTable = new String[] { // Autor : Valeria Chinchilla
     "<int>",
     "<char>",
     "<identifier>",
