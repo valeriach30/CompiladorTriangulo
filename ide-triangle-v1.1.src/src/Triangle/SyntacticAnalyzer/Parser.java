@@ -372,8 +372,31 @@ public class Parser {
         commandAST = new LetCommand(dAST, cAST, commandPos);
       }
       break;  
-      
-    // -------------------------------- LOOP --------------------------------
+    
+    // -------------------------------- SELECT ---------------------------------
+    // "select" Expression "from" Cases ["else" Command] "end"
+    case Token.SELECT: {
+        acceptIt();
+        
+        // Determinar la expresion
+        Expression eAST = parseExpression();
+        
+        accept(Token.FROM);
+        
+        // Determinar los Cases
+        
+        // Determinar si hay else 0 o 1 vez
+        
+        // End
+        break;
+    }
+    
+    // ---------------------------------- IF -----------------------------------
+    case Token.IF: {
+        break;
+    }
+    
+    // -------------------------------- LOOP -----------------------------------
 
     case Token.LOOP:
       {
@@ -450,7 +473,11 @@ public class Parser {
                         // Crear el arbol final
                         commandAST = new LoopUntilEndAST(iAST, DoAST, UntilAST, commandPos);
                         break;
-                    }    
+                    }
+                    default :{
+                        syntacticError("Expected 'while' or 'until' after the command", currentToken.spelling);
+                        break;
+                    }
                 }
                 break;
             }
@@ -524,6 +551,10 @@ public class Parser {
                                              ToAST, UntilAST, commandPos);
                                 break;
                             }
+                            default :{
+                                syntacticError("Expected 'while', 'do' or 'until' after the expression", currentToken.spelling);
+                                break;
+                            }
                         }
                     break;
                     }
@@ -555,19 +586,19 @@ public class Parser {
                         }
                         // Error
                         else{
-                            syntacticError("Expected END here", currentToken.spelling);
+                            syntacticError("Expected 'end' after the command", currentToken.spelling);
                         }
                         break;
                     }
                     default: 
-                        syntacticError("Expected from or in here", currentToken.spelling);
+                        syntacticError("Expected 'from' or 'in' after the identifier", currentToken.spelling);
                         acceptIt();
                         break;
                 }
             break;
             }
             default:
-                syntacticError("Expected while, do, until or for here", currentToken.spelling);
+                syntacticError("Expected 'while', 'do', 'until' or 'for' after loop", currentToken.spelling);
                 break;
         }
       }
