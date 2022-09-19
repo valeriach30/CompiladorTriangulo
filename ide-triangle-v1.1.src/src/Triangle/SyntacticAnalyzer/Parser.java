@@ -913,9 +913,21 @@ public class Parser {
         FormalParameterSequence fpsAST = parseFormalParameterSequence();
         accept(Token.RPAREN);
         accept(Token.IS);
-        Command cAST = parseSingleCommand();
-        finish(declarationPos);
-        declarationAST = new ProcDeclaration(iAST, fpsAST, cAST, declarationPos);
+        
+        // Se cambia de single command a command
+        Command cAST = parseCommand();
+        
+        // Determina que haya un end al final
+        
+        if(currentToken.kind == Token.END){
+            acceptIt();
+            finish(declarationPos);
+            declarationAST = new ProcDeclaration(iAST, fpsAST, cAST, declarationPos);
+        }
+        // Error
+        else{
+            syntacticError("Expected end after the command", currentToken.spelling);
+        }
       }
       break;
 

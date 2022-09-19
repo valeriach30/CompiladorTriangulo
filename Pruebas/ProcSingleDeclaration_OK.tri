@@ -1,0 +1,7 @@
+! Prueba de modificacion en single declaration
+
+let
+   proc x() ~ put('z') end
+in
+  x()
+end
