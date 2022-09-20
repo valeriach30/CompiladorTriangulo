@@ -15,6 +15,7 @@ import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
+import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -133,9 +134,19 @@ public class TreeVisitor implements Visitor {
         return(createBinary("While Do Command", ast.E, ast.C));
     }
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-    public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object obj){
+public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object obj){
         return(createBinary("Case Literal Command", ast.CL, ast.IL));
     }
+//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){
+    if(ast.CLC2 == null && ast.TC == null){
+        return(createUnary("Case Range Command", ast.CLC));
+    }
+    else{
+        return(createTernary("Case Range Command", ast.CLC, ast.CLC2, ast.TC));
+    }
+}
+    
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Expressions ">

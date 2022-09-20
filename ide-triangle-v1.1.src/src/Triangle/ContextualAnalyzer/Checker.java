@@ -26,6 +26,7 @@ import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
+import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -110,9 +111,14 @@ public final class Checker implements Visitor {
 
   // Always returns null. Does not use the given object.
     
-  //Se dejo declarado el CaseLiteralCommand para los siguientes proyectos. 
+  //Se dejo declarado el CaseLiteralCommand para los siguientes proyectos.
+    
   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
 public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object o) {
+    return null;
+  }
+//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+public Object visitCaseRangeCommand(CaseRangeCommand ast, Object o) {
     return null;
   }
 

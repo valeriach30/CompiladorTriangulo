@@ -15,6 +15,7 @@ import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
+import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -157,13 +158,21 @@ public class TableVisitor implements Visitor {
       
       return(null);
   }
-   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-   public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object o) { 
-      ast.CL.visit(this, null);
-      ast.IL.visit(this, null);
+//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object o) { 
+    ast.CL.visit(this, null);
+    ast.IL.visit(this, null);
       
-      return(null);
-  }
+    return(null);
+}
+
+//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+public Object visitCaseRangeCommand(CaseRangeCommand ast, Object o) { 
+    ast.CLC.visit(this, null);
+    ast.CLC2.visit(this, null);
+    ast.TC.visit(this, null);
+    return(null);
+ }
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc=" Expressions ">

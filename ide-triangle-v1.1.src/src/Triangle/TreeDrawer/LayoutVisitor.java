@@ -27,6 +27,7 @@ import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
+import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -114,6 +115,16 @@ public class LayoutVisitor implements Visitor {
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object obj) {
     return layoutBinary("CaseLitCom.", ast.CL, ast.IL);
+  }
+ 
+ //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj) {
+      if(ast.CLC2 == null && ast.TC == null){
+          return layoutUnary("CaseRngCom.", ast.CLC);
+      }
+      else{
+          return layoutTernary("CaseRngCom.", ast.CLC, ast.CLC2, ast.TC);
+      }
   }
   
   public Object visitAssignCommand(AssignCommand ast, Object obj) {
@@ -645,5 +656,7 @@ public class LayoutVisitor implements Visitor {
     public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+
 
 }

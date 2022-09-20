@@ -13,10 +13,12 @@ public class CaseLiteralCommand extends Command{
     public CaseLiteralCommand (CharacterLiteral cAST, SourcePosition thePosition) {
         super (thePosition);
         CL = cAST;
+        IL = null;
     }
     public CaseLiteralCommand (IntegerLiteral cAST, SourcePosition thePosition) {
         super (thePosition);
         IL = cAST;
+        CL = null;
     }
     
     public Object visit(Visitor V, Object O){

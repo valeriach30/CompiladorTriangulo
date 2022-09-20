@@ -34,6 +34,7 @@ import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
+import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -178,6 +179,10 @@ public final class Encoder implements Visitor {
   //Se dejo declarado el CaseLiteralCommand para los siguientes proyectos. 
    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object O){
+      return null;
+  }
+  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitCaseRangeCommand(CaseRangeCommand ast, Object O){
       return null;
   }
 
