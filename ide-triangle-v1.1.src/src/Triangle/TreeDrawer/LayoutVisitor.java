@@ -26,6 +26,7 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -109,6 +110,12 @@ public class LayoutVisitor implements Visitor {
   }
 
   // Commands
+ //Se dejo declarado el CaseLiteralCommand para los siguientes proyectos. 
+ //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+ public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object obj) {
+    return layoutBinary("CaseLitCom.", ast.CL, ast.IL);
+  }
+  
   public Object visitAssignCommand(AssignCommand ast, Object obj) {
     return layoutBinary("AssignCom.", ast.V, ast.E);
   }

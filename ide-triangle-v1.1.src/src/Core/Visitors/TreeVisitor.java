@@ -14,6 +14,7 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -130,6 +131,10 @@ public class TreeVisitor implements Visitor {
     
     public Object visitWhileCommand(WhileCommand ast, Object obj) {
         return(createBinary("While Do Command", ast.E, ast.C));
+    }
+ //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object obj){
+        return(createBinary("Case Literal Command", ast.CL, ast.IL));
     }
     // </editor-fold>
     

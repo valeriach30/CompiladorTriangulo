@@ -33,6 +33,7 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -172,6 +173,12 @@ public final class Encoder implements Visitor {
     ast.E.visit(this, frame);
     emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
     return null;
+  }
+  
+  //Se dejo declarado el CaseLiteralCommand para los siguientes proyectos. 
+   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object O){
+      return null;
   }
 
 

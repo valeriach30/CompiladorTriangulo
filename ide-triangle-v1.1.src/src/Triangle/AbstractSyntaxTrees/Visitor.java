@@ -39,6 +39,7 @@ public interface Visitor {
   public abstract Object visitForInCommand(ForInCommand aThis, Object o);
   public abstract Object visitForInDoCommand(ForInDo aThis, Object o);
   public abstract Object visitToCommandAST(ToCommand aThis, Object o);
+  public abstract Object visitCaseLiteralCommand(CaseLiteralCommand aThis, Object O);
   
   // Expressions
   public abstract Object visitArrayExpression(ArrayExpression ast, Object o);
