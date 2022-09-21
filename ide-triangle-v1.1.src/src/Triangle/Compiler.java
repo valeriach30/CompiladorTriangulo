@@ -21,6 +21,8 @@ import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.SyntacticAnalyzer.Scanner;
 import Triangle.SyntacticAnalyzer.SourceFile;
 import Triangle.TreeDrawer.Drawer;
+import Triangle.TreeDrawer.XML;
+import Triangle.TreeDrawer.XMLcreator;
 
 /**
  * The main driver class for the Triangle compiler.
@@ -86,6 +88,8 @@ public class Compiler {
             //if (showingAST) {
             //    drawer.draw(theAST);
             //}
+            String nombreArchivo = sourceName.substring(0, sourceName.length()-3)+"XML";
+            XML.crear(theAST, nombreArchivo);
             System.out.println ("Contextual Analysis ...");
             checker.check(theAST);				// 2nd pass
             if (showingAST) {
