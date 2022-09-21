@@ -122,4 +122,6 @@ public interface Visitor {
   public abstract Object visitProgram(Program ast, Object o);
 
     public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o);
+
+    public Object visitBarCommandCaseRange(BarCommandCaseRange aThis, Object o);
 }

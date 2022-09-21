@@ -9,6 +9,7 @@ import Triangle.AbstractSyntaxTrees.AnyTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
 import Triangle.AbstractSyntaxTrees.AssignCommand;
+import Triangle.AbstractSyntaxTrees.BarCommandCaseRange;
 import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
@@ -174,9 +175,15 @@ public Object visitCaseRangeCommand(CaseRangeCommand ast, Object o) {
     ast.TC.visit(this, null);
     return(null);
  }
-
+//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
 public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object o){
     ast.CLCT.visit(this, null);
+    return(null);
+}
+
+//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
+    ast.CRCB.visit(this, null);
     return(null);
 }
   // </editor-fold>
