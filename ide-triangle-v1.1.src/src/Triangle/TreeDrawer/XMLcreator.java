@@ -780,6 +780,10 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitArrayTypeDenoter(ArrayTypeDenoter ast, Object o) {
         nuevaLinea("<ArrayTypeDenoter>");
+        
+        ast.IL.visit(this, null);
+        ast.T.visit(this, null);
+      
         nuevaLinea("</ArrayTypeDenoter>");
         return(null);
     }
@@ -808,6 +812,9 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitSimpleTypeDenoter(SimpleTypeDenoter ast, Object o) {
         nuevaLinea("<SimpleTypeDenoter>");
+        
+        ast.I.visit(this, null);
+      
         nuevaLinea("</SimpleTypeDenoter>");
         return(null);
     }
@@ -822,6 +829,9 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitRecordTypeDenoter(RecordTypeDenoter ast, Object o) {
         nuevaLinea("<RecordTypeDenoter>");
+      
+        ast.FT.visit(this, null);
+      
         nuevaLinea("</RecordTypeDenoter>");
         return(null);
     }
@@ -829,6 +839,11 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitMultipleFieldTypeDenoter(MultipleFieldTypeDenoter ast, Object o) {
         nuevaLinea("<MultipleFieldTypeDenoter>");
+        
+        ast.FT.visit(this, null);
+        ast.I.visit(this, null);
+        ast.T.visit(this, null);
+
         nuevaLinea("</MultipleFieldTypeDenoter>");
         return(null);
     }
@@ -836,6 +851,10 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitSingleFieldTypeDenoter(SingleFieldTypeDenoter ast, Object o) {
         nuevaLinea("<SingleFieldTypeDenoter>");
+    
+        ast.I.visit(this, null);
+        ast.T.visit(this, null);
+  
         nuevaLinea("</SingleFieldTypeDenoter>");
         return(null);
     }
@@ -864,6 +883,9 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitOperator(Operator ast, Object o) {
         nuevaLinea("<Operator>");
+  
+        ast.decl.visit(this, null);
+  
         nuevaLinea("</Operator>");
         return(null);
     }
@@ -871,6 +893,10 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitDotVname(DotVname ast, Object o) {
         nuevaLinea("<DotVname>");
+    
+        ast.I.visit(this, null);
+        ast.V.visit(this, null);
+  
         nuevaLinea("</DotVname>");
         return(null);
     }
@@ -878,6 +904,9 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitSimpleVname(SimpleVname ast, Object o) {
         nuevaLinea("<SimpleVname>");
+  
+        ast.I.visit(this, null);
+  
         nuevaLinea("</SimpleVname>");
         return(null);
     }
@@ -885,6 +914,10 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitSubscriptVname(SubscriptVname ast, Object o) {
         nuevaLinea("<SubscriptVname>");
+        
+        ast.E.visit(this, null);
+        ast.V.visit(this, null);
+  
         nuevaLinea("</SubscriptVname>");
         return(null);
     }
@@ -892,6 +925,9 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitProgram(Program ast, Object o) {
         nuevaLinea("<Program>");
+      
+        ast.C.visit(this, null);
+      
         nuevaLinea("</Program>");
         return(null);
     }
@@ -899,6 +935,10 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
         nuevaLinea("<VarDeclarationInit>");
+        
+        aThis.E.visit(this, null);
+        aThis.I.visit(this, null);
+      
         nuevaLinea("</VarDeclarationInit>");
         return(null);
     }

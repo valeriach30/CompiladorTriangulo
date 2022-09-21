@@ -17,8 +17,8 @@ public class XML {
         try{
             try(FileWriter escritorXML = new FileWriter(nombreArchivo)){
                 escritorXML.write("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>");
-                // XMLcreator layout = new XMLcreator(escritorXML);
-                //AST.visit(layout, null);
+                XMLcreator layout = new XMLcreator(escritorXML);
+                AST.visit(layout, null);
             }
         }
         catch(IOException e){

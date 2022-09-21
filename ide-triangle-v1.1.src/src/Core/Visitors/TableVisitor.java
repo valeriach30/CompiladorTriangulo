@@ -794,6 +794,9 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 
     @Override
     public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) { // Autor : Valeria Chinchilla
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        aThis.E.visit(this, null);
+        aThis.I.visit(this, null);
+      
+        return(null);
     }
 }
