@@ -72,6 +72,7 @@ import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
 import Triangle.AbstractSyntaxTrees.ToCommand;
+import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
@@ -899,6 +900,11 @@ public class XMLcreator implements Visitor {
         nuevaLinea("<VarDeclarationInit>");
         nuevaLinea("</VarDeclarationInit>");
         return(null);
+    }
+
+    @Override
+    public Object visitToCommandLiteralAST(ToCommandLiteral aThis, Object O) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

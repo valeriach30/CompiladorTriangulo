@@ -85,6 +85,7 @@ import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
 import Triangle.AbstractSyntaxTrees.ToCommand;
+import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
@@ -126,6 +127,12 @@ public class LayoutVisitor implements Visitor {
           return layoutTernary("CaseRngCom.", ast.CLC, ast.CLC2, ast.TC);
       }
   }
+ 
+ //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+ public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj) {
+    return layoutUnary("CaseToLitCom.", ast.CLCT);
+  }  
+  
   
   public Object visitAssignCommand(AssignCommand ast, Object obj) {
     return layoutBinary("AssignCom.", ast.V, ast.E);

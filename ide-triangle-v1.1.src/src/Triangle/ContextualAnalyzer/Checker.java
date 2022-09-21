@@ -89,6 +89,7 @@ import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
 import Triangle.AbstractSyntaxTrees.Terminal;
 import Triangle.AbstractSyntaxTrees.ToCommand;
+import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.TypeDenoter;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
@@ -121,6 +122,11 @@ public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object o) {
 public Object visitCaseRangeCommand(CaseRangeCommand ast, Object o) {
     return null;
   }
+
+//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj){
+    return null;
+}
 
   public Object visitAssignCommand(AssignCommand ast, Object o) {
     TypeDenoter vType = (TypeDenoter) ast.V.visit(this, null);

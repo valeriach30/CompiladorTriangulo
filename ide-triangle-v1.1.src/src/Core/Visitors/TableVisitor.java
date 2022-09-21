@@ -73,6 +73,7 @@ import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
 import Triangle.AbstractSyntaxTrees.ToCommand;
+import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
@@ -173,6 +174,11 @@ public Object visitCaseRangeCommand(CaseRangeCommand ast, Object o) {
     ast.TC.visit(this, null);
     return(null);
  }
+
+public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object o){
+    ast.CLCT.visit(this, null);
+    return(null);
+}
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc=" Expressions ">

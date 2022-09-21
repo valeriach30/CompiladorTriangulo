@@ -93,6 +93,7 @@ import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
 import Triangle.AbstractSyntaxTrees.ToCommand;
+import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
@@ -183,6 +184,11 @@ public final class Encoder implements Visitor {
   }
   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseRangeCommand(CaseRangeCommand ast, Object O){
+      return null;
+  }
+    
+   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj){
       return null;
   }
 

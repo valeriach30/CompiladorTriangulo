@@ -73,6 +73,7 @@ import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
 import Triangle.AbstractSyntaxTrees.ToCommand;
+import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
@@ -145,6 +146,10 @@ public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){
     else{
         return(createTernary("Case Range Command", ast.CLC, ast.CLC2, ast.TC));
     }
+}
+
+public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj){
+    return(createUnary("Case To Literal", ast.CLCT));
 }
     
     // </editor-fold>
