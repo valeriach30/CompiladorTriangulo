@@ -29,13 +29,13 @@ import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
 import Triangle.AbstractSyntaxTrees.AssignCommand;
 import Triangle.AbstractSyntaxTrees.BarCommandCaseRange;
-import Triangle.AbstractSyntaxTrees.BarCommandCaseRangeN;
 import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
+import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
@@ -197,9 +197,9 @@ public final class Encoder implements Visitor {
     public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
       return null;
   }
-
+    
         //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-    public Object visitBarCommandCaseRangeN(BarCommandCaseRangeN ast, Object obj){
+    public Object visitCaseLiterals(CaseLiterals ast, Object obj){
       return null;
   }
 

@@ -22,13 +22,13 @@ import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
 import Triangle.AbstractSyntaxTrees.AssignCommand;
 import Triangle.AbstractSyntaxTrees.BarCommandCaseRange;
-import Triangle.AbstractSyntaxTrees.BarCommandCaseRangeN;
 import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
+import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
@@ -138,11 +138,11 @@ public class LayoutVisitor implements Visitor {
  public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj) {
     return layoutUnary("CaseBarCaseRngtCom.", ast.CRCB);
   }  
- 
   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
- public Object visitBarCommandCaseRangeN(BarCommandCaseRangeN ast, Object obj) {
-    return layoutBinary("CaseBarCaseRngNtCom.", ast.BCCR, ast.APS);
+ public Object visitCaseLiterals(CaseLiterals ast, Object obj) {
+    return layoutTernary("CaseLiteralstCom.", ast.BCCRCL, ast.APS, ast.BCCRCL);
   }  
+ 
   
   public Object visitAssignCommand(AssignCommand ast, Object obj) {
     return layoutBinary("AssignCom.", ast.V, ast.E);
