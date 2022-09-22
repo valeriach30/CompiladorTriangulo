@@ -42,6 +42,7 @@ public interface Visitor {
   public abstract Object visitCaseLiteralCommand(CaseLiteralCommand aThis, Object O);
   public abstract Object visitCaseRangeCommand(CaseRangeCommand aThis, Object O);
   public abstract Object visitToCommandLiteralAST(ToCommandLiteral aThis, Object O);
+  public abstract Object visitBarCommandCaseRangeN(BarCommandCaseRangeN aThis, Object O);
   
   // Expressions
   public abstract Object visitArrayExpression(ArrayExpression ast, Object o);

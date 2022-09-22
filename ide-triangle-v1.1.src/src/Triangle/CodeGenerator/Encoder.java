@@ -29,6 +29,7 @@ import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
 import Triangle.AbstractSyntaxTrees.AssignCommand;
 import Triangle.AbstractSyntaxTrees.BarCommandCaseRange;
+import Triangle.AbstractSyntaxTrees.BarCommandCaseRangeN;
 import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
@@ -197,6 +198,10 @@ public final class Encoder implements Visitor {
       return null;
   }
 
+        //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitBarCommandCaseRangeN(BarCommandCaseRangeN ast, Object obj){
+      return null;
+  }
 
   // Expressions
   public Object visitArrayExpression(ArrayExpression ast, Object o) {
