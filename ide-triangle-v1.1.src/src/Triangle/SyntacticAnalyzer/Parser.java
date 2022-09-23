@@ -24,6 +24,7 @@ import Triangle.AbstractSyntaxTrees.AssignCommand;
 import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
 import Triangle.AbstractSyntaxTrees.Command;
@@ -217,6 +218,29 @@ public class Parser {
       syntacticError("character literal expected here", "");
     }
     return CL;
+  }
+  //Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
+  CaseLiteralCommand parseCaseLiteral() throws SyntaxError{
+    CaseLiteralCommand caseLiteralAST = null;
+    SourcePosition commandPos = new SourcePosition();
+    start(commandPos);
+    if(currentToken.kind == Token.INTLITERAL){
+        acceptIt();
+        IntegerLiteral c2AST = parseIntegerLiteral();
+        finish(commandPos);
+        caseLiteralAST = new CaseLiteralCommand(c2AST, commandPos);
+    }
+    else if(currentToken.kind == Token.CHARLITERAL){
+        acceptIt();
+        CharacterLiteral c2AST = parseCharacterLiteral();
+        finish(commandPos);
+        caseLiteralAST = new CaseLiteralCommand(c2AST, commandPos);
+    }
+    else{
+       caseLiteralAST = null; 
+       syntacticError("character literal or integer literal expected here", "");
+    }
+    return caseLiteralAST;
   }
 
 // parseIdentifier parses an identifier, and constructs a leaf AST to
@@ -659,6 +683,9 @@ public class Parser {
     }
 
     return commandAST;
+    
+   //Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
+    
   }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -811,7 +838,6 @@ public class Parser {
 
   RecordAggregate parseRecordAggregate() throws SyntaxError {
     RecordAggregate aggregateAST = null; // in case there's a syntactic error
-
     SourcePosition aggregatePos = new SourcePosition();
     start(aggregatePos);
 
