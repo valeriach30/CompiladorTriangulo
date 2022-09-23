@@ -13,6 +13,8 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.ContextualAnalyzer.Checker;
 import Triangle.CodeGenerator.Encoder;
+import Triangle.TreeDrawer.XML;
+import java.io.IOException;
 
 
 
@@ -39,7 +41,7 @@ public class IDECompiler {
      * @param sourceName Path to the source file.
      * @return True if compilation was succesful.
      */
-    public boolean compileProgram(String sourceName) {
+    public boolean compileProgram(String sourceName) throws IOException {
         System.out.println("********** " +
                            "Triangle Compiler (IDE-Triangle 1.0)" +
                            " **********");
@@ -56,6 +58,8 @@ public class IDECompiler {
             //System.out.println("Contextual Analysis ...");
             //Checker checker = new Checker(report);
             //checker.check(rootAST);
+            String nombreArchivo = sourceName.substring(0, sourceName.length()-3)+"XML";
+            XML.crear(rootAST, nombreArchivo);
             if (report.numErrors == 0) {
                 //System.out.println("Code Generation ...");
                 //Encoder encoder = new Encoder(report);

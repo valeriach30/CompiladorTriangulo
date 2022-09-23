@@ -102,7 +102,7 @@ public class XMLcreator implements Visitor {
     private final FileWriter escritorXML;
 
     public XMLcreator(FileWriter escritor) {
-        escritorXML = escritor;
+        this.escritorXML = escritor;
     }
     
     
@@ -115,9 +115,10 @@ public class XMLcreator implements Visitor {
     ///////////////////////////////////////////////////////////////////////////////
     
     // Funcion que escribe una nueva linea en el archivo XML
-    private void nuevaLinea(String line){
+    private void nuevaLinea(String linea){
         try{
-            escritorXML.write(line + "\n");
+            escritorXML.write(linea);
+            escritorXML.write("\n");
         }
         catch (IOException error){
             System.out.println("Error al agregar nueva linea al XML");
@@ -139,8 +140,8 @@ public class XMLcreator implements Visitor {
         nuevaLinea("<AssignCommand>");
         
         // Visitar
-        ast.E.visit(null, null);
-        ast.V.visit(null, null);
+        ast.V.visit(this, null);
+        ast.E.visit(this, null);
         
         nuevaLinea("</AssignCommand>");
         return (null);
@@ -416,8 +417,9 @@ public class XMLcreator implements Visitor {
         nuevaLinea("<BinaryExpression>");
         
         ast.E1.visit(this, null);
-        ast.E2.visit(this, null);
         ast.O.visit(this, null);
+        ast.E2.visit(this, null);
+        
       
         nuevaLinea("</BinaryExpression>");
         return(null);
@@ -886,9 +888,9 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitOperator(Operator ast, Object o) {
         nuevaLinea("<Operator>");
-  
-        ast.decl.visit(this, null);
-  
+        if(ast.decl != null){
+            ast.decl.visit(this, null);
+        }
         nuevaLinea("</Operator>");
         return(null);
     }

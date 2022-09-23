@@ -13,10 +13,10 @@ import java.io.IOException;
 
 // Clase para crear el archivo del XML
 public class XML {
-    public static void crear(Program AST, String nombreArchivo){
+    public static void crear(Program AST, String nombreArchivo) throws IOException{
         try{
             try(FileWriter escritorXML = new FileWriter(nombreArchivo)){
-                escritorXML.write("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>");
+                escritorXML.write("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
                 XMLcreator layout = new XMLcreator(escritorXML);
                 AST.visit(layout, null);
             }
