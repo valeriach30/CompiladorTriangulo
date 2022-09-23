@@ -18,6 +18,7 @@ import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
+import Triangle.AbstractSyntaxTrees.CasesCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -962,6 +963,11 @@ public class XMLcreator implements Visitor {
 
     @Override
     public Object visitCaseCommand(CaseCommand aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object visitCasesCommand(CasesCommand aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

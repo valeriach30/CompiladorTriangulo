@@ -26,6 +26,6 @@ public class CaseLiteralCommand extends Command{
     }
     public CharacterLiteral CL;
     public IntegerLiteral IL;
-  }
+}
 
 

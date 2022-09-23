@@ -31,6 +31,7 @@ import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
+import Triangle.AbstractSyntaxTrees.CasesCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -138,6 +139,10 @@ public class LayoutVisitor implements Visitor {
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCaseCommand(CaseCommand ast, Object obj) {
     return layoutBinary("CaseCommandCom.", ast.C,  ast.CL);
+  }  
+ //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  public Object visitCasesCommand(CasesCommand ast, Object obj) {
+    return layoutBinary("CasesCommandCom.", ast.caseComand,  ast.APS);
   }  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj) {

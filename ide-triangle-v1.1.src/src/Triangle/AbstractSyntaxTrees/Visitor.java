@@ -44,7 +44,7 @@ public interface Visitor {
   public abstract Object visitToCommandLiteralAST(ToCommandLiteral aThis, Object o);
   public abstract Object visitCaseLiterals(CaseLiterals aThis, Object o);
   public abstract Object visitCaseCommand(CaseCommand aThis, Object o);
-  
+  public abstract Object visitCasesCommand(CasesCommand aThis, Object o);
   
   // Expressions
   public abstract Object visitArrayExpression(ArrayExpression ast, Object o);

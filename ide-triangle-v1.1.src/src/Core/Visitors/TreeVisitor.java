@@ -19,6 +19,7 @@ import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
+import Triangle.AbstractSyntaxTrees.CasesCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -146,6 +147,10 @@ public class TreeVisitor implements Visitor {
         return(createBinary("Case Command", ast.C,  ast.CL));
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitCasesCommand(CasesCommand ast, Object obj){
+        return(createBinary("Cases Command", ast.APS,  ast.caseComand));
+    }
+    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){
         if(ast.CLC2 == null && ast.TC == null){
             return(createUnary("Case Range Command", ast.CLC));
@@ -168,7 +173,7 @@ public class TreeVisitor implements Visitor {
         return(createTernary("Case Literals", ast.BCCRCL, ast.APS, ast.CRCCL));
     }
 
-
+    
     
     // </editor-fold>
     

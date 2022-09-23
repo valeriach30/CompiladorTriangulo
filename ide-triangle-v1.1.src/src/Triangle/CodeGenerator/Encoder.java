@@ -38,6 +38,7 @@ import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
+import Triangle.AbstractSyntaxTrees.CasesCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -205,6 +206,9 @@ public final class Encoder implements Visitor {
     }
 
     public Object visitCaseCommand(CaseCommand ast, Object obj){
+        return null;
+    }
+    public Object visitCasesCommand(CasesCommand ast, Object obj){
         return null;
     }
     

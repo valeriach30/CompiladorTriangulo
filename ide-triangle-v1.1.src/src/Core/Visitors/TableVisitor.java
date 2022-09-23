@@ -19,6 +19,7 @@ import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
+import Triangle.AbstractSyntaxTrees.CasesCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -130,6 +131,11 @@ public class TableVisitor implements Visitor {
   public Object visitCaseCommand(CaseCommand ast, Object o) { 
       ast.C.visit(this, null);
       ast.CL.visit(this, null);
+      return(null);
+  }
+  public Object visitCasesCommand(CasesCommand ast, Object o) { 
+      ast.caseComand.visit(this, null);
+      ast.APS.visit(this, null);
       return(null);
   }
   
