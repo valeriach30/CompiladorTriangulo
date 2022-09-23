@@ -214,7 +214,9 @@ public class XMLcreator implements Visitor {
     public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) {
         nuevaLinea("<LoopCommand>");
         
-        aThis.I.visit(this, null);
+        if(aThis.I != null){
+            aThis.I.visit(this, null);
+        }
         aThis.WhileVar.visit(this, null);
         
         nuevaLinea("</LoopCommand>");
@@ -245,8 +247,9 @@ public class XMLcreator implements Visitor {
     @Override
     public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
         nuevaLinea("<LoopCommand>");
-        
-        aThis.I.visit(this, null);
+        if(aThis.I != null){
+            aThis.I.visit(this, null);
+        }
         aThis.E.visit(this, null);
         aThis.ForFrom.visit(this, null);
         aThis.Do.visit(this, null);
@@ -259,7 +262,9 @@ public class XMLcreator implements Visitor {
     public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
         nuevaLinea("<LoopCommand>");
         
-        aThis.I.visit(this, null);
+        if(aThis.I != null){
+            aThis.I.visit(this, null);
+        }
         aThis.UntilVar.visit(this, null);
       
         nuevaLinea("</LoopCommand>");
@@ -291,6 +296,9 @@ public class XMLcreator implements Visitor {
     public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
         nuevaLinea("<LoopCommand>");
         
+        if(aThis.I != null){
+            aThis.I.visit(this, null);
+        }
         aThis.WhileV.visit(this, null);
         aThis.C.visit(this, null);
       
@@ -312,7 +320,9 @@ public class XMLcreator implements Visitor {
     public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
         nuevaLinea("<LoopCommand>");
         
-        aThis.I.visit(this, null);
+        if(aThis.I != null){
+            aThis.I.visit(this, null);
+        }
         aThis.C.visit(this, null);
         aThis.UntilEnd.visit(this, null);
       
@@ -324,7 +334,9 @@ public class XMLcreator implements Visitor {
     public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
         nuevaLinea("<LoopCommand>");
         
-        aThis.I.visit(this, null);
+        if(aThis.I != null){
+           aThis.I.visit(this, null);
+        }
         aThis.E.visit(this, null);
         aThis.ForFrom.visit(this, null);
         aThis.whileV.visit(this, null);
@@ -337,7 +349,9 @@ public class XMLcreator implements Visitor {
     public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
         nuevaLinea("<LoopCommand>");
         
-        aThis.I.visit(this, null);
+        if(aThis.I != null){
+           aThis.I.visit(this, null);
+        }
         aThis.E.visit(this, null);
         aThis.ForFrom.visit(this, null);
         aThis.untilV.visit(this, null);
@@ -361,7 +375,9 @@ public class XMLcreator implements Visitor {
     public Object visitForInDoCommand(ForInDo aThis, Object o) {
         nuevaLinea("<LoopCommand>");
         
-        aThis.I.visit(this, null);
+        if(aThis.I != null){
+           aThis.I.visit(this, null);
+        }
         aThis.forAST.visit(this, null);
         aThis.C.visit(this, null);
       
@@ -466,10 +482,10 @@ public class XMLcreator implements Visitor {
     }
 
     @Override
-    public Object visitIntegerExpression(IntegerExpression ast, Object o) { // ??????
+    public Object visitIntegerExpression(IntegerExpression ast, Object o) { 
         nuevaLinea("<IntegerExpression>");
         
-        //ast.IL.visit(this, null);
+        ast.IL.visit(this, null);
         
         nuevaLinea("</IntegerExpression>");
         return(null);
@@ -518,7 +534,7 @@ public class XMLcreator implements Visitor {
     }
 
     @Override
-    public Object visitBinaryOperatorDeclaration(BinaryOperatorDeclaration ast, Object o) { // ??????
+    public Object visitBinaryOperatorDeclaration(BinaryOperatorDeclaration ast, Object o) { 
         nuevaLinea("<BinaryOperatorDeclaration>");
       
         nuevaLinea("</BinaryOperatorDeclaration>");
@@ -873,14 +889,14 @@ public class XMLcreator implements Visitor {
 
     @Override
     public Object visitIdentifier(Identifier ast, Object o) {
-        nuevaLinea("<Identifier>");
+        nuevaLinea("<Identifier value='" + ast.spelling + "'>");
         nuevaLinea("</Identifier>");
         return(null);
     }
 
     @Override
     public Object visitIntegerLiteral(IntegerLiteral ast, Object o) {
-        nuevaLinea("<IntegerLiteral>");
+        nuevaLinea("<IntegerLiteral value= '" + ast.spelling + "'>");
         nuevaLinea("</IntegerLiteral>");
         return(null);
     }

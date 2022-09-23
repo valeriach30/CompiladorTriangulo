@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Program>
 <LoopCommand>
-<WhileEndCommand>
-<BinaryExpression>
-<VnameExpression>
-<SimpleVname>
+<ForInCommand>
 <Identifier value='x'>
 </Identifier>
-</SimpleVname>
-</VnameExpression>
-<Operator>
-</Operator>
 <IntegerExpression>
-<IntegerLiteral value= '10'>
+<IntegerLiteral value= '1'>
 </IntegerLiteral>
 </IntegerExpression>
-</BinaryExpression>
-</WhileEndCommand>
+</ForInCommand>
 <DoCommand>
 <AssignCommand>
 <SimpleVname>
