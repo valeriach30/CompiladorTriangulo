@@ -34,6 +34,7 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
@@ -179,62 +180,66 @@ public final class Encoder implements Visitor {
     return null;
   }
   
-  //Se dejo declarado el CaseLiteralCommand para los siguientes proyectos. 
-   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-  public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object O){
-      return null;
-  }
-  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-    public Object visitCaseRangeCommand(CaseRangeCommand ast, Object O){
-      return null;
-  }
-    
-   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-    public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj){
-      return null;
-  }
+    //Se dejo declarado el CaseLiteralCommand para los siguientes proyectos. 
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object O){
+       return null;
+    }
+    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitCaseRangeCommand(CaseRangeCommand ast, Object O){
+       return null;
+    }
+
+    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj){
+       return null;
+    }
+     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
-      return null;
-  }
-    
-        //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+       return null;
+    }
+
+     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseLiterals(CaseLiterals ast, Object obj){
-      return null;
-  }
+       return null;
+    }
 
-  // Expressions
-  public Object visitArrayExpression(ArrayExpression ast, Object o) {
-    ast.type.visit(this, null);
-    return ast.AA.visit(this, o);
-  }
+    public Object visitCaseCommand(CaseCommand ast, Object obj){
+        return null;
+    }
+    
+    // Expressions
+    public Object visitArrayExpression(ArrayExpression ast, Object o) {
+      ast.type.visit(this, null);
+      return ast.AA.visit(this, o);
+    }
 
-  public Object visitBinaryExpression(BinaryExpression ast, Object o) {
-    Frame frame = (Frame) o;
-    Integer valSize = (Integer) ast.type.visit(this, null);
-    int valSize1 = ((Integer) ast.E1.visit(this, frame)).intValue();
-    Frame frame1 = new Frame(frame, valSize1);
-    int valSize2 = ((Integer) ast.E2.visit(this, frame1)).intValue();
-    Frame frame2 = new Frame(frame.level, valSize1 + valSize2);
-    ast.O.visit(this, frame2);
-    return valSize;
-  }
+    public Object visitBinaryExpression(BinaryExpression ast, Object o) {
+      Frame frame = (Frame) o;
+      Integer valSize = (Integer) ast.type.visit(this, null);
+      int valSize1 = ((Integer) ast.E1.visit(this, frame)).intValue();
+      Frame frame1 = new Frame(frame, valSize1);
+      int valSize2 = ((Integer) ast.E2.visit(this, frame1)).intValue();
+      Frame frame2 = new Frame(frame.level, valSize1 + valSize2);
+      ast.O.visit(this, frame2);
+      return valSize;
+    }
 
-  public Object visitCallExpression(CallExpression ast, Object o) {
-    Frame frame = (Frame) o;
-    Integer valSize = (Integer) ast.type.visit(this, null);
-    Integer argsSize = (Integer) ast.APS.visit(this, frame);
-    ast.I.visit(this, new Frame(frame.level, argsSize));
-    return valSize;
-  }
+    public Object visitCallExpression(CallExpression ast, Object o) {
+      Frame frame = (Frame) o;
+      Integer valSize = (Integer) ast.type.visit(this, null);
+      Integer argsSize = (Integer) ast.APS.visit(this, frame);
+      ast.I.visit(this, new Frame(frame.level, argsSize));
+      return valSize;
+    }
 
-  public Object visitCharacterExpression(CharacterExpression ast,
-						Object o) {
-    Frame frame = (Frame) o;
-    Integer valSize = (Integer) ast.type.visit(this, null);
-    emit(Machine.LOADLop, 0, 0, ast.CL.spelling.charAt(1));
-    return valSize;
-  }
+    public Object visitCharacterExpression(CharacterExpression ast,
+                                                  Object o) {
+      Frame frame = (Frame) o;
+      Integer valSize = (Integer) ast.type.visit(this, null);
+      emit(Machine.LOADLop, 0, 0, ast.CL.spelling.charAt(1));
+      return valSize;
+    }
 
   public Object visitEmptyExpression(EmptyExpression ast, Object o) {
     return new Integer(0);

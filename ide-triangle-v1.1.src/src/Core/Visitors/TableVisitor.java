@@ -15,6 +15,7 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
@@ -118,14 +119,17 @@ public class TableVisitor implements Visitor {
   public Object visitAssignCommand(AssignCommand ast, Object o) { 
       ast.V.visit(this, null);
       ast.E.visit(this, null);
-      
       return(null);
   }
   
   public Object visitCallCommand(CallCommand ast, Object o) { 
       ast.I.visit(this, null);
       ast.APS.visit(this, null);
-      
+      return(null);
+  }
+  public Object visitCaseCommand(CaseCommand ast, Object o) { 
+      ast.C.visit(this, null);
+      ast.CL.visit(this, null);
       return(null);
   }
   
@@ -683,15 +687,13 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
     public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.WhileVar.visit(this, null);
-      
         return(null);
     }
 
     @Override
     public Object visitForFromCommand(ForFromCommand aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
-        aThis.E.visit(this, null);
-      
+        aThis.E.visit(this, null);      
         return(null);
     }
 

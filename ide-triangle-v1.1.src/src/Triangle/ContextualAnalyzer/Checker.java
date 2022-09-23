@@ -26,6 +26,7 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
@@ -132,6 +133,10 @@ public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj){
 
 //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
 public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
+    return null;
+}
+//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+public Object visitCaseCommand(CaseCommand ast, Object obj){
     return null;
 }
 

@@ -15,6 +15,7 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
@@ -136,30 +137,34 @@ public class TreeVisitor implements Visitor {
     public Object visitWhileCommand(WhileCommand ast, Object obj) {
         return(createBinary("While Do Command", ast.E, ast.C));
     }
- //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object obj){
+    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object obj){
         return(createBinary("Case Literal Command", ast.CL, ast.IL));
     }
-//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){
-    if(ast.CLC2 == null && ast.TC == null){
-        return(createUnary("Case Range Command", ast.CLC));
+    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitCaseCommand(CaseCommand ast, Object obj){
+        return(createBinary("Case Command", ast.C,  ast.CL));
     }
-    else{
-        return(createTernary("Case Range Command", ast.CLC, ast.CLC2, ast.TC));
+    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){
+        if(ast.CLC2 == null && ast.TC == null){
+            return(createUnary("Case Range Command", ast.CLC));
+        }
+        else{
+            return(createTernary("Case Range Command", ast.CLC, ast.CLC2, ast.TC));
+        }
     }
-}
-//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj){
-    return(createUnary("Case To Literal", ast.CLCT));
-}
+    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj){
+        return(createUnary("Case To Literal", ast.CLCT));
+    }
 
-//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
-    return(createUnary("Case Bar Command Case Range", ast.CRCB));
-}
-//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-public Object visitCaseLiterals(CaseLiterals ast, Object o) {
+    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
+        return(createUnary("Case Bar Command Case Range", ast.CRCB));
+    }
+    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+    public Object visitCaseLiterals(CaseLiterals ast, Object o) {
         return(createTernary("Case Literals", ast.BCCRCL, ast.APS, ast.CRCCL));
     }
 
