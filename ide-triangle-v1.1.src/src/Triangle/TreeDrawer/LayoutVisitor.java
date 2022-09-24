@@ -606,84 +606,122 @@ public class LayoutVisitor implements Visitor {
 
     @Override
     public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       if(aThis.I == null){
+            return(layoutUnary("Loop Command", aThis.WhileVar));
+        }
+        else{
+            return(layoutBinary("Loop Command", aThis.I, aThis.WhileVar));
+        }
     }
 
     @Override
     public Object visitForFromCommand(ForFromCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return(layoutBinary("For From Command", aThis.I, aThis.E));
     }
 
     @Override
     public Object visitDoCommandAST(DoCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return(layoutUnary("Do Command", aThis.C));
     }
 
     @Override
     public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(aThis.I == null){
+            return(layoutTernary("Loop Command", aThis.ForFrom, aThis.E, aThis.Do));
+        }
+        else{
+            return(layoutQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.Do));
+        }
     }
 
     @Override
     public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(aThis.I == null){
+            return(layoutUnary("Loop Command", aThis.UntilVar));
+        }
+        else{
+            return(layoutBinary("Loop Command", aThis.I, aThis.UntilVar));
+        }
     }
 
     @Override
     public Object visitUntilCommand(UntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return(layoutBinary("Until Command", aThis.I, aThis.C));
     }
 
     @Override
     public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return(layoutUnary("While Command", aThis.E));
     }
 
     @Override
     public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(aThis.I == null){
+            return(layoutBinary("Loop Command", aThis.C, aThis.WhileV));
+        }
+        else{
+            return(layoutTernary("Loop Command", aThis.I, aThis.C, aThis.WhileV));
+        }
     }
 
     @Override
     public Object visitUntilEndCommand(UntilEndCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return(layoutUnary("Until Command", aThis.E));
     }
 
     @Override
     public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(aThis.I == null){
+            return(layoutBinary("Loop Command", aThis.C, aThis.UntilEnd));
+        }
+        else{
+            return(layoutTernary("Loop Command",aThis.I , aThis.C, aThis.UntilEnd));
+        }
     }
 
     @Override
     public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(aThis.I == null){
+            return(layoutTernary("Loop Command",aThis.ForFrom, aThis.E, aThis.whileV));
+        }
+        else{
+            return(layoutQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.whileV));
+        }
     }
 
     @Override
     public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(aThis.I == null){
+            return(layoutTernary("Loop Command",aThis.ForFrom, aThis.E, aThis.untilV));
+        }
+        else{
+            return(layoutQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.untilV));
+        }
     }
 
     @Override
     public Object visitForInCommand(ForInCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return(layoutBinary("For In Command", aThis.I, aThis.E));
     }
 
     @Override
     public Object visitForInDoCommand(ForInDo aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(aThis.I == null){
+            return(layoutBinary("Loop Command", aThis.forAST, aThis.C));
+        }
+        else{
+            return(layoutTernary("Loop Command", aThis.I, aThis.forAST, aThis.C));
+        }
     }
 
     @Override
     public Object visitToCommandAST(ToCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return(layoutUnary("To Command", aThis.E));
     }
 
     @Override
     public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return(layoutBinary("Variable Declaration", aThis.I, aThis.E));
     }
-
-
 
 }
