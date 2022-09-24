@@ -53,7 +53,7 @@ public class IDECompiler {
         // Crear el archivo HTML
         String nombreArchivo = sourceName.substring(0, sourceName.length()-3)+"html";
         HTML archivo = new HTML(nombreArchivo);
-        //archivo.crear();
+        
         
         Scanner scanner = new Scanner(source, archivo);
         
