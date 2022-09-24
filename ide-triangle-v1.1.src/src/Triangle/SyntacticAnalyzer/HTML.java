@@ -67,14 +67,14 @@ public class HTML {
             case Token.WHEN:
             case Token.WHILE:
             {
-                nuevaLinea(" <b> "+ currentToken.spelling +" </b> ");
+                nuevaLinea(" <font style='padding-left:1em'><b><tt> "+ currentToken.spelling +" </tt></b></font> ");
                 break;
             }
             
             case Token.INTLITERAL:
             case Token.CHARLITERAL:
             {
-                nuevaLinea(" <font color=\"#5050DB\"> "+ currentToken.spelling +" </font> ");
+                nuevaLinea(" <font style='padding-left:1em' color=\"#5050DB\"><tt> "+ currentToken.spelling +" </tt></font> ");
                 break;
             }
             
@@ -94,7 +94,7 @@ public class HTML {
             case Token.LCURLY:    
             case Token.RCURLY:    
             {
-                nuevaLinea(" <font color:'#000000'> "+ currentToken.spelling +" </font> ");
+                nuevaLinea(" <font style='padding-left:1em' color:'#000000'><tt> "+ currentToken.spelling +" </tt></font> ");
                 break;
             }
             

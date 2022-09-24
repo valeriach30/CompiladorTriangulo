@@ -74,7 +74,7 @@ public final class Scanner {
   // scanSeparator skips a single separator.
 
   private void scanSeparator() {
-    String comentario = " <font color=\"#50C878\"> ! ";
+    String comentario = " <font style='padding-left:1em' color=\"#50C878\"><tt> ! ";
     switch (currentChar) {
     case '!':
       {
@@ -84,12 +84,12 @@ public final class Scanner {
             takeIt();  
         }
         if (currentChar == SourceFile.EOL){
-          comentario += "</font><br></br>";
+          comentario += "</tt></font><br></br>";
           archivo.nuevaLinea(comentario);
           takeIt();
           break;
         }
-        comentario += "</font><br></br>";
+        comentario += "</tt></font><br></br>";
         archivo.nuevaLinea(comentario);
       }
       break;
