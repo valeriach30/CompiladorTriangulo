@@ -13,6 +13,7 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.ContextualAnalyzer.Checker;
 import Triangle.CodeGenerator.Encoder;
+import Triangle.SyntacticAnalyzer.HTML;
 import Triangle.TreeDrawer.XML;
 import java.io.IOException;
 
@@ -48,7 +49,14 @@ public class IDECompiler {
         
         System.out.println("Syntactic Analysis ...");
         SourceFile source = new SourceFile(sourceName);
-        Scanner scanner = new Scanner(source);
+        
+        // Crear el archivo HTML
+        String nombreArchivo = sourceName.substring(0, sourceName.length()-3)+"html";
+        HTML archivo = new HTML(nombreArchivo);
+        //archivo.crear();
+        
+        Scanner scanner = new Scanner(source, archivo);
+        
         report = new IDEReporter();
         Parser parser = new Parser(scanner, report);
         boolean success = false;
@@ -58,8 +66,11 @@ public class IDECompiler {
             //System.out.println("Contextual Analysis ...");
             //Checker checker = new Checker(report);
             //checker.check(rootAST);
-            String nombreArchivo = sourceName.substring(0, sourceName.length()-3)+"XML";
-            XML.crear(rootAST, nombreArchivo);
+            
+            // Crear XML
+            String nombreArchivo2 = sourceName.substring(0, sourceName.length()-3)+"XML";
+            XML.crear(rootAST, nombreArchivo2);
+            
             if (report.numErrors == 0) {
                 //System.out.println("Code Generation ...");
                 //Encoder encoder = new Encoder(report);
