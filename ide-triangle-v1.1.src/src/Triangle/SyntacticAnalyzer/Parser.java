@@ -21,10 +21,12 @@ import Triangle.AbstractSyntaxTrees.ArrayAggregate;
 import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
 import Triangle.AbstractSyntaxTrees.AssignCommand;
+import Triangle.AbstractSyntaxTrees.BarCommandCaseRange;
 import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
+import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -271,6 +273,26 @@ public class Parser {
       }
       return caseRangeCommandAST;
     }
+   //Autores: Gabriel Fallas, Kevin Rodriguez, Hillary Castro
+//  CaseLiterals parseCaseLiteralsCommand() throws SyntaxError{
+//      ActualParameterSequence actualsAST = null;
+//      CaseLiterals caseLiteralsCommandAST = null;
+//      BarCommandCaseRange BarCommandCaseRangeAST = null;
+//      SourcePosition actualsPos = new SourcePosition();
+//      CaseRangeCommand c2AST = parseCaseRangeCommand();
+//      start(actualsPos);
+//      ActualParameter apAST = parseActualParameter();
+//      if (currentToken.kind == Token.BAR){
+//          acceptIt();
+//          CaseRangeCommand c3AST = parseCaseRangeCommand();
+//          BarCommandCaseRangeAST = new BarCommandCaseRange(c2AST, actualsPos);
+//          ActualParameterSequence apsAST = parseActualParameterSequence();
+//          finish(actualsPos);
+//          actualsAST = new MultipleActualParameterSequence(apAST, apsAST, actualsPos);
+//          finish(actualsPos);
+//          caseRangeCommandAST = new CaseRangeCommand(c2AST, ToCommandLiteralAST, commandPos);
+//      }
+//  }
   
 
 // parseIdentifier parses an identifier, and constructs a leaf AST to
