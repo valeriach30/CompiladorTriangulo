@@ -16,7 +16,9 @@ package Triangle.SyntacticAnalyzer;
 
 import Triangle.ErrorReporter;
 import Triangle.AbstractSyntaxTrees.ActualParameter;
+import Triangle.AbstractSyntaxTrees.ActualParameterCaseLiterals;
 import Triangle.AbstractSyntaxTrees.ActualParameterSequence;
+import Triangle.AbstractSyntaxTrees.ActualParameterSequenceCaseLiterals;
 import Triangle.AbstractSyntaxTrees.ArrayAggregate;
 import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
@@ -82,6 +84,7 @@ import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
+import Triangle.AbstractSyntaxTrees.SingleActualParameterSequenceCaseLiterals;
 import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
@@ -275,22 +278,17 @@ public class Parser {
     }
    //Autores: Gabriel Fallas, Kevin Rodriguez, Hillary Castro
 //  CaseLiterals parseCaseLiteralsCommand() throws SyntaxError{
-//      ActualParameterSequence actualsAST = null;
+////      ActualParameterSequenceCaseLiterals actualsAST = null;
 //      CaseLiterals caseLiteralsCommandAST = null;
 //      BarCommandCaseRange BarCommandCaseRangeAST = null;
 //      SourcePosition actualsPos = new SourcePosition();
-//      CaseRangeCommand c2AST = parseCaseRangeCommand();
 //      start(actualsPos);
-//      ActualParameter apAST = parseActualParameter();
+//      CaseRangeCommand c2AST = parseCaseRangeCommand();
 //      if (currentToken.kind == Token.BAR){
-//          acceptIt();
-//          CaseRangeCommand c3AST = parseCaseRangeCommand();
-//          BarCommandCaseRangeAST = new BarCommandCaseRange(c2AST, actualsPos);
-//          ActualParameterSequence apsAST = parseActualParameterSequence();
-//          finish(actualsPos);
-//          actualsAST = new MultipleActualParameterSequence(apAST, apsAST, actualsPos);
-//          finish(actualsPos);
-//          caseRangeCommandAST = new CaseRangeCommand(c2AST, ToCommandLiteralAST, commandPos);
+//          caseLiteralsCommandAST = parseCaseLiteralCommand2();
+//      }
+//      else{
+//          SingleActualParameterSequenceCaseLiterals singleAPS = new SingleActualParameterSequenceCaseLiterals(actualsPos, )
 //      }
 //  }
   
@@ -1015,7 +1013,7 @@ public class Parser {
               break;
           case Token.REC:
               acceptIt();
-              declarationAST = parseProcFuncs();
+              //declarationAST = parseProcFuncs();
               accept(Token.END);
               finish(position);
               break;

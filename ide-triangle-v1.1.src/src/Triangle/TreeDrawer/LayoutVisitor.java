@@ -153,7 +153,7 @@ public class LayoutVisitor implements Visitor {
   }  
   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitCaseLiterals(CaseLiterals ast, Object obj) {
-    return layoutQuinary("CaseLiteralstCom.", ast.CRCCL, ast.BCCRCL, ast.EAPSCL, ast.SAPSCL, ast.MAPSCL);
+    return layoutQuaternary("CaseLiteralstCom.", ast.CRCCL, ast.EAPSCL, ast.SAPSCL, ast.MAPSCL);
   }  
  
  public Object visitEmptyActualParameterSequenceCaseLiterals(EmptyActualParameterSequenceCaseLiterals ast, Object obj){
