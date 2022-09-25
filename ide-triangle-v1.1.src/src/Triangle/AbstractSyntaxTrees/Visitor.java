@@ -68,6 +68,7 @@ public interface Visitor {
   public abstract Object visitTypeDeclaration(TypeDeclaration ast, Object o);
   public abstract Object visitUnaryOperatorDeclaration(UnaryOperatorDeclaration ast, Object o);
   public abstract Object visitVarDeclaration(VarDeclaration ast, Object o);
+  public abstract Object visitLocalDeclaration(LocalDeclaration aThis, Object o);
 
   // Array Aggregates
   public abstract Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object o);
@@ -133,4 +134,5 @@ public interface Visitor {
     public Object visitSingleActualParameterSequenceCaseLiterals(SingleActualParameterSequenceCaseLiterals aThis, Object o);
 
     public Object visitMultipleActualParameterSequenceCaseLiterals(MultipleActualParameterSequenceCaseLiterals aThis, Object o);
+
 }

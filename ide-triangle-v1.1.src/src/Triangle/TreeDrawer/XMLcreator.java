@@ -48,6 +48,7 @@ import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.LoopForFromUntil;
 import Triangle.AbstractSyntaxTrees.LoopForFromWhile;
@@ -585,6 +586,17 @@ public class XMLcreator implements Visitor {
         ast.D2.visit(this, null);
       
         nuevaLinea("</SequentialDeclaration>");
+        return(null);
+    }
+    
+    @Override
+    public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
+        nuevaLinea("<LocalDeclaration>");
+        
+        ast.D1.visit(this, null);
+        ast.D2.visit(this, null);
+      
+        nuevaLinea("</LocalDeclaration>");
         return(null);
     }
 

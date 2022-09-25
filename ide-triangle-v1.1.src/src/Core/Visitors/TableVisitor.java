@@ -49,6 +49,7 @@ import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.LoopForFromUntil;
 import Triangle.AbstractSyntaxTrees.LoopForFromWhile;
@@ -350,6 +351,12 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
   }
   
   public Object visitSequentialDeclaration(SequentialDeclaration ast, Object o) {   
+      ast.D1.visit(this, null);
+      ast.D2.visit(this, null);
+      
+      return(null);
+  }
+  public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {   
       ast.D1.visit(this, null);
       ast.D2.visit(this, null);
       

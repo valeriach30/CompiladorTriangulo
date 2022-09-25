@@ -49,6 +49,7 @@ import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
 import Triangle.AbstractSyntaxTrees.LoopForFromUntil;
 import Triangle.AbstractSyntaxTrees.LoopForFromWhile;
@@ -247,6 +248,10 @@ public class TreeVisitor implements Visitor {
     
     public Object visitSequentialDeclaration(SequentialDeclaration ast, Object obj) {
         return(createBinary("Sequential Declaration", ast.D1, ast.D2));
+    }
+    
+    public Object visitLocalDeclaration(LocalDeclaration ast, Object obj) {
+        return(createBinary("Local Declaration", ast.D1, ast.D2));
     }
     
     public Object visitTypeDeclaration(TypeDeclaration ast, Object obj) {
