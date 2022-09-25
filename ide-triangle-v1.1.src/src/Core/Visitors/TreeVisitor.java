@@ -174,7 +174,7 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseLiterals(CaseLiterals ast, Object o) {
-        return(createQuinary("Case Literals", ast.BCCRCL, ast.CRCCL, ast.EAPSCL, ast.SAPSCL, ast.MAPSCL));
+        return(createQuaternary("Case Literals", ast.CRCCL, ast.EAPSCL, ast.SAPSCL, ast.MAPSCL));
     }
 
     

@@ -16,7 +16,9 @@ package Triangle.SyntacticAnalyzer;
 
 import Triangle.ErrorReporter;
 import Triangle.AbstractSyntaxTrees.ActualParameter;
+import Triangle.AbstractSyntaxTrees.ActualParameterCaseLiterals;
 import Triangle.AbstractSyntaxTrees.ActualParameterSequence;
+import Triangle.AbstractSyntaxTrees.ActualParameterSequenceCaseLiterals;
 import Triangle.AbstractSyntaxTrees.ArrayAggregate;
 import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
@@ -83,6 +85,7 @@ import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
+import Triangle.AbstractSyntaxTrees.SingleActualParameterSequenceCaseLiterals;
 import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
@@ -276,22 +279,17 @@ public class Parser {
     }
    //Autores: Gabriel Fallas, Kevin Rodriguez, Hillary Castro
 //  CaseLiterals parseCaseLiteralsCommand() throws SyntaxError{
-//      ActualParameterSequence actualsAST = null;
+////      ActualParameterSequenceCaseLiterals actualsAST = null;
 //      CaseLiterals caseLiteralsCommandAST = null;
 //      BarCommandCaseRange BarCommandCaseRangeAST = null;
 //      SourcePosition actualsPos = new SourcePosition();
-//      CaseRangeCommand c2AST = parseCaseRangeCommand();
 //      start(actualsPos);
-//      ActualParameter apAST = parseActualParameter();
+//      CaseRangeCommand c2AST = parseCaseRangeCommand();
 //      if (currentToken.kind == Token.BAR){
-//          acceptIt();
-//          CaseRangeCommand c3AST = parseCaseRangeCommand();
-//          BarCommandCaseRangeAST = new BarCommandCaseRange(c2AST, actualsPos);
-//          ActualParameterSequence apsAST = parseActualParameterSequence();
-//          finish(actualsPos);
-//          actualsAST = new MultipleActualParameterSequence(apAST, apsAST, actualsPos);
-//          finish(actualsPos);
-//          caseRangeCommandAST = new CaseRangeCommand(c2AST, ToCommandLiteralAST, commandPos);
+//          caseLiteralsCommandAST = parseCaseLiteralCommand2();
+//      }
+//      else{
+//          SingleActualParameterSequenceCaseLiterals singleAPS = new SingleActualParameterSequenceCaseLiterals(actualsPos, )
 //      }
 //  }
   
@@ -970,6 +968,72 @@ public class Parser {
 // DECLARATIONS
 //
 ///////////////////////////////////////////////////////////////////////////////
+
+  //Autor: Gabriel Fallas
+  //Se modifica parseCompoundDeclaration por parseSingleDeclaration
+  Declaration parseDeclaration() throws SyntaxError {
+    Declaration declarationAST = null; // in case there's a syntactic error
+    SourcePosition declarationPos = new SourcePosition();
+    start(declarationPos);
+    declarationAST = parseCompoundDeclaration();
+    while (currentToken.kind == Token.SEMICOLON) {
+      acceptIt();
+      Declaration d2AST = parseSingleDeclaration();
+      finish(declarationPos);
+      //Un sequential declaration son dos single declaration.
+      declarationAST = new SequentialDeclaration(declarationAST, d2AST,
+        declarationPos);
+    }
+    return declarationAST;
+  }
+  
+//  Declaration parseProcFuncs() throws SyntaxError{
+//      Declaration declarationAST = null;
+//      SourcePosition position = new SourcePosition();
+//      start(position);
+//      declarationAST = parseSingleProcFunc();
+//      if(currentToken.kind == Token.){
+//          
+//      }
+//  }
+
+  Declaration parseCompoundDeclaration() throws SyntaxError{
+      //Aqui se hace un single declaration a partir del declaration
+      //que se necesita.
+      Declaration declarationAST = null;
+      SourcePosition position = new SourcePosition();
+      start(position);
+      switch(currentToken.kind){
+          case Token.CONST:
+          case Token.VAR:
+          case Token.PROC:
+          case Token.FUNC:
+          case Token.TYPE:
+              declarationAST = parseSingleDeclaration();
+              finish(position);
+              break;
+          case Token.REC:
+              acceptIt();
+              //declarationAST = parseProcFuncs();
+              accept(Token.END);
+              finish(position);
+              break;
+          case Token.LOCAL:
+              acceptIt();
+              Declaration dAST = parseDeclaration();
+              accept(Token.IN);
+              Declaration dAST2 = parseDeclaration();
+              accept(Token.END);
+              finish(position);
+//              declarationAST = new LocalDeclaration(dAST, dAST2, declarationPos);
+              break;
+          default:
+              syntacticError("A syntactic error has ocurred.",
+                             currentToken.spelling);
+              break;
+      }
+      return declarationAST;
+  }
 
   Declaration parseSingleDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error

@@ -205,7 +205,6 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitCaseLiterals(CaseLiterals ast, Object o) { 
       ast.CRCCL.visit(this, null);
-      ast.BCCRCL.visit(this, null);
       ast.MAPSCL.visit(this, null);
       ast.SAPSCL.visit(this, null);
       ast.EAPSCL.visit(this, null);
