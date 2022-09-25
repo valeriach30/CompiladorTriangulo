@@ -11,19 +11,29 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  * @author Kevin
  */
 public class CaseLiterals extends Command{
+    public CaseLiterals (CaseRangeCommand cAST, SourcePosition thePosition, EmptyActualParameterSequence eAST) {
+        super (thePosition);
+        CRCCL = cAST;
+        BCCRCL = null;
+        EAPSCL = eAST;
+        SAPSCL = null;
+        MAPSCL = null;
+    }
     public CaseLiterals (CaseRangeCommand cAST, SourcePosition thePosition, SingleActualParameterSequence eAST) {
         super (thePosition);
         CRCCL = cAST;
-        SAPSCL = eAST;
         BCCRCL = null;
+        EAPSCL = null;
+        SAPSCL = eAST;
         MAPSCL = null;
     }
     public CaseLiterals (CaseRangeCommand cAST, BarCommandCaseRange eAST, MultipleActualParameterSequence apsAST, SourcePosition thePosition) {
         super (thePosition);
         CRCCL = cAST;
         BCCRCL = eAST;
-        MAPSCL = apsAST;
+        EAPSCL = null;
         SAPSCL = null;
+        MAPSCL = apsAST;
     }
     
     public Object visit(Visitor V, Object O){
@@ -31,6 +41,7 @@ public class CaseLiterals extends Command{
     }
     public BarCommandCaseRange BCCRCL;
     public CaseRangeCommand CRCCL;
+    public EmptyActualParameterSequence EAPSCL;
     public SingleActualParameterSequence SAPSCL;
     public MultipleActualParameterSequence MAPSCL;
   }

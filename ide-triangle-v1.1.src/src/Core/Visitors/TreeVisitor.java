@@ -148,7 +148,7 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCasesCommand(CasesCommand ast, Object obj){
-        return(createQuaternary("Cases Command",  ast.caseComand, ast.EAPSCM, ast.SAPSCM, ast.MAPSCM));
+        return(createTernary("Cases Command",  ast.caseComand, ast.SAPSCM, ast.MAPSCM));
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){
@@ -170,7 +170,7 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseLiterals(CaseLiterals ast, Object o) {
-        return(createQuaternary("Case Literals", ast.BCCRCL, ast.CRCCL, ast.MAPSCL, ast.SAPSCL));
+        return(createQuinary("Case Literals", ast.BCCRCL, ast.CRCCL, ast.EAPSCL, ast.SAPSCL, ast.MAPSCL));
     }
 
     
@@ -493,6 +493,17 @@ public class TreeVisitor implements Visitor {
         t.add((DefaultMutableTreeNode)child2.visit(this, null));
         t.add((DefaultMutableTreeNode)child3.visit(this, null));
         t.add((DefaultMutableTreeNode)child4.visit(this, null));
+        
+        return(t);             
+    }
+//Autores: Kevin Rodriguez, Gabriel Fallas
+    public DefaultMutableTreeNode createQuinary(String caption, AST child1, AST child2, AST child3, AST child4, AST child5) {
+        DefaultMutableTreeNode t = new DefaultMutableTreeNode(caption);
+        t.add((DefaultMutableTreeNode)child1.visit(this, null));
+        t.add((DefaultMutableTreeNode)child2.visit(this, null));
+        t.add((DefaultMutableTreeNode)child3.visit(this, null));
+        t.add((DefaultMutableTreeNode)child4.visit(this, null));
+        t.add((DefaultMutableTreeNode)child5.visit(this, null));
         
         return(t);             
     }

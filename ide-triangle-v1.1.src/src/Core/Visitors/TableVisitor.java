@@ -135,7 +135,6 @@ public class TableVisitor implements Visitor {
   }
   public Object visitCasesCommand(CasesCommand ast, Object o) { 
       ast.caseComand.visit(this, null);
-      ast.EAPSCM.visit(this, null);
       ast.SAPSCM.visit(this, null);
       ast.MAPSCM.visit(this, null);
       return(null);
@@ -206,6 +205,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
       ast.BCCRCL.visit(this, null);
       ast.MAPSCL.visit(this, null);
       ast.SAPSCL.visit(this, null);
+      ast.EAPSCL.visit(this, null);
       
       return(null);
   }
