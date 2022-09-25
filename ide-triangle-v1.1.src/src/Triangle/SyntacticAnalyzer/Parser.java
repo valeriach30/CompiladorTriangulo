@@ -978,7 +978,7 @@ public class Parser {
     declarationAST = parseCompoundDeclaration();
     while (currentToken.kind == Token.SEMICOLON) {
       acceptIt();
-      Declaration d2AST = parseSingleDeclaration();
+      Declaration d2AST = parseCompoundDeclaration();
       finish(declarationPos);
       //Un sequential declaration son dos single declaration.
       declarationAST = new SequentialDeclaration(declarationAST, d2AST,
