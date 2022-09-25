@@ -124,11 +124,11 @@ public class LayoutVisitor implements Visitor {
  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj) {
-      if(ast.CLC2 == null && ast.TC == null){
+      if(ast.TC == null){
           return layoutUnary("CaseRngCom.", ast.CLC);
       }
       else{
-          return layoutTernary("CaseRngCom.", ast.CLC, ast.CLC2, ast.TC);
+          return layoutBinary("CaseRngCom.", ast.CLC, ast.TC);
       }
   }
  

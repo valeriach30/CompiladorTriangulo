@@ -25,6 +25,7 @@ import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
+import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
 import Triangle.AbstractSyntaxTrees.Command;
@@ -97,6 +98,7 @@ import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 import Triangle.AbstractSyntaxTrees.WhileEndCommand;
 import Triangle.AbstractSyntaxTrees.ToCommand;
+import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.VarDeclarationInit;
 
 public class Parser {
@@ -242,6 +244,34 @@ public class Parser {
     }
     return caseLiteralAST;
   }
+  
+  //Autores: Gabriel Fallas, Kevin Rodriguez, Hillary Castro
+  CaseRangeCommand parseCaseRangeCommand() throws SyntaxError{
+      CaseRangeCommand caseRangeCommandAST = null;
+      ToCommandLiteral ToCommandLiteralAST = null;
+      SourcePosition commandPos = new SourcePosition();
+      start(commandPos); 
+      CaseLiteralCommand c2AST = parseCaseLiteral();
+      if(currentToken.kind == Token.TO){
+        acceptIt();
+        CaseLiteralCommand c3AST = parseCaseLiteral();
+        ToCommandLiteralAST = new ToCommandLiteral(c2AST, commandPos);
+        finish(commandPos);
+        caseRangeCommandAST = new CaseRangeCommand(c2AST, ToCommandLiteralAST, commandPos);
+      }
+      else if(currentToken.kind == Token.NIL){
+         acceptIt();
+         CaseLiteralCommand c3AST = parseCaseLiteral();
+         finish(commandPos);
+        caseRangeCommandAST = new CaseRangeCommand(c2AST, commandPos);
+      }
+      else{
+        caseRangeCommandAST = null; 
+        syntacticError("character literal or integer literal expected here", "");  
+      }
+      return caseRangeCommandAST;
+    }
+  
 
 // parseIdentifier parses an identifier, and constructs a leaf AST to
 // represent it.

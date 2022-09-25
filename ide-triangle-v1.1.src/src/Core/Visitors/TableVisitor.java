@@ -183,7 +183,6 @@ public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object o) {
 //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
 public Object visitCaseRangeCommand(CaseRangeCommand ast, Object o) { 
     ast.CLC.visit(this, null);
-    ast.CLC2.visit(this, null);
     ast.TC.visit(this, null);
     return(null);
  }

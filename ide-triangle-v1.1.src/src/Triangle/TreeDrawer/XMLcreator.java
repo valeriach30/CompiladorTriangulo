@@ -411,7 +411,6 @@ public class XMLcreator implements Visitor {
         nuevaLinea("<CaseRangeCommand>");
         
         aThis.CLC.visit(this, null);
-        aThis.CLC2.visit(this, null);
         aThis.TC.visit(this, null);
     
         nuevaLinea("</CaseRangeCommand>");

@@ -152,11 +152,11 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){
-        if(ast.CLC2 == null && ast.TC == null){
+        if(ast.TC == null){
             return(createUnary("Case Range Command", ast.CLC));
         }
         else{
-            return(createTernary("Case Range Command", ast.CLC, ast.CLC2, ast.TC));
+            return(createBinary("Case Range Command", ast.CLC, ast.TC));
         }
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas

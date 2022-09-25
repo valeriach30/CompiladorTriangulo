@@ -14,16 +14,13 @@ public class CaseRangeCommand extends Command{
     public CaseRangeCommand (CaseLiteralCommand ast, SourcePosition thePosition){
         super(thePosition);
         CLC = ast;
-        CLC2 = null;
         TC = null;
     }
     public CaseRangeCommand (CaseLiteralCommand iAST,
-                            ToCommand eAST,
-                            CaseLiteralCommand uAST,
+                            ToCommandLiteral eAST,
                             SourcePosition thePosition){
         super(thePosition);
         CLC = iAST;
-        CLC2 = uAST;
         TC = eAST;
     }
     
@@ -33,6 +30,5 @@ public class CaseRangeCommand extends Command{
     
     
     public CaseLiteralCommand CLC;
-    public CaseLiteralCommand CLC2;
-    public ToCommand TC;
+    public ToCommandLiteral TC;
 }
