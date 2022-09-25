@@ -1018,25 +1018,14 @@ public class Parser {
               declarationAST = new LocalDeclaration(dAST, dAST2, position);
               break;
           default:
-              syntacticError("A syntactic error has ocurred.",
+              syntacticError("\"%\" cannot start a declaration.",
                              currentToken.spelling);
               break;
       }
       return declarationAST;
    }
   
-//  Declaration parseProcFuncs() throws SyntaxError{
-//      Declaration declarationAST = null;
-//      SourcePosition position = new SourcePosition();
-//      start(position);
-//      declarationAST = parseSingleProcFunc();
-//      if(currentToken.kind == Token.){
-//          
-//      }
-//  }//  Declaration parseProcFunc() throws SyntaxError{
-//
-//      
-//  }
+  //parseProcFunc()
   
 //  Declaration parseProcFuncs() throws SyntaxError{
 //      Declaration declarationAST = null; // in case there's a syntactic error
