@@ -969,7 +969,7 @@ public class Parser {
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-  //Autor: Gabriel Fallas
+  //Autores: Gabriel Fallas, Hilary Castro, Kevin Rodriguez.
   //Se modifica parseCompoundDeclaration por parseSingleDeclaration
   Declaration parseDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
@@ -986,7 +986,7 @@ public class Parser {
     }
     return declarationAST;
   }
-  
+  //Autores: Gabriel Fallas, Hilary Castro, Kevin Rodriguez.
   Declaration parseCompoundDeclaration() throws SyntaxError{
       //Aqui se hace un single declaration a partir del declaration
       //que se necesita.
@@ -1004,7 +1004,7 @@ public class Parser {
               break;
           case Token.REC:
               acceptIt();
-              //declarationAST = parseProcFuncs();
+              declarationAST = parseProcFuncs();
               accept(Token.END);
               finish(position);
               break;
@@ -1024,28 +1024,64 @@ public class Parser {
       }
       return declarationAST;
    }
-  
-  //parseProcFunc()
-  
-//  Declaration parseProcFuncs() throws SyntaxError{
-//      Declaration declarationAST = null; // in case there's a syntactic error
-//      SourcePosition position = new SourcePosition();
-//      start(position);
-//      declarationAST = parseProcFunc();
-//      if(currentToken.kind == Token.AND){
-//          do{
-//              acceptIt();
-//              Declaration dAST2 = parseProcFunc();
-//              finish(position);
-//              declarationAST = new SequentialDeclaration(declarationAST,
-//                               dAST2, position);
-//          }while(currentToken.kind == Token.AND);
-//      }else{
-//          syntacticError("\"%\" cannot follow a declaration.",
-//                         currentToken.spelling);
-//      }
-//      return declarationAST;
-//  }
+  //Autores: Gabriel Fallas, Hilary Castro, Kevin Rodriguez.
+  Declaration parseProcFunc() throws SyntaxError{
+      Declaration procFuncAST = null;
+      SourcePosition position = new SourcePosition();
+      start(position);
+      switch(currentToken.kind){
+          case Token.PROC:
+              acceptIt();
+              Identifier iAST = parseIdentifier();
+              accept(Token.LPAREN);
+              FormalParameterSequence formalAST = parseFormalParameterSequence();
+              accept(Token.RPAREN);
+              accept(Token.IS);
+              Command cAST = parseCommand();
+              accept(Token.END);
+              finish(position);
+              procFuncAST = new ProcDeclaration(iAST, formalAST, cAST, position);
+              break;
+          case Token.FUNC:
+              acceptIt();
+              Identifier identifierAST = parseIdentifier();
+              accept(Token.LPAREN);
+              FormalParameterSequence fpsAST = parseFormalParameterSequence();
+              accept(Token.RPAREN);
+              accept(Token.COLON);
+              TypeDenoter tAST = parseTypeDenoter();
+              accept(Token.IS);
+              Expression eAST = parseExpression();
+              finish(position);
+              procFuncAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST, position);
+              break;
+          default:
+              syntacticError("expected here a proc or func",
+                             currentToken.spelling);
+              break;
+      }
+      return procFuncAST;
+  }
+  //Autores: Gabriel Fallas, Hilary Castro, Kevin Rodriguez.
+  Declaration parseProcFuncs() throws SyntaxError{
+      Declaration declarationAST = null; // in case there's a syntactic error
+      SourcePosition position = new SourcePosition();
+      start(position);
+      declarationAST = parseProcFunc();
+      if(currentToken.kind == Token.BAR){
+          while(currentToken.kind == Token.BAR){
+              acceptIt();
+              Declaration dAST2 = parseProcFunc();
+              finish(position);
+              declarationAST = new SequentialDeclaration(declarationAST,
+                               dAST2, position);
+          }
+      }else{
+          syntacticError("\"%\" cannot follow a declaration.",
+                         currentToken.spelling);
+      }
+      return declarationAST;
+  }
 
   Declaration parseSingleDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
