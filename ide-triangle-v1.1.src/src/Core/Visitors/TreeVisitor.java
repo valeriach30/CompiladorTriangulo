@@ -148,7 +148,7 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCasesCommand(CasesCommand ast, Object obj){
-        return(createBinary("Cases Command", ast.APS,  ast.caseComand));
+        return(createQuaternary("Cases Command",  ast.caseComand, ast.EAPSCM, ast.SAPSCM, ast.MAPSCM));
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){

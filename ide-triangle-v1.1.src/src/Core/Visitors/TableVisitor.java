@@ -135,7 +135,9 @@ public class TableVisitor implements Visitor {
   }
   public Object visitCasesCommand(CasesCommand ast, Object o) { 
       ast.caseComand.visit(this, null);
-      ast.APS.visit(this, null);
+      ast.EAPSCM.visit(this, null);
+      ast.SAPSCM.visit(this, null);
+      ast.MAPSCM.visit(this, null);
       return(null);
   }
   

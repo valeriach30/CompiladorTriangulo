@@ -142,7 +142,7 @@ public class LayoutVisitor implements Visitor {
   }  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCasesCommand(CasesCommand ast, Object obj) {
-    return layoutBinary("CasesCommandCom.", ast.caseComand,  ast.APS);
+    return layoutQuaternary("CasesCommandCom.", ast.caseComand,  ast.EAPSCM, ast.SAPSCM, ast.MAPSCM);
   }  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj) {

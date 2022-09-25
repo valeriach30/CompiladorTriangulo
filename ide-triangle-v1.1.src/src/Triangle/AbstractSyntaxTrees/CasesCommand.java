@@ -11,21 +11,35 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  * @author gabri
  */
 public class CasesCommand extends Command{
-    public CasesCommand (CaseCommand cAST, SourcePosition thePosition) {
+    public CasesCommand (CaseCommand cAST, SourcePosition thePosition, EmptyActualParameterSequence eAST) {
         super (thePosition);
         caseComand = cAST;
-        APS = null;
+        EAPSCM = eAST;
+        SAPSCM = null;
+        MAPSCM = null;
     }
-    public CasesCommand (CaseCommand cAST, ActualParameterSequence apsAST,
+    public CasesCommand (CaseCommand cAST, SingleActualParameterSequence eAST,
                          SourcePosition thePosition) {
         super (thePosition);
         caseComand = cAST;
-        APS = apsAST;
+        EAPSCM = null;
+        SAPSCM = eAST;
+        MAPSCM = null;
+    }
+    public CasesCommand (CaseCommand cAST, MultipleActualParameterSequence eAST,
+                         SourcePosition thePosition) {
+        super (thePosition);
+        caseComand = cAST;
+        EAPSCM = null;
+        SAPSCM = null;
+        MAPSCM = eAST;
     }
 
     public Object visit(Visitor V, Object O){
         return V.visitCasesCommand(this, O);
     }
     public CaseCommand caseComand;
-    public ActualParameterSequence APS;
+    public EmptyActualParameterSequence EAPSCM;
+    public SingleActualParameterSequence SAPSCM;
+    public MultipleActualParameterSequence MAPSCM;
 }
