@@ -202,7 +202,8 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
  public Object visitCaseLiterals(CaseLiterals ast, Object o) { 
       ast.CRCCL.visit(this, null);
       ast.BCCRCL.visit(this, null);
-      ast.APS.visit(this, null);
+      ast.MAPSCL.visit(this, null);
+      ast.SAPSCL.visit(this, null);
       
       return(null);
   }
