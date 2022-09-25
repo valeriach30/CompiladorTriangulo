@@ -970,20 +970,70 @@ public class Parser {
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+  //Autor: Gabriel Fallas
+  //Se modifica parseCompoundDeclaration por parseSingleDeclaration
   Declaration parseDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
-
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
-    declarationAST = parseSingleDeclaration();
+    declarationAST = parseCompoundDeclaration();
     while (currentToken.kind == Token.SEMICOLON) {
       acceptIt();
       Declaration d2AST = parseSingleDeclaration();
       finish(declarationPos);
+      //Un sequential declaration son dos single declaration.
       declarationAST = new SequentialDeclaration(declarationAST, d2AST,
         declarationPos);
     }
     return declarationAST;
+  }
+  
+//  Declaration parseProcFuncs() throws SyntaxError{
+//      Declaration declarationAST = null;
+//      SourcePosition position = new SourcePosition();
+//      start(position);
+//      declarationAST = parseSingleProcFunc();
+//      if(currentToken.kind == Token.){
+//          
+//      }
+//  }
+
+  Declaration parseCompoundDeclaration() throws SyntaxError{
+      //Aqui se hace un single declaration a partir del declaration
+      //que se necesita.
+      Declaration declarationAST = null;
+      SourcePosition position = new SourcePosition();
+      start(position);
+      switch(currentToken.kind){
+          case Token.CONST:
+          case Token.VAR:
+          case Token.PROC:
+          case Token.FUNC:
+          case Token.TYPE:
+              declarationAST = parseSingleDeclaration();
+              finish(position);
+              break;
+          case Token.REC:
+              acceptIt();
+              declarationAST = parseProcFuncs();
+              accept(Token.END);
+              finish(position);
+              break;
+          case Token.LOCAL:
+              acceptIt();
+              Declaration dAST = parseDeclaration();
+              accept(Token.IN);
+              Declaration dAST2 = parseDeclaration();
+              accept(Token.END);
+              finish(position);
+//              declarationAST = new LocalDeclaration(dAST, dAST2, declarationPos);
+              break;
+          default:
+              syntacticError("A syntactic error has ocurred.",
+                             currentToken.spelling);
+              break;
+      }
+      return declarationAST;
   }
 
   Declaration parseSingleDeclaration() throws SyntaxError {
