@@ -29,7 +29,6 @@ import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
 import Triangle.AbstractSyntaxTrees.DoCommand;
 import Triangle.AbstractSyntaxTrees.DotVname;
 import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequenceCaseLiterals;
 import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
@@ -57,7 +56,7 @@ import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
 import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequenceCaseLiterals;
+import Triangle.AbstractSyntaxTrees.MultipleCaseRange;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
@@ -74,7 +73,7 @@ import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.SingleActualParameterSequenceCaseLiterals;
+import Triangle.AbstractSyntaxTrees.SingleCaseRange;
 import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
@@ -174,7 +173,10 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseLiterals(CaseLiterals ast, Object o) {
-        return(createQuaternary("Case Literals", ast.CRCCL, ast.EAPSCL, ast.SAPSCL, ast.MAPSCL));
+        if(ast.MCRCL == null)
+            return(createUnary("Case Literals single Case Range", ast.SCRCL));
+        else
+            return(createUnary("Case Literals multiple Case Range", ast.MCRCL));
     }
 
     
@@ -337,10 +339,6 @@ public class TreeVisitor implements Visitor {
     public Object visitEmptyActualParameterSequence(EmptyActualParameterSequence ast, Object obj) {
         return(createNullary("Empty Actual Parameter Sequence"));
     }
-    //Autores: Kevin, Hillary, Gabriel
-    public Object visitEmptyActualParameterSequenceCaseLiterals(EmptyActualParameterSequenceCaseLiterals ast, Object obj) {
-        return(createNullary("Empty Actual Parameter Sequence Case Literals"));
-    }
     public Object visitMultipleActualParameterSequence(MultipleActualParameterSequence ast, Object obj) {
         return(createBinary("Multiple Actual Parameter Sequence", ast.AP, ast.APS));
     }
@@ -349,12 +347,16 @@ public class TreeVisitor implements Visitor {
         return(createUnary("Single Actual Parameter Sequence", ast.AP));
     }
     
-    public Object visitSingleActualParameterSequenceCaseLiterals(SingleActualParameterSequenceCaseLiterals ast, Object obj) {
-        return(createBinary("Single Actual Parameter Sequence Case Literals", ast.BCCRSAPS, ast.CRCSAPS));
+    //Autores: Kevin, Hillary, Gabriel
+    public Object visitSingleCaseRange(SingleCaseRange ast, Object obj) {
+        return(createUnary("Single Case Range", ast.CRCSCR));
     }
     
-    public Object visitMultipleActualParameterSequenceCaseLiterals(MultipleActualParameterSequenceCaseLiterals ast, Object obj) {
-        return(createBinary("Multiple Actual Parameter Sequence Case Literals", ast.BCCRMAPS, ast.CRCMAPS));
+    public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj) {
+        if(ast.CRCMCR2 == null)
+            return(createUnary("First Multiple Case Range", ast.CRCMCR));
+        else
+            return(createBinary("Multiple Case Range", ast.CRCMCR, ast.CRCMCR2));
     }
     // </editor-fold>
         

@@ -11,33 +11,21 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  * @author Kevin
  */
 public class CaseLiterals extends Command{
-    public CaseLiterals (CaseRangeCommand cAST, SourcePosition thePosition, EmptyActualParameterSequenceCaseLiterals eAST) {
+    public CaseLiterals (SingleCaseRange cAST, SourcePosition thePosition) {
         super (thePosition);
-        CRCCL = cAST;
-        EAPSCL = eAST;
-        SAPSCL = null;
-        MAPSCL = null;
+        SCRCL = cAST;
+        MCRCL = null;
     }
-    public CaseLiterals (CaseRangeCommand cAST, SourcePosition thePosition, SingleActualParameterSequenceCaseLiterals eAST) {
+    public CaseLiterals (MultipleCaseRange cAST, SourcePosition thePosition) {
         super (thePosition);
-        CRCCL = cAST;
-        EAPSCL = null;
-        SAPSCL = eAST;
-        MAPSCL = null;
-    }
-    public CaseLiterals (CaseRangeCommand cAST, SourcePosition thePosition, MultipleActualParameterSequenceCaseLiterals apsAST) {
-        super (thePosition);
-        CRCCL = cAST;
-        EAPSCL = null;
-        SAPSCL = null;
-        MAPSCL = apsAST;
+        MCRCL = cAST;
+        SCRCL = null;
     }
     
+    @Override
     public Object visit(Visitor V, Object O){
         return V.visitCaseLiterals(this, O);
     }
-    public CaseRangeCommand CRCCL;
-    public EmptyActualParameterSequenceCaseLiterals EAPSCL;
-    public SingleActualParameterSequenceCaseLiterals SAPSCL;
-    public MultipleActualParameterSequenceCaseLiterals MAPSCL;
+    public SingleCaseRange SCRCL; //Single case range (case literals) 
+    public MultipleCaseRange MCRCL; //Multiple case range (case literals)
   }

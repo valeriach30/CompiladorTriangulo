@@ -16,14 +16,11 @@ package Triangle.SyntacticAnalyzer;
 
 import Triangle.ErrorReporter;
 import Triangle.AbstractSyntaxTrees.ActualParameter;
-import Triangle.AbstractSyntaxTrees.ActualParameterCaseLiterals;
 import Triangle.AbstractSyntaxTrees.ActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.ActualParameterSequenceCaseLiterals;
 import Triangle.AbstractSyntaxTrees.ArrayAggregate;
 import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
 import Triangle.AbstractSyntaxTrees.AssignCommand;
-import Triangle.AbstractSyntaxTrees.BarCommandCaseRange;
 import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
@@ -54,7 +51,6 @@ import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
 import Triangle.AbstractSyntaxTrees.Identifier;
-import Triangle.AbstractSyntaxTrees.IfCommand;
 import Triangle.AbstractSyntaxTrees.IfExpression;
 import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
@@ -69,6 +65,7 @@ import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
 import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleCaseRange;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
@@ -85,7 +82,7 @@ import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.SingleActualParameterSequenceCaseLiterals;
+import Triangle.AbstractSyntaxTrees.SingleCaseRange;
 import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
@@ -278,20 +275,35 @@ public class Parser {
       return caseRangeCommandAST;
     }
    //Autores: Gabriel Fallas, Kevin Rodriguez, Hillary Castro
-//  CaseLiterals parseCaseLiteralsCommand() throws SyntaxError{
-////      ActualParameterSequenceCaseLiterals actualsAST = null;
-//      CaseLiterals caseLiteralsCommandAST = null;
-//      BarCommandCaseRange BarCommandCaseRangeAST = null;
-//      SourcePosition actualsPos = new SourcePosition();
-//      start(actualsPos);
-//      CaseRangeCommand c2AST = parseCaseRangeCommand();
-//      if (currentToken.kind == Token.BAR){
-//          caseLiteralsCommandAST = parseCaseLiteralCommand2();
-//      }
-//      else{
-//          SingleActualParameterSequenceCaseLiterals singleAPS = new SingleActualParameterSequenceCaseLiterals(actualsPos, )
-//      }
-//  }
+  CaseLiterals parseCaseLiteralsCommand() throws SyntaxError{
+      CaseLiterals clAST = null;
+      SourcePosition actualsPos = new SourcePosition();
+      start(actualsPos);
+      CaseRangeCommand c2AST = parseCaseRangeCommand();
+      if(currentToken.kind == Token.THEN){
+          SingleCaseRange scrAST = new SingleCaseRange(c2AST, actualsPos);
+          finish(actualsPos);
+          clAST = new CaseLiterals(scrAST, actualsPos);
+      }
+      else if((currentToken.kind != Token.THEN) && (currentToken.kind != Token.BAR)){
+          clAST = null;
+          syntacticError("| or then expected here", "");
+      }
+      else{
+          MultipleCaseRange mcrAST = new MultipleCaseRange(c2AST, actualsPos);
+          while (currentToken.kind == Token.BAR){
+            acceptIt();
+            CaseRangeCommand c3AST = parseCaseRangeCommand();
+            finish(actualsPos);
+            mcrAST = new MultipleCaseRange(mcrAST, c3AST, actualsPos);
+        }
+        clAST = new CaseLiterals(mcrAST, actualsPos); 
+      }
+      return clAST;
+  }
+  
+  
+  
   
 
 // parseIdentifier parses an identifier, and constructs a leaf AST to
@@ -1053,7 +1065,7 @@ public class Parser {
               accept(Token.IS);
               Expression eAST = parseExpression();
               finish(position);
-              procFuncAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST, position);
+              procFuncAST = new FuncDeclaration(identifierAST, fpsAST, tAST, eAST, position);
               break;
           default:
               syntacticError("expected here a proc or func",

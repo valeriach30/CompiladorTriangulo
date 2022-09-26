@@ -49,7 +49,6 @@ import Triangle.AbstractSyntaxTrees.Declaration;
 import Triangle.AbstractSyntaxTrees.DoCommand;
 import Triangle.AbstractSyntaxTrees.DotVname;
 import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequenceCaseLiterals;
 import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
@@ -77,7 +76,7 @@ import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
 import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequenceCaseLiterals;
+import Triangle.AbstractSyntaxTrees.MultipleCaseRange;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
@@ -94,7 +93,7 @@ import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.SingleActualParameterSequenceCaseLiterals;
+import Triangle.AbstractSyntaxTrees.SingleCaseRange;
 import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
@@ -216,15 +215,11 @@ public final class Encoder implements Visitor {
         return null;
     }
     
-    public Object visitEmptyActualParameterSequenceCaseLiterals(EmptyActualParameterSequenceCaseLiterals ast, Object obj){
+    public Object visitSingleCaseRange(SingleCaseRange ast, Object obj){
         return null;
     }
     
-    public Object visitSingleActualParameterSequenceCaseLiterals(SingleActualParameterSequenceCaseLiterals ast, Object obj){
-        return null;
-    }
-    
-    public Object visitMultipleActualParameterSequenceCaseLiterals(MultipleActualParameterSequenceCaseLiterals ast, Object obj){
+    public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj){
         return null;
     }
     

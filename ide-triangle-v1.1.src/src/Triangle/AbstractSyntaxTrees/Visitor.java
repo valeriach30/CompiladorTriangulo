@@ -129,10 +129,8 @@ public interface Visitor {
 
     public Object visitBarCommandCaseRange(BarCommandCaseRange aThis, Object o);
 
-    public Object visitEmptyActualParameterSequenceCaseLiterals(EmptyActualParameterSequenceCaseLiterals aThis, Object o);
+    public Object visitSingleCaseRange(SingleCaseRange aThis, Object o);
 
-    public Object visitSingleActualParameterSequenceCaseLiterals(SingleActualParameterSequenceCaseLiterals aThis, Object o);
-
-    public Object visitMultipleActualParameterSequenceCaseLiterals(MultipleActualParameterSequenceCaseLiterals aThis, Object o);
+    public Object visitMultipleCaseRange(MultipleCaseRange aThis, Object o);
 
 }

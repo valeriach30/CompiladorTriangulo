@@ -41,7 +41,6 @@ import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
 import Triangle.AbstractSyntaxTrees.DoCommand;
 import Triangle.AbstractSyntaxTrees.DotVname;
 import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequenceCaseLiterals;
 import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
@@ -69,7 +68,7 @@ import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
 import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
 import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequenceCaseLiterals;
+import Triangle.AbstractSyntaxTrees.MultipleCaseRange;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
@@ -86,7 +85,7 @@ import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.SingleActualParameterSequenceCaseLiterals;
+import Triangle.AbstractSyntaxTrees.SingleCaseRange;
 import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
@@ -154,13 +153,11 @@ public class LayoutVisitor implements Visitor {
   }  
   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitCaseLiterals(CaseLiterals ast, Object obj) {
-    return layoutQuaternary("CaseLiteralstCom.", ast.CRCCL, ast.EAPSCL, ast.SAPSCL, ast.MAPSCL);
+    if(ast.MCRCL == null)
+            return(layoutUnary("SingleCaseRange", ast.SCRCL));
+        else
+            return(layoutUnary("MultipleCaseRange", ast.MCRCL));
   }  
- 
- public Object visitEmptyActualParameterSequenceCaseLiterals(EmptyActualParameterSequenceCaseLiterals ast, Object obj){
-     return layoutNullary("EmptyActualParameterSequenceCaseLiteralstCom.");
- }
- 
   
   public Object visitAssignCommand(AssignCommand ast, Object obj) {
     return layoutBinary("AssignCom.", ast.V, ast.E);
@@ -356,12 +353,15 @@ public class LayoutVisitor implements Visitor {
     return layoutUnary("Sing.A.P.S.", ast.AP);
   }
   
-  public Object visitSingleActualParameterSequenceCaseLiterals(SingleActualParameterSequenceCaseLiterals ast, Object obj) {
-    return layoutBinary("Sing.A.P.S.C.L", ast.BCCRSAPS, ast.CRCSAPS);
+  public Object visitSingleCaseRange(SingleCaseRange ast, Object obj) {
+    return layoutUnary("Sing.C.R.C.L", ast.CRCSCR);
   }
   
-  public Object visitMultipleActualParameterSequenceCaseLiterals(MultipleActualParameterSequenceCaseLiterals ast, Object obj) {
-    return layoutBinary("Multiple.A.P.S.C.L", ast.BCCRMAPS, ast.CRCMAPS);
+  public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj) {
+    if(ast.CRCMCR2 == null)
+        return layoutUnary("First.Multiple.C.R.C.L", ast.CRCMCR);
+    else
+        return layoutBinary("Multiple.C.R.C.L", ast.CRCMCR, ast.CRCMCR2);
   }
 
 

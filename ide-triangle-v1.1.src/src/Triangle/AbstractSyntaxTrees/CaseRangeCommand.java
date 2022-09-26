@@ -24,6 +24,12 @@ public class CaseRangeCommand extends Command{
         TC = eAST;
     }
     
+    public CaseRangeCommand (SourcePosition thePosition){
+        super(thePosition);
+        CLC = null;
+        TC = null;
+    }
+    
     public Object visit(Visitor v, Object o){
         return v.visitCaseRangeCommand(this, o);
     }
