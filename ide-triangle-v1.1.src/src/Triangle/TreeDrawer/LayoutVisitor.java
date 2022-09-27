@@ -81,6 +81,7 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -147,7 +148,7 @@ public class LayoutVisitor implements Visitor {
   }  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCasesCommand(CasesCommand ast, Object obj) {
-    return layoutBinary("CasesCommandCom.", ast.SAPSCM, ast.MAPSCM);
+    return layoutUnary("CasesCommandCom.", ast.sequentialCases);
   }  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj) {
@@ -183,6 +184,10 @@ public class LayoutVisitor implements Visitor {
 
   public Object visitSequentialCommand(SequentialCommand ast, Object obj) {
     return layoutBinary("Seq.Com.", ast.C1, ast.C2);
+  }
+  
+  public Object visitSequentialCases(SequentialCases ast, Object obj) {
+    return layoutBinary("Seq.Cas.", ast.C1, ast.C2);
   }
 
   public Object visitWhileCommand(WhileCommand ast, Object obj) {

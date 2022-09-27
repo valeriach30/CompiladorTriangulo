@@ -89,6 +89,7 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -167,6 +168,11 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitSequentialCommand(SequentialCommand ast, Object o) {
+    ast.C1.visit(this, o);
+    ast.C2.visit(this, o);
+    return null;
+  }
+  public Object visitSequentialCases(SequentialCases ast, Object o) {
     ast.C1.visit(this, o);
     ast.C2.visit(this, o);
     return null;

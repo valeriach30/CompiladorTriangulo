@@ -69,6 +69,7 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -138,8 +139,7 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   public Object visitCasesCommand(CasesCommand ast, Object o) { 
-      ast.SAPSCM.visit(this, null);
-      ast.MAPSCM.visit(this, null);
+      ast.sequentialCases.visit(this, null);
       return(null);
   }
   
@@ -163,6 +163,13 @@ public class TableVisitor implements Visitor {
   }
   
   public Object visitSequentialCommand(SequentialCommand ast, Object o) { 
+      ast.C1.visit(this, null);
+      ast.C2.visit(this, null);
+      
+      return(null);
+  }
+  
+  public Object visitSequentialCases(SequentialCases ast, Object o) { 
       ast.C1.visit(this, null);
       ast.C2.visit(this, null);
       

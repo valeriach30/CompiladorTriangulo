@@ -11,22 +11,14 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  * @author gabri
  */
 public class CasesCommand extends Command{
-    public CasesCommand (SingleCase eAST,
+    public CasesCommand (SequentialCases sequentialCaseAST,
                          SourcePosition thePosition) {
         super (thePosition);
-        SAPSCM = eAST;
-        MAPSCM = null;
-    }
-    public CasesCommand (MultipleCase eAST,
-                         SourcePosition thePosition) {
-        super (thePosition);
-        SAPSCM = null;
-        MAPSCM = eAST;
+        sequentialCases = sequentialCaseAST;
     }
 
     public Object visit(Visitor V, Object O){
         return V.visitCasesCommand(this, O);
     }
-    public SingleCase SAPSCM;
-    public MultipleCase MAPSCM;
+    public SequentialCases sequentialCases;
 }

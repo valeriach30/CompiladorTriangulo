@@ -69,6 +69,7 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -140,6 +141,10 @@ public class TreeVisitor implements Visitor {
         return(createBinary("Sequential Command", ast.C1, ast.C2));
     }
     
+    public Object visitSequentialCases(SequentialCases ast, Object obj) {
+        return(createBinary("Sequential Cases", ast.C1, ast.C2));
+    }
+    
     public Object visitWhileCommand(WhileCommand ast, Object obj) {
         return(createBinary("While Do Command", ast.E, ast.C));
     }
@@ -153,7 +158,7 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCasesCommand(CasesCommand ast, Object obj){
-        return(createBinary("Cases Command", ast.SAPSCM, ast.MAPSCM));
+        return(createUnary("Cases Command", ast.sequentialCases));
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){

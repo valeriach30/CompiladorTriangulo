@@ -84,6 +84,7 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -156,6 +157,10 @@ public Object visitCaseLiterals(CaseLiterals ast, Object obj){
 }
 
 public Object visitSingleCaseRange(SingleCaseRange ast, Object obj){
+    return null;
+}
+
+public Object visitSequentialCases(SequentialCases ast, Object obj){
     return null;
 }
 
