@@ -543,23 +543,25 @@ public class Parser {
     
     // ---------------------------------- IF -----------------------------------
     case Token.IF: {
-//      acceptIt(); //Se acepta el if
-//      Expression eAST = parseExpression(); //Se acepta el expression.
-//      accept(Token.THEN);
-//      Command cAST = parseCommand();
-//      if(currentToken.kind == Token.BAR){
-//          while(currentToken.kind == Token.BAR){
-//              acceptIt();
-//              Declaration dAST2 = parseProcFunc();
-//              finish(position);
+      acceptIt(); //Se acepta el if
+      Expression eAST = parseExpression(); //Se acepta el expression.
+      accept(Token.THEN);
+      Command cAST = parseCommand();
+      if(currentToken.kind == Token.BAR){
+          while(currentToken.kind == Token.BAR){
+              acceptIt();
+              Expression eAST2 = parseExpression();
+              accept(Token.THEN);
+              Command cAST2 = parseCommand();
+              finish(commandPos);
+              //"else" Command "end" -> falta
 //              declarationAST = new SequentialDeclaration(declarationAST,
 //                               dAST2, position);
-//          }
-//      }else{
-//          syntacticError("\"%\" cannot follow a declaration.",
-//                         currentToken.spelling);
-//      }
-//      return declarationAST;  
+          }
+      }else{
+          syntacticError("\"%\" cannot follow a declaration.",
+                         currentToken.spelling);
+      } 
       break;
     }
     
