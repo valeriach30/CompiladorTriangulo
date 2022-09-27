@@ -80,6 +80,7 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
@@ -504,6 +505,7 @@ public class Parser {
     // -------------------------------- SELECT ---------------------------------
     // "select" Expression "from" Cases ["else" Command] "end"
     case Token.SELECT: {
+        SelectCommand selectCommand = null;
         acceptIt();
         
         // Determinar la expresion
@@ -512,10 +514,26 @@ public class Parser {
         accept(Token.FROM);
         
         // Determinar los Cases
-        
+        CasesCommand casesCommand = parseCasesCommand();
         // Determinar si hay else 0 o 1 vez
-        
-        // End
+        if(currentToken.kind == Token.ELSE){
+            acceptIt();
+            Command command = parseCommand();
+            accept(Token.END);
+            finish(commandPos);
+            selectCommand = new SelectCommand(eAST, casesCommand,
+                                              command,commandPos);
+        }
+        else if(currentToken.kind != Token.ELSE){
+            accept(Token.END);
+            finish(commandPos);
+            selectCommand = new SelectCommand(eAST, casesCommand,
+                                              commandPos);
+        }
+        else{
+            syntacticError("Token expected",
+                    "");
+        }
         break;
     }
     
