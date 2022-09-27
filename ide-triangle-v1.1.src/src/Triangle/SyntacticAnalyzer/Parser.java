@@ -53,6 +53,7 @@ import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
 import Triangle.AbstractSyntaxTrees.Identifier;
+import Triangle.AbstractSyntaxTrees.IfCommand;
 import Triangle.AbstractSyntaxTrees.IfExpression;
 import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
@@ -448,7 +449,7 @@ public class Parser {
           Expression eAST = parseExpression();
           finish(commandPos);
           commandAST = new AssignCommand(vAST, eAST, commandPos);
-        }
+        }   
       }
       break;
       
@@ -505,14 +506,10 @@ public class Parser {
     // -------------------------------- SELECT ---------------------------------
     // "select" Expression "from" Cases ["else" Command] "end"
     case Token.SELECT: {
-        SelectCommand selectCommand = null;
         acceptIt();
-        
         // Determinar la expresion
         Expression eAST = parseExpression();
-        
         accept(Token.FROM);
-        
         // Determinar los Cases
         CasesCommand casesCommand = parseCasesCommand();
         // Determinar si hay else 0 o 1 vez
@@ -521,13 +518,13 @@ public class Parser {
             Command command = parseCommand();
             accept(Token.END);
             finish(commandPos);
-            selectCommand = new SelectCommand(eAST, casesCommand,
+            commandAST = new SelectCommand(eAST, casesCommand,
                                               command,commandPos);
         }
         else if(currentToken.kind != Token.ELSE){
             accept(Token.END);
             finish(commandPos);
-            selectCommand = new SelectCommand(eAST, casesCommand,
+            commandAST = new SelectCommand(eAST, casesCommand,
                                               commandPos);
         }
         else{
@@ -539,7 +536,24 @@ public class Parser {
     
     // ---------------------------------- IF -----------------------------------
     case Token.IF: {
-        break;
+//      acceptIt(); //Se acepta el if
+//      Expression eAST = parseExpression(); //Se acepta el expression.
+//      accept(Token.THEN);
+//      Command cAST = parseCommand();
+//      if(currentToken.kind == Token.BAR){
+//          while(currentToken.kind == Token.BAR){
+//              acceptIt();
+//              Declaration dAST2 = parseProcFunc();
+//              finish(position);
+//              declarationAST = new SequentialDeclaration(declarationAST,
+//                               dAST2, position);
+//          }
+//      }else{
+//          syntacticError("\"%\" cannot follow a declaration.",
+//                         currentToken.spelling);
+//      }
+//      return declarationAST;  
+      break;
     }
     
     // -------------------------------- LOOP -----------------------------------
