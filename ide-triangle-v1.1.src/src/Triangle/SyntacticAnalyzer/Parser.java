@@ -24,6 +24,7 @@ import Triangle.AbstractSyntaxTrees.AssignCommand;
 import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
@@ -301,7 +302,25 @@ public class Parser {
       }
       return clAST;
   }
-  
+  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  CaseCommand parseCaseCommand() throws SyntaxError{
+      CaseCommand c1AST = null;
+      SourcePosition actualsPos = new SourcePosition();
+      start(actualsPos);
+      if(currentToken.kind == Token.WHEN){
+        acceptIt();
+        CaseLiterals c2AST = parseCaseLiteralsCommand();
+        accept(Token.THEN);
+        Command c3AST = parseCommand();
+        finish(actualsPos);
+        c1AST = new CaseCommand(c2AST, c3AST, actualsPos);
+        }
+      else{
+          c1AST = null;
+          syntacticError("WHEN expected here", "");
+      }
+      return c1AST;
+  }
   
   
   
