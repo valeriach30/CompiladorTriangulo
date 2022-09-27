@@ -141,4 +141,10 @@ public interface Visitor {
 
     public Object visitSelectCommand(SelectCommand aThis, Object O);
 
+    public Object visitThenCommandAST(ThenCommand aThis, Object o);
+
+    public Object visitSingleThen(SingleThen aThis, Object o);
+
+    public Object visitMultipleThen(MultipleThen aThis, Object o);
+
 }

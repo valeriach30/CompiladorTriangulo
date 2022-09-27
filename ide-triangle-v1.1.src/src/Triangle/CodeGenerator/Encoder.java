@@ -82,6 +82,7 @@ import Triangle.AbstractSyntaxTrees.MultipleCase;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleThen;
 import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
@@ -102,7 +103,9 @@ import Triangle.AbstractSyntaxTrees.SingleCase;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.SingleThen;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
+import Triangle.AbstractSyntaxTrees.ThenCommand;
 import Triangle.AbstractSyntaxTrees.ToCommand;
 import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
@@ -233,11 +236,20 @@ public final class Encoder implements Visitor {
         return null;
     }
     
+    public Object visitSingleThen(SingleThen ast, Object obj){
+        return null;
+    }
+    
+    
     public Object visitSingleCase(SingleCase ast, Object obj){
         return null;
     }
     
     public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj){
+        return null;
+    }
+    
+    public Object visitMultipleThen(MultipleThen ast, Object obj){
         return null;
     }
     
@@ -1168,6 +1180,11 @@ public final class Encoder implements Visitor {
 
     @Override
     public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object visitThenCommandAST(ThenCommand aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
