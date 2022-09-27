@@ -62,6 +62,7 @@ import Triangle.AbstractSyntaxTrees.MultipleCase;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleThen;
 import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
@@ -82,7 +83,9 @@ import Triangle.AbstractSyntaxTrees.SingleCase;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.SingleThen;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
+import Triangle.AbstractSyntaxTrees.ThenCommand;
 import Triangle.AbstractSyntaxTrees.ToCommand;
 import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
@@ -131,8 +134,9 @@ public class TreeVisitor implements Visitor {
     }
     
     public Object visitIfCommand(IfCommand ast, Object obj) {
-        return(createTernary("If Command", ast.E, ast.C1, ast.C2));
+        return(createQuinary("If Command", ast.E, ast.C1, ast.C2, ast.ST, ast.MT));
     }
+    
     
     public Object visitLetCommand(LetCommand ast, Object obj) {
         return(createBinary("Let Command", ast.D, ast.C));
@@ -364,6 +368,11 @@ public class TreeVisitor implements Visitor {
         return(createUnary("Single Case Range", ast.CRCSCR));
     }
     
+    //Autores: Kevin, Hillary, Gabriel
+    public Object visitSingleThen(SingleThen ast, Object obj) {
+        return(createUnary("Single Then", ast.TC));
+    }
+    
     public Object visitSingleCase(SingleCase ast, Object obj) {
         return(createUnary("Single Case ", ast.SC));
     }
@@ -373,6 +382,13 @@ public class TreeVisitor implements Visitor {
             return(createUnary("First Multiple Case Range", ast.CRCMCR));
         else
             return(createBinary("Multiple Case Range", ast.CRCMCR, ast.CRCMCR2));
+    }
+    
+    public Object visitMultipleThen(MultipleThen ast, Object obj) {
+        if(ast.TC2 == null)
+            return(createUnary("First Multiple Then", ast.TC));
+        else
+            return(createBinary("Multiple Then", ast.TC, ast.TC2));
     }
     
     public Object visitMultipleCase(MultipleCase ast, Object obj) {
@@ -575,6 +591,12 @@ public class TreeVisitor implements Visitor {
     @Override
     public Object visitDoCommandAST(DoCommand aThis, Object o) {
         return(createUnary("Do Command", aThis.C));
+    }
+    
+    // Autor : Kevin Rodriguez
+    @Override
+    public Object visitThenCommandAST(ThenCommand aThis, Object o) {
+        return(createUnary("Then Command", aThis.C));
     }
 
     // Autor : Valeria Chinchilla

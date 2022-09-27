@@ -74,6 +74,7 @@ import Triangle.AbstractSyntaxTrees.MultipleCase;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleThen;
 import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
@@ -94,7 +95,9 @@ import Triangle.AbstractSyntaxTrees.SingleCase;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.SingleThen;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
+import Triangle.AbstractSyntaxTrees.ThenCommand;
 import Triangle.AbstractSyntaxTrees.ToCommand;
 import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
@@ -180,7 +183,7 @@ public class LayoutVisitor implements Visitor {
   }
 
   public Object visitIfCommand(IfCommand ast, Object obj) {
-    return layoutTernary("IfCom.", ast.E, ast.C1, ast.C2);
+    return layoutQuinary("IfCom.", ast.E, ast.C1, ast.C2, ast.ST, ast.MT);
   }
 
   public Object visitLetCommand(LetCommand ast, Object obj) {
@@ -369,6 +372,10 @@ public class LayoutVisitor implements Visitor {
     return layoutUnary("Sing.C.R.C.L", ast.CRCSCR);
   }
   
+  public Object visitSingleThen(SingleThen ast, Object obj) {
+    return layoutUnary("Sing.Then", ast.TC);
+  }
+  
   public Object visitSingleCase(SingleCase ast, Object obj) {
     return layoutUnary("Sing.C.", ast.SC);
   }
@@ -378,6 +385,13 @@ public class LayoutVisitor implements Visitor {
         return layoutUnary("First.Multiple.C.R.C.L", ast.CRCMCR);
     else
         return layoutBinary("Multiple.C.R.C.L", ast.CRCMCR, ast.CRCMCR2);
+  }
+  
+  public Object visitMultipleThen(MultipleThen ast, Object obj) {
+    if(ast.TC2 == null)
+        return layoutUnary("First.Multiple.Then", ast.TC);
+    else
+        return layoutBinary("Multiple.Then", ast.TC, ast.TC2);
   }
 
    public Object visitMultipleCase(MultipleCase ast, Object obj) {
@@ -678,6 +692,10 @@ public class LayoutVisitor implements Visitor {
     @Override
     public Object visitDoCommandAST(DoCommand aThis, Object o) {
         return(layoutUnary("Do Command", aThis.C));
+    }
+    
+    public Object visitThenCommandAST(ThenCommand aThis, Object o) {
+        return(layoutUnary("Then Command", aThis.C));
     }
 
     @Override

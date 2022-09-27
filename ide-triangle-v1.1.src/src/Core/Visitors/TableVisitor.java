@@ -62,6 +62,7 @@ import Triangle.AbstractSyntaxTrees.MultipleCase;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleThen;
 import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
@@ -82,7 +83,9 @@ import Triangle.AbstractSyntaxTrees.SingleCase;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.SingleThen;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
+import Triangle.AbstractSyntaxTrees.ThenCommand;
 import Triangle.AbstractSyntaxTrees.ToCommand;
 import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
@@ -159,6 +162,8 @@ public class TableVisitor implements Visitor {
       ast.E.visit(this, null);
       ast.C1.visit(this, null);
       ast.C2.visit(this, null);
+      ast.ST.visit(this, null);
+      ast.MT.visit(this, null);
       
       return(null);
   }
@@ -222,6 +227,12 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
       ast.SCRCL.visit(this, null);
       return(null);
   }
+ 
+ public Object visitThenCommandAST(ThenCommand aThis, Object o) { // Autor : Kevin Rodriguez
+        aThis.C.visit(this, null);
+      
+        return(null);
+    }
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc=" Expressions ">
@@ -544,6 +555,12 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
       return(null);
   }
   
+  public Object visitSingleThen(SingleThen ast, Object o) { 
+      ast.TC.visit(this, null);
+      
+      return(null);
+  }
+  
   public Object visitSingleCase(SingleCase ast, Object o) { 
       ast.SC.visit(this, null);
       
@@ -553,6 +570,13 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
   public Object visitMultipleCaseRange(MultipleCaseRange ast, Object o) { 
       ast.CRCMCR.visit(this, null);
       ast.CRCMCR2.visit(this, null);
+      
+      return(null);
+  }
+  
+  public Object visitMultipleThen(MultipleThen ast, Object o) { 
+      ast.TC.visit(this, null);
+      ast.TC2.visit(this, null);
       
       return(null);
   }
