@@ -19,6 +19,6 @@ public class SingleCase extends CaseCommand{
     public Object visit(Visitor v, Object o) {
         return v.visitSingleCase(this, o);
     }
-    public CaseCommand SC; //Case range command (single case range)
+    public CaseCommand SC; 
     
 }

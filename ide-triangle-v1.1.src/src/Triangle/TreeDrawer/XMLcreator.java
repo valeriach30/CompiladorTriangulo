@@ -406,8 +406,10 @@ public class XMLcreator implements Visitor {
     public Object visitCaseLiteralCommand(CaseLiteralCommand aThis, Object O) {
         nuevaLinea("<CaseLiteralCommand>");
         
-        aThis.CL.visit(this, null);
-        aThis.IL.visit(this, null);
+        if(aThis.CL != null)
+            aThis.CL.visit(this, null);
+        else
+            aThis.IL.visit(this, null);
     
         nuevaLinea("</CaseLiteralCommand>");
         return(null);
@@ -418,7 +420,8 @@ public class XMLcreator implements Visitor {
         nuevaLinea("<CaseRangeCommand>");
         
         aThis.CLC.visit(this, null);
-        aThis.TC.visit(this, null);
+        if(aThis.TC != null)
+            aThis.TC.visit(this, null);
     
         nuevaLinea("</CaseRangeCommand>");
         return(null);
@@ -983,47 +986,105 @@ public class XMLcreator implements Visitor {
 
     @Override
     public Object visitToCommandLiteralAST(ToCommandLiteral aThis, Object O) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<VarDeclarationInit>");
+        
+        aThis.CLCT.visit(this, null);
+      
+        nuevaLinea("</VarDeclarationInit>");
+        return(null);
     }
 
     @Override
     public Object visitBarCommandCaseRange(BarCommandCaseRange aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<VarDeclarationInit>");
+        
+        aThis.CRCB.visit(this, null);
+      
+        nuevaLinea("</VarDeclarationInit>");
+        return(null);
     }
 
     @Override
     public Object visitCaseLiterals(CaseLiterals aThis, Object O) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<CaseLiterals>");
+        
+        if(aThis.SCRCL != null)
+            aThis.SCRCL.visit(this, null);
+        else
+            aThis.MCRCL.visit(this, null);
+        
+        nuevaLinea("</CaseLiterals>");
+        return(null);
     }
 
     @Override
     public Object visitCaseCommand(CaseCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<CaseCommand>");
+        
+        if(aThis.C != null){
+            aThis.CL.visit(this, null);
+            aThis.C.visit(this, null);
+        }
+        
+        nuevaLinea("</CaseCommand>");
+        return(null);
     }
 
     @Override
     public Object visitCasesCommand(CasesCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<CasesCommand>");
+        
+        if(aThis.multipleCase == null)
+            aThis.singleCase.visit(this, null);
+        else
+            aThis.multipleCase.visit(this, null);
+        
+        nuevaLinea("</CasesCommand>");
+        return(null);
     }
 
     @Override
     public Object visitSingleCaseRange(SingleCaseRange aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<SingleCaseRange>");
+        
+        aThis.CRCSCR.visit(this, null);
+        
+        nuevaLinea("</SingleCaseRange>");
+        return(null);
     }
 
     @Override
     public Object visitMultipleCaseRange(MultipleCaseRange aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<MultipleCaseRange>");
+        
+        aThis.CRCMCR.visit(this, null);
+        if(aThis.CRCMCR2 != null)
+            aThis.CRCMCR2.visit(this, null);
+        
+        nuevaLinea("</MultipleCaseRange>");
+        return(null);
     }
 
     @Override
     public Object visitSingleCase(SingleCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<SingleCase>");
+        
+        aThis.SC.visit(this, null);
+        
+        nuevaLinea("</SingleCase>");
+        return(null);
     }
 
     @Override
     public Object visitMultipleCase(MultipleCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<MultipleCase>");
+        
+        aThis.MCC.visit(this, null);
+        if(aThis.MCC2 != null)
+            aThis.MCC2.visit(this, null);
+        
+        nuevaLinea("</MultipleCase>");
+        return(null);
     }
 
     @Override
@@ -1033,7 +1094,15 @@ public class XMLcreator implements Visitor {
 
     @Override
     public Object visitSelectCommand(SelectCommand aThis, Object O) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<SelectCommand>");
+        
+        aThis.expression.visit(this, null);
+        aThis.cases.visit(this, null);
+        if(aThis.command != null)
+            aThis.command.visit(this, null);
+        
+        nuevaLinea("</SelectCommand>");
+        return(null);
     }
 
     

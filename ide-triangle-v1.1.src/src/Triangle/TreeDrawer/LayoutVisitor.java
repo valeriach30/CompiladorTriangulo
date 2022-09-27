@@ -126,7 +126,10 @@ public class LayoutVisitor implements Visitor {
  //Se dejo declarado el CaseLiteralCommand para los siguientes proyectos. 
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object obj) {
-    return layoutBinary("CaseLitCom.", ast.CL, ast.IL);
+    if(ast.CL == null)
+        return layoutUnary("CaseLitCom.", ast.IL);
+    else
+        return layoutUnary("CaseLitCom.", ast.CL);
   }
  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
@@ -149,7 +152,10 @@ public class LayoutVisitor implements Visitor {
   }  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCasesCommand(CasesCommand ast, Object obj) {
-    return layoutUnary("CasesCommandCom.", ast.sequentialCases);
+    if(ast.multipleCase == null)
+        return layoutUnary("CasesCommandCom.", ast.singleCase);
+    else
+        return layoutUnary("CasesCommandCom.", ast.multipleCase);
   }  
   
   public Object visitSelectCommand(SelectCommand ast, Object obj) {

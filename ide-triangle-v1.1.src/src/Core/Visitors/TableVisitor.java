@@ -140,7 +140,8 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   public Object visitCasesCommand(CasesCommand ast, Object o) { 
-      ast.sequentialCases.visit(this, null);
+      ast.singleCase.visit(this, null);
+      ast.multipleCase.visit(this, null);
       return(null);
   }
   

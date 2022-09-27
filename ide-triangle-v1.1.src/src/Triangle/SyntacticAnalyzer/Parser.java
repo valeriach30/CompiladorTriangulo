@@ -237,13 +237,11 @@ public class Parser {
     SourcePosition commandPos = new SourcePosition();
     start(commandPos);
     if(currentToken.kind == Token.INTLITERAL){
-        acceptIt();
         IntegerLiteral c2AST = parseIntegerLiteral();
         finish(commandPos);
         caseLiteralAST = new CaseLiteralCommand(c2AST, commandPos);
     }
     else if(currentToken.kind == Token.CHARLITERAL){
-        acceptIt();
         CharacterLiteral c2AST = parseCharacterLiteral();
         finish(commandPos);
         caseLiteralAST = new CaseLiteralCommand(c2AST, commandPos);
@@ -269,9 +267,13 @@ public class Parser {
         finish(commandPos);
         caseRangeCommandAST = new CaseRangeCommand(c2AST, ToCommandLiteralAST, commandPos);
       }
-      else if(currentToken.kind == Token.NIL){
+      else if(currentToken.kind == Token.BAR){
          acceptIt();
          CaseLiteralCommand c3AST = parseCaseLiteral();
+         finish(commandPos);
+        caseRangeCommandAST = new CaseRangeCommand(c2AST, commandPos);
+      }
+      else if(currentToken.kind == Token.THEN){
          finish(commandPos);
         caseRangeCommandAST = new CaseRangeCommand(c2AST, commandPos);
       }
@@ -323,27 +325,32 @@ public class Parser {
         }
       else{
           c1AST = null;
-          syntacticError("WHEN expected here", "");
+          syntacticError("when expected here", "");
       }
       return c1AST;
   }
   CasesCommand parseCasesCommand() throws SyntaxError{
       CasesCommand commandAST = null; // in case there's a syntactic error
-      SequentialCases sequentialCases = null;
       SourcePosition position = new SourcePosition();
       start(position);
       CaseCommand cAST1 = parseCaseCommand();
       if(currentToken.kind == Token.WHEN){
-          while(currentToken.kind == Token.WHEN){
-              CaseCommand cAST2 = parseCaseCommand();
-              finish(position);
-              sequentialCases = new SequentialCases(cAST1, cAST2,
-                                                        position);
-              commandAST = new CasesCommand(sequentialCases, position);
-          }
-      }else{
+        MultipleCase mCase = new MultipleCase(cAST1, position);
+        while(currentToken.kind == Token.WHEN){
+            CaseCommand cAST2 = parseCaseCommand();
+            finish(position);
+            mCase = new MultipleCase(mCase, cAST2,position);
+        }
+        commandAST = new CasesCommand(mCase, position);
+      }
+      else if(currentToken.kind == Token.END || currentToken.kind == Token.ELSE){
+          finish(position);
+          SingleCase sCase = new SingleCase(cAST1, position);
+          commandAST = new CasesCommand(sCase, position);
+      }
+      else{
           commandAST = null;
-          syntacticError("case expected here", "");
+          syntacticError("when or end expected here", "");
       }
       return commandAST;
   }
@@ -528,7 +535,7 @@ public class Parser {
                                               commandPos);
         }
         else{
-            syntacticError("Token expected",
+            syntacticError("Token expected here",
                     "");
         }
         break;

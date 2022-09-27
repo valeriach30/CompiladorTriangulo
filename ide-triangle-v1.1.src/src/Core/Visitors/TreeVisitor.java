@@ -151,7 +151,10 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object obj){
-        return(createBinary("Case Literal Command", ast.CL, ast.IL));
+        if(ast.CL == null)
+            return(createUnary("Case Literal Command", ast.IL));
+        else
+            return(createUnary("Case Literal Command", ast.CL));
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseCommand(CaseCommand ast, Object obj){
@@ -159,11 +162,17 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCasesCommand(CasesCommand ast, Object obj){
-        return(createUnary("Cases Command", ast.sequentialCases));
+        if(ast.multipleCase == null)
+            return(createUnary("Cases Command", ast.singleCase));
+        else
+            return(createUnary("Cases Command", ast.multipleCase));
     }
     
     public Object visitSelectCommand(SelectCommand ast, Object obj){
-        return(createTernary("Select Command", ast.expression, ast.cases, ast.command));
+        if(ast.command == null)
+            return(createBinary("Select Command", ast.expression, ast.cases));
+        else
+            return(createTernary("Select Command", ast.expression, ast.cases, ast.command));
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){
