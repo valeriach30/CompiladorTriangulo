@@ -133,4 +133,8 @@ public interface Visitor {
 
     public Object visitMultipleCaseRange(MultipleCaseRange aThis, Object o);
 
+    public Object visitSingleCase(SingleCase aThis, Object o);
+
+    public Object visitMultipleCase(MultipleCase aThis, Object o);
+
 }

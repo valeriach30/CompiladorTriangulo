@@ -28,6 +28,7 @@ import Triangle.AbstractSyntaxTrees.CaseCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
 import Triangle.AbstractSyntaxTrees.CaseLiterals;
 import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
+import Triangle.AbstractSyntaxTrees.CasesCommand;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
 import Triangle.AbstractSyntaxTrees.Command;
@@ -66,6 +67,7 @@ import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
 import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleCase;
 import Triangle.AbstractSyntaxTrees.MultipleCaseRange;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
@@ -85,6 +87,7 @@ import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleCaseRange;
 import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.SingleCase;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
@@ -322,7 +325,26 @@ public class Parser {
       return c1AST;
   }
   
-  
+  CasesCommand parseCasesCommand() throws SyntaxError{
+      CasesCommand c1AST = null;
+      SourcePosition actualsPos = new SourcePosition();
+      start(actualsPos);
+      CaseCommand c2AST= parseCaseCommand();
+      if(currentToken.kind != Token.NIL){
+          acceptIt();
+          SingleCase scrAST = new SingleCase(c2AST, actualsPos);
+          finish(actualsPos);
+          MultipleCase mcrAST = new MultipleCase(c2AST, actualsPos);
+          CaseCommand c3AST = parseCaseCommand();
+          mcrAST = new MultipleCase(mcrAST, c2AST, actualsPos);
+          c1AST = new CasesCommand(mcrAST, actualsPos); 
+      }
+      else{
+          c1AST = null;
+          syntacticError("case expected here", "");
+      }
+      return c1AST;
+  }
   
 
 // parseIdentifier parses an identifier, and constructs a leaf AST to

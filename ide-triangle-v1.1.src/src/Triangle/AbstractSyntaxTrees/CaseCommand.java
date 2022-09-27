@@ -18,6 +18,12 @@ public class CaseCommand extends Command {
     CL = caseLiteralAST;
     C = cAST;
   }
+  
+  public CaseCommand (SourcePosition thePosition) {
+    super (thePosition);
+    CL = null;
+    C = null;
+  }
 
   public Object visit(Visitor v, Object o) {
     return v.visitCaseCommand(this, o);

@@ -58,6 +58,7 @@ import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleCaseRange;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleCase;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
@@ -75,6 +76,7 @@ import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleCaseRange;
 import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.SingleCase;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
@@ -136,7 +138,6 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   public Object visitCasesCommand(CasesCommand ast, Object o) { 
-      ast.caseComand.visit(this, null);
       ast.SAPSCM.visit(this, null);
       ast.MAPSCM.visit(this, null);
       return(null);
@@ -528,9 +529,22 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
       return(null);
   }
   
+  public Object visitSingleCase(SingleCase ast, Object o) { 
+      ast.SC.visit(this, null);
+      
+      return(null);
+  }
+  
   public Object visitMultipleCaseRange(MultipleCaseRange ast, Object o) { 
       ast.CRCMCR.visit(this, null);
       ast.CRCMCR2.visit(this, null);
+      
+      return(null);
+  }
+  
+  public Object visitMultipleCase(MultipleCase ast, Object o) { 
+      ast.MCC.visit(this, null);
+      ast.MCC2.visit(this, null);
       
       return(null);
   }

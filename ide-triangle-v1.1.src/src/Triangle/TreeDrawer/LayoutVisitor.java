@@ -70,6 +70,7 @@ import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleCaseRange;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleCase;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
@@ -87,6 +88,7 @@ import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleCaseRange;
 import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.SingleCase;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
@@ -145,7 +147,7 @@ public class LayoutVisitor implements Visitor {
   }  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCasesCommand(CasesCommand ast, Object obj) {
-    return layoutTernary("CasesCommandCom.", ast.caseComand, ast.SAPSCM, ast.MAPSCM);
+    return layoutBinary("CasesCommandCom.", ast.SAPSCM, ast.MAPSCM);
   }  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj) {
@@ -357,6 +359,10 @@ public class LayoutVisitor implements Visitor {
     return layoutUnary("Sing.C.R.C.L", ast.CRCSCR);
   }
   
+  public Object visitSingleCase(SingleCase ast, Object obj) {
+    return layoutUnary("Sing.C.", ast.SC);
+  }
+  
   public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj) {
     if(ast.CRCMCR2 == null)
         return layoutUnary("First.Multiple.C.R.C.L", ast.CRCMCR);
@@ -364,6 +370,12 @@ public class LayoutVisitor implements Visitor {
         return layoutBinary("Multiple.C.R.C.L", ast.CRCMCR, ast.CRCMCR2);
   }
 
+   public Object visitMultipleCase(MultipleCase ast, Object obj) {
+    if(ast.MCC2 == null)
+        return layoutUnary("First.Multiple.C.C", ast.MCC);
+    else
+        return layoutBinary("Multiple.C.C", ast.MCC, ast.MCC2);
+  }
 
   // Type Denoters
   public Object visitAnyTypeDenoter(AnyTypeDenoter ast, Object obj) {

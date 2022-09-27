@@ -58,6 +58,7 @@ import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleCaseRange;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleCase;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
@@ -75,6 +76,7 @@ import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleCaseRange;
 import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
+import Triangle.AbstractSyntaxTrees.SingleCase;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
@@ -151,7 +153,7 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCasesCommand(CasesCommand ast, Object obj){
-        return(createTernary("Cases Command",  ast.caseComand, ast.SAPSCM, ast.MAPSCM));
+        return(createBinary("Cases Command", ast.SAPSCM, ast.MAPSCM));
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseRangeCommand(CaseRangeCommand ast, Object obj){
@@ -352,11 +354,22 @@ public class TreeVisitor implements Visitor {
         return(createUnary("Single Case Range", ast.CRCSCR));
     }
     
+    public Object visitSingleCase(SingleCase ast, Object obj) {
+        return(createUnary("Single Case ", ast.SC));
+    }
+    
     public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj) {
         if(ast.CRCMCR2 == null)
             return(createUnary("First Multiple Case Range", ast.CRCMCR));
         else
             return(createBinary("Multiple Case Range", ast.CRCMCR, ast.CRCMCR2));
+    }
+    
+    public Object visitMultipleCase(MultipleCase ast, Object obj) {
+        if(ast.MCC2 == null)
+            return(createUnary("First Multiple Case ", ast.MCC));
+        else
+            return(createBinary("Multiple Case ", ast.MCC, ast.MCC2));
     }
     // </editor-fold>
         
