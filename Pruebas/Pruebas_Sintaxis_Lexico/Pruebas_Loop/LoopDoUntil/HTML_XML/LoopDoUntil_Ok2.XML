@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Program>
 <LoopCommand>
-<Identifier value='x'>
-</Identifier>
 <DoCommand>
 <AssignCommand>
 <SimpleVname>

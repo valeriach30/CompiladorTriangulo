@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<LocalDeclaration>
+<SequentialDeclaration>
+<VarDeclaration>
+<SimpleTypeDenoter>
+<Identifier value='Char'>
+</Identifier>
+</SimpleTypeDenoter>
+</VarDeclaration>
+<VarDeclaration>
+<SimpleTypeDenoter>
+<Identifier value='Integer'>
+</Identifier>
+</SimpleTypeDenoter>
+</VarDeclaration>
+</SequentialDeclaration>
+<ProcDeclaration>
+<EmptyFormalParameterSequence>
+</EmptyFormalParameterSequence>
+<CallCommand>
+<Identifier value='put'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CharacterExpression>
+<CharacterLiteral>
+</CharacterLiteral>
+</CharacterExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</ProcDeclaration>
+</LocalDeclaration>
+<CallCommand>
+<Identifier value='z'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</Program>

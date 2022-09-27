@@ -3,6 +3,20 @@
 <LoopCommand>
 <Identifier value='x'>
 </Identifier>
+<ToCommand>
+<IntegerExpression>
+<IntegerLiteral value= '10'>
+</IntegerLiteral>
+</IntegerExpression>
+</ToCommand>
+<ForFromCommand>
+<Identifier value='x'>
+</Identifier>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</ForFromCommand>
 <DoCommand>
 <AssignCommand>
 <SimpleVname>
@@ -25,21 +39,5 @@
 </BinaryExpression>
 </AssignCommand>
 </DoCommand>
-<UntilCommand>
-<BinaryExpression>
-<VnameExpression>
-<SimpleVname>
-<Identifier value='x'>
-</Identifier>
-</SimpleVname>
-</VnameExpression>
-<Operator>
-</Operator>
-<IntegerExpression>
-<IntegerLiteral value= '10'>
-</IntegerLiteral>
-</IntegerExpression>
-</BinaryExpression>
-</UntilCommand>
 </LoopCommand>
 </Program>

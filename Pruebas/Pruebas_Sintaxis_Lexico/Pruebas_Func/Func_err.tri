@@ -1,0 +1,7 @@
+! Prueba de agregacion Func
+
+let
+   func x() : x | 1
+in
+  x()
+end
