@@ -139,4 +139,6 @@ public interface Visitor {
 
     public Object visitSequentialCases(SequentialCases aThis, Object o);
 
+    public Object visitSelectCommand(SelectCommand aThis, Object O);
+
 }

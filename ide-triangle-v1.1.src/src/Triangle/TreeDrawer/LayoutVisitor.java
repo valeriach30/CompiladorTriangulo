@@ -81,6 +81,7 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
@@ -150,6 +151,10 @@ public class LayoutVisitor implements Visitor {
   public Object visitCasesCommand(CasesCommand ast, Object obj) {
     return layoutUnary("CasesCommandCom.", ast.sequentialCases);
   }  
+  
+  public Object visitSelectCommand(SelectCommand ast, Object obj) {
+    return layoutTernary("SelectCommandCom.", ast.expression, ast.cases, ast.command);
+  } 
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj) {
     return layoutUnary("CaseBarCaseRngtCom.", ast.CRCB);

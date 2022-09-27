@@ -84,6 +84,7 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
@@ -148,6 +149,10 @@ public Object visitCaseCommand(CaseCommand ast, Object obj){
 }
 //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
 public Object visitCasesCommand(CasesCommand ast, Object obj){
+    return null;
+}
+
+public Object visitSelectCommand(SelectCommand ast, Object obj){
     return null;
 }
 

@@ -69,6 +69,7 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
@@ -140,6 +141,13 @@ public class TableVisitor implements Visitor {
   }
   public Object visitCasesCommand(CasesCommand ast, Object o) { 
       ast.sequentialCases.visit(this, null);
+      return(null);
+  }
+  
+  public Object visitSelectCommand(SelectCommand ast, Object o) { 
+      ast.cases.visit(this, null);
+      ast.command.visit(this, null);
+      ast.expression.visit(this, null);
       return(null);
   }
   
