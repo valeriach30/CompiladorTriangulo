@@ -80,6 +80,7 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -324,29 +325,27 @@ public class Parser {
       }
       return c1AST;
   }
-  
   CasesCommand parseCasesCommand() throws SyntaxError{
-      CasesCommand c1AST = null;
-      SourcePosition actualsPos = new SourcePosition();
-      start(actualsPos);
-      CaseCommand c2AST= parseCaseCommand();
-      if(currentToken.kind != Token.NIL){
-          acceptIt();
-          SingleCase scrAST = new SingleCase(c2AST, actualsPos);
-          finish(actualsPos);
-          MultipleCase mcrAST = new MultipleCase(c2AST, actualsPos);
-          CaseCommand c3AST = parseCaseCommand();
-          mcrAST = new MultipleCase(mcrAST, c2AST, actualsPos);
-          c1AST = new CasesCommand(mcrAST, actualsPos); 
-      }
-      else{
-          c1AST = null;
+      CasesCommand commandAST = null; // in case there's a syntactic error
+      SequentialCases sequentialCases = null;
+      SourcePosition position = new SourcePosition();
+      start(position);
+      CaseCommand cAST1 = parseCaseCommand();
+      if(currentToken.kind == Token.WHEN){
+          while(currentToken.kind == Token.WHEN){
+              CaseCommand cAST2 = parseCaseCommand();
+              finish(position);
+              sequentialCases = new SequentialCases(cAST1, cAST2,
+                                                        position);
+              commandAST = new CasesCommand(sequentialCases, position);
+          }
+      }else{
+          commandAST = null;
           syntacticError("case expected here", "");
       }
-      return c1AST;
+      return commandAST;
   }
   
-
 // parseIdentifier parses an identifier, and constructs a leaf AST to
 // represent it.
 

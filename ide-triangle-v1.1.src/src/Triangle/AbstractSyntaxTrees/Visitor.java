@@ -137,4 +137,6 @@ public interface Visitor {
 
     public Object visitMultipleCase(MultipleCase aThis, Object o);
 
+    public Object visitSequentialCases(SequentialCases aThis, Object o);
+
 }
