@@ -151,7 +151,7 @@ public class LayoutVisitor implements Visitor {
   }  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCaseCommand(CaseCommand ast, Object obj) {
-    return layoutBinary("CaseCommandCom.", ast.C,  ast.CL);
+    return layoutBinary("CaseCommandCom.", ast.CL,  ast.C);
   }  
  //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCasesCommand(CasesCommand ast, Object obj) {

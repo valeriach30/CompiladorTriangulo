@@ -162,7 +162,7 @@ public class TreeVisitor implements Visitor {
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseCommand(CaseCommand ast, Object obj){
-        return(createBinary("Case Command", ast.C,  ast.CL));
+        return(createBinary("Case Command", ast.CL,  ast.C));
     }
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCasesCommand(CasesCommand ast, Object obj){
@@ -199,9 +199,9 @@ public class TreeVisitor implements Visitor {
     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
     public Object visitCaseLiterals(CaseLiterals ast, Object o) {
         if(ast.MCRCL == null)
-            return(createUnary("Case Literals single Case Range", ast.SCRCL));
+            return(createUnary("Case Literals", ast.SCRCL));
         else
-            return(createUnary("Case Literals multiple Case Range", ast.MCRCL));
+            return(createUnary("Case Literals", ast.MCRCL));
     }
 
     
@@ -388,21 +388,21 @@ public class TreeVisitor implements Visitor {
     
     public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj) {
         if(ast.CRCMCR2 == null)
-            return(createUnary("First Multiple Case Range", ast.CRCMCR));
+            return(createUnary("Multiple Case Range", ast.CRCMCR));
         else
             return(createBinary("Multiple Case Range", ast.CRCMCR, ast.CRCMCR2));
     }
     
     public Object visitMultipleThen(MultipleThen ast, Object obj) {
         if(ast.TC2 == null)
-            return(createUnary("First Multiple Then", ast.TC));
+            return(createUnary("Multiple Then", ast.TC));
         else
             return(createBinary("Multiple Then", ast.TC, ast.TC2));
     }
     
     public Object visitMultipleCase(MultipleCase ast, Object obj) {
         if(ast.MCC2 == null)
-            return(createUnary("First Multiple Case ", ast.MCC));
+            return(createUnary("Multiple Case ", ast.MCC));
         else
             return(createBinary("Multiple Case ", ast.MCC, ast.MCC2));
     }

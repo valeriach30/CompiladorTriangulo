@@ -138,8 +138,8 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   public Object visitCaseCommand(CaseCommand ast, Object o) { 
-      ast.C.visit(this, null);
       ast.CL.visit(this, null);
+      ast.C.visit(this, null);
       return(null);
   }
   public Object visitCasesCommand(CasesCommand ast, Object o) { 

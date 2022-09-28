@@ -266,17 +266,17 @@ public class Parser {
       if(currentToken.kind == Token.TO){
         acceptIt();
         CaseLiteralCommand c3AST = parseCaseLiteral();
-        ToCommandLiteralAST = new ToCommandLiteral(c2AST, commandPos);
+        ToCommandLiteralAST = new ToCommandLiteral(c3AST, commandPos);
         finish(commandPos);
         caseRangeCommandAST = new CaseRangeCommand(c2AST, ToCommandLiteralAST, commandPos);
       }
-      else if(currentToken.kind == Token.BAR){
+      /*else if(currentToken.kind == Token.BAR){
          acceptIt();
          CaseLiteralCommand c3AST = parseCaseLiteral();
          finish(commandPos);
         caseRangeCommandAST = new CaseRangeCommand(c2AST, commandPos);
-      }
-      else if(currentToken.kind == Token.THEN){
+      }*/
+      else if(currentToken.kind == Token.THEN || currentToken.kind == Token.BAR){
          finish(commandPos);
         caseRangeCommandAST = new CaseRangeCommand(c2AST, commandPos);
       }
@@ -447,9 +447,7 @@ public class Parser {
 
     SourcePosition commandPos = new SourcePosition();
     start(commandPos);
-
     switch (currentToken.kind) {
-
     case Token.IDENTIFIER:
       {
         Identifier iAST = parseIdentifier();
