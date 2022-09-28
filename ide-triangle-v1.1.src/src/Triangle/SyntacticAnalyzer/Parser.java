@@ -415,12 +415,13 @@ public class Parser {
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-  ThenCommand parseThenCommand(SourcePosition commandPos) throws SyntaxError {
-    start(commandPos);
+ ThenCommand parseThenCommand(SourcePosition commandPos) throws SyntaxError {
     ThenCommand commandAST = null;
-    Command eAST = parseCommand();
+    start(commandPos);
+    Expression eAST = parseExpression();
+    Command cAST = parseCommand();
     finish(commandPos);
-    commandAST = new ThenCommand(eAST, commandPos);
+    commandAST = new ThenCommand(cAST, commandPos);
     return commandAST;
   }
 // parseCommand parses the command, and constructs an AST
@@ -573,6 +574,7 @@ public class Parser {
           accept(Token.ELSE);
           Command cAST2 = parseCaseCommand();
           accept(Token.END);
+          finish(commandPos);
           commandAST = new IfCommand(eAST, cAST, cAST2,
                      multipleThen, commandPos);
       }
@@ -584,6 +586,7 @@ public class Parser {
               accept(Token.ELSE);
               Command cAST2 = parseCaseCommand();
               accept(Token.END);
+              finish(commandPos);
               commandAST = new IfCommand(eAST, cAST, cAST2, singleThen, commandPos);
       }
       else if((currentToken.kind != Token.ELSE) && (currentToken.kind != Token.BAR)){
