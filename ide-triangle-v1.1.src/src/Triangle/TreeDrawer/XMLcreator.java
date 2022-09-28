@@ -905,7 +905,7 @@ public class XMLcreator implements Visitor {
 
     @Override
     public Object visitCharacterLiteral(CharacterLiteral ast, Object o) {
-        nuevaLinea("<CharacterLiteral value='" + ast.spelling + "'>");
+        nuevaLinea("<CharacterLiteral value=" + ast.spelling + ">");
         nuevaLinea("</CharacterLiteral>");
         return(null);
     }
@@ -926,11 +926,10 @@ public class XMLcreator implements Visitor {
 
     @Override
     public Object visitOperator(Operator ast, Object o) {
-        nuevaLinea("<Operator>");
+        nuevaLinea("<Operator value= '" + ast.spelling + "'>");
         if(ast.decl != null){
             ast.decl.visit(this, null);
         }
-        nuevaLinea(""+ast.spelling+"");
         nuevaLinea("</Operator>");
         return(null);
     }
