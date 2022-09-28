@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<IfCommand>
+<BinaryExpression>
+<CharacterExpression>
+<CharacterLiteral>
+</CharacterLiteral>
+</CharacterExpression>
+<Operator>
+</Operator>
+<CharacterExpression>
+<CharacterLiteral>
+</CharacterLiteral>
+</CharacterExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '10'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '11'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</IfCommand>
+</Program>

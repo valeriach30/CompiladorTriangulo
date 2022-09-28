@@ -379,7 +379,7 @@ public class LayoutVisitor implements Visitor {
   }
   
   public Object visitSingleThen(SingleThen ast, Object obj) {
-    return layoutUnary("Sing.Then", ast.TC);
+    return layoutBinary("Sing.Then", ast.TC, ast.E);
   }
   
   public Object visitSingleCase(SingleCase ast, Object obj) {
@@ -397,7 +397,7 @@ public class LayoutVisitor implements Visitor {
     if(ast.TC2 == null)
         return layoutUnary("First.Multiple.Then", ast.TC);
     else
-        return layoutBinary("Multiple.Then", ast.TC, ast.TC2);
+        return layoutTernary("Multiple.Then", ast.TC, ast.TC2, ast.E);
   }
 
    public Object visitMultipleCase(MultipleCase ast, Object obj) {

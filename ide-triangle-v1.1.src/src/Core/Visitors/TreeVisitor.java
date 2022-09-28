@@ -379,7 +379,7 @@ public class TreeVisitor implements Visitor {
     
     //Autores: Kevin, Hillary, Gabriel
     public Object visitSingleThen(SingleThen ast, Object obj) {
-        return(createUnary("Single Then", ast.TC));
+        return(createBinary("Single Then", ast.TC, ast.E));
     }
     
     public Object visitSingleCase(SingleCase ast, Object obj) {
@@ -397,7 +397,7 @@ public class TreeVisitor implements Visitor {
         if(ast.TC2 == null)
             return(createUnary("Multiple Then", ast.TC));
         else
-            return(createBinary("Multiple Then", ast.TC, ast.TC2));
+            return(createTernary("Multiple Then", ast.TC, ast.TC2, ast.E));
     }
     
     public Object visitMultipleCase(MultipleCase ast, Object obj) {

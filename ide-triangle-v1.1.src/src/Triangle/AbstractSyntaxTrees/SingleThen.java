@@ -11,13 +11,15 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  * @author Kevin
  */
 public class SingleThen extends ThenCommand{
-    public SingleThen(ThenCommand cAST, SourcePosition thePosition) {
+    public SingleThen(ThenCommand cAST, Expression eAST, SourcePosition thePosition) {
         super (thePosition);
         TC = cAST;
+        E = eAST;
     }
     
     public Object visit(Visitor v, Object o) {
         return v.visitSingleThen(this, o);
     }
     public ThenCommand TC; //Case range command (single case range)
+    public Expression E;
 }

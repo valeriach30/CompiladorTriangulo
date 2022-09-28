@@ -559,6 +559,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
   
   public Object visitSingleThen(SingleThen ast, Object o) { 
       ast.TC.visit(this, null);
+      ast.E.visit(this, null);
       
       return(null);
   }
@@ -579,6 +580,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
   public Object visitMultipleThen(MultipleThen ast, Object o) { 
       ast.TC.visit(this, null);
       ast.TC2.visit(this, null);
+      ast.E.visit(this, null);
       
       return(null);
   }
