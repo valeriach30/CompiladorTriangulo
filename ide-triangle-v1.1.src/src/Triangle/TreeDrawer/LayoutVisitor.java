@@ -189,7 +189,7 @@ public class LayoutVisitor implements Visitor {
   }
 
   public Object visitIfCommand(IfCommand ast, Object obj) {
-    return layoutQuinary("IfCom.", ast.E, ast.C1, ast.C2, ast.ST, ast.MT);
+    return layoutSixary("IfCom.", ast.E, ast.C1, ast.C2, ast.ST, ast.MT, ast.E2);
   }
 
   public Object visitLetCommand(LetCommand ast, Object obj) {
@@ -553,6 +553,20 @@ public class LayoutVisitor implements Visitor {
     DrawingTree d4 = (DrawingTree) child4.visit(this, null);
     DrawingTree d5 = (DrawingTree) child5.visit(this, null);
     dt.setChildren(new DrawingTree[] {d1, d2, d3, d4, d5});
+    attachParent(dt, join(dt));
+    return dt;
+  }
+  
+  private DrawingTree layoutSixary (String name, AST child1, AST child2,
+                                        AST child3, AST child4, AST child5, AST child6) {
+    DrawingTree dt = layoutCaption(name);
+    DrawingTree d1 = (DrawingTree) child1.visit(this, null);
+    DrawingTree d2 = (DrawingTree) child2.visit(this, null);
+    DrawingTree d3 = (DrawingTree) child3.visit(this, null);
+    DrawingTree d4 = (DrawingTree) child4.visit(this, null);
+    DrawingTree d5 = (DrawingTree) child5.visit(this, null);
+    DrawingTree d6 = (DrawingTree) child6.visit(this, null);
+    dt.setChildren(new DrawingTree[] {d1, d2, d3, d4, d5, d6});
     attachParent(dt, join(dt));
     return dt;
   }

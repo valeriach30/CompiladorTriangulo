@@ -134,7 +134,7 @@ public class TreeVisitor implements Visitor {
     }
     
     public Object visitIfCommand(IfCommand ast, Object obj) {
-        return(createQuinary("If Command", ast.E, ast.C1, ast.C2, ast.ST, ast.MT));
+        return(createSixary("If Command", ast.E, ast.C1, ast.C2, ast.ST, ast.MT, ast.E2));
     }
     
     
@@ -573,6 +573,18 @@ public class TreeVisitor implements Visitor {
         t.add((DefaultMutableTreeNode)child3.visit(this, null));
         t.add((DefaultMutableTreeNode)child4.visit(this, null));
         t.add((DefaultMutableTreeNode)child5.visit(this, null));
+        
+        return(t);             
+    }
+    
+    public DefaultMutableTreeNode createSixary(String caption, AST child1, AST child2, AST child3, AST child4, AST child5, AST child6) {
+        DefaultMutableTreeNode t = new DefaultMutableTreeNode(caption);
+        t.add((DefaultMutableTreeNode)child1.visit(this, null));
+        t.add((DefaultMutableTreeNode)child2.visit(this, null));
+        t.add((DefaultMutableTreeNode)child3.visit(this, null));
+        t.add((DefaultMutableTreeNode)child4.visit(this, null));
+        t.add((DefaultMutableTreeNode)child5.visit(this, null));
+        t.add((DefaultMutableTreeNode)child6.visit(this, null));
         
         return(t);             
     }
