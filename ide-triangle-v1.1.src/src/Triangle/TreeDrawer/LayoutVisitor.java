@@ -189,7 +189,12 @@ public class LayoutVisitor implements Visitor {
   }
 
   public Object visitIfCommand(IfCommand ast, Object obj) {
-    return layoutSixary("IfCom.", ast.E, ast.C1, ast.C2, ast.ST, ast.MT, ast.E2);
+    if(ast.ST == null){
+            return layoutQuaternary("If Command", ast.E, ast.C1, ast.C2, ast.MT);
+    }
+    else{
+        return layoutQuaternary("If Command", ast.E, ast.C1, ast.C2, ast.ST);
+    }
   }
 
   public Object visitLetCommand(LetCommand ast, Object obj) {

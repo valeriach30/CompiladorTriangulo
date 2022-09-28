@@ -556,51 +556,39 @@ public class Parser {
 //            "else" Command "end"
       acceptIt(); //Se acepta el if
       Expression eAST = parseExpression(); //Se acepta el expression.
+      Expression eAST2 = null;
       accept(Token.THEN);
       Command cAST = parseCommand();
+      ThenCommand thenCommand = parseThenCommand(commandPos); 
       if(currentToken.kind == Token.BAR){
-          ThenCommand thenCommand = parseThenCommand(commandPos); 
           MultipleThen multipleThen = new MultipleThen(thenCommand, commandPos);
-          Expression eAST2 = null;
-          int contador = 0;
           while(currentToken.kind == Token.BAR){
-              contador ++;
               acceptIt();
               eAST2 = parseExpression();
               ThenCommand thenCommand2 = parseThenCommand(commandPos);
               finish(commandPos);
-              multipleThen = new MultipleThen(multipleThen, thenCommand2,
-                      commandPos);    
+              multipleThen = new MultipleThen(multipleThen, thenCommand2, eAST2,
+              commandPos);    
           }
-          if(contador == 1){
-              finish(commandPos);
-              SingleThen singleThen = new SingleThen(thenCommand,
-                      commandPos);
+          accept(Token.ELSE);
+          Command cAST2 = parseCaseCommand();
+          accept(Token.END);
+          commandAST = new IfCommand(eAST, cAST, cAST2,
+                     multipleThen, commandPos);
+      }
+      else if(currentToken.kind == Token.ELSE){
+              //finish(commandPos);
+              acceptIt();
+              eAST2 = parseExpression();
+              SingleThen singleThen = new SingleThen(thenCommand, eAST2, commandPos);
               accept(Token.ELSE);
               Command cAST2 = parseCaseCommand();
               accept(Token.END);
-              commandAST = new IfCommand(eAST, cAST, cAST2, eAST2,
-                      singleThen, commandPos);
-
-          }
-          else{
-             accept(Token.ELSE);
-             Command cAST2 = parseCaseCommand();
-             accept(Token.END);
-             commandAST = new IfCommand(eAST, cAST, cAST2, eAST2,
-                     multipleThen, commandPos);
-          }
+              commandAST = new IfCommand(eAST, cAST, cAST2, singleThen, commandPos);
       }
-      else if(currentToken.kind == Token.ELSE){
-          acceptIt();
-          Command cAST2 = parseCommand();
-          accept(Token.END);
-          finish(commandPos);
-          commandAST = new IfCommand(eAST, cAST, cAST2, commandPos);
-      }
-      else{
-          syntacticError("\"%\" cannot follow a declaration.",
-                         currentToken.spelling);
+      else if((currentToken.kind != Token.ELSE) && (currentToken.kind != Token.BAR)){
+          syntacticError("BAR or ELSE expected.",
+          currentToken.spelling);
       } 
       break;
     }

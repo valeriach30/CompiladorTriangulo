@@ -161,7 +161,6 @@ public class TableVisitor implements Visitor {
   
   public Object visitIfCommand(IfCommand ast, Object o) { 
       ast.E.visit(this, null);
-      ast.E2.visit(this, null);
       ast.C1.visit(this, null);
       ast.C2.visit(this, null);
       ast.ST.visit(this, null);
