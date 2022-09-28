@@ -73,6 +73,7 @@ import Triangle.AbstractSyntaxTrees.MultipleCaseRange;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.MultipleThen;
 import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
@@ -94,7 +95,9 @@ import Triangle.AbstractSyntaxTrees.SingleCase;
 import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
+import Triangle.AbstractSyntaxTrees.SingleThen;
 import Triangle.AbstractSyntaxTrees.SubscriptVname;
+import Triangle.AbstractSyntaxTrees.ThenCommand;
 import Triangle.AbstractSyntaxTrees.TypeDeclaration;
 import Triangle.AbstractSyntaxTrees.TypeDenoter;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
@@ -412,6 +415,14 @@ public class Parser {
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+  ThenCommand parseThenCommand(SourcePosition commandPos) throws SyntaxError {
+    start(commandPos);
+    ThenCommand commandAST = null;
+    Command eAST = parseCommand();
+    finish(commandPos);
+    commandAST = new ThenCommand(eAST, commandPos);
+    return commandAST;
+  }
 // parseCommand parses the command, and constructs an AST
 // to represent its phrase structure.
 
@@ -543,22 +554,53 @@ public class Parser {
     
     // ---------------------------------- IF -----------------------------------
     case Token.IF: {
+        //"if" Expression "then" Command ("|" Expression "then" Command)*
+//            "else" Command "end"
       acceptIt(); //Se acepta el if
       Expression eAST = parseExpression(); //Se acepta el expression.
       accept(Token.THEN);
       Command cAST = parseCommand();
       if(currentToken.kind == Token.BAR){
+          ThenCommand thenCommand = parseThenCommand(commandPos); 
+          MultipleThen multipleThen = new MultipleThen(thenCommand, commandPos);
+          Expression eAST2 = null;
+          int contador = 0;
           while(currentToken.kind == Token.BAR){
+              contador ++;
               acceptIt();
-              Expression eAST2 = parseExpression();
-              accept(Token.THEN);
-              Command cAST2 = parseCommand();
+              eAST2 = parseExpression();
+              ThenCommand thenCommand2 = parseThenCommand(commandPos);
               finish(commandPos);
-              //"else" Command "end" -> falta
-//              declarationAST = new SequentialDeclaration(declarationAST,
-//                               dAST2, position);
+              multipleThen = new MultipleThen(multipleThen, thenCommand2,
+                      commandPos);    
           }
-      }else{
+          if(contador == 1){
+              finish(commandPos);
+              SingleThen singleThen = new SingleThen(thenCommand,
+                      commandPos);
+              accept(Token.ELSE);
+              Command cAST2 = parseCaseCommand();
+              accept(Token.END);
+              commandAST = new IfCommand(eAST, cAST, cAST2, eAST2,
+                      singleThen, commandPos);
+
+          }
+          else{
+             accept(Token.ELSE);
+             Command cAST2 = parseCaseCommand();
+             accept(Token.END);
+             commandAST = new IfCommand(eAST, cAST, cAST2, eAST2,
+                     multipleThen, commandPos);
+          }
+      }
+      else if(currentToken.kind == Token.ELSE){
+          acceptIt();
+          Command cAST2 = parseCommand();
+          accept(Token.END);
+          finish(commandPos);
+          commandAST = new IfCommand(eAST, cAST, cAST2, commandPos);
+      }
+      else{
           syntacticError("\"%\" cannot follow a declaration.",
                          currentToken.spelling);
       } 
