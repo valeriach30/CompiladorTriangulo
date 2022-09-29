@@ -1,4 +1,0 @@
-loop 
-  do x:= x + 1 
-  while x < 10 ! comentario de prueba para html
-end

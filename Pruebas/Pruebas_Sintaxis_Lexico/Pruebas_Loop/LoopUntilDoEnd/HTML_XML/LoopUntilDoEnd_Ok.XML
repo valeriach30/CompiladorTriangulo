@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LoopCommand>
+<Identifier value='x'>
+</Identifier>
+<UntilCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&lt;'>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '10'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+<DoCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '+'>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</AssignCommand>
+</DoCommand>
+</UntilCommand>
+</LoopCommand>
+</Program>

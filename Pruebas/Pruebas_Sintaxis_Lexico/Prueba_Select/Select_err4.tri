@@ -1,0 +1,5 @@
+select
+  x
+from
+  when 'c' to 'd' then x := x+1
+  else x := x-1

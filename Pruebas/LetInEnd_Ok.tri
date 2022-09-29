@@ -1,6 +1,0 @@
-let
-   var x: Char;
-   var y: Integer
-in
-   x := 5
-end

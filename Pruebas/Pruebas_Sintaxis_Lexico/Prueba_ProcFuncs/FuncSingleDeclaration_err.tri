@@ -1,0 +1,7 @@
+! error en func, 1 no es type denoter
+
+let
+   func z() : 1 ~ 2 
+in
+   x()
+end

@@ -925,7 +925,12 @@ public class XMLcreator implements Visitor {
 
     @Override
     public Object visitOperator(Operator ast, Object o) {
-        nuevaLinea("<Operator value= '" + ast.spelling + "'>");
+        if("<".equals(ast.spelling))
+            nuevaLinea("<Operator value='&lt;'>");
+        else if(">".equals(ast.spelling))
+            nuevaLinea("<Operator value='&gt;'>");
+        else
+            nuevaLinea("<Operator value= '" + ast.spelling + "'>");
         if(ast.decl != null){
             ast.decl.visit(this, null);
         }

@@ -1,7 +1,0 @@
-! Let command error test
-
-let
-   var x: Char;
-   var y: Integer
-in
-   x := 5

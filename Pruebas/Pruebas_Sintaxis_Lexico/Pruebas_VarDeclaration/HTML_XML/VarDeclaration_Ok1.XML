@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<VarDeclarationInit>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&lt;'>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+<Identifier value='a'>
+</Identifier>
+</VarDeclarationInit>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</Program>

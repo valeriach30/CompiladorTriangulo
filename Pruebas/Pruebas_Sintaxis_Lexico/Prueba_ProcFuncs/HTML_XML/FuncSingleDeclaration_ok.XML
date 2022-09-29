@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<FuncDeclaration>
+<SimpleTypeDenoter>
+<Identifier value='z'>
+</Identifier>
+</SimpleTypeDenoter>
+<EmptyFormalParameterSequence>
+</EmptyFormalParameterSequence>
+<IntegerExpression>
+<IntegerLiteral value= '2'>
+</IntegerLiteral>
+</IntegerExpression>
+</FuncDeclaration>
+<CallCommand>
+<Identifier value='x'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</Program>
