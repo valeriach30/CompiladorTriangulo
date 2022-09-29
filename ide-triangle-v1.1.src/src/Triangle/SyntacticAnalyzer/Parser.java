@@ -557,7 +557,7 @@ public class Parser {
         Expression eAST = parseExpression(); //Se acepta el expression.
         accept(Token.THEN);
         Command c1AST = parseCommand();
-        Command c2AST = parseBarThen(); // Este m�todo me da el arbol de los elifs o del else
+        Command c2AST = parseBarThen(); 
         finish(commandPos);
         commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
       }
@@ -1726,7 +1726,7 @@ public class Parser {
         commandAST = cAST;
       }
         break;
-      case Token.BAR: {  //Elifs("|")
+      case Token.BAR: {
         acceptIt();
         Expression eAST = parseExpression();
         accept(Token.THEN);
