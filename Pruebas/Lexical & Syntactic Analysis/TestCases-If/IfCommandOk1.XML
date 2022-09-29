@@ -3,13 +3,63 @@
 <IfCommand>
 <BinaryExpression>
 <CharacterExpression>
-<CharacterLiteral>
+<CharacterLiteral value='a'>
 </CharacterLiteral>
 </CharacterExpression>
-<Operator>
+<Operator value= '='>
 </Operator>
 <CharacterExpression>
-<CharacterLiteral>
+<CharacterLiteral value='a'>
+</CharacterLiteral>
+</CharacterExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '10'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<IfCommand>
+<BinaryExpression>
+<CharacterExpression>
+<CharacterLiteral value='a'>
+</CharacterLiteral>
+</CharacterExpression>
+<Operator value= '='>
+</Operator>
+<CharacterExpression>
+<CharacterLiteral value='a'>
+</CharacterLiteral>
+</CharacterExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '10'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<IfCommand>
+<BinaryExpression>
+<CharacterExpression>
+<CharacterLiteral value='a'>
+</CharacterLiteral>
+</CharacterExpression>
+<Operator value= '='>
+</Operator>
+<CharacterExpression>
+<CharacterLiteral value='a'>
 </CharacterLiteral>
 </CharacterExpression>
 </BinaryExpression>
@@ -37,5 +87,7 @@
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
+</IfCommand>
+</IfCommand>
 </IfCommand>
 </Program>

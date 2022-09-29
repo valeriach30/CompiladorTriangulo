@@ -24,29 +24,29 @@ public class IfCommand extends Command {
     E = eAST;
     C1 = c1AST;
     C2 = c2AST;
-    ST = null;
-    MT = null;
+//    ST = null;
+//    MT = null;
   }
   
-  public IfCommand (Expression eAST, Command c1AST, Command c2AST, SingleThen c3AST,
-                    SourcePosition thePosition) {
-    super (thePosition);
-    E = eAST;
-    C1 = c1AST;
-    C2 = c2AST;
-    ST = c3AST;
-    MT = null;
-  }
-  
-  public IfCommand (Expression eAST, Command c1AST, Command c2AST, MultipleThen c3AST,
-                    SourcePosition thePosition) {
-    super (thePosition);
-    E = eAST;
-    C1 = c1AST;
-    C2 = c2AST;
-    ST = null;
-    MT = c3AST;
-  }
+//  public IfCommand (Expression eAST, Command c1AST, Command c2AST, SingleThen c3AST,
+//                    SourcePosition thePosition) {
+//    super (thePosition);
+//    E = eAST;
+//    C1 = c1AST;
+//    C2 = c2AST;
+//    ST = c3AST;
+//    MT = null;
+//  }
+//  
+//  public IfCommand (Expression eAST, Command c1AST, Command c2AST, MultipleThen c3AST,
+//                    SourcePosition thePosition) {
+//    super (thePosition);
+//    E = eAST;
+//    C1 = c1AST;
+//    C2 = c2AST;
+//    ST = null;
+//    MT = c3AST;
+//  }
 
   public Object visit(Visitor v, Object o) {
     return v.visitIfCommand(this, o);
@@ -54,7 +54,7 @@ public class IfCommand extends Command {
 
   public Expression E;
   public Command C1, C2;
-  public SingleThen ST;
-  public MultipleThen MT;
+//  public SingleThen ST;
+//  public MultipleThen MT;
   
 }

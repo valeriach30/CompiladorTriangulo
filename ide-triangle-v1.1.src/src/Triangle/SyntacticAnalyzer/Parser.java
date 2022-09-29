@@ -442,7 +442,7 @@ public class Parser {
     }
     return commandAST;
   }
-
+  
   Command parseSingleCommand() throws SyntaxError {
     Command commandAST = null; // in case there's a syntactic error
 
@@ -553,48 +553,15 @@ public class Parser {
     
     // ---------------------------------- IF -----------------------------------
     case Token.IF: {
-        //"if" Expression "then" Command ("|" Expression "then" Command)*
-//            "else" Command "end"
-      acceptIt(); //Se acepta el if
-      Expression eAST = parseExpression(); //Se acepta el expression.
-      Expression eAST2 = null;
-      accept(Token.THEN);
-      Command cAST = parseCommand();
-      ThenCommand thenCommand = parseThenCommand(commandPos); 
-      if(currentToken.kind == Token.BAR){
-          MultipleThen multipleThen = new MultipleThen(thenCommand, commandPos);
-          while(currentToken.kind == Token.BAR){
-              acceptIt();
-              eAST2 = parseExpression();
-              ThenCommand thenCommand2 = parseThenCommand(commandPos);
-              finish(commandPos);
-              multipleThen = new MultipleThen(multipleThen, thenCommand2, eAST2,
-              commandPos);    
-          }
-          accept(Token.ELSE);
-          Command cAST2 = parseCaseCommand();
-          accept(Token.END);
-          finish(commandPos);
-          commandAST = new IfCommand(eAST, cAST, cAST2,
-                     multipleThen, commandPos);
+        acceptIt(); //Se acepta el if
+        Expression eAST = parseExpression(); //Se acepta el expression.
+        accept(Token.THEN);
+        Command c1AST = parseCommand();
+        Command c2AST = parseBarThen(); // Este m�todo me da el arbol de los elifs o del else
+        finish(commandPos);
+        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
       }
-      else if(currentToken.kind == Token.ELSE){
-              //finish(commandPos);
-              acceptIt();
-              eAST2 = parseExpression();
-              SingleThen singleThen = new SingleThen(thenCommand, eAST2, commandPos);
-              accept(Token.ELSE);
-              Command cAST2 = parseCaseCommand();
-              accept(Token.END);
-              finish(commandPos);
-              commandAST = new IfCommand(eAST, cAST, cAST2, singleThen, commandPos);
-      }
-      else if((currentToken.kind != Token.ELSE) && (currentToken.kind != Token.BAR)){
-          syntacticError("BAR or ELSE expected.",
-          currentToken.spelling);
-      } 
       break;
-    }
     
     // -------------------------------- LOOP -----------------------------------
     // Autor : Valeria Chinchilla
@@ -1744,4 +1711,36 @@ public class Parser {
         commandAST = new ForInCommand(iAST2, eAST, commandPos);
         return commandAST;
     }
+
+  Command parseBarThen() throws SyntaxError {
+
+    Command commandAST = null; 
+    SourcePosition commandPos = new SourcePosition();
+    start(commandPos);
+
+    switch (currentToken.kind) {
+      case Token.ELSE: {
+        acceptIt();
+        Command cAST = parseCommand();
+        accept(Token.END);
+        commandAST = cAST;
+      }
+        break;
+      case Token.BAR: {  //Elifs("|")
+        acceptIt();
+        Expression eAST = parseExpression();
+        accept(Token.THEN);
+        Command cAST = parseCommand();
+        Command c2AST = parseBarThen();
+        finish(commandPos);
+        commandAST = new IfCommand(eAST, cAST, c2AST, commandPos); 
+      }
+        break;
+
+    default:
+        syntacticError("\"%\" cannot start a command", currentToken.spelling);
+        break;
+    }
+    return commandAST;
+  }
 }

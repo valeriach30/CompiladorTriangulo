@@ -134,12 +134,13 @@ public class TreeVisitor implements Visitor {
     }
     
     public Object visitIfCommand(IfCommand ast, Object obj) {
-        if(ast.ST == null){
-            return(createQuaternary("If Command", ast.E, ast.C1, ast.C2, ast.MT));
-        }
-        else{
-            return(createQuaternary("If Command", ast.E, ast.C1, ast.C2, ast.ST));
-        }
+//        if(ast.ST == null){
+//            return(createQuaternary("If Command", ast.E, ast.C1, ast.C2, ast.MT));
+//        }
+//        else{
+//            return(createQuaternary("If Command", ast.E, ast.C1, ast.C2, ast.ST));
+//        }
+        return(createTernary("If command", ast.E, ast.C1, ast.C2));
     }
     
     
