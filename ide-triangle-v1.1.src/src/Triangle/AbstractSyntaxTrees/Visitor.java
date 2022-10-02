@@ -147,4 +147,6 @@ public interface Visitor {
 
     public Object visitMultipleThen(MultipleThen aThis, Object o);
 
+    public Object visitLeaveIdentifier(LeaveIdentifier aThis, Object o);
+
 }
