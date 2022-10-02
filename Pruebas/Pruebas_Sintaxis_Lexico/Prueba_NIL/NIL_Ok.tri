@@ -1,1 +1,6 @@
-nil
+let
+   var x: Char;
+   var y: Integer
+in
+   nil
+end

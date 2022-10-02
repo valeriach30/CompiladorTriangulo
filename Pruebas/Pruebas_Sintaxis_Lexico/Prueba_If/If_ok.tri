@@ -1,0 +1,8 @@
+!Prueba correcta comando if
+
+if ('a' = 'a') then putint(10)
+  | ('b' = 'b') then putint(8)
+  | ('c' = 'c') then putint(9)
+else
+  putint(11)
+end

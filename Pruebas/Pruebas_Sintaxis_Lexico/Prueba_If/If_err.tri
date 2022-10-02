@@ -1,0 +1,8 @@
+!Prueba incorrecta comando if
+
+if ('a' = 'a') then putint(10)
+  | ('b' = 'b') then putint(8)
+  | ('c' = 'c') then putint(9)
+in
+  putint(11)
+end

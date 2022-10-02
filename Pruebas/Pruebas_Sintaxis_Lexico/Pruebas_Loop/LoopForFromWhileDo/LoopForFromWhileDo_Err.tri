@@ -1,3 +1,4 @@
+!falta el do
 loop x 
 for x from 1 to 10 
 while x < 10 

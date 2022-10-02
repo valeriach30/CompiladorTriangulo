@@ -328,7 +328,7 @@ public class Parser {
         }
       else{
           c1AST = null;
-          syntacticError("when expected here", "");
+          syntacticError("A Case expected here", "");
       }
       return c1AST;
   }
@@ -462,10 +462,16 @@ public class Parser {
         } else {
 
           Vname vAST = parseRestOfVname(iAST);
-          accept(Token.BECOMES);
-          Expression eAST = parseExpression();
-          finish(commandPos);
-          commandAST = new AssignCommand(vAST, eAST, commandPos);
+          if(currentToken.kind == Token.BECOMES){
+            acceptIt();
+            Expression eAST = parseExpression();
+            finish(commandPos);
+            commandAST = new AssignCommand(vAST, eAST, commandPos);
+          }
+          else{
+              syntacticError(":= expected after a variable name", "");
+          }
+          
         }   
       }
       break;
@@ -513,7 +519,7 @@ public class Parser {
         acceptIt();
         Declaration dAST = parseDeclaration();
         accept(Token.IN);
-        Command cAST = parseSingleCommand();
+        Command cAST = parseCommand();
         accept(Token.END);
         finish(commandPos);
         commandAST = new LetCommand(dAST, cAST, commandPos);
@@ -1067,7 +1073,7 @@ public class Parser {
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
     declarationAST = parseCompoundDeclaration();
-    while (currentToken.kind == Token.SEMICOLON) {
+    while (currentToken.kind == Token.SEMICOLON) {  
       acceptIt();
       Declaration d2AST = parseCompoundDeclaration();
       finish(declarationPos);
@@ -1168,8 +1174,7 @@ public class Parser {
                                dAST2, position);
           }
       }else{
-          syntacticError("\"%\" cannot follow a declaration.",
-                         currentToken.spelling);
+          syntacticError("| expected here.","");
       }
       return declarationAST;
   }
@@ -1738,7 +1743,7 @@ public class Parser {
         break;
 
     default:
-        syntacticError("\"%\" cannot start a command", currentToken.spelling);
+        syntacticError("| or else expected here", "");
         break;
     }
     return commandAST;

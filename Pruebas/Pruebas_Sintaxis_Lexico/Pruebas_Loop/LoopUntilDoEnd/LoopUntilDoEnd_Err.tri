@@ -1,4 +1,7 @@
-! Programa con error, falta el end
+! Programa con error
+! se cambia el until 
+! por un in
 loop x 
-until x < 10 
-do x:= x + 1 
+ in x < 10 
+ do x:= x + 1 
+end

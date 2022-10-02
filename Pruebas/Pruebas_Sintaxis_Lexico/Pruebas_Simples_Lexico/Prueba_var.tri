@@ -1,0 +1,6 @@
+let
+  var !Espera identificador
+  init
+in
+  putint(a)
+end

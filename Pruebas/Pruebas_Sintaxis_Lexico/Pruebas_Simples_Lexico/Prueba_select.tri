@@ -1,0 +1,6 @@
+select
+  x
+from
+  !Aca deberia
+  !haber un case
+end

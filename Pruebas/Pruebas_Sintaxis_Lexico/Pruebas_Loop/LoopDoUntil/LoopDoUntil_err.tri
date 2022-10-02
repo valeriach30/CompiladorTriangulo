@@ -1,3 +1,5 @@
+!Error, 1 no es
+!un comando
 loop
 do 1 
 until x < 10

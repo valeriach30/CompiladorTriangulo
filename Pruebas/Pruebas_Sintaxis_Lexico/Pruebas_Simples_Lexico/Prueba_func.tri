@@ -1,0 +1,6 @@
+let
+   func
+   !Espera un identificador 
+in
+   x()
+end

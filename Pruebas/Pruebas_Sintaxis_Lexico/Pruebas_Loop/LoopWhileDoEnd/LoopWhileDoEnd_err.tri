@@ -1,2 +1,5 @@
-!Archivo con error, falta el end
-loop while x < 10 do x:= x + 1 
+!Archivo con error
+!Falta el end
+loop 
+  while x < 10 
+  do x:= x + 1 

@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Program>
+<LetCommand>
+<SequentialDeclaration>
+<VarDeclaration>
+<SimpleTypeDenoter>
+<Identifier value='Char'>
+</Identifier>
+</SimpleTypeDenoter>
+</VarDeclaration>
+<VarDeclaration>
+<SimpleTypeDenoter>
+<Identifier value='Integer'>
+</Identifier>
+</SimpleTypeDenoter>
+</VarDeclaration>
+</SequentialDeclaration>
 <EmptyCommand>
 </EmptyCommand>
+</LetCommand>
 </Program>

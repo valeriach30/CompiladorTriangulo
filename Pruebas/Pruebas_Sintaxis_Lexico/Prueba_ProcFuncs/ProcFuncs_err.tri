@@ -1,4 +1,5 @@
 ! Prueba de error de Proc-Funcs
+! falta el end del proc
 let
   rec
    func x() : x ~ 1 |

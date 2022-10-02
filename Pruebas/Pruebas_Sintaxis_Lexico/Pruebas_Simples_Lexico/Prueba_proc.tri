@@ -1,0 +1,6 @@
+let
+   proc !Espera un identificador  
+   end
+in
+  x()
+end

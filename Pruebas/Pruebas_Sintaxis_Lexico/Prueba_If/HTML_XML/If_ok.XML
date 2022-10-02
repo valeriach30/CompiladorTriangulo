@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<IfCommand>
+<BinaryExpression>
+<CharacterExpression>
+<CharacterLiteral value='a'>
+</CharacterLiteral>
+</CharacterExpression>
+<Operator value= '='>
+</Operator>
+<CharacterExpression>
+<CharacterLiteral value='a'>
+</CharacterLiteral>
+</CharacterExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '10'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<IfCommand>
+<BinaryExpression>
+<CharacterExpression>
+<CharacterLiteral value='b'>
+</CharacterLiteral>
+</CharacterExpression>
+<Operator value= '='>
+</Operator>
+<CharacterExpression>
+<CharacterLiteral value='b'>
+</CharacterLiteral>
+</CharacterExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '8'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<IfCommand>
+<BinaryExpression>
+<CharacterExpression>
+<CharacterLiteral value='c'>
+</CharacterLiteral>
+</CharacterExpression>
+<Operator value= '='>
+</Operator>
+<CharacterExpression>
+<CharacterLiteral value='c'>
+</CharacterLiteral>
+</CharacterExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '9'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '11'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</IfCommand>
+</IfCommand>
+</IfCommand>
+</Program>

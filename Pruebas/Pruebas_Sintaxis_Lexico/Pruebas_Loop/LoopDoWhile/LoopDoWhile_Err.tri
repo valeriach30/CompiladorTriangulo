@@ -1,4 +1,6 @@
-! Programa con error, falta el end
+! Programa con error
+! se cambio el orden del
+! comando y la expresion
 loop x 
-do x:= x + 1 
-while x < 10
+do x < 10 
+while x:= x + 1 
