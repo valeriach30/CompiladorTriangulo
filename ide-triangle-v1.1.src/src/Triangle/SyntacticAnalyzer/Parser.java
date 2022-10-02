@@ -1644,11 +1644,9 @@ public class Parser {
         start(commandPos);
         DoCommand commandAST = null;
         Command cAST = parseCommand();
-        if(currentToken.kind == Token.END){
-            acceptIt();
-            finish(commandPos);
-            commandAST = new DoCommand(cAST, commandPos);
-        }
+        accept(Token.END);
+        finish(commandPos);
+        commandAST = new DoCommand(cAST, commandPos);
         return commandAST;
     }
 
