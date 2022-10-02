@@ -845,7 +845,7 @@ public class Parser {
         acceptIt();
         // Crear AST
         commandAST = new ReturnCommand(commandPos);
-;        break;
+        break;
     } 
     default:
       syntacticError("\"%\" cannot start a command",
