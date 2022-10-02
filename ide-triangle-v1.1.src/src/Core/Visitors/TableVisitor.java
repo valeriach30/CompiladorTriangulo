@@ -46,6 +46,7 @@ import Triangle.AbstractSyntaxTrees.IfExpression;
 import Triangle.AbstractSyntaxTrees.IntTypeDenoter;
 import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
+import Triangle.AbstractSyntaxTrees.LeaveIdentifier;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LocalDeclaration;
@@ -63,6 +64,7 @@ import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleThen;
+import Triangle.AbstractSyntaxTrees.NextIdentifier;
 import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
@@ -70,6 +72,7 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ReturnCommand;
 import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
@@ -893,5 +896,26 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
         aThis.I.visit(this, null);
       
         return(null);
+    }
+
+    @Override
+    public Object visitLeaveIdentifier(LeaveIdentifier aThis, Object o) {
+        if(aThis.I != null){
+            aThis.I.visit(this, null);
+        }
+        return (null);
+    }
+
+    @Override
+    public Object visitNextIdentifier(NextIdentifier aThis, Object o) {
+        if(aThis.I != null){
+            aThis.I.visit(this, null);
+        }
+        return (null);        
+    }
+
+    @Override
+    public Object visitReturnCommand(ReturnCommand aThis, Object o) {
+        return (null);
     }
 }

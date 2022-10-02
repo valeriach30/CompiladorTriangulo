@@ -57,6 +57,7 @@ import Triangle.AbstractSyntaxTrees.IfCommand;
 import Triangle.AbstractSyntaxTrees.IfExpression;
 import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
+import Triangle.AbstractSyntaxTrees.LeaveIdentifier;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
 import Triangle.AbstractSyntaxTrees.LocalDeclaration;
@@ -74,6 +75,7 @@ import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleThen;
+import Triangle.AbstractSyntaxTrees.NextIdentifier;
 import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
@@ -82,6 +84,7 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ReturnCommand;
 import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
@@ -822,7 +825,28 @@ public class Parser {
       commandAST = new EmptyCommand(commandPos);
       break;
     */
-      
+    case Token.LEAVE: {
+        acceptIt();
+        // Agarrar el identificador 
+        Identifier iAST = parseIdentifierOptional();
+        // Crear AST
+        commandAST = new LeaveIdentifier(iAST, commandPos);
+        break;
+    }  
+    case Token.NEXT: {
+        acceptIt();
+        // Agarrar el identificador 
+        Identifier iAST = parseIdentifierOptional();
+        // Crear AST
+        commandAST = new NextIdentifier(iAST, commandPos);
+        break;
+    } 
+    case Token.RETURN: {
+        acceptIt();
+        // Crear AST
+        commandAST = new ReturnCommand(commandPos);
+;        break;
+    } 
     default:
       syntacticError("\"%\" cannot start a command",
         currentToken.spelling);
