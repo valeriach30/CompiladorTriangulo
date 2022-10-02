@@ -1117,17 +1117,31 @@ public class XMLcreator implements Visitor {
 
     @Override
     public Object visitThenCommandAST(ThenCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<ThenCommand>");
+        if(aThis.C != null){
+            aThis.C.visit(this, null);
+        }
+        nuevaLinea("</ThenCommand>");
+        return (null);
     }
 
     @Override
     public Object visitSingleThen(SingleThen aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<SingleThen>");
+        aThis.E.visit(this, null);
+        aThis.TC.visit(this, null);
+        nuevaLinea("</SingleThen>");
+        return (null);
     }
 
     @Override
     public Object visitMultipleThen(MultipleThen aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        nuevaLinea("<MultipleThen>");
+        aThis.TC.visit(this, null);
+        aThis.TC2.visit(this, null);
+        aThis.E.visit(this, null);
+        nuevaLinea("</MultipleThen>");
+        return (null);
     }
 
     @Override
