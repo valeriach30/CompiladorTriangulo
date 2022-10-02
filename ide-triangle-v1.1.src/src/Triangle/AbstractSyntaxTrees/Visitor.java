@@ -149,4 +149,8 @@ public interface Visitor {
 
     public Object visitLeaveIdentifier(LeaveIdentifier aThis, Object o);
 
+    public Object visitNextIdentifier(NextIdentifier aThis, Object o);
+
+    public Object visitReturnCommand(ReturnCommand aThis, Object o);
+
 }
