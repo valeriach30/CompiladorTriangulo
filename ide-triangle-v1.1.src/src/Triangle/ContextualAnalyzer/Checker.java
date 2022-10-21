@@ -171,8 +171,10 @@ public Object visitSingleCaseRange(SingleCaseRange ast, Object obj){
     return null;
 }
 
+//Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+//Se verifica que la expresion que acompaña al then sea de tipo booleano.
 public Object visitSingleThen(SingleThen ast, Object obj){
-    return null;
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 }
 
 public Object visitSequentialCases(SequentialCases ast, Object obj){
@@ -188,7 +190,7 @@ public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj){
 }
 
 public Object visitMultipleThen(MultipleThen ast, Object obj){
-    return null;
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 }
 
 public Object visitMultipleCase(MultipleCase ast, Object obj){
@@ -1197,9 +1199,12 @@ public Object visitMultipleCase(MultipleCase ast, Object obj){
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+  //Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
+    //then Comi de if Exp then Com1 ( | Expi then Comi )* else Com2 end
     @Override
     public Object visitThenCommandAST(ThenCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        aThis.C.visit(this, null);
+        return null;
     }
 
     @Override
