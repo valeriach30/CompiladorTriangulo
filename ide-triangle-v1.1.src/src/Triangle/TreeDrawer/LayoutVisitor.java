@@ -730,10 +730,10 @@ public class LayoutVisitor implements Visitor {
     @Override
     public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
         if(aThis.I == null){
-            return(layoutTernary("Loop Command", aThis.ForFrom, aThis.E, aThis.Do));
+            return(layoutTernary("Loop Command", aThis.ForFrom, aThis.TC, aThis.Do));
         }
         else{
-            return(layoutQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.Do));
+            return(layoutQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.TC, aThis.Do));
         }
     }
 

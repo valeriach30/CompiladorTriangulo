@@ -10,7 +10,7 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  *
  * @author Valeria Chinchilla
  */
-public class ForFromCommand extends Command{
+public class ForFromCommand extends Declaration{
   public ForFromCommand (Identifier iAST, Expression eAST, SourcePosition thePosition) {
     super (thePosition);
     I = iAST;

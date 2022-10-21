@@ -262,7 +262,7 @@ public class XMLcreator implements Visitor {
         if(aThis.I != null){
             aThis.I.visit(this, null);
         }
-        aThis.E.visit(this, null);
+        aThis.TC.visit(this, null);
         aThis.ForFrom.visit(this, null);
         aThis.Do.visit(this, null);
         

@@ -633,10 +633,10 @@ public class TreeVisitor implements Visitor {
     @Override
     public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
         if(aThis.I == null){
-            return(createTernary("Loop Command", aThis.ForFrom, aThis.E, aThis.Do));
+            return(createTernary("Loop Command", aThis.ForFrom, aThis.TC, aThis.Do));
         }
         else{
-            return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.E, aThis.Do));
+            return(createQuaternary("Loop Command",aThis.I, aThis.ForFrom, aThis.TC, aThis.Do));
         }
     }
 

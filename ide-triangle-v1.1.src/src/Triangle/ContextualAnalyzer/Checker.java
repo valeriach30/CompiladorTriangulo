@@ -1057,17 +1057,33 @@ public Object visitMultipleCase(MultipleCase ast, Object obj){
 
     @Override
     public Object visitForFromCommand(ForFromCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        TypeDenoter eType = (TypeDenoter) aThis.E.visit(this, null);
+        if(!eType.equals(StdEnvironment.integerType))
+          reporter.reportError("Integer Expression expected here", "", aThis.E.position);
+
+        idTable.enter(aThis.I.spelling, aThis);
+        if(aThis.duplicated)
+          reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
+        return null;
     }
 
     @Override
     public Object visitDoCommandAST(DoCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        aThis.C.visit(this, null);
+        return null;
     }
 
+    //Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
+    //loop for Id from Exp1 to Exp2 do Com end
     @Override
     public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        idTable.openScope(); //Se inicia el scope.
+        aThis.ForFrom.visit(this, null); 
+        aThis.Do.visit(this, null); // Do command
+        idTable.closeScope(); //Se cierra el scope.
+        aThis.TC.visit(this, null); // To command
+        return null;
+
     }
 
     @Override
@@ -1087,7 +1103,7 @@ public Object visitMultipleCase(MultipleCase ast, Object obj){
         aThis.C.visit(this, null);
         return null;
     }
-
+    //Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
     // while Exp end
     @Override
     public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) {
@@ -1098,6 +1114,7 @@ public Object visitMultipleCase(MultipleCase ast, Object obj){
         return null;
     }
 
+    //Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
     //Loop do Com while Exp end
     @Override
     public Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
@@ -1121,15 +1138,28 @@ public Object visitMultipleCase(MultipleCase ast, Object obj){
         aThis.UntilEnd.visit(this, null);
         return null;
     }
-
+    //Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
+    //loop for Id from Exp1 to Exp2 while Exp3 do Com end
     @Override
     public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        idTable.openScope(); //Se inicia el scope.
+        aThis.ForFrom.visit(this, null); // from exp
+        aThis.whileV.visit(this, null); // while exp do command
+        idTable.closeScope(); //Se cierra el scope.
+        aThis.E.visit(this, null); // To exp
+        return null;
     }
 
+    //Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
+    //loop for Id from Exp1 to Exp2 until Exp3 do Com end
     @Override
     public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        idTable.openScope(); //Se inicia el scope.
+        aThis.ForFrom.visit(this, null); // from exp
+        aThis.untilV.visit(this, null); // until exp do command
+        idTable.closeScope(); //Se cierra el scope.
+        aThis.E.visit(this, null); // To exp
+        return null;
     }
 
     @Override
@@ -1139,12 +1169,17 @@ public Object visitMultipleCase(MultipleCase ast, Object obj){
 
     @Override
     public Object visitForInDoCommand(ForInDo aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      // TypeDenoter eType = (TypeDenoter) aThis.forAST.E.visit(this, null); //Se extrae la exp de tipo array.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public Object visitToCommandAST(ToCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        TypeDenoter eType = (TypeDenoter) aThis.E.visit(this, null);
+        if(!eType.equals(StdEnvironment.integerType)){
+            reporter.reportError("Integer expression expected here", "", aThis.E.position);
+        }
+        return null;
     }
 
     @Override
