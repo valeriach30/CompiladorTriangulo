@@ -1051,7 +1051,8 @@ public Object visitMultipleCase(MultipleCase ast, Object obj){
 
     @Override
     public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        aThis.WhileVar.visit(this, null);
+        return null;
     }
 
     @Override
