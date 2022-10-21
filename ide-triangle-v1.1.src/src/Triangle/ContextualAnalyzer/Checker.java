@@ -134,11 +134,11 @@ public final class Checker implements Visitor {
   //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
 public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object o) {
     return null;
-  }
+}
 //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
 public Object visitCaseRangeCommand(CaseRangeCommand ast, Object o) {
     return null;
-  }
+}
 
 //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
 public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj){
@@ -1164,13 +1164,23 @@ public Object visitMultipleCase(MultipleCase ast, Object obj){
 
     @Override
     public Object visitForInCommand(ForInCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        TypeDenoter eType = (TypeDenoter) aThis.E.visit(this, null);
+        if(!eType.equals(StdEnvironment.arrayTypeDenoter))
+            reporter.reportError("Array Integer expression expected here", "", aThis.E.position);
+      
+        return null;
     }
 
     @Override
     public Object visitForInDoCommand(ForInDo aThis, Object o) {
-      // TypeDenoter eType = (TypeDenoter) aThis.forAST.E.visit(this, null); //Se extrae la exp de tipo array.
-        throw new UnsupportedOperationException("Not supported yet.");
+        aThis.forAST.visit(this, null); 
+        idTable.openScope();  
+        idTable.enter(aThis.forAST.I.spelling, aThis.forAST);
+        if(aThis.forAST.duplicated)
+          reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
+        aThis.C.visit(this, null);
+        idTable.closeScope(); 
+        return null;
     }
 
     @Override
