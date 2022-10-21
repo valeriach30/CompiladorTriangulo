@@ -1142,7 +1142,7 @@ public final class Encoder implements Visitor {
     }
 
     @Override
-    public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
+    public Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -1152,7 +1152,7 @@ public final class Encoder implements Visitor {
     }
 
     @Override
-    public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
+    public Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

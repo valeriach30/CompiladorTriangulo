@@ -287,7 +287,7 @@ public class XMLcreator implements Visitor {
     public Object visitUntilCommand(UntilCommand aThis, Object o) {
         nuevaLinea("<UntilCommand>");
         
-        aThis.I.visit(this, null);
+        aThis.E.visit(this, null);
         aThis.C.visit(this, null);
       
         nuevaLinea("</UntilCommand>");
@@ -305,7 +305,7 @@ public class XMLcreator implements Visitor {
     }
 
     @Override
-    public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
+    public Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
         nuevaLinea("<LoopCommand>");
         
         if(aThis.I != null){
@@ -329,7 +329,7 @@ public class XMLcreator implements Visitor {
     }
 
     @Override
-    public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
+    public Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
         nuevaLinea("<LoopCommand>");
         
         if(aThis.I != null){

@@ -31,9 +31,9 @@ public interface Visitor {
   public abstract Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o);
   public abstract Object visitUntilCommand(UntilCommand aThis, Object o);
   public abstract Object visitWhileEndCommand(WhileEndCommand aThis, Object o);
-  public abstract Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o);
+  public abstract Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o);
   public abstract Object visitUntilEndCommand(UntilEndCommand aThis, Object o);
-  public abstract Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o);
+  public abstract Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o);
   public abstract Object visitForFromWhile(LoopForFromWhile aThis, Object o);
   public abstract Object visitForFromUntil(LoopForFromUntil aThis, Object o);
   public abstract Object visitForInCommand(ForInCommand aThis, Object o);

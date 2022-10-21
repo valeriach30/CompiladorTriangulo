@@ -27,7 +27,7 @@ public class LoopWhileEndAST extends Command{
     }
     
     public Object visit(Visitor v, Object o) {
-        return v.visitLooopWhileEndCommand(this, o);
+        return v.visitLoopWhileEndCommand(this, o);
     }
 
     public Command C;

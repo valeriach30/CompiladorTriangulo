@@ -166,9 +166,6 @@ public class TableVisitor implements Visitor {
       ast.E.visit(this, null);
       ast.C1.visit(this, null);
       ast.C2.visit(this, null);
-//      ast.ST.visit(this, null);
-//      ast.MT.visit(this, null);
-      
       return(null);
   }
   
@@ -810,7 +807,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 
     @Override
     public Object visitUntilCommand(UntilCommand aThis, Object o) { // Autor : Valeria Chinchilla
-        aThis.I.visit(this, null);
+        aThis.E.visit(this, null);
         aThis.C.visit(this, null);
       
         return(null);
@@ -824,7 +821,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
     }
 
     @Override
-    public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) { // Autor : Valeria Chinchilla
+    public Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.WhileV.visit(this, null);
         aThis.C.visit(this, null);
       
@@ -838,7 +835,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
     }
 
     @Override
-    public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) { // Autor : Valeria Chinchilla
+    public Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o) { // Autor : Valeria Chinchilla
         aThis.I.visit(this, null);
         aThis.C.visit(this, null);
         aThis.UntilEnd.visit(this, null);

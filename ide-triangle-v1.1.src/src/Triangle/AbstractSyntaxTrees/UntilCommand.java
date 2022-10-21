@@ -13,9 +13,9 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  */
 public class UntilCommand extends Command{
 
-  public UntilCommand (Expression iAST, Command cAST, SourcePosition thePosition) {
+  public UntilCommand (Expression eAST, Command cAST, SourcePosition thePosition) {
     super (thePosition);
-    I = iAST;
+    E = eAST;
     C = cAST;
   }
 
@@ -23,7 +23,7 @@ public class UntilCommand extends Command{
     return v.visitUntilCommand(this, o);
   }
 
-  public Expression I;
+  public Expression E;
   public Command C;
     
 }

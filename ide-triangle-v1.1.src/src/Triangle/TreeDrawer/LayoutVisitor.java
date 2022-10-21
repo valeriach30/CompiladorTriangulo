@@ -749,7 +749,7 @@ public class LayoutVisitor implements Visitor {
 
     @Override
     public Object visitUntilCommand(UntilCommand aThis, Object o) {
-        return(layoutBinary("Until Command", aThis.I, aThis.C));
+        return(layoutBinary("Until Command", aThis.E, aThis.C));
     }
 
     @Override
@@ -758,7 +758,7 @@ public class LayoutVisitor implements Visitor {
     }
 
     @Override
-    public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
+    public Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
         if(aThis.I == null){
             return(layoutBinary("Loop Command", aThis.C, aThis.WhileV));
         }
@@ -773,7 +773,7 @@ public class LayoutVisitor implements Visitor {
     }
 
     @Override
-    public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
+    public Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
         if(aThis.I == null){
             return(layoutBinary("Loop Command", aThis.C, aThis.UntilEnd));
         }

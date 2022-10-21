@@ -654,7 +654,7 @@ public class TreeVisitor implements Visitor {
     // Autor : Valeria Chinchilla
     @Override
     public Object visitUntilCommand(UntilCommand aThis, Object o) {
-        return(createBinary("Until Command", aThis.I, aThis.C));
+        return(createBinary("Until Command", aThis.E, aThis.C));
     }
 
     // Autor : Valeria Chinchilla
@@ -665,7 +665,7 @@ public class TreeVisitor implements Visitor {
 
     // Autor : Valeria Chinchilla
     @Override
-    public Object visitLooopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
+    public Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
         if(aThis.I == null){
             return(createBinary("Loop Command", aThis.C, aThis.WhileV));
         }
@@ -682,7 +682,7 @@ public class TreeVisitor implements Visitor {
 
     // Autor : Valeria Chinchilla
     @Override
-    public Object visitLooopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
+    public Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
         if(aThis.I == null){
             return(createBinary("Loop Command", aThis.C, aThis.UntilEnd));
         }
