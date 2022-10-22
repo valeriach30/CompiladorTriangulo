@@ -63,9 +63,9 @@ public class IDECompiler {
         
         rootAST = parser.parseProgram();
         if (report.numErrors == 0) {
-            //System.out.println("Contextual Analysis ...");
-            //Checker checker = new Checker(report);
-            //checker.check(rootAST);
+            System.out.println("Contextual Analysis ...");
+            Checker checker = new Checker(report);
+            checker.check(rootAST);
             
             // Crear XML
             String nombreArchivo2 = sourceName.substring(0, sourceName.length()-3)+"XML";
