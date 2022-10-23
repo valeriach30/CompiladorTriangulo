@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<SequentialDeclaration>
+<SequentialDeclaration>
+<VarDeclaration>
+<CharTypeDenoter>
+</CharTypeDenoter>
+</VarDeclaration>
+<VarDeclaration>
+<IntTypeDenoter>
+</IntTypeDenoter>
+</VarDeclaration>
+</SequentialDeclaration>
+<VarDeclarationInit>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+<Identifier value='z'>
+</Identifier>
+</VarDeclarationInit>
+</SequentialDeclaration>
+<SequentialCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+<CharacterExpression>
+<CharacterLiteral value='5'>
+</CharacterLiteral>
+</CharacterExpression>
+</AssignCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='z'>
+</Identifier>
+</SimpleVname>
+<IntegerExpression>
+<IntegerLiteral value= '5'>
+</IntegerLiteral>
+</IntegerExpression>
+</AssignCommand>
+</SequentialCommand>
+</LetCommand>
+</Program>

@@ -1,6 +1,8 @@
 let
    var x: Char;
-   var y: Integer
+   var y: Integer;
+   var z init 1
 in
-   x := 5
+   x := '5';
+   z := 5
 end

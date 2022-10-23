@@ -1,11 +1,7 @@
 ! Declaracion de variable con init
 
 let
-
-  var a init a < 1
-
+   var z init 1
 in
-
-  putint (a)
-
+   z := 5
 end

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<VarDeclarationInit>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+<Identifier value='z'>
+</Identifier>
+</VarDeclarationInit>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='z'>
+</Identifier>
+</SimpleVname>
+<IntegerExpression>
+<IntegerLiteral value= '5'>
+</IntegerLiteral>
+</IntegerExpression>
+</AssignCommand>
+</LetCommand>
+</Program>
