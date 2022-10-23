@@ -1295,13 +1295,6 @@ public final class Checker implements Visitor {
   public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
     TypeDenoter eType = (TypeDenoter) aThis.E.visit(this, null);
 
-    // Determinar si es una expresion
-    if (!eType.equals(StdEnvironment.booleanType)) {
-      reporter.reportError("Boolean expression expected here", "", aThis.E.position);
-    }
-
-    TypeDenoter iType = (TypeDenoter) aThis.I.visit(this, null);
-
     // Ingresar el identificador a la tabla
     idTable.enter(aThis.I.spelling, aThis);
 
@@ -1312,15 +1305,6 @@ public final class Checker implements Visitor {
 
     return null;
   }
-  /*
-   * ast.T = (TypeDenoter) ast.T.visit(this, null);
-   * idTable.enter (ast.I.spelling, ast);
-   * if (ast.duplicated)
-   * reporter.reportError ("identifier \"%\" already declared",
-   * ast.I.spelling, ast.position);
-   * 
-   * return null;
-   */
 
   // Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
   // then Comi de if Exp then Com1 ( | Expi then Comi )* else Com2 end
