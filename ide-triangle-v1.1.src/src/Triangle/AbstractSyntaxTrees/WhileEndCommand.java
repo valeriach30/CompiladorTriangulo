@@ -10,13 +10,13 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  *
  * @author Valeria Chinchilla
  */
-public class WhileEndCommand extends Command{
+public class WhileEndCommand extends Command {
 
   public WhileEndCommand(Expression eAST, SourcePosition commandPos) {
     super(commandPos);
     E = eAST;
   }
-    
+
   public Object visit(Visitor v, Object o) {
     return v.visitWhileEndCommand(this, o);
   }
