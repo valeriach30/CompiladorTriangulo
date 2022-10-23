@@ -80,7 +80,10 @@ import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
+import Triangle.AbstractSyntaxTrees.ProcFuncs;
+import Triangle.AbstractSyntaxTrees.ProcFuncsDeclaration;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.RecProcFuncDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
@@ -1125,9 +1128,10 @@ public class Parser {
               break;
           case Token.REC:
               acceptIt();
-              declarationAST = parseProcFuncs();
+              Declaration recAST = parseProcFuncs();
               accept(Token.END);
               finish(position);
+              declarationAST = new RecProcFuncDeclaration((ProcFuncs) recAST,position);
               break;
           case Token.LOCAL:
               acceptIt();
@@ -1185,17 +1189,17 @@ public class Parser {
   }
   //Autores: Gabriel Fallas, Hilary Castro, Kevin Rodriguez.
   Declaration parseProcFuncs() throws SyntaxError{
-      Declaration declarationAST = null; // in case there's a syntactic error
+      ProcFuncs declarationAST = null; // in case there's a syntactic error
       SourcePosition position = new SourcePosition();
       start(position);
-      declarationAST = parseProcFunc();
+      declarationAST = (ProcFuncs) parseProcFunc();
       if(currentToken.kind == Token.BAR){
           while(currentToken.kind == Token.BAR){
               acceptIt();
               Declaration dAST2 = parseProcFunc();
               finish(position);
-              declarationAST = new SequentialDeclaration(declarationAST,
-                               dAST2, position);
+              //declarationAST = new SequentialDeclaration(declarationAST, dAST2, position);
+              declarationAST = new ProcFuncsDeclaration((ProcFuncs)declarationAST, (ProcFuncs)dAST2, position ); 
           }
       }else{
           syntacticError("| expected here.","");

@@ -16,7 +16,7 @@ package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
-public class FuncDeclaration extends Declaration {
+public class FuncDeclaration extends ProcFuncs {
 
   public FuncDeclaration (Identifier iAST, FormalParameterSequence fpsAST,
   		   TypeDenoter tAST, Expression eAST,
@@ -36,4 +36,9 @@ public class FuncDeclaration extends Declaration {
   public FormalParameterSequence FPS;
   public TypeDenoter T;
   public Expression E;
+
+  @Override
+  public Object visitRec(Visitor v, Object o) {
+    return v.visitFuncDeclarationRec(this, o);
+  }
 }

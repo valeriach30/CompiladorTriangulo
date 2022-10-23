@@ -69,7 +69,9 @@ import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
+import Triangle.AbstractSyntaxTrees.ProcFuncsDeclaration;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.RecProcFuncDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ReturnCommand;
@@ -914,4 +916,35 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
     public Object visitReturnCommand(ReturnCommand aThis, Object o) {
         return (null);
     }
+
+    @Override
+    public Object visitRecProcFuncDeclaration(RecProcFuncDeclaration aThis, Object o) {
+        aThis.D1.visit(null, null);
+        return (null);
+    }
+
+    @Override
+    public Object visitProcFuncsDeclaration(ProcFuncsDeclaration aThis, Object o) {
+        aThis.D1.visit(null, null);
+        aThis.D2.visit(null, null);
+        return (null);
+    }
+
+    @Override
+    public Object visitProcFuncsDeclarationRec(ProcFuncsDeclaration aThis, Object o) {
+        aThis.D1.visit(null, null);
+        aThis.D2.visit(null, null);
+        return (null);
+    }
+
+    @Override
+    public Object visitProcDeclarationRec(ProcDeclaration aThis, Object o) {
+        return null;
+    }
+
+    @Override
+    public Object visitFuncDeclarationRec(FuncDeclaration aThis, Object o) {
+        return null;
+    }
+
 }

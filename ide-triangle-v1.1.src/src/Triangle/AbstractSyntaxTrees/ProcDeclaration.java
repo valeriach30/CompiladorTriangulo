@@ -16,7 +16,7 @@ package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
-public class ProcDeclaration extends Declaration {
+public class ProcDeclaration extends ProcFuncs {
 
   public ProcDeclaration (Identifier iAST, FormalParameterSequence fpsAST,
   		   Command cAST, SourcePosition thePosition) {
@@ -33,4 +33,9 @@ public class ProcDeclaration extends Declaration {
   public Identifier I;
   public FormalParameterSequence FPS;
   public Command C;
+
+  @Override
+  public Object visitRec(Visitor v, Object o) {
+      return v.visitProcDeclarationRec(this, o);
+  }
 }

@@ -68,7 +68,9 @@ import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
+import Triangle.AbstractSyntaxTrees.ProcFuncsDeclaration;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.RecProcFuncDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ReturnCommand;
@@ -1169,6 +1171,42 @@ public class XMLcreator implements Visitor {
         nuevaLinea("<Return>");
         nuevaLinea("</Return>");
         return (null);
+    }
+
+    @Override
+    public Object visitRecProcFuncDeclaration(RecProcFuncDeclaration aThis, Object o) {
+        nuevaLinea("<Rec Declaration>");
+        aThis.D1.visit(this, null);
+        nuevaLinea("</Rec Declaration>");
+        return (null);
+    }
+
+    @Override
+    public Object visitProcFuncsDeclaration(ProcFuncsDeclaration aThis, Object o) {
+        nuevaLinea("<Proc Func Declaration>");
+        aThis.D1.visit(this, null);
+        aThis.D2.visit(this, null);
+        nuevaLinea("</Proc Func Declaration>");
+        return (null);
+    }
+
+    @Override
+    public Object visitProcFuncsDeclarationRec(ProcFuncsDeclaration aThis, Object o) {
+        nuevaLinea("<Rec Proc Func Declaration>");
+        aThis.D1.visit(this, null);
+        aThis.D2.visit(this, null);
+        nuevaLinea("</Rec Proc Func Declaration>");
+        return (null);
+    }
+
+    @Override
+    public Object visitProcDeclarationRec(ProcDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object visitFuncDeclarationRec(FuncDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     

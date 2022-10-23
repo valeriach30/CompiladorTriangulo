@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<Rec Declaration>
+<Proc Func Declaration>
+<Proc Func Declaration>
+<FuncDeclaration>
+<ErrorTypeDenoter>
+</ErrorTypeDenoter>
+<EmptyFormalParameterSequence>
+</EmptyFormalParameterSequence>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</FuncDeclaration>
+<ProcDeclaration>
+<EmptyFormalParameterSequence>
+</EmptyFormalParameterSequence>
+<CallCommand>
+<Identifier value='put'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CharacterExpression>
+<CharacterLiteral value='z'>
+</CharacterLiteral>
+</CharacterExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</ProcDeclaration>
+</Proc Func Declaration>
+<FuncDeclaration>
+<ErrorTypeDenoter>
+</ErrorTypeDenoter>
+<EmptyFormalParameterSequence>
+</EmptyFormalParameterSequence>
+<IntegerExpression>
+<IntegerLiteral value= '2'>
+</IntegerLiteral>
+</IntegerExpression>
+</FuncDeclaration>
+</Proc Func Declaration>
+</Rec Declaration>
+<CallCommand>
+<Identifier value='x'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</Program>
