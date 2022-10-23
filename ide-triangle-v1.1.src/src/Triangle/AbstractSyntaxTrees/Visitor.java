@@ -153,14 +153,4 @@ public interface Visitor {
 
     public Object visitReturnCommand(ReturnCommand aThis, Object o);
 
-    public Object visitRecProcFuncDeclaration(RecProcFuncDeclaration aThis, Object o);
-
-    public Object visitProcFuncsDeclaration(ProcFuncsDeclaration aThis, Object o);
-
-    public Object visitProcFuncsDeclarationRec(ProcFuncsDeclaration aThis, Object o);
-
-    public Object visitProcDeclarationRec(ProcDeclaration aThis, Object o);
-
-    public Object visitFuncDeclarationRec(FuncDeclaration aThis, Object o);
-
 }

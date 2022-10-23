@@ -84,9 +84,7 @@ import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
-import Triangle.AbstractSyntaxTrees.ProcFuncsDeclaration;
 import Triangle.AbstractSyntaxTrees.Program;
-import Triangle.AbstractSyntaxTrees.RecProcFuncDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ReturnCommand;
@@ -516,10 +514,8 @@ public final class Checker implements Visitor {
   }
 
   public Object visitSequentialDeclaration(SequentialDeclaration ast, Object o) {
-    
     ast.D1.visit(this, null);
     ast.D2.visit(this, null);
-
     return null;
   }
 
@@ -1352,49 +1348,4 @@ public final class Checker implements Visitor {
     throw new UnsupportedOperationException("Not supported yet."); // Generated from
                                                                    // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
   }
-
-    @Override
-    public Object visitRecProcFuncDeclaration(RecProcFuncDeclaration aThis, Object o) {
-        idTable.pushPilaPublica();
-        aThis.D1.visit(this, null);
-        aThis.D1.visitRec(this, null);
-        return null;
-    }
-
-    @Override
-    public Object visitProcFuncsDeclaration(ProcFuncsDeclaration aThis, Object o) {
-        aThis.D1.visit(this, null);
-        aThis.D2.visit(this, null);
-        return null;
-    }
-
-    @Override
-    public Object visitProcFuncsDeclarationRec(ProcFuncsDeclaration aThis, Object o) {
-        aThis.D1.visitRec(this, null);
-        aThis.D2.visitRec(this, null);
-        return null;
-    }
-
-    @Override
-    public Object visitProcDeclarationRec(ProcDeclaration aThis, Object o) {
-        idTable.openScope();
-        aThis.FPS.visit(this, null);
-        aThis.C.visit(this, null);
-        idTable.closeScope();
-        return null;
-    }
-
-    @Override
-    public Object visitFuncDeclarationRec(FuncDeclaration aThis, Object o) {
-        idTable.openScope();
-        aThis.FPS.visit(this, null);
-        TypeDenoter eType = (TypeDenoter) aThis.E.visit(this, null);
-        idTable.closeScope();
-        if (!aThis.T.visit(this, null).equals(eType)) {
-            reporter.reportError("body of function \"%\" has wrong type",
-                    aThis.I.spelling, aThis.E.position);
-        }
-        return null;
-    }
-    
 }
