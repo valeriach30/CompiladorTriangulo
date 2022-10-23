@@ -1,4 +1,4 @@
-!Prueba de compund declaration Local
+!Prueba error compund declaration Local
 let
   local
    var x: Char;
@@ -7,5 +7,6 @@ let
     proc z() ~ put(x) end
   end
 in
-  z()
+  z();
+  y := 'a'  ! y es conocida unicamente en Dec2
 end

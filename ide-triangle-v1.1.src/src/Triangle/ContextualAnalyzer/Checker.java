@@ -520,11 +520,17 @@ public final class Checker implements Visitor {
   }
 
   public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
-    //idTable.pushPublicStack();
+    
+    // Se agrega a la pila publica 
+    idTable.pushPilaPublica();
     ast.D1.visit(this, null);
-    //idTable.pushPrivateStack();
+    
+    // Se agrega unicamente a la pila privado
+    idTable.pushPilaPrivada();
     ast.D2.visit(this, null);
-    //idTable.disconnectPrivate();
+    
+    // Se cierra la pila privada
+    idTable.cerrarPilaPrivada();
     return null;
   }
 
@@ -1176,7 +1182,7 @@ public final class Checker implements Visitor {
   }
 
   // Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
-  // loop for Id from Exp1 to Exp2 do Com end
+  // loop for Id from Exp1 to Exp2 do Com end 
   @Override
   public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
     idTable.openScope(); // Se inicia el scope.

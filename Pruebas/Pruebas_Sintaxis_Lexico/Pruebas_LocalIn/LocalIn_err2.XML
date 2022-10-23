@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<LocalDeclaration>
+<SequentialDeclaration>
+<VarDeclaration>
+<CharTypeDenoter>
+</CharTypeDenoter>
+</VarDeclaration>
+<VarDeclaration>
+<IntTypeDenoter>
+</IntTypeDenoter>
+</VarDeclaration>
+</SequentialDeclaration>
+<ProcDeclaration>
+<EmptyFormalParameterSequence>
+</EmptyFormalParameterSequence>
+<CallCommand>
+<Identifier value='put'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</ProcDeclaration>
+</LocalDeclaration>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='z'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='y'>
+</Identifier>
+</SimpleVname>
+<CharacterExpression>
+<CharacterLiteral value='a'>
+</CharacterLiteral>
+</CharacterExpression>
+</AssignCommand>
+</SequentialCommand>
+</LetCommand>
+</Program>
