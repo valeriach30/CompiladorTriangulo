@@ -1293,8 +1293,13 @@ public final class Checker implements Visitor {
   // Autor: Valeria Chinchilla
   @Override
   public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
+    
+    // Funciona parecido a "const" I ~ E, solo que seria "var" I := E
     TypeDenoter eType = (TypeDenoter) aThis.E.visit(this, null);
-
+    
+    // El tipo de dato del identificador es el de la expresion
+    aThis.T = eType;
+    
     // Ingresar el identificador a la tabla
     idTable.enter(aThis.I.spelling, aThis);
 
@@ -1305,7 +1310,7 @@ public final class Checker implements Visitor {
 
     return null;
   }
-
+  
   // Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
   // then Comi de if Exp then Com1 ( | Expi then Comi )* else Com2 end
   @Override
