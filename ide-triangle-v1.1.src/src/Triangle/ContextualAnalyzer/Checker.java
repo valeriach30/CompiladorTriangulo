@@ -520,8 +520,11 @@ public final class Checker implements Visitor {
   }
 
   public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
+    //idTable.pushPublicStack();
     ast.D1.visit(this, null);
+    //idTable.pushPrivateStack();
     ast.D2.visit(this, null);
+    //idTable.disconnectPrivate();
     return null;
   }
 
