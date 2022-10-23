@@ -1,0 +1,40 @@
+! Procedimientos mutuamente recursivos, m�s uno auxiliar que est� adelante y debe ser referenciado antes
+
+
+let
+
+  rec
+
+   proc Ping (x : Integer) ~ 
+         if x > 0 then
+             
+             Ping (0) 
+         else 
+             nil
+         end
+    end
+
+    |
+
+    proc Pong (a : Integer) ~ 
+         if a > 0 then 
+             
+             Ping (a - 1) 
+         else 
+             nil
+         end
+    end
+
+    |
+
+    proc Impr (c : Char) ~ 
+         put (c)
+    end
+
+  end
+
+in
+
+  Ping (6) ! imprime IOIOIO
+
+end
