@@ -77,6 +77,7 @@ import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
+import Triangle.AbstractSyntaxTrees.SequentialDeclarationProcFuncs;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
@@ -913,5 +914,13 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 
     public Object visitReturnCommand(ReturnCommand aThis, Object o) {
         return (null);
+    }
+
+    @Override
+    public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
+        aThis.D1.visit(this, null);
+        aThis.D2.visit(this, null);
+      
+        return(null);
     }
 }

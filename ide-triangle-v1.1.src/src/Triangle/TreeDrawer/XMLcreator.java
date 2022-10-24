@@ -76,6 +76,7 @@ import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
+import Triangle.AbstractSyntaxTrees.SequentialDeclarationProcFuncs;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
@@ -1169,6 +1170,17 @@ public class XMLcreator implements Visitor {
         nuevaLinea("<Return>");
         nuevaLinea("</Return>");
         return (null);
+    }
+
+    @Override
+    public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
+        nuevaLinea("<ProcFuncDeclaration>");
+        
+        aThis.D1.visit(this, null);
+        aThis.D2.visit(this, null);
+      
+        nuevaLinea("</ProcFuncDeclaration>");
+        return(null);
     }
 
     

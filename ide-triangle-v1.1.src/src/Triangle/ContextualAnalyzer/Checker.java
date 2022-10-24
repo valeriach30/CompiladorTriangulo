@@ -92,6 +92,7 @@ import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
+import Triangle.AbstractSyntaxTrees.SequentialDeclarationProcFuncs;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
@@ -1348,4 +1349,76 @@ public final class Checker implements Visitor {
     throw new UnsupportedOperationException("Not supported yet."); // Generated from
                                                                    // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
   }
+
+  private void enterProc(ProcDeclaration aThis){
+    idTable.enter(aThis.I.spelling, aThis);
+    if (aThis.duplicated)
+      reporter.reportError("identifier \"%\" already declared",
+          aThis.I.spelling, aThis.position);
+    idTable.openScope();
+    aThis.FPS.visit(this, null);
+    aThis.C.visit(this, null);
+    idTable.closeScope();
+    (aThis).isRecursive = true;
+  }
+  private void enterFunc(FuncDeclaration aThis){
+    aThis.T = (TypeDenoter) aThis.T.visit(this, null);
+    idTable.enter(aThis.I.spelling, aThis); // permits recursion
+    if (aThis.duplicated)
+      reporter.reportError("identifier \"%\" already declared",
+          aThis.I.spelling, aThis.position);
+    idTable.openScope();
+    aThis.FPS.visit(this, null);
+    idTable.closeScope();
+    (aThis).isRecursive = true;
+  }
+  
+    @Override
+    public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
+        aThis.D1.visit(this, null);
+        aThis.D2.visit(this, null);
+
+        //Si el nodo ya se visito termine return null;
+        if (aThis.D2 instanceof ProcDeclaration && ((ProcDeclaration) aThis.D2).isRecursive){ 
+            return null;
+        }
+        //Si el nodo ya se visito termine return null;
+        if (aThis.D2 instanceof FuncDeclaration && ((FuncDeclaration) aThis.D2).isRecursive) { 
+            return null;
+        }
+        if (aThis.D1 instanceof SequentialDeclarationProcFuncs) {
+            if (aThis.D2 instanceof ProcDeclaration) { 
+                enterProc((ProcDeclaration) aThis.D2);
+                aThis.D1.visit(this, null);
+            }
+            else{ 
+                if (aThis.D2 instanceof FuncDeclaration) { 
+                    enterFunc((FuncDeclaration)aThis.D2);
+                    aThis.D1.visit(this, null);
+                }
+            }
+        }
+
+        else{
+            if (aThis.D1 instanceof ProcDeclaration) { 
+                enterProc((ProcDeclaration) aThis.D1);
+            }
+            else{ 
+                if (aThis.D1 instanceof FuncDeclaration) { 
+                    enterFunc((FuncDeclaration) aThis.D1);
+                }
+            }
+            if (aThis.D2 instanceof ProcDeclaration) {
+                enterProc((ProcDeclaration) aThis.D2); 
+            }
+            else {
+                if (aThis.D2 instanceof FuncDeclaration) { 
+                    enterFunc((FuncDeclaration) aThis.D2);
+                }
+            }
+        }
+        aThis.D1.visit(this, null);
+        aThis.D2.visit(this, null);
+        return null;
+    }
 }

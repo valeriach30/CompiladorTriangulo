@@ -89,6 +89,7 @@ import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
+import Triangle.AbstractSyntaxTrees.SequentialDeclarationProcFuncs;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
@@ -846,6 +847,11 @@ public class LayoutVisitor implements Visitor {
     @Override
     public Object visitReturnCommand(ReturnCommand aThis, Object o) {
         return(layoutNullary("Return Command"));
+    }
+
+    @Override
+    public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
+         return layoutBinary("Proc Funcs Declaration", aThis.D1, aThis.D2);
     }
 
 }

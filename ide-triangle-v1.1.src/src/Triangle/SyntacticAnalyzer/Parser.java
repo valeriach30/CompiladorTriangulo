@@ -89,6 +89,7 @@ import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCases;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
+import Triangle.AbstractSyntaxTrees.SequentialDeclarationProcFuncs;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
 import Triangle.AbstractSyntaxTrees.SimpleVname;
 import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
@@ -1194,7 +1195,7 @@ public class Parser {
               acceptIt();
               Declaration dAST2 = parseProcFunc();
               finish(position);
-              declarationAST = new SequentialDeclaration(declarationAST,
+              declarationAST = new SequentialDeclarationProcFuncs(declarationAST,
                                dAST2, position);
           }
       }else{

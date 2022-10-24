@@ -153,4 +153,7 @@ public interface Visitor {
 
     public Object visitReturnCommand(ReturnCommand aThis, Object o);
 
+    public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o);
+
+
 }
