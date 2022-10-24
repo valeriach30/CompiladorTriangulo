@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Program>
 <LetCommand>
+<RecDeclaration>
 <ProcFuncDeclaration>
 <ProcFuncDeclaration>
 <ProcDeclaration>
@@ -125,6 +126,7 @@
 </CallCommand>
 </ProcDeclaration>
 </ProcFuncDeclaration>
+</RecDeclaration>
 <CallCommand>
 <Identifier value='Ping'>
 </Identifier>

@@ -7,8 +7,7 @@ let
 
    proc Ping (x : Integer) ~ 
          if x > 0 then
-             Impr ('0');
-             Pong (x - 1) 
+             putint(2) 
          else 
              nil
          end
@@ -18,8 +17,7 @@ let
 
     proc Pong (a : Integer) ~ 
          if a > 0 then 
-             Impr ('0');
-             Ping (a - 1) 
+             putint(2)
          else 
              nil
          end

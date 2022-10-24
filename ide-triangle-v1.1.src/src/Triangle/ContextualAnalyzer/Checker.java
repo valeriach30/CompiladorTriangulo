@@ -295,10 +295,11 @@ public final class Checker implements Visitor {
   }
 
   public Object visitCallCommand(CallCommand ast, Object o) {
-
+      
     Declaration binding = (Declaration) ast.I.visit(this, null);
-    if (binding == null)
+    if (binding == null){
       reportUndeclared(ast.I);
+    }
     else if (binding instanceof ProcDeclaration) {
       ast.APS.visit(this, ((ProcDeclaration) binding).FPS);
     } else if (binding instanceof ProcFormalParameter) {
@@ -1383,9 +1384,6 @@ public final class Checker implements Visitor {
   
     @Override
     public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
-        aThis.D1.visit(this, null);
-        aThis.D2.visit(this, null);
-
         //Si el nodo ya se visito termine 
         if (aThis.D2 instanceof ProcDeclaration && ((ProcDeclaration) aThis.D2).isRecursive){ 
             return null;
