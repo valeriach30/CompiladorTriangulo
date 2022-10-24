@@ -140,11 +140,14 @@ public final class Checker implements Visitor {
   // Case ::= "when" Case-Literals "then" Command
   // Case-Literals ::= Case-Range ("|" Case-Range)*
   // Case-Range ::= Case-Literal ["to" Case-Literal]
-  // Case-Literal ::= Integer-Literal | Character-Literal //este
+  // Case-Literal ::= Integer-Literal | Character-Literal
   public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object o) {
     TypeDenoter cType;
     if (ast.CL != null) {
       cType = (TypeDenoter) ast.CL.visit(this, null);
+      idTable.enter(ast.CL.spelling, ast);
+      if (ast.duplicated)
+        reporter.reportError("Character literal \"%\" already used", ast.CL.spelling, ast.position);
     } else {
       cType = (TypeDenoter) ast.IL.visit(this, null);
     }
@@ -295,12 +298,11 @@ public final class Checker implements Visitor {
   }
 
   public Object visitCallCommand(CallCommand ast, Object o) {
-      
+
     Declaration binding = (Declaration) ast.I.visit(this, null);
-    if (binding == null){
+    if (binding == null) {
       reportUndeclared(ast.I);
-    }
-    else if (binding instanceof ProcDeclaration) {
+    } else if (binding instanceof ProcDeclaration) {
       ast.APS.visit(this, ((ProcDeclaration) binding).FPS);
     } else if (binding instanceof ProcFormalParameter) {
       ast.APS.visit(this, ((ProcFormalParameter) binding).FPS);
@@ -490,12 +492,12 @@ public final class Checker implements Visitor {
   }
 
   public Object visitFuncDeclaration(FuncDeclaration ast, Object o) {
-    if(!ast.visitaddo){
-        ast.T = (TypeDenoter) ast.T.visit(this, null);
-        idTable.enter(ast.I.spelling, ast); // permits recursion
-        if (ast.duplicated)
-          reporter.reportError("identifier \"%\" already declared",
-              ast.I.spelling, ast.position);
+    if (!ast.visitaddo) {
+      ast.T = (TypeDenoter) ast.T.visit(this, null);
+      idTable.enter(ast.I.spelling, ast); // permits recursion
+      if (ast.duplicated)
+        reporter.reportError("identifier \"%\" already declared",
+            ast.I.spelling, ast.position);
     }
     idTable.openScope();
     ast.FPS.visit(this, null);
@@ -508,11 +510,11 @@ public final class Checker implements Visitor {
   }
 
   public Object visitProcDeclaration(ProcDeclaration ast, Object o) {
-    if(!ast.visitaddo){
-        idTable.enter(ast.I.spelling, ast); // permits recursion
-        if (ast.duplicated)
-          reporter.reportError("identifier \"%\" already declared",
-              ast.I.spelling, ast.position);
+    if (!ast.visitaddo) {
+      idTable.enter(ast.I.spelling, ast); // permits recursion
+      if (ast.duplicated)
+        reporter.reportError("identifier \"%\" already declared",
+            ast.I.spelling, ast.position);
     }
     idTable.openScope();
     ast.FPS.visit(this, null);
@@ -529,15 +531,15 @@ public final class Checker implements Visitor {
 
   // Autores: Valeria Chinchilla
   public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
-    
-    // Se agrega a la pila publica 
+
+    // Se agrega a la pila publica
     idTable.pushPilaPublica();
     ast.D1.visit(this, null);
-    
+
     // Se agrega unicamente a la pila privado
     idTable.pushPilaPrivada();
     ast.D2.visit(this, null);
-    
+
     // Se cierra la pila privada
     idTable.cerrarPilaPrivada();
     return null;
@@ -1191,7 +1193,7 @@ public final class Checker implements Visitor {
   }
 
   // Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
-  // loop for Id from Exp1 to Exp2 do Com end 
+  // loop for Id from Exp1 to Exp2 do Com end
   @Override
   public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
     idTable.openScope(); // Se inicia el scope.
@@ -1314,13 +1316,13 @@ public final class Checker implements Visitor {
   // Autor: Valeria Chinchilla
   @Override
   public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
-    
+
     // Funciona parecido a "const" I ~ E, solo que seria "var" I := E
     TypeDenoter eType = (TypeDenoter) aThis.E.visit(this, null);
-    
+
     // El tipo de dato del identificador es el de la expresion
     aThis.T = eType;
-    
+
     // Ingresar el identificador a la tabla
     idTable.enter(aThis.I.spelling, aThis);
 
@@ -1331,7 +1333,7 @@ public final class Checker implements Visitor {
 
     return null;
   }
-  
+
   // Autores: Gabriel Fallas, Kevin Rodriguez y Hilary Castro.
   // then Comi de if Exp then Com1 ( | Expi then Comi )* else Com2 end
   @Override
@@ -1357,117 +1359,115 @@ public final class Checker implements Visitor {
     throw new UnsupportedOperationException("Not supported yet."); // Generated from
                                                                    // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
   }
+
   // Autores: Valeria Chinchilla
-  private void agregarProc(ProcDeclaration aThis){
-    
+  private void agregarProc(ProcDeclaration aThis) {
+
     // Agregar a la tabla
     idTable.enter(aThis.I.spelling, aThis);
-    
+
     // Determinar si el identificador esta repetido
-    if(aThis.duplicated){
-        reporter.reportError("identifier \"%\" already declared",
+    if (aThis.duplicated) {
+      reporter.reportError("identifier \"%\" already declared",
           aThis.I.spelling, aThis.position);
     }
-    
+
     idTable.openScope();
-    
+
     aThis.FPS.visit(this, null);
     aThis.C.visit(this, null);
-    
+
     idTable.closeScope();
-    
+
     // Colocar como visitado
     aThis.visitaddo = true;
   }
-  
+
   // Autores: Valeria Chinchilla
-  private void agregarFunc(FuncDeclaration aThis){
-    
+  private void agregarFunc(FuncDeclaration aThis) {
+
     aThis.T = (TypeDenoter) aThis.T.visit(this, null);
-    
+
     // Agregar a la tabla
     idTable.enter(aThis.I.spelling, aThis); // permits recursion
-    
-    // Determinar si el identificador esta repetido 
-    if(aThis.duplicated){
-        reporter.reportError("identifier \"%\" already declared",
+
+    // Determinar si el identificador esta repetido
+    if (aThis.duplicated) {
+      reporter.reportError("identifier \"%\" already declared",
           aThis.I.spelling, aThis.position);
     }
-    
+
     idTable.openScope();
-    
+
     aThis.FPS.visit(this, null);
-    
+
     idTable.closeScope();
-    
+
     // Colocar como visitado
     aThis.visitaddo = true;
   }
-  
+
   // Autores: Valeria Chinchilla
-    @Override
-    public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
-        
-        // Caso base para la recursion
-        if (aThis.D2 instanceof ProcDeclaration && ((ProcDeclaration) aThis.D2).visitaddo){ 
-            return null;
+  @Override
+  public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
+
+    // Caso base para la recursion
+    if (aThis.D2 instanceof ProcDeclaration && ((ProcDeclaration) aThis.D2).visitaddo) {
+      return null;
+    }
+    // Caso base para la recursion
+    if (aThis.D2 instanceof FuncDeclaration && ((FuncDeclaration) aThis.D2).visitaddo) {
+      return null;
+    }
+
+    // Determina si es un proc funcs
+    if (aThis.D1 instanceof SequentialDeclarationProcFuncs) {
+      visitarProcFuncs(aThis);
+    }
+    // Otros casos
+    else {
+      if (aThis.D1 instanceof ProcDeclaration) {
+        agregarProc((ProcDeclaration) aThis.D1);
+      } else {
+        if (aThis.D1 instanceof FuncDeclaration) {
+          agregarFunc((FuncDeclaration) aThis.D1);
         }
-        // Caso base para la recursion
-        if (aThis.D2 instanceof FuncDeclaration && ((FuncDeclaration) aThis.D2).visitaddo) { 
-            return null;
+      }
+      if (aThis.D2 instanceof ProcDeclaration) {
+        agregarProc((ProcDeclaration) aThis.D2);
+      } else {
+        if (aThis.D2 instanceof FuncDeclaration) {
+          agregarFunc((FuncDeclaration) aThis.D2);
         }
-        
-        // Determina si es un proc funcs
-        if (aThis.D1 instanceof SequentialDeclarationProcFuncs) {
-            visitarProcFuncs(aThis);
-        }
-        // Otros casos
-        else{
-            if (aThis.D1 instanceof ProcDeclaration) { 
-                agregarProc((ProcDeclaration) aThis.D1);
-            }
-            else{ 
-                if (aThis.D1 instanceof FuncDeclaration) { 
-                    agregarFunc((FuncDeclaration) aThis.D1);
-                }
-            }
-            if (aThis.D2 instanceof ProcDeclaration) {
-                agregarProc((ProcDeclaration) aThis.D2); 
-            }
-            else {
-                if (aThis.D2 instanceof FuncDeclaration) { 
-                    agregarFunc((FuncDeclaration) aThis.D2);
-                }
-            }
-        }
-        // Vistar los hijos
+      }
+    }
+    // Vistar los hijos
+    aThis.D1.visit(this, null);
+    aThis.D2.visit(this, null);
+    return null;
+  }
+
+  @Override
+  public Object visitRecDeclaration(RecDeclaration aThis, Object o) {
+    aThis.dAST.visit(this, null);
+    return null;
+  }
+
+  @Override
+  public Object visitCompoundSingleDeclaration(CompoundSingleDeclaration aThis, Object o) {
+    aThis.dAST.visit(this, null);
+    return null;
+  }
+
+  private void visitarProcFuncs(SequentialDeclarationProcFuncs aThis) {
+    if (aThis.D2 instanceof FuncDeclaration) {
+      agregarFunc((FuncDeclaration) aThis.D2);
+      aThis.D1.visit(this, null);
+    } else {
+      if (aThis.D2 instanceof ProcDeclaration) {
+        agregarProc((ProcDeclaration) aThis.D2);
         aThis.D1.visit(this, null);
-        aThis.D2.visit(this, null);
-        return null;
+      }
     }
-
-    @Override
-    public Object visitRecDeclaration(RecDeclaration aThis, Object o) {
-        aThis.dAST.visit(this, null);
-        return null;
-    }
-
-    @Override
-    public Object visitCompoundSingleDeclaration(CompoundSingleDeclaration aThis, Object o) {
-        aThis.dAST.visit(this, null);
-        return null;
-    }
-
-    private void visitarProcFuncs(SequentialDeclarationProcFuncs aThis) {
-        if(aThis.D2 instanceof FuncDeclaration){
-            agregarFunc((FuncDeclaration)aThis.D2);
-            aThis.D1.visit(this, null);
-        }
-        else{
-            if (aThis.D2 instanceof ProcDeclaration) { 
-                agregarProc((ProcDeclaration) aThis.D2);
-                aThis.D1.visit(this, null);
-            }
-        }
-    }
+  }
 }
