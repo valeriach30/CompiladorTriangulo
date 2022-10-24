@@ -22,6 +22,8 @@ public final class IdentificationTable {
   private int level;
   private IdEntry latest;
 
+  // Nuevos atributos
+  // Autores: Valeria Chinchilla
   private Stack<IdEntry> pilaPublica = new Stack<>();
   private Stack<IdEntry> pilaPrivada = new Stack<>();
   
@@ -109,17 +111,19 @@ public final class IdentificationTable {
     return attr;
   }
   
+    // Autores: Valeria Chinchilla
     public void pushPilaPublica(){
         IdEntry ultimo = this.latest;
         pilaPublica.push(ultimo);
     }
-
+    
+    // Autores: Valeria Chinchilla
     public void pushPilaPrivada(){
         IdEntry ultimo = this.latest;
         pilaPrivada.push(ultimo);
     }
 
-
+    // Autores: Valeria Chinchilla
     public void cerrarPilaPrivada(){
         IdEntry entrada = this.latest;
         IdEntry ultimoPublico = pilaPublica.pop();

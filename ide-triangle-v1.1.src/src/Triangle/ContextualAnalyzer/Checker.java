@@ -527,6 +527,7 @@ public final class Checker implements Visitor {
     return null;
   }
 
+  // Autores: Valeria Chinchilla
   public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
     
     // Se agrega a la pila publica 
@@ -1358,30 +1359,49 @@ public final class Checker implements Visitor {
   }
   // Autores: Valeria Chinchilla
   private void agregarProc(ProcDeclaration aThis){
+    
+    // Agregar a la tabla
     idTable.enter(aThis.I.spelling, aThis);
+    
+    // Determinar si el identificador esta repetido
     if(aThis.duplicated){
         reporter.reportError("identifier \"%\" already declared",
           aThis.I.spelling, aThis.position);
     }
+    
     idTable.openScope();
+    
     aThis.FPS.visit(this, null);
     aThis.C.visit(this, null);
+    
     idTable.closeScope();
-    (aThis).visitaddo = true;
+    
+    // Colocar como visitado
+    aThis.visitaddo = true;
   }
   
   // Autores: Valeria Chinchilla
   private void agregarFunc(FuncDeclaration aThis){
+    
     aThis.T = (TypeDenoter) aThis.T.visit(this, null);
+    
+    // Agregar a la tabla
     idTable.enter(aThis.I.spelling, aThis); // permits recursion
+    
+    // Determinar si el identificador esta repetido 
     if(aThis.duplicated){
         reporter.reportError("identifier \"%\" already declared",
           aThis.I.spelling, aThis.position);
     }
+    
     idTable.openScope();
+    
     aThis.FPS.visit(this, null);
+    
     idTable.closeScope();
-    (aThis).visitaddo = true;
+    
+    // Colocar como visitado
+    aThis.visitaddo = true;
   }
   
   // Autores: Valeria Chinchilla
@@ -1397,20 +1417,11 @@ public final class Checker implements Visitor {
             return null;
         }
         
-        // Si es un proc funcs
+        // Determina si es un proc funcs
         if (aThis.D1 instanceof SequentialDeclarationProcFuncs) {
-            if (aThis.D2 instanceof ProcDeclaration) { 
-                agregarProc((ProcDeclaration) aThis.D2);
-                aThis.D1.visit(this, null);
-            }
-            else{ 
-                if (aThis.D2 instanceof FuncDeclaration) { 
-                    agregarFunc((FuncDeclaration)aThis.D2);
-                    aThis.D1.visit(this, null);
-                }
-            }
+            visitarProcFuncs(aThis);
         }
-
+        // Otros casos
         else{
             if (aThis.D1 instanceof ProcDeclaration) { 
                 agregarProc((ProcDeclaration) aThis.D1);
@@ -1429,6 +1440,7 @@ public final class Checker implements Visitor {
                 }
             }
         }
+        // Vistar los hijos
         aThis.D1.visit(this, null);
         aThis.D2.visit(this, null);
         return null;
@@ -1444,5 +1456,18 @@ public final class Checker implements Visitor {
     public Object visitCompoundSingleDeclaration(CompoundSingleDeclaration aThis, Object o) {
         aThis.dAST.visit(this, null);
         return null;
+    }
+
+    private void visitarProcFuncs(SequentialDeclarationProcFuncs aThis) {
+        if(aThis.D2 instanceof FuncDeclaration){
+            agregarFunc((FuncDeclaration)aThis.D2);
+            aThis.D1.visit(this, null);
+        }
+        else{
+            if (aThis.D2 instanceof ProcDeclaration) { 
+                agregarProc((ProcDeclaration) aThis.D2);
+                aThis.D1.visit(this, null);
+            }
+        }
     }
 }
