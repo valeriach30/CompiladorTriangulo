@@ -30,18 +30,44 @@
 </IntegerLiteral>
 </IntegerExpression>
 </BinaryExpression>
+<SequentialCommand>
 <CallCommand>
-<Identifier value='putint'>
+<Identifier value='Impr'>
 </Identifier>
 <SingleActualParameterSequence>
 <ConstActualParameter>
-<IntegerExpression>
-<IntegerLiteral value= '2'>
-</IntegerLiteral>
-</IntegerExpression>
+<CharacterExpression>
+<CharacterLiteral value='0'>
+</CharacterLiteral>
+</CharacterExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
+<CallCommand>
+<Identifier value='Pong'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '-'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</SequentialCommand>
 <EmptyCommand>
 </EmptyCommand>
 </IfCommand>
@@ -72,18 +98,44 @@
 </IntegerLiteral>
 </IntegerExpression>
 </BinaryExpression>
+<SequentialCommand>
 <CallCommand>
-<Identifier value='putint'>
+<Identifier value='Impr'>
 </Identifier>
 <SingleActualParameterSequence>
 <ConstActualParameter>
-<IntegerExpression>
-<IntegerLiteral value= '2'>
-</IntegerLiteral>
-</IntegerExpression>
+<CharacterExpression>
+<CharacterLiteral value='0'>
+</CharacterLiteral>
+</CharacterExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
+<CallCommand>
+<Identifier value='Ping'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '-'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</SequentialCommand>
 <EmptyCommand>
 </EmptyCommand>
 </IfCommand>
