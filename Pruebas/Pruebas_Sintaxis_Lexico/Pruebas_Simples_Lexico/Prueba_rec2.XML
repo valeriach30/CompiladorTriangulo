@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Program>
 <LetCommand>
-<SequentialDeclaration>
-<SequentialDeclaration>
+<ProcFuncDeclaration>
+<ProcFuncDeclaration>
 <ProcDeclaration>
 <SingleFormalParameterSequence>
 <ConstFormalParameter>
@@ -30,14 +30,14 @@
 </IntegerExpression>
 </BinaryExpression>
 <CallCommand>
-<Identifier value='Ping'>
+<Identifier value='put'>
 </Identifier>
 <SingleActualParameterSequence>
 <ConstActualParameter>
-<IntegerExpression>
-<IntegerLiteral value= '0'>
-</IntegerLiteral>
-</IntegerExpression>
+<CharacterExpression>
+<CharacterLiteral value='0'>
+</CharacterLiteral>
+</CharacterExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
@@ -99,7 +99,7 @@
 </EmptyCommand>
 </IfCommand>
 </ProcDeclaration>
-</SequentialDeclaration>
+</ProcFuncDeclaration>
 <ProcDeclaration>
 <SingleFormalParameterSequence>
 <ConstFormalParameter>
@@ -124,7 +124,7 @@
 </SingleActualParameterSequence>
 </CallCommand>
 </ProcDeclaration>
-</SequentialDeclaration>
+</ProcFuncDeclaration>
 <CallCommand>
 <Identifier value='Ping'>
 </Identifier>

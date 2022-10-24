@@ -34,6 +34,7 @@ import Triangle.AbstractSyntaxTrees.CasesCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
+import Triangle.AbstractSyntaxTrees.CompoundSingleDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstActualParameter;
 import Triangle.AbstractSyntaxTrees.ConstDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
@@ -85,6 +86,7 @@ import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.RecDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ReturnCommand;
@@ -487,11 +489,13 @@ public final class Checker implements Visitor {
   }
 
   public Object visitFuncDeclaration(FuncDeclaration ast, Object o) {
-    ast.T = (TypeDenoter) ast.T.visit(this, null);
-    idTable.enter(ast.I.spelling, ast); // permits recursion
-    if (ast.duplicated)
-      reporter.reportError("identifier \"%\" already declared",
-          ast.I.spelling, ast.position);
+    if(!ast.isRecursive){
+        ast.T = (TypeDenoter) ast.T.visit(this, null);
+        idTable.enter(ast.I.spelling, ast); // permits recursion
+        if (ast.duplicated)
+          reporter.reportError("identifier \"%\" already declared",
+              ast.I.spelling, ast.position);
+    }
     idTable.openScope();
     ast.FPS.visit(this, null);
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
@@ -503,10 +507,12 @@ public final class Checker implements Visitor {
   }
 
   public Object visitProcDeclaration(ProcDeclaration ast, Object o) {
-    idTable.enter(ast.I.spelling, ast); // permits recursion
-    if (ast.duplicated)
-      reporter.reportError("identifier \"%\" already declared",
-          ast.I.spelling, ast.position);
+    if(!ast.isRecursive){
+        idTable.enter(ast.I.spelling, ast); // permits recursion
+        if (ast.duplicated)
+          reporter.reportError("identifier \"%\" already declared",
+              ast.I.spelling, ast.position);
+    }
     idTable.openScope();
     ast.FPS.visit(this, null);
     ast.C.visit(this, null);
@@ -1352,9 +1358,10 @@ public final class Checker implements Visitor {
 
   private void enterProc(ProcDeclaration aThis){
     idTable.enter(aThis.I.spelling, aThis);
-    if (aThis.duplicated)
-      reporter.reportError("identifier \"%\" already declared",
+    if(aThis.duplicated){
+        reporter.reportError("identifier \"%\" already declared",
           aThis.I.spelling, aThis.position);
+    }
     idTable.openScope();
     aThis.FPS.visit(this, null);
     aThis.C.visit(this, null);
@@ -1364,9 +1371,10 @@ public final class Checker implements Visitor {
   private void enterFunc(FuncDeclaration aThis){
     aThis.T = (TypeDenoter) aThis.T.visit(this, null);
     idTable.enter(aThis.I.spelling, aThis); // permits recursion
-    if (aThis.duplicated)
-      reporter.reportError("identifier \"%\" already declared",
+    if(aThis.duplicated){
+        reporter.reportError("identifier \"%\" already declared",
           aThis.I.spelling, aThis.position);
+    }
     idTable.openScope();
     aThis.FPS.visit(this, null);
     idTable.closeScope();
@@ -1378,11 +1386,11 @@ public final class Checker implements Visitor {
         aThis.D1.visit(this, null);
         aThis.D2.visit(this, null);
 
-        //Si el nodo ya se visito termine return null;
+        //Si el nodo ya se visito termine 
         if (aThis.D2 instanceof ProcDeclaration && ((ProcDeclaration) aThis.D2).isRecursive){ 
             return null;
         }
-        //Si el nodo ya se visito termine return null;
+        //Si el nodo ya se visito termine 
         if (aThis.D2 instanceof FuncDeclaration && ((FuncDeclaration) aThis.D2).isRecursive) { 
             return null;
         }
@@ -1419,6 +1427,18 @@ public final class Checker implements Visitor {
         }
         aThis.D1.visit(this, null);
         aThis.D2.visit(this, null);
+        return null;
+    }
+
+    @Override
+    public Object visitRecDeclaration(RecDeclaration aThis, Object o) {
+        aThis.dAST.visit(this, null);
+        return null;
+    }
+
+    @Override
+    public Object visitCompoundSingleDeclaration(CompoundSingleDeclaration aThis, Object o) {
+        aThis.dAST.visit(this, null);
         return null;
     }
 }

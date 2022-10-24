@@ -32,6 +32,7 @@ import Triangle.AbstractSyntaxTrees.CasesCommand;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
 import Triangle.AbstractSyntaxTrees.Command;
+import Triangle.AbstractSyntaxTrees.CompoundSingleDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstActualParameter;
 import Triangle.AbstractSyntaxTrees.ConstDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
@@ -81,6 +82,7 @@ import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.RecDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
@@ -1121,23 +1123,25 @@ public class Parser {
           case Token.PROC:
           case Token.FUNC:
           case Token.TYPE:
-              declarationAST = parseSingleDeclaration();
+              Declaration dAST = parseSingleDeclaration();
               finish(position);
+              declarationAST = new CompoundSingleDeclaration(dAST, position);
               break;
           case Token.REC:
               acceptIt();
               declarationAST = parseProcFuncs();
               accept(Token.END);
               finish(position);
+              declarationAST = new RecDeclaration(declarationAST, position);
               break;
           case Token.LOCAL:
               acceptIt();
-              Declaration dAST = parseDeclaration();
+              Declaration dAST1 = parseDeclaration();
               accept(Token.IN);
               Declaration dAST2 = parseDeclaration();
               accept(Token.END);
               finish(position);
-              declarationAST = new LocalDeclaration(dAST, dAST2, position);
+              declarationAST = new LocalDeclaration(dAST1, dAST2, position);
               break;
           default:
               syntacticError("\"%\" cannot start a declaration.",

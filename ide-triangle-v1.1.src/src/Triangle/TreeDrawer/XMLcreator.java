@@ -22,6 +22,7 @@ import Triangle.AbstractSyntaxTrees.CasesCommand;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
+import Triangle.AbstractSyntaxTrees.CompoundSingleDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstActualParameter;
 import Triangle.AbstractSyntaxTrees.ConstDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
@@ -69,6 +70,7 @@ import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.RecDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ReturnCommand;
@@ -1180,6 +1182,26 @@ public class XMLcreator implements Visitor {
         aThis.D2.visit(this, null);
       
         nuevaLinea("</ProcFuncDeclaration>");
+        return(null);
+    }
+
+    @Override
+    public Object visitRecDeclaration(RecDeclaration aThis, Object o) {
+        nuevaLinea("<RecDeclaration>");
+      
+        aThis.dAST.visit(this, null);
+      
+        nuevaLinea("</RecDeclaration>");
+        return(null);
+    }
+
+    @Override
+    public Object visitCompoundSingleDeclaration(CompoundSingleDeclaration aThis, Object o) {
+        nuevaLinea("<CompoundSingleDeclaration>");
+      
+        aThis.dAST.visit(this, null);
+      
+        nuevaLinea("</CompoundSingleDeclaration>");
         return(null);
     }
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Program>
 <LetCommand>
-<SequentialDeclaration>
-<SequentialDeclaration>
+<RecDeclaration>
+<ProcFuncDeclaration>
+<ProcFuncDeclaration>
 <ProcDeclaration>
 <SingleFormalParameterSequence>
 <ConstFormalParameter>
@@ -55,6 +56,8 @@
 </SimpleVname>
 </VnameExpression>
 <Operator value= '-'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
 </Operator>
 <IntegerExpression>
 <IntegerLiteral value= '1'>
@@ -137,7 +140,7 @@
 </EmptyCommand>
 </IfCommand>
 </ProcDeclaration>
-</SequentialDeclaration>
+</ProcFuncDeclaration>
 <ProcDeclaration>
 <SingleFormalParameterSequence>
 <ConstFormalParameter>
@@ -162,7 +165,8 @@
 </SingleActualParameterSequence>
 </CallCommand>
 </ProcDeclaration>
-</SequentialDeclaration>
+</ProcFuncDeclaration>
+</RecDeclaration>
 <CallCommand>
 <Identifier value='Ping'>
 </Identifier>
