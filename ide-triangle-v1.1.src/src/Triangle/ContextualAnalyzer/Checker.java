@@ -150,6 +150,9 @@ public final class Checker implements Visitor {
         reporter.reportError("Character literal \"%\" already used", ast.CL.spelling, ast.position);
     } else {
       cType = (TypeDenoter) ast.IL.visit(this, null);
+      idTable.enter(ast.IL.spelling, ast);
+      if (ast.duplicated)
+        reporter.reportError("Integer literal \"%\" already used", ast.IL.spelling, ast.position);
     }
     if (!cType.equals(StdEnvironment.integerType) || !cType.equals(StdEnvironment.charType))
       reporter.reportError("Integer Literal or Character Literal expected here",
@@ -209,17 +212,10 @@ public final class Checker implements Visitor {
 
   public Object visitSelectCommand(SelectCommand ast, Object obj) {
     TypeDenoter eType = (TypeDenoter) ast.expression.visit(this, null);
-    if (eType.equals(StdEnvironment.integerType)) {
-      TypeDenoter cType = (TypeDenoter) ast.cases.visit(this, eType);
-      /*
-       * if(! eType.equals(cType))
-       * reporter.reportError("All literals must be integers", "",
-       * ast.cases.getPosition());
-       */
-    } else if (eType.equals(StdEnvironment.charType)) {
-      TypeDenoter cType = (TypeDenoter) ast.cases.visit(this, null);
-      if (!eType.equals(cType))
-        reporter.reportError("All literals must be characters", "", ast.cases.getPosition());
+    if (eType.equals(StdEnvironment.integerType) || eType.equals(StdEnvironment.charType)) {
+      idTable.openScope();
+      ast.cases.visit(this, eType);
+      idTable.closeScope();
     } else {
       reporter.reportError("Integer or Character Expression expected here",
           "", ast.expression.position);
@@ -1375,7 +1371,7 @@ public final class Checker implements Visitor {
     idTable.openScope();
 
     aThis.FPS.visit(this, null);
-    aThis.C.visit(this, null);
+    // aThis.C.visit(this, null); Bug
 
     idTable.closeScope();
 
