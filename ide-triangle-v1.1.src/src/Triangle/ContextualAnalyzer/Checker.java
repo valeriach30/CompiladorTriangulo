@@ -490,7 +490,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitFuncDeclaration(FuncDeclaration ast, Object o) {
-    if(!ast.isRecursive){
+    if(!ast.visitaddo){
         ast.T = (TypeDenoter) ast.T.visit(this, null);
         idTable.enter(ast.I.spelling, ast); // permits recursion
         if (ast.duplicated)
@@ -508,7 +508,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitProcDeclaration(ProcDeclaration ast, Object o) {
-    if(!ast.isRecursive){
+    if(!ast.visitaddo){
         idTable.enter(ast.I.spelling, ast); // permits recursion
         if (ast.duplicated)
           reporter.reportError("identifier \"%\" already declared",
@@ -1356,8 +1356,8 @@ public final class Checker implements Visitor {
     throw new UnsupportedOperationException("Not supported yet."); // Generated from
                                                                    // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
   }
-
-  private void enterProc(ProcDeclaration aThis){
+  // Autores: Valeria Chinchilla
+  private void agregarProc(ProcDeclaration aThis){
     idTable.enter(aThis.I.spelling, aThis);
     if(aThis.duplicated){
         reporter.reportError("identifier \"%\" already declared",
@@ -1367,9 +1367,11 @@ public final class Checker implements Visitor {
     aThis.FPS.visit(this, null);
     aThis.C.visit(this, null);
     idTable.closeScope();
-    (aThis).isRecursive = true;
+    (aThis).visitaddo = true;
   }
-  private void enterFunc(FuncDeclaration aThis){
+  
+  // Autores: Valeria Chinchilla
+  private void agregarFunc(FuncDeclaration aThis){
     aThis.T = (TypeDenoter) aThis.T.visit(this, null);
     idTable.enter(aThis.I.spelling, aThis); // permits recursion
     if(aThis.duplicated){
@@ -1379,27 +1381,31 @@ public final class Checker implements Visitor {
     idTable.openScope();
     aThis.FPS.visit(this, null);
     idTable.closeScope();
-    (aThis).isRecursive = true;
+    (aThis).visitaddo = true;
   }
   
+  // Autores: Valeria Chinchilla
     @Override
     public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
-        //Si el nodo ya se visito termine 
-        if (aThis.D2 instanceof ProcDeclaration && ((ProcDeclaration) aThis.D2).isRecursive){ 
+        
+        // Caso base para la recursion
+        if (aThis.D2 instanceof ProcDeclaration && ((ProcDeclaration) aThis.D2).visitaddo){ 
             return null;
         }
-        //Si el nodo ya se visito termine 
-        if (aThis.D2 instanceof FuncDeclaration && ((FuncDeclaration) aThis.D2).isRecursive) { 
+        // Caso base para la recursion
+        if (aThis.D2 instanceof FuncDeclaration && ((FuncDeclaration) aThis.D2).visitaddo) { 
             return null;
         }
+        
+        // Si es un proc funcs
         if (aThis.D1 instanceof SequentialDeclarationProcFuncs) {
             if (aThis.D2 instanceof ProcDeclaration) { 
-                enterProc((ProcDeclaration) aThis.D2);
+                agregarProc((ProcDeclaration) aThis.D2);
                 aThis.D1.visit(this, null);
             }
             else{ 
                 if (aThis.D2 instanceof FuncDeclaration) { 
-                    enterFunc((FuncDeclaration)aThis.D2);
+                    agregarFunc((FuncDeclaration)aThis.D2);
                     aThis.D1.visit(this, null);
                 }
             }
@@ -1407,19 +1413,19 @@ public final class Checker implements Visitor {
 
         else{
             if (aThis.D1 instanceof ProcDeclaration) { 
-                enterProc((ProcDeclaration) aThis.D1);
+                agregarProc((ProcDeclaration) aThis.D1);
             }
             else{ 
                 if (aThis.D1 instanceof FuncDeclaration) { 
-                    enterFunc((FuncDeclaration) aThis.D1);
+                    agregarFunc((FuncDeclaration) aThis.D1);
                 }
             }
             if (aThis.D2 instanceof ProcDeclaration) {
-                enterProc((ProcDeclaration) aThis.D2); 
+                agregarProc((ProcDeclaration) aThis.D2); 
             }
             else {
                 if (aThis.D2 instanceof FuncDeclaration) { 
-                    enterFunc((FuncDeclaration) aThis.D2);
+                    agregarFunc((FuncDeclaration) aThis.D2);
                 }
             }
         }

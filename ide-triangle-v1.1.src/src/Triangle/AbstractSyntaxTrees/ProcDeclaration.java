@@ -33,5 +33,5 @@ public class ProcDeclaration extends Declaration {
   public Identifier I;
   public FormalParameterSequence FPS;
   public Command C;
-  public boolean isRecursive;
+  public boolean visitaddo;
 }

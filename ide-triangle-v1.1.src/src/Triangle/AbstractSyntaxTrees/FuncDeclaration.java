@@ -36,5 +36,5 @@ public class FuncDeclaration extends Declaration {
   public FormalParameterSequence FPS;
   public TypeDenoter T;
   public Expression E;
-  public boolean isRecursive;
+  public boolean visitaddo;
 }
