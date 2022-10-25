@@ -1,0 +1,33 @@
+! Error: impr esta declarado dos veces
+
+
+let
+
+  rec
+
+   proc Ping (x : Integer) ~ 
+         if x > 0 then
+             put ('x')
+         else 
+             nil
+         end
+    end
+
+    |
+
+    proc Impr (c : Char) ~ 
+         put (c)
+    end
+
+    |
+
+    proc Impr (c : Char) ~ 
+         put (c)
+    end
+
+  end
+
+in
+
+  Ping (6) ! imprime IOIOIO
+end
