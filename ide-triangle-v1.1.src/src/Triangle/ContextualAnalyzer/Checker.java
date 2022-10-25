@@ -145,21 +145,20 @@ public final class Checker implements Visitor {
     TypeDenoter cType;
     if (ast.CL != null) {
       cType = (TypeDenoter) ast.CL.visit(this, null);
-      idTable.enter(ast.CL.spelling, ast);
+      idTable.enter((String) ast.CL.spelling, ast);
       if (ast.duplicated)
         reporter.reportError("Character literal \"%\" already used", ast.CL.spelling, ast.position);
     } else {
       cType = (TypeDenoter) ast.IL.visit(this, null);
-      idTable.enter(ast.IL.spelling, ast);
+      idTable.enter((String) ast.IL.spelling, ast);
       if (ast.duplicated)
         reporter.reportError("Integer literal \"%\" already used", ast.IL.spelling, ast.position);
     }
-    if (!cType.equals(StdEnvironment.integerType) || !cType.equals(StdEnvironment.charType))
+    if (!cType.equals(StdEnvironment.integerType) && !cType.equals(StdEnvironment.charType))
       reporter.reportError("Integer Literal or Character Literal expected here",
           "", ast.position);
-    else if (!cType.equals(o))
+    if (cType.equals(o) == false)
       reporter.reportError("All literals must be the same kind", "", ast.position);
-
     return null;
   }
 
@@ -191,22 +190,18 @@ public final class Checker implements Visitor {
   public Object visitCaseCommand(CaseCommand ast, Object obj) {
     if (ast.CL != null) {
       ast.CL.visit(this, obj);
+      ast.C.visit(this, null);
     }
     return null;
   }
 
   // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCasesCommand(CasesCommand ast, Object obj) {
-    TypeDenoter cType;
     if (ast.multipleCase == null) {
-      cType = (TypeDenoter) ast.singleCase.visit(this, obj);
+      ast.singleCase.visit(this, obj);
     } else {
-      cType = (TypeDenoter) ast.multipleCase.visit(this, obj);
+      ast.multipleCase.visit(this, obj);
     }
-
-    if (!obj.equals(cType))
-      reporter.reportError("All literals must be the same kind", "", ast.position);
-
     return null;
   }
 
@@ -229,11 +224,10 @@ public final class Checker implements Visitor {
 
   // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
   public Object visitCaseLiterals(CaseLiterals ast, Object obj) {
-    TypeDenoter cType;
     if (ast.SCRCL != null) {
-      cType = (TypeDenoter) ast.SCRCL.visit(this, obj);
+      ast.SCRCL.visit(this, obj);
     } else if (ast.MCRCL != null) {
-      cType = (TypeDenoter) ast.MCRCL.visit(this, obj);
+      ast.MCRCL.visit(this, obj);
     }
     return null;
   }
@@ -254,7 +248,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitSingleCase(SingleCase ast, Object obj) {
-    TypeDenoter cType = (TypeDenoter) ast.SC.visit(this, obj);
+    ast.SC.visit(this, obj);
     return null;
   }
 
@@ -274,8 +268,8 @@ public final class Checker implements Visitor {
   }
 
   public Object visitMultipleCase(MultipleCase ast, Object obj) {
-    if (ast.MCC2 != null) {
-      ast.MCC2.visit(this, obj);
+    if (ast.MCC2 == null) {
+      ast.MCC.visit(this, obj);
     } else {
       ast.MCC.visit(this, obj);
       ast.MCC2.visit(this, obj);
@@ -355,6 +349,7 @@ public final class Checker implements Visitor {
     IntegerLiteral il = new IntegerLiteral(new Integer(ast.AA.elemCount).toString(),
         ast.position);
     ast.type = new ArrayTypeDenoter(il, elemType, ast.position);
+    StdEnvironment.arrayTypeDenoter = new ArrayTypeDenoter(il, elemType, ast.position);
     return ast.type;
   }
 
@@ -927,6 +922,12 @@ public final class Checker implements Visitor {
     } else if (binding instanceof VarDeclarationInit) { // Se agrega para var init
       ast.type = ((VarDeclarationInit) binding).T;
       ast.variable = true; // Se agrega como una variable
+    } else if (binding instanceof ForFromCommand) {
+      ast.type = ((ForFromCommand) binding).E.type;
+      ast.variable = true; // Se agrega como una variable
+    } else if (binding instanceof ForInCommand) {
+      ast.type = ((ForInCommand) binding).E.type;
+      ast.variable = true; // Se agrega como una variable
     } else
       reporter.reportError("\"%\" is not a const or var identifier",
           ast.I.spelling, ast.I.position);
@@ -1106,6 +1107,8 @@ public final class Checker implements Visitor {
     StdEnvironment.integerType = new IntTypeDenoter(dummyPos);
     StdEnvironment.charType = new CharTypeDenoter(dummyPos);
     StdEnvironment.anyType = new AnyTypeDenoter(dummyPos);
+    StdEnvironment.arrayTypeDenoter = new ArrayTypeDenoter(new IntegerLiteral("", dummyPos),
+        new IntTypeDenoter(dummyPos), dummyPos);
     StdEnvironment.errorType = new ErrorTypeDenoter(dummyPos);
 
     StdEnvironment.booleanDecl = declareStdType("Boolean", StdEnvironment.booleanType);

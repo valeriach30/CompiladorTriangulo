@@ -1,4 +1,9 @@
-loop x 
-do x:= x + 1 
-while x < 10
+let 
+var x : Integer
+in
+x := 0;
+loop x 
+do x:= x + 1
+ while x < 10 
+end 
 end

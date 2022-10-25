@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<CompoundSingleDeclaration>
+<VarDeclaration>
+<IntTypeDenoter>
+</IntTypeDenoter>
+</VarDeclaration>
+</CompoundSingleDeclaration>
+<SequentialCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+<IntegerExpression>
+<IntegerLiteral value= '0'>
+</IntegerLiteral>
+</IntegerExpression>
+</AssignCommand>
+<LoopCommand>
+<Identifier value='x'>
+</Identifier>
+<ToCommand>
+<IntegerExpression>
+<IntegerLiteral value= '10'>
+</IntegerLiteral>
+</IntegerExpression>
+</ToCommand>
+<ForFromCommand>
+<Identifier value='x'>
+</Identifier>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</ForFromCommand>
+<DoCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '+'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</AssignCommand>
+</DoCommand>
+</LoopCommand>
+</SequentialCommand>
+</LetCommand>
+</Program>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<SelectCommand>
+<CharacterExpression>
+<CharacterLiteral value='1'>
+</CharacterLiteral>
+</CharacterExpression>
+<CasesCommand>
+<MultipleCase>
+<MultipleCase>
+<CaseCommand>
+<CaseLiterals>
+<SingleCaseRange>
+<CaseRangeCommand>
+<CaseLiteralCommand>
+<CharacterLiteral value='1'>
+</CharacterLiteral>
+</CaseLiteralCommand>
+</CaseRangeCommand>
+</SingleCaseRange>
+</CaseLiterals>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '12'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</CaseCommand>
+</MultipleCase>
+<CaseCommand>
+<CaseLiterals>
+<SingleCaseRange>
+<CaseRangeCommand>
+<CaseLiteralCommand>
+<CharacterLiteral value='4'>
+</CharacterLiteral>
+</CaseLiteralCommand>
+</CaseRangeCommand>
+</SingleCaseRange>
+</CaseLiterals>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '2'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</CaseCommand>
+</MultipleCase>
+</CasesCommand>
+</SelectCommand>
+</Program>

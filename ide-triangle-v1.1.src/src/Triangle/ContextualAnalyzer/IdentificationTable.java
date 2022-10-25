@@ -26,8 +26,8 @@ public final class IdentificationTable {
   // Autores: Valeria Chinchilla
   private Stack<IdEntry> pilaPublica = new Stack<>();
   private Stack<IdEntry> pilaPrivada = new Stack<>();
-  
-  public IdentificationTable () {
+
+  public IdentificationTable() {
     level = 0;
     latest = null;
   }
@@ -35,15 +35,15 @@ public final class IdentificationTable {
   // Opens a new level in the identification table, 1 higher than the
   // current topmost level.
 
-  public void openScope () {
+  public void openScope() {
 
-    level ++;
+    level++;
   }
 
   // Closes the topmost level in the identification table, discarding
   // all entries belonging to that level.
 
-  public void closeScope () {
+  public void closeScope() {
 
     IdEntry entry, local;
 
@@ -62,7 +62,7 @@ public final class IdentificationTable {
   // duplicated is set to to true iff there is already an entry for the
   // same identifier at the current level.
 
-  public void enter (String id, Declaration attr) {
+  public void enter(String id, Declaration attr) {
 
     IdEntry entry = this.latest;
     boolean present = false, searching = true;
@@ -74,8 +74,9 @@ public final class IdentificationTable {
       else if (entry.id.equals(id)) {
         present = true;
         searching = false;
-       } else
-       entry = entry.previous;
+      } else {
+        entry = entry.previous;
+      }
     }
 
     attr.duplicated = present;
@@ -90,7 +91,7 @@ public final class IdentificationTable {
   // Returns null iff no entry is found.
   // otherwise returns the attribute field of the entry found.
 
-  public Declaration retrieve (String id) {
+  public Declaration retrieve(String id) {
 
     IdEntry entry;
     Declaration attr = null;
@@ -110,28 +111,28 @@ public final class IdentificationTable {
 
     return attr;
   }
-  
-    // Autores: Valeria Chinchilla
-    public void pushPilaPublica(){
-        IdEntry ultimo = this.latest;
-        pilaPublica.push(ultimo);
-    }
-    
-    // Autores: Valeria Chinchilla
-    public void pushPilaPrivada(){
-        IdEntry ultimo = this.latest;
-        pilaPrivada.push(ultimo);
-    }
 
-    // Autores: Valeria Chinchilla
-    public void cerrarPilaPrivada(){
-        IdEntry entrada = this.latest;
-        IdEntry ultimoPublico = pilaPublica.pop();
-        IdEntry ultimoPrivado = pilaPrivada.pop();
-        while(!(entrada.previous == ultimoPrivado)){
-            entrada = entrada.previous;
-        }
-        entrada.previous = ultimoPublico;
+  // Autores: Valeria Chinchilla
+  public void pushPilaPublica() {
+    IdEntry ultimo = this.latest;
+    pilaPublica.push(ultimo);
+  }
+
+  // Autores: Valeria Chinchilla
+  public void pushPilaPrivada() {
+    IdEntry ultimo = this.latest;
+    pilaPrivada.push(ultimo);
+  }
+
+  // Autores: Valeria Chinchilla
+  public void cerrarPilaPrivada() {
+    IdEntry entrada = this.latest;
+    IdEntry ultimoPublico = pilaPublica.pop();
+    IdEntry ultimoPrivado = pilaPrivada.pop();
+    while (!(entrada.previous == ultimoPrivado)) {
+      entrada = entrada.previous;
     }
+    entrada.previous = ultimoPublico;
+  }
 
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<SelectCommand>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+<CasesCommand>
+<SingleCase>
+<CaseCommand>
+<CaseLiterals>
+<SingleCaseRange>
+<CaseRangeCommand>
+<CaseLiteralCommand>
+<IntegerLiteral value= '0'>
+</IntegerLiteral>
+</CaseLiteralCommand>
+</CaseRangeCommand>
+</SingleCaseRange>
+</CaseLiterals>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</CaseCommand>
+</SingleCase>
+</CasesCommand>
+</SelectCommand>
+</Program>

@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Program>
+<LetCommand>
+<CompoundSingleDeclaration>
+<VarDeclaration>
+<IntTypeDenoter>
+</IntTypeDenoter>
+</VarDeclaration>
+</CompoundSingleDeclaration>
+<SequentialCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+<IntegerExpression>
+<IntegerLiteral value= '0'>
+</IntegerLiteral>
+</IntegerExpression>
+</AssignCommand>
 <LoopCommand>
 <Identifier value='x'>
 </Identifier>
@@ -46,4 +64,6 @@
 </AssignCommand>
 </DoCommand>
 </LoopCommand>
+</SequentialCommand>
+</LetCommand>
 </Program>
