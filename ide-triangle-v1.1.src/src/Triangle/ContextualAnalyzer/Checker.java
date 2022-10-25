@@ -349,7 +349,7 @@ public final class Checker implements Visitor {
     IntegerLiteral il = new IntegerLiteral(new Integer(ast.AA.elemCount).toString(),
         ast.position);
     if (!(elemType instanceof IntTypeDenoter)) {
-            reporter.reportError("Int Array expected here", "", ast.position);
+      reporter.reportError("Int Array expected here", "", ast.position);
     }
     ast.type = new ArrayTypeDenoter(il, elemType, ast.position);
     StdEnvironment.arrayTypeDenoter = new ArrayTypeDenoter(il, elemType, ast.position);
@@ -671,12 +671,14 @@ public final class Checker implements Visitor {
   public Object visitConstActualParameter(ConstActualParameter ast, Object o) {
     FormalParameter fp = (FormalParameter) o;
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
-      System.out.println(eType);
-      System.out.println(((ConstFormalParameter) fp).T);
+    System.out.println(eType);
+    System.out.println(((ConstFormalParameter) fp).T);
 
     if (!(fp instanceof ConstFormalParameter))
       reporter.reportError("const actual parameter not expected here", "",
           ast.position);
+    else if (eType instanceof ArrayTypeDenoter)
+      return null;
     else if (!eType.equals(((ConstFormalParameter) fp).T))
       reporter.reportError("wrong type for const actual parameter", "",
           ast.E.position);

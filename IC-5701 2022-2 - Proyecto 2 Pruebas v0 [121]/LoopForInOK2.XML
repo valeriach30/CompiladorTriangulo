@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LoopCommand>
+<ForInCommand>
+<Identifier value='x'>
+</Identifier>
+<ArrayExpression>
+<MultipleArrayAggregate>
+<MultipleArrayAggregate>
+<MultipleArrayAggregate>
+<MultipleArrayAggregate>
+<MultipleArrayAggregate>
+<SingleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '16'>
+</IntegerLiteral>
+</IntegerExpression>
+</SingleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '8'>
+</IntegerLiteral>
+</IntegerExpression>
+</MultipleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '4'>
+</IntegerLiteral>
+</IntegerExpression>
+</MultipleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '2'>
+</IntegerLiteral>
+</IntegerExpression>
+</MultipleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</MultipleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '0'>
+</IntegerLiteral>
+</IntegerExpression>
+</MultipleArrayAggregate>
+</ArrayExpression>
+</ForInCommand>
+<DoCommand>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<LetCommand>
+<CompoundSingleDeclaration>
+<VarDeclarationInit>
+<CharacterExpression>
+<CharacterLiteral value='a'>
+</CharacterLiteral>
+</CharacterExpression>
+<Identifier value='x'>
+</Identifier>
+</VarDeclarationInit>
+</CompoundSingleDeclaration>
+<CallCommand>
+<Identifier value='put'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</SequentialCommand>
+</DoCommand>
+</LoopCommand>
+</Program>
