@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<RecDeclaration>
+<ProcFuncDeclaration>
+<ProcDeclaration>
+<SingleFormalParameterSequence>
+<ConstFormalParameter>
+<Identifier value='x'>
+</Identifier>
+<IntTypeDenoter>
+</IntTypeDenoter>
+</ConstFormalParameter>
+</SingleFormalParameterSequence>
+<IfCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&gt;'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '0'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='put'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CharacterExpression>
+<CharacterLiteral value='x'>
+</CharacterLiteral>
+</CharacterExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<EmptyCommand>
+</EmptyCommand>
+</IfCommand>
+</ProcDeclaration>
+<FuncDeclaration>
+<ErrorTypeDenoter>
+</ErrorTypeDenoter>
+<EmptyFormalParameterSequence>
+</EmptyFormalParameterSequence>
+<IntegerExpression>
+<IntegerLiteral value= '2'>
+</IntegerLiteral>
+</IntegerExpression>
+</FuncDeclaration>
+</ProcFuncDeclaration>
+</RecDeclaration>
+<CallCommand>
+<Identifier value='put'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CharacterExpression>
+<CharacterLiteral value='a'>
+</CharacterLiteral>
+</CharacterExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</Program>
