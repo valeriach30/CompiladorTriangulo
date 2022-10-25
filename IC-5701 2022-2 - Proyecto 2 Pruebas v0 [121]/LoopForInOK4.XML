@@ -67,20 +67,20 @@
 <MultipleArrayAggregate>
 <MultipleArrayAggregate>
 <SingleArrayAggregate>
-<IntegerExpression>
-<IntegerLiteral value= '3'>
-</IntegerLiteral>
-</IntegerExpression>
+<CharacterExpression>
+<CharacterLiteral value='c'>
+</CharacterLiteral>
+</CharacterExpression>
 </SingleArrayAggregate>
-<IntegerExpression>
-<IntegerLiteral value= '2'>
-</IntegerLiteral>
-</IntegerExpression>
+<CharacterExpression>
+<CharacterLiteral value='b'>
+</CharacterLiteral>
+</CharacterExpression>
 </MultipleArrayAggregate>
-<IntegerExpression>
-<IntegerLiteral value= '1'>
-</IntegerLiteral>
-</IntegerExpression>
+<CharacterExpression>
+<CharacterLiteral value='a'>
+</CharacterLiteral>
+</CharacterExpression>
 </MultipleArrayAggregate>
 </ArrayExpression>
 </ForInCommand>

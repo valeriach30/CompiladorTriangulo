@@ -348,8 +348,8 @@ public final class Checker implements Visitor {
     TypeDenoter elemType = (TypeDenoter) ast.AA.visit(this, null);
     IntegerLiteral il = new IntegerLiteral(new Integer(ast.AA.elemCount).toString(),
         ast.position);
-    if (!(elemType instanceof IntTypeDenoter)) {
-      reporter.reportError("Int Array expected here", "", ast.position);
+    if (!(elemType instanceof IntTypeDenoter) && !(elemType instanceof CharTypeDenoter)) {
+      reporter.reportError("Int or char Array expected here", "", ast.position);
     }
     ast.type = new ArrayTypeDenoter(il, elemType, ast.position);
     StdEnvironment.arrayTypeDenoter = new ArrayTypeDenoter(il, elemType, ast.position);
