@@ -671,9 +671,6 @@ public final class Checker implements Visitor {
   public Object visitConstActualParameter(ConstActualParameter ast, Object o) {
     FormalParameter fp = (FormalParameter) o;
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
-    System.out.println(eType);
-    System.out.println(((ConstFormalParameter) fp).T);
-
     if (!(fp instanceof ConstFormalParameter))
       reporter.reportError("const actual parameter not expected here", "",
           ast.position);
@@ -687,7 +684,6 @@ public final class Checker implements Visitor {
 
   public Object visitFuncActualParameter(FuncActualParameter ast, Object o) {
     FormalParameter fp = (FormalParameter) o;
-
     Declaration binding = (Declaration) ast.I.visit(this, null);
     if (binding == null)
       reportUndeclared(ast.I);
