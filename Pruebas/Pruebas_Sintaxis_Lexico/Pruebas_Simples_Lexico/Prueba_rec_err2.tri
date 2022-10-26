@@ -1,0 +1,28 @@
+! Error: los parametros de los proc son privados entonces c no esta declarado
+
+
+let
+
+  rec
+
+   proc Ping (x : Integer) ~ 
+         if x > 0 then
+             put ('x')
+         else 
+             nil
+         end
+    end
+
+    |
+
+    proc Impr (c : Char) ~ 
+         put (c)
+    end
+
+  end
+
+in
+
+  Ping (6); ! imprime IOIOIO
+  put(c)
+end

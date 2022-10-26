@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<RecDeclaration>
+<ProcFuncDeclaration>
+<ProcDeclaration>
+<SingleFormalParameterSequence>
+<ConstFormalParameter>
+<Identifier value='x'>
+</Identifier>
+<IntTypeDenoter>
+</IntTypeDenoter>
+</ConstFormalParameter>
+</SingleFormalParameterSequence>
+<IfCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&gt;'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '0'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='put'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CharacterExpression>
+<CharacterLiteral value='x'>
+</CharacterLiteral>
+</CharacterExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<EmptyCommand>
+</EmptyCommand>
+</IfCommand>
+</ProcDeclaration>
+<ProcDeclaration>
+<SingleFormalParameterSequence>
+<ConstFormalParameter>
+<Identifier value='c'>
+</Identifier>
+<CharTypeDenoter>
+</CharTypeDenoter>
+</ConstFormalParameter>
+</SingleFormalParameterSequence>
+<CallCommand>
+<Identifier value='put'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='c'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</ProcDeclaration>
+</ProcFuncDeclaration>
+</RecDeclaration>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='Ping'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value= '6'>
+</IntegerLiteral>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<CallCommand>
+<Identifier value='put'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='c'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</SequentialCommand>
+</LetCommand>
+</Program>
