@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<SequentialDeclaration>
+<SequentialDeclaration>
+<CompoundSingleDeclaration>
+<ConstDeclaration>
+<IntegerExpression>
+<IntegerLiteral value= '10'>
+</IntegerLiteral>
+</IntegerExpression>
+<Identifier value='b'>
+</Identifier>
+</ConstDeclaration>
+</CompoundSingleDeclaration>
+<CompoundSingleDeclaration>
+<VarDeclarationInit>
+<IntegerExpression>
+<IntegerLiteral value= '15'>
+</IntegerLiteral>
+</IntegerExpression>
+<Identifier value='a'>
+</Identifier>
+</VarDeclarationInit>
+</CompoundSingleDeclaration>
+</SequentialDeclaration>
+<CompoundSingleDeclaration>
+<VarDeclarationInit>
+<IntegerExpression>
+<IntegerLiteral value= '0'>
+</IntegerLiteral>
+</IntegerExpression>
+<Identifier value='x'>
+</Identifier>
+</VarDeclarationInit>
+</CompoundSingleDeclaration>
+</SequentialDeclaration>
+<SequentialCommand>
+<SequentialCommand>
+<SequentialCommand>
+<SequentialCommand>
+<LoopCommand>
+<Identifier value='z'>
+</Identifier>
+<WhileCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&gt;'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='b'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</BinaryExpression>
+<DoCommand>
+<SequentialCommand>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '-'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</AssignCommand>
+</SequentialCommand>
+<LoopCommand>
+<WhileCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&lt;'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '5'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+<DoCommand>
+<Leave>
+<Identifier value='y'>
+</Identifier>
+</Leave>
+</DoCommand>
+</WhileCommand>
+</LoopCommand>
+</SequentialCommand>
+</DoCommand>
+</WhileCommand>
+</LoopCommand>
+<LoopCommand>
+<Identifier value='y'>
+</Identifier>
+<UntilCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&gt;'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '5'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+<DoCommand>
+<SequentialCommand>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '+'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</AssignCommand>
+</SequentialCommand>
+<Leave>
+</Leave>
+</SequentialCommand>
+</DoCommand>
+</UntilCommand>
+</LoopCommand>
+</SequentialCommand>
+<LoopCommand>
+<WhileEndCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&lt;'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '5'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</WhileEndCommand>
+<DoCommand>
+<SequentialCommand>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '+'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</AssignCommand>
+</SequentialCommand>
+<Leave>
+</Leave>
+</SequentialCommand>
+</DoCommand>
+</LoopCommand>
+</SequentialCommand>
+<LoopCommand>
+<DoCommand>
+<SequentialCommand>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '+'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</AssignCommand>
+</SequentialCommand>
+<Leave>
+</Leave>
+</SequentialCommand>
+</DoCommand>
+<UntilCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&gt;'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '5'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</UntilCommand>
+</LoopCommand>
+</SequentialCommand>
+<LoopCommand>
+<ForInCommand>
+<Identifier value='x'>
+</Identifier>
+<ArrayExpression>
+<MultipleArrayAggregate>
+<MultipleArrayAggregate>
+<MultipleArrayAggregate>
+<MultipleArrayAggregate>
+<MultipleArrayAggregate>
+<SingleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '16'>
+</IntegerLiteral>
+</IntegerExpression>
+</SingleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '8'>
+</IntegerLiteral>
+</IntegerExpression>
+</MultipleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '4'>
+</IntegerLiteral>
+</IntegerExpression>
+</MultipleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '2'>
+</IntegerLiteral>
+</IntegerExpression>
+</MultipleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</MultipleArrayAggregate>
+<IntegerExpression>
+<IntegerLiteral value= '0'>
+</IntegerLiteral>
+</IntegerExpression>
+</MultipleArrayAggregate>
+</ArrayExpression>
+</ForInCommand>
+<DoCommand>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<Leave>
+</Leave>
+</SequentialCommand>
+</DoCommand>
+</LoopCommand>
+</SequentialCommand>
+</LetCommand>
+</Program>

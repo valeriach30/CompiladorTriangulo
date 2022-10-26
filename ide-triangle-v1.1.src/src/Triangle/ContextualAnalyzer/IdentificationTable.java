@@ -15,7 +15,13 @@
 package Triangle.ContextualAnalyzer;
 
 import Triangle.AbstractSyntaxTrees.Declaration;
+import Triangle.AbstractSyntaxTrees.ProcDeclaration;
+import Triangle.AbstractSyntaxTrees.loopDeclaration;
+import Triangle.SyntacticAnalyzer.SourcePosition;
+
 import java.util.Stack;
+
+import javax.swing.text.Position;
 
 public final class IdentificationTable {
 
@@ -71,7 +77,7 @@ public final class IdentificationTable {
     while (searching) {
       if (entry == null || entry.level < this.level)
         searching = false;
-      else if (entry.id.equals(id)) {
+      else if (entry.id.equals(id) && id != "") {
         present = true;
         searching = false;
       } else {
@@ -102,6 +108,72 @@ public final class IdentificationTable {
       if (entry == null)
         searching = false;
       else if (entry.id.equals(id)) {
+        present = true;
+        searching = false;
+        attr = entry.attr;
+      } else
+        entry = entry.previous;
+    }
+
+    return attr;
+  }
+
+  public Declaration searchLoop() {
+
+    IdEntry entry;
+    Declaration attr = null;
+    boolean present = false, searching = true;
+
+    entry = this.latest;
+    while (searching) {
+      if (entry == null || entry.level < this.level) // sin id, debe de estar en el mismo nivel
+        searching = false;
+      else if (entry.attr instanceof loopDeclaration) {
+        present = true;
+        searching = false;
+        attr = entry.attr;
+      } else
+        entry = entry.previous;
+    }
+
+    return attr;
+  }
+
+  public Declaration searchLoopId(String id) {
+
+    IdEntry entry;
+    Declaration attr = null;
+    boolean present = false, searching = true;
+
+    entry = this.latest;
+    while (searching) {
+      if (entry == null) // con id, debe de estar en algun lugar dentro del loop
+        searching = false;
+      else if (entry.id.equals(id) 
+                && entry.attr instanceof loopDeclaration 
+                && entry.level <= this.level) {
+        present = true;
+        searching = false;
+        attr = entry.attr;
+      } else
+        entry = entry.previous;
+    }
+
+    return attr;
+  }
+
+  public Declaration searchProc() {
+
+    IdEntry entry;
+    Declaration attr = null;
+    boolean present = false, searching = true;
+
+    entry = this.latest;
+    while (searching) {
+      if (entry == null)
+        searching = false;
+      else if (entry.attr instanceof ProcDeclaration
+                && entry.level <= this.level) {
         present = true;
         searching = false;
         attr = entry.attr;

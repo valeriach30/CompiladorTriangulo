@@ -1,0 +1,58 @@
+!Prueba de lo extra con todos los loop
+let
+  const b ~ 10;
+  var a init 15;
+  var x init 0
+in
+  !loop while do
+  loop z
+  while a > b do
+
+    putint (a) ; 
+    a := a - 1;
+    loop while x < 5 do leave z end 
+
+  end;
+
+  !loop until do
+  loop y
+  until x > 5  
+  do
+
+    putint(x) ;
+    x := x +1 ;
+    leave 
+
+  end;
+
+  !loop do while
+  loop  do
+
+    putint(x);
+    x := x +1;
+    leave 
+
+  while x < 5 
+  end;
+
+  !loop do until
+  loop do 
+
+    putint (x);
+    x := x +1;
+    leave 
+
+  until x > 5 
+  end;
+
+  !loop for in
+  loop  
+   for x in [0, 1, 2, 4, 8, 16] 
+   do 
+
+     putint (x);
+     leave  
+
+  end
+
+end

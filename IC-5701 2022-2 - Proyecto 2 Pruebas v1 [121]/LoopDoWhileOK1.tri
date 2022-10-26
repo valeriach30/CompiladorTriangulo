@@ -2,10 +2,11 @@ let
   var x : Integer 
 in
   x := 1 ;
-  loop do
+  loop y do
 
     putint(x);
-    x := x +1
+    x := x +1;
+    leave y
 
   while x < 5 ! Debe imprimir 1, 2, 3, 4
   end

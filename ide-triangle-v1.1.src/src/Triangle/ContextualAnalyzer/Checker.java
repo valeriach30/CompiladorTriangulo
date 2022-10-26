@@ -16,114 +16,7 @@ package Triangle.ContextualAnalyzer;
 
 import Triangle.ErrorReporter;
 import Triangle.StdEnvironment;
-import Triangle.AbstractSyntaxTrees.AnyTypeDenoter;
-import Triangle.AbstractSyntaxTrees.ArrayExpression;
-import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
-import Triangle.AbstractSyntaxTrees.AssignCommand;
-import Triangle.AbstractSyntaxTrees.BarCommandCaseRange;
-import Triangle.AbstractSyntaxTrees.BinaryExpression;
-import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
-import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
-import Triangle.AbstractSyntaxTrees.CallCommand;
-import Triangle.AbstractSyntaxTrees.CallExpression;
-import Triangle.AbstractSyntaxTrees.CaseCommand;
-import Triangle.AbstractSyntaxTrees.CaseLiteralCommand;
-import Triangle.AbstractSyntaxTrees.CaseLiterals;
-import Triangle.AbstractSyntaxTrees.CaseRangeCommand;
-import Triangle.AbstractSyntaxTrees.CasesCommand;
-import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
-import Triangle.AbstractSyntaxTrees.CharacterExpression;
-import Triangle.AbstractSyntaxTrees.CharacterLiteral;
-import Triangle.AbstractSyntaxTrees.CompoundSingleDeclaration;
-import Triangle.AbstractSyntaxTrees.ConstActualParameter;
-import Triangle.AbstractSyntaxTrees.ConstDeclaration;
-import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
-import Triangle.AbstractSyntaxTrees.Declaration;
-import Triangle.AbstractSyntaxTrees.DoCommand;
-import Triangle.AbstractSyntaxTrees.DotVname;
-import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.EmptyCommand;
-import Triangle.AbstractSyntaxTrees.EmptyExpression;
-import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
-import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
-import Triangle.AbstractSyntaxTrees.FieldTypeDenoter;
-import Triangle.AbstractSyntaxTrees.ForFromAST1;
-import Triangle.AbstractSyntaxTrees.ForFromCommand;
-import Triangle.AbstractSyntaxTrees.ForInCommand;
-import Triangle.AbstractSyntaxTrees.ForInDo;
-import Triangle.AbstractSyntaxTrees.FormalParameter;
-import Triangle.AbstractSyntaxTrees.FormalParameterSequence;
-import Triangle.AbstractSyntaxTrees.FuncActualParameter;
-import Triangle.AbstractSyntaxTrees.FuncDeclaration;
-import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
-import Triangle.AbstractSyntaxTrees.Identifier;
-import Triangle.AbstractSyntaxTrees.IfCommand;
-import Triangle.AbstractSyntaxTrees.IfExpression;
-import Triangle.AbstractSyntaxTrees.IntTypeDenoter;
-import Triangle.AbstractSyntaxTrees.IntegerExpression;
-import Triangle.AbstractSyntaxTrees.IntegerLiteral;
-import Triangle.AbstractSyntaxTrees.LeaveIdentifier;
-import Triangle.AbstractSyntaxTrees.LetCommand;
-import Triangle.AbstractSyntaxTrees.LetExpression;
-import Triangle.AbstractSyntaxTrees.LocalDeclaration;
-import Triangle.AbstractSyntaxTrees.LoopCommandAST1;
-import Triangle.AbstractSyntaxTrees.LoopForFromUntil;
-import Triangle.AbstractSyntaxTrees.LoopForFromWhile;
-import Triangle.AbstractSyntaxTrees.LoopUntilDoAST;
-import Triangle.AbstractSyntaxTrees.LoopUntilEndAST;
-import Triangle.AbstractSyntaxTrees.LoopWhileEndAST;
-import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.MultipleCaseRange;
-import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
-import Triangle.AbstractSyntaxTrees.MultipleCase;
-import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
-import Triangle.AbstractSyntaxTrees.MultipleFormalParameterSequence;
-import Triangle.AbstractSyntaxTrees.MultipleRecordAggregate;
-import Triangle.AbstractSyntaxTrees.MultipleThen;
-import Triangle.AbstractSyntaxTrees.NextIdentifier;
-import Triangle.AbstractSyntaxTrees.Operator;
-import Triangle.AbstractSyntaxTrees.ProcActualParameter;
-import Triangle.AbstractSyntaxTrees.ProcDeclaration;
-import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
-import Triangle.AbstractSyntaxTrees.Program;
-import Triangle.AbstractSyntaxTrees.RecDeclaration;
-import Triangle.AbstractSyntaxTrees.RecordExpression;
-import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
-import Triangle.AbstractSyntaxTrees.ReturnCommand;
-import Triangle.AbstractSyntaxTrees.SelectCommand;
-import Triangle.AbstractSyntaxTrees.SequentialCases;
-import Triangle.AbstractSyntaxTrees.SequentialCommand;
-import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
-import Triangle.AbstractSyntaxTrees.SequentialDeclarationProcFuncs;
-import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
-import Triangle.AbstractSyntaxTrees.SimpleVname;
-import Triangle.AbstractSyntaxTrees.SingleActualParameterSequence;
-import Triangle.AbstractSyntaxTrees.SingleCaseRange;
-import Triangle.AbstractSyntaxTrees.SingleArrayAggregate;
-import Triangle.AbstractSyntaxTrees.SingleCase;
-import Triangle.AbstractSyntaxTrees.SingleFieldTypeDenoter;
-import Triangle.AbstractSyntaxTrees.SingleFormalParameterSequence;
-import Triangle.AbstractSyntaxTrees.SingleRecordAggregate;
-import Triangle.AbstractSyntaxTrees.SingleThen;
-import Triangle.AbstractSyntaxTrees.SubscriptVname;
-import Triangle.AbstractSyntaxTrees.Terminal;
-import Triangle.AbstractSyntaxTrees.ThenCommand;
-import Triangle.AbstractSyntaxTrees.ToCommand;
-import Triangle.AbstractSyntaxTrees.ToCommandLiteral;
-import Triangle.AbstractSyntaxTrees.TypeDeclaration;
-import Triangle.AbstractSyntaxTrees.TypeDenoter;
-import Triangle.AbstractSyntaxTrees.UnaryExpression;
-import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
-import Triangle.AbstractSyntaxTrees.UntilCommand;
-import Triangle.AbstractSyntaxTrees.UntilEndCommand;
-import Triangle.AbstractSyntaxTrees.VarActualParameter;
-import Triangle.AbstractSyntaxTrees.VarDeclaration;
-import Triangle.AbstractSyntaxTrees.VarDeclarationInit;
-import Triangle.AbstractSyntaxTrees.VarFormalParameter;
-import Triangle.AbstractSyntaxTrees.Visitor;
-import Triangle.AbstractSyntaxTrees.VnameExpression;
-import Triangle.AbstractSyntaxTrees.WhileCommand;
-import Triangle.AbstractSyntaxTrees.WhileEndCommand;
+import Triangle.AbstractSyntaxTrees.*;
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public final class Checker implements Visitor {
@@ -335,7 +228,24 @@ public final class Checker implements Visitor {
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
     if (!eType.equals(StdEnvironment.booleanType))
       reporter.reportError("Boolean expression expected here", "", ast.E.position);
-    ast.C.visit(this, null);
+
+    if(o != null){
+      loopDeclaration loop = new loopDeclaration(dummyPos);
+      idTable.openScope();
+      if(((LoopCommandAST1) o).I != null)
+        idTable.enter(((LoopCommandAST1) o).I.spelling, loop);
+      else
+        idTable.enter("", loop);
+
+      if(loop.duplicated)
+        reporter.reportError("identifier \"%\" already declared", 
+          ((LoopCommandAST1) o).I.spelling, ((LoopCommandAST1) o).position);
+      ast.C.visit(this, null);
+      idTable.closeScope();
+    }
+    else
+      ast.C.visit(this, null);
+
     return null;
   }
 
@@ -1172,7 +1082,7 @@ public final class Checker implements Visitor {
 
   @Override
   public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) {
-    aThis.WhileVar.visit(this, null);
+    aThis.WhileVar.visit(this, aThis);
     return null;
   }
 
@@ -1181,10 +1091,6 @@ public final class Checker implements Visitor {
     TypeDenoter eType = (TypeDenoter) aThis.E.visit(this, null);
     if (!eType.equals(StdEnvironment.integerType))
       reporter.reportError("Integer Expression expected here", "", aThis.E.position);
-
-    idTable.enter(aThis.I.spelling, aThis);
-    if (aThis.duplicated)
-      reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
     return null;
   }
 
@@ -1198,18 +1104,33 @@ public final class Checker implements Visitor {
   // loop for Id from Exp1 to Exp2 do Com end
   @Override
   public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
-    idTable.openScope(); // Se inicia el scope.
-    aThis.ForFrom.visit(this, null);
-    aThis.Do.visit(this, null); // Do command
+    loopDeclaration loop = new loopDeclaration(dummyPos);
+    idTable.openScope(); // Se inicia el scope para el com y ids.
+    if(aThis.I != null){ // ingresa el id del loop si existe
+      idTable.enter(aThis.I.spelling, loop);
+      if(loop.duplicated)
+        reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
+    }
+    else{
+      idTable.enter("", loop);
+    }
+
+    idTable.enter(aThis.ForFrom.I.spelling, aThis.ForFrom); // ingresa el id del for
+    if (aThis.ForFrom.duplicated)
+      reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
+
+    aThis.Do.visit(this, null); // command
     idTable.closeScope(); // Se cierra el scope.
-    aThis.TC.visit(this, null); // To command
+
+    aThis.ForFrom.visit(this, null); // exp1
+    aThis.TC.visit(this, null); // exp2
     return null;
 
   }
 
   @Override
   public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
-    aThis.UntilVar.visit(this, null);
+    aThis.UntilVar.visit(this, aThis);
     return null;
   }
 
@@ -1221,7 +1142,23 @@ public final class Checker implements Visitor {
     if (!eType.equals(StdEnvironment.booleanType)) {
       reporter.reportError("Boolean expression expected here", "", aThis.E.position);
     }
-    aThis.C.visit(this, null);
+    if(o != null){
+      loopDeclaration loop = new loopDeclaration(dummyPos);
+      idTable.openScope();
+      if(((LoopUntilDoAST) o).I != null)
+        idTable.enter(((LoopUntilDoAST) o).I.spelling, loop);
+      else
+        idTable.enter("", loop);
+
+      if(loop.duplicated)
+        reporter.reportError("identifier \"%\" already declared", 
+          ((LoopUntilDoAST) o).I.spelling, ((LoopUntilDoAST) o).position);
+
+      aThis.C.visit(this, null);
+      idTable.closeScope();
+    }
+    else
+      aThis.C.visit(this, null);
     return null;
   }
 
@@ -1240,7 +1177,23 @@ public final class Checker implements Visitor {
   // Loop do Com while Exp end
   @Override
   public Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
-    aThis.C.visit(this, null);
+    loopDeclaration loop = new loopDeclaration(dummyPos);
+    if(aThis.I != null){
+      idTable.openScope();
+      idTable.enter(aThis.I.spelling, loop);
+      if(loop.duplicated)
+        reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
+
+      aThis.C.visit(this, null);
+      idTable.closeScope();
+    }
+    else{
+      idTable.openScope();
+      idTable.enter("", loop);
+      aThis.C.visit(this, null);
+      idTable.closeScope();
+    }
+
     aThis.WhileV.visit(this, null);
     return null;
   }
@@ -1256,7 +1209,23 @@ public final class Checker implements Visitor {
 
   @Override
   public Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
-    aThis.C.visit(this, null);
+    loopDeclaration loop = new loopDeclaration(dummyPos);
+    if(aThis.I != null){
+      idTable.openScope();
+      idTable.enter(aThis.I.spelling, loop);
+      if(loop.duplicated)
+        reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
+
+      aThis.C.visit(this, null);
+      idTable.closeScope();
+    }
+    else{
+      idTable.openScope();
+      idTable.enter("", loop);
+      aThis.C.visit(this, null);
+      idTable.closeScope();
+    }
+      
     aThis.UntilEnd.visit(this, null);
     return null;
   }
@@ -1265,11 +1234,26 @@ public final class Checker implements Visitor {
   // loop for Id from Exp1 to Exp2 while Exp3 do Com end
   @Override
   public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
-    idTable.openScope(); // Se inicia el scope.
-    aThis.ForFrom.visit(this, null); // from exp
-    aThis.whileV.visit(this, null); // while exp do command
+    loopDeclaration loop = new loopDeclaration(dummyPos);
+    idTable.openScope(); // Se inicia el scope, para los id y el com.
+    if(aThis.I != null){ // ingresa el id del loop si existe
+      idTable.enter(aThis.I.spelling, loop);
+      if(loop.duplicated)
+        reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
+    }
+    else{
+      idTable.enter("", loop);
+    }
+
+    idTable.enter(aThis.ForFrom.I.spelling, aThis.ForFrom); // ingresa el id del for
+    if (aThis.ForFrom.duplicated)
+      reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
+
+    aThis.whileV.visit(this, null); // while exp do command (exp3)
     idTable.closeScope(); // Se cierra el scope.
-    aThis.E.visit(this, null); // To exp
+
+    aThis.ForFrom.visit(this, null); // from exp1
+    aThis.E.visit(this, null); // To exp2
     return null;
   }
 
@@ -1277,11 +1261,25 @@ public final class Checker implements Visitor {
   // loop for Id from Exp1 to Exp2 until Exp3 do Com end
   @Override
   public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
-    idTable.openScope(); // Se inicia el scope.
-    aThis.ForFrom.visit(this, null); // from exp
-    aThis.untilV.visit(this, null); // until exp do command
+    loopDeclaration loop = new loopDeclaration(dummyPos);
+    idTable.openScope(); // Se inicia el scope para los id y el com.
+    if(aThis.I != null){ // ingresa el id del loop si existe
+      idTable.enter(aThis.I.spelling, loop);
+      if(loop.duplicated)
+        reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
+    }else{
+      idTable.enter("", loop);
+    }
+
+    idTable.enter(aThis.ForFrom.I.spelling, aThis.ForFrom); // ingresa el id del for
+    if (aThis.ForFrom.duplicated)
+      reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
+      
+    aThis.untilV.visit(this, null); // until exp do command (exp3)
     idTable.closeScope(); // Se cierra el scope.
-    aThis.E.visit(this, null); // To exp
+
+    aThis.ForFrom.visit(this, null); // from exp1
+    aThis.E.visit(this, null); // To exp2
     return null;
   }
 
@@ -1296,12 +1294,25 @@ public final class Checker implements Visitor {
 
   @Override
   public Object visitForInDoCommand(ForInDo aThis, Object o) {
-    aThis.forAST.visit(this, null);
+    aThis.forAST.visit(this, null); //exp
+    loopDeclaration loop = new loopDeclaration(dummyPos);
     idTable.openScope();
-    idTable.enter(aThis.forAST.I.spelling, aThis.forAST);
-    if (aThis.forAST.duplicated)
+
+    if(aThis.I != null){ //ingresa el id del loop si existe
+      idTable.enter(aThis.I.spelling, loop);
+      if(loop.duplicated)
       reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
-    aThis.C.visit(this, null);
+    }
+    else{
+      idTable.enter("", loop);
+    }
+
+    idTable.enter(aThis.forAST.I.spelling, aThis.forAST); // ingresa id del for
+    if (aThis.forAST.duplicated)
+      reporter.reportError("identifier \"%\" already declared", 
+          aThis.forAST.I.spelling, aThis.forAST.position);
+
+    aThis.C.visit(this, null); // com
     idTable.closeScope();
     return null;
   }
@@ -1346,20 +1357,49 @@ public final class Checker implements Visitor {
 
   @Override
   public Object visitLeaveIdentifier(LeaveIdentifier aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    if(aThis.I != null){
+      Declaration dec = idTable.searchLoopId(aThis.I.spelling);
+      if(dec == null || !(dec instanceof loopDeclaration)){
+        reporter.reportError("identifier \"%\" does not belong to a loop or is not declared", 
+          aThis.I.spelling, aThis.position);
+      }
+    }
+    else{
+      Declaration dec = idTable.searchLoop();
+      if(dec == null){
+        reporter.reportError("leave is not near a loop", 
+          "", aThis.position);
+      }
+    }
+    return null;
   }
 
   @Override
   public Object visitNextIdentifier(NextIdentifier aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    if(aThis.I != null){
+      Declaration dec = idTable.searchLoopId(aThis.I.spelling);
+      if(dec == null || !(dec instanceof loopDeclaration)){
+        reporter.reportError("identifier \"%\" does not belong to a loop or is not declared", 
+          aThis.I.spelling, aThis.position);
+      }
+    }
+    else{
+      Declaration dec = idTable.searchLoop();
+      if(dec == null){
+        reporter.reportError("leave is not near a loop", 
+          "", aThis.position);
+      }
+    }
+    return null;
   }
 
   @Override
   public Object visitReturnCommand(ReturnCommand aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Declaration dec = idTable.searchProc();
+    if(dec == null || !(dec instanceof ProcDeclaration)){
+      reporter.reportError("return must be in a proc command", "", aThis.position);
+    }
+    return null;
   }
 
   // Autores: Valeria Chinchilla
