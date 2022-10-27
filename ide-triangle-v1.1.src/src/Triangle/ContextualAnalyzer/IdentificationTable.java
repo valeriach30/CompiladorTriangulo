@@ -15,6 +15,10 @@
 package Triangle.ContextualAnalyzer;
 
 import Triangle.AbstractSyntaxTrees.Declaration;
+import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
+import Triangle.AbstractSyntaxTrees.EmptyCommand;
+import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
+import Triangle.AbstractSyntaxTrees.FormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.loopDeclaration;
 import Triangle.SyntacticAnalyzer.SourcePosition;
@@ -111,17 +115,17 @@ public final class IdentificationTable {
         present = true;
         searching = false;
         attr = entry.attr;
-      } else
+      } else{
         entry = entry.previous;
+      }
     }
 
     return attr;
   }
 
-  public Declaration searchLoop() {
+  public boolean searchLoop() {
 
     IdEntry entry;
-    Declaration attr = null;
     boolean present = false, searching = true;
 
     entry = this.latest;
@@ -131,18 +135,16 @@ public final class IdentificationTable {
       else if (entry.attr instanceof loopDeclaration) {
         present = true;
         searching = false;
-        attr = entry.attr;
       } else
         entry = entry.previous;
     }
 
-    return attr;
+    return present;
   }
 
-  public Declaration searchLoopId(String id) {
+  public boolean searchLoopId(String id) {
 
     IdEntry entry;
-    Declaration attr = null;
     boolean present = false, searching = true;
 
     entry = this.latest;
@@ -154,34 +156,32 @@ public final class IdentificationTable {
                 && entry.level <= this.level) {
         present = true;
         searching = false;
-        attr = entry.attr;
       } else
         entry = entry.previous;
     }
 
-    return attr;
+    return present;
   }
 
-  public Declaration searchProc() {
+  public boolean searchProc() {
 
     IdEntry entry;
-    Declaration attr = null;
     boolean present = false, searching = true;
 
     entry = this.latest;
     while (searching) {
-      if (entry == null)
+      if (entry == null || entry.level == 0)
         searching = false;
-      else if (entry.attr instanceof ProcDeclaration
-                && entry.level <= this.level) {
+      else if (entry.attr instanceof ProcDeclaration) 
+      {
         present = true;
         searching = false;
-        attr = entry.attr;
-      } else
+      } else{
         entry = entry.previous;
+      }
     }
 
-    return attr;
+    return present;
   }
 
   // Autores: Valeria Chinchilla

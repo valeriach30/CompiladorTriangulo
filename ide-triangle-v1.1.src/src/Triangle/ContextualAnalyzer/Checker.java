@@ -1358,15 +1358,13 @@ public final class Checker implements Visitor {
   @Override
   public Object visitLeaveIdentifier(LeaveIdentifier aThis, Object o) {
     if(aThis.I != null){
-      Declaration dec = idTable.searchLoopId(aThis.I.spelling);
-      if(dec == null || !(dec instanceof loopDeclaration)){
+      if(!idTable.searchLoopId(aThis.I.spelling)){
         reporter.reportError("identifier \"%\" does not belong to a loop or is not declared", 
           aThis.I.spelling, aThis.position);
       }
     }
     else{
-      Declaration dec = idTable.searchLoop();
-      if(dec == null){
+      if(!idTable.searchLoop()){
         reporter.reportError("leave is not near a loop", 
           "", aThis.position);
       }
@@ -1377,15 +1375,13 @@ public final class Checker implements Visitor {
   @Override
   public Object visitNextIdentifier(NextIdentifier aThis, Object o) {
     if(aThis.I != null){
-      Declaration dec = idTable.searchLoopId(aThis.I.spelling);
-      if(dec == null || !(dec instanceof loopDeclaration)){
+      if(!idTable.searchLoopId(aThis.I.spelling)){
         reporter.reportError("identifier \"%\" does not belong to a loop or is not declared", 
           aThis.I.spelling, aThis.position);
       }
     }
     else{
-      Declaration dec = idTable.searchLoop();
-      if(dec == null){
+      if(!idTable.searchLoop()){
         reporter.reportError("leave is not near a loop", 
           "", aThis.position);
       }
@@ -1395,9 +1391,9 @@ public final class Checker implements Visitor {
 
   @Override
   public Object visitReturnCommand(ReturnCommand aThis, Object o) {
-    Declaration dec = idTable.searchProc();
-    if(dec == null || !(dec instanceof ProcDeclaration)){
-      reporter.reportError("return must be in a proc command", "", aThis.position);
+    if(!idTable.searchProc()){
+      reporter.reportError("return must be in a proc declaration", 
+              "", aThis.position);
     }
     return null;
   }
