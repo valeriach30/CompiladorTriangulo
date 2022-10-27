@@ -1383,7 +1383,7 @@ public final class Checker implements Visitor {
     }
     else{
       if(!idTable.searchLoop()){
-        reporter.reportError("leave is not near a loop", 
+        reporter.reportError("next is not near a loop", 
           "", aThis.position);
       }
     }
