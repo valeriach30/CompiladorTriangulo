@@ -1091,6 +1091,7 @@ public final class Checker implements Visitor {
     TypeDenoter eType = (TypeDenoter) aThis.E.visit(this, null);
     if (!eType.equals(StdEnvironment.integerType))
       reporter.reportError("Integer Expression expected here", "", aThis.E.position);
+    
     return null;
   }
 
@@ -1104,6 +1105,8 @@ public final class Checker implements Visitor {
   // loop for Id from Exp1 to Exp2 do Com end
   @Override
   public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
+    aThis.ForFrom.visit(this, null); // exp1
+    aThis.TC.visit(this, null); // exp2
     loopDeclaration loop = new loopDeclaration(dummyPos);
     idTable.openScope(); // Se inicia el scope para el com y ids.
     if(aThis.I != null){ // ingresa el id del loop si existe
@@ -1121,9 +1124,6 @@ public final class Checker implements Visitor {
 
     aThis.Do.visit(this, null); // command
     idTable.closeScope(); // Se cierra el scope.
-
-    aThis.ForFrom.visit(this, null); // exp1
-    aThis.TC.visit(this, null); // exp2
     return null;
 
   }
@@ -1235,6 +1235,9 @@ public final class Checker implements Visitor {
   @Override
   public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
     loopDeclaration loop = new loopDeclaration(dummyPos);
+    aThis.ForFrom.visit(this, null); // from exp1
+    aThis.E.visit(this, null); // To exp2
+
     idTable.openScope(); // Se inicia el scope, para los id y el com.
     if(aThis.I != null){ // ingresa el id del loop si existe
       idTable.enter(aThis.I.spelling, loop);
@@ -1249,11 +1252,10 @@ public final class Checker implements Visitor {
     if (aThis.ForFrom.duplicated)
       reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
 
-    aThis.whileV.visit(this, null); // while exp do command (exp3)
+    aThis.whileV.E.visit(this, null);
+    aThis.whileV.C.visit(this, null);
+    //aThis.whileV.visit(this, null); // while exp do command (exp3)
     idTable.closeScope(); // Se cierra el scope.
-
-    aThis.ForFrom.visit(this, null); // from exp1
-    aThis.E.visit(this, null); // To exp2
     return null;
   }
 
@@ -1261,6 +1263,8 @@ public final class Checker implements Visitor {
   // loop for Id from Exp1 to Exp2 until Exp3 do Com end
   @Override
   public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
+    aThis.ForFrom.visit(this, null); // from exp1
+    aThis.E.visit(this, null); // To exp2
     loopDeclaration loop = new loopDeclaration(dummyPos);
     idTable.openScope(); // Se inicia el scope para los id y el com.
     if(aThis.I != null){ // ingresa el id del loop si existe
@@ -1277,9 +1281,6 @@ public final class Checker implements Visitor {
       
     aThis.untilV.visit(this, null); // until exp do command (exp3)
     idTable.closeScope(); // Se cierra el scope.
-
-    aThis.ForFrom.visit(this, null); // from exp1
-    aThis.E.visit(this, null); // To exp2
     return null;
   }
 
