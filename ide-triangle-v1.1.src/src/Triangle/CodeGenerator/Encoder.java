@@ -131,13 +131,12 @@ import Triangle.AbstractSyntaxTrees.WhileEndCommand;
 
 public final class Encoder implements Visitor {
 
-
   // Commands
   public Object visitAssignCommand(AssignCommand ast, Object o) {
     Frame frame = (Frame) o;
     Integer valSize = (Integer) ast.E.visit(this, frame);
-    encodeStore(ast.V, new Frame (frame, valSize.intValue()),
-		valSize.intValue());
+    encodeStore(ast.V, new Frame(frame, valSize.intValue()),
+        valSize.intValue());
     return null;
   }
 
@@ -149,6 +148,7 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitEmptyCommand(EmptyCommand ast, Object o) {
+    emit(Machine.HALTop, 0, 0, 0);
     return null;
   }
 
@@ -182,6 +182,7 @@ public final class Encoder implements Visitor {
     ast.C2.visit(this, o);
     return null;
   }
+
   public Object visitSequentialCases(SequentialCases ast, Object o) {
     ast.C1.visit(this, o);
     ast.C2.visit(this, o);
@@ -201,100 +202,101 @@ public final class Encoder implements Visitor {
     emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
     return null;
   }
-  
-    //Se dejo declarado el CaseLiteralCommand para los siguientes proyectos. 
-    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-    public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object O){
-       return null;
-    }
-    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-    public Object visitCaseRangeCommand(CaseRangeCommand ast, Object O){
-       return null;
-    }
 
-    //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-    public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj){
-       return null;
-    }
-     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-    public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
-       return null;
-    }
+  // Se dejo declarado el CaseLiteralCommand para los siguientes proyectos.
+  // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object O) {
+    return null;
+  }
 
-     //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
-    public Object visitCaseLiterals(CaseLiterals ast, Object obj){
-       return null;
-    }
+  // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  public Object visitCaseRangeCommand(CaseRangeCommand ast, Object O) {
+    return null;
+  }
 
-    public Object visitCaseCommand(CaseCommand ast, Object obj){
-        return null;
-    }
-    public Object visitCasesCommand(CasesCommand ast, Object obj){
-        return null;
-    }
-    
-    public Object visitSelectCommand(SelectCommand ast, Object obj){
-        return null;
-    }
-    
-    
-    public Object visitSingleCaseRange(SingleCaseRange ast, Object obj){
-        return null;
-    }
-    
-    public Object visitSingleThen(SingleThen ast, Object obj){
-        return null;
-    }
-    
-    
-    public Object visitSingleCase(SingleCase ast, Object obj){
-        return null;
-    }
-    
-    public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj){
-        return null;
-    }
-    
-    public Object visitMultipleThen(MultipleThen ast, Object obj){
-        return null;
-    }
-    
-    public Object visitMultipleCase(MultipleCase ast, Object obj){
-        return null;
-    }
-    
-    // Expressions
-    public Object visitArrayExpression(ArrayExpression ast, Object o) {
-      ast.type.visit(this, null);
-      return ast.AA.visit(this, o);
-    }
+  // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj) {
+    return null;
+  }
 
-    public Object visitBinaryExpression(BinaryExpression ast, Object o) {
-      Frame frame = (Frame) o;
-      Integer valSize = (Integer) ast.type.visit(this, null);
-      int valSize1 = ((Integer) ast.E1.visit(this, frame)).intValue();
-      Frame frame1 = new Frame(frame, valSize1);
-      int valSize2 = ((Integer) ast.E2.visit(this, frame1)).intValue();
-      Frame frame2 = new Frame(frame.level, valSize1 + valSize2);
-      ast.O.visit(this, frame2);
-      return valSize;
-    }
+  // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj) {
+    return null;
+  }
 
-    public Object visitCallExpression(CallExpression ast, Object o) {
-      Frame frame = (Frame) o;
-      Integer valSize = (Integer) ast.type.visit(this, null);
-      Integer argsSize = (Integer) ast.APS.visit(this, frame);
-      ast.I.visit(this, new Frame(frame.level, argsSize));
-      return valSize;
-    }
+  // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  public Object visitCaseLiterals(CaseLiterals ast, Object obj) {
+    return null;
+  }
 
-    public Object visitCharacterExpression(CharacterExpression ast,
-                                                  Object o) {
-      Frame frame = (Frame) o;
-      Integer valSize = (Integer) ast.type.visit(this, null);
-      emit(Machine.LOADLop, 0, 0, ast.CL.spelling.charAt(1));
-      return valSize;
-    }
+  public Object visitCaseCommand(CaseCommand ast, Object obj) {
+    return null;
+  }
+
+  public Object visitCasesCommand(CasesCommand ast, Object obj) {
+    return null;
+  }
+
+  public Object visitSelectCommand(SelectCommand ast, Object obj) {
+    return null;
+  }
+
+  public Object visitSingleCaseRange(SingleCaseRange ast, Object obj) {
+    return null;
+  }
+
+  public Object visitSingleThen(SingleThen ast, Object obj) {
+    return null;
+  }
+
+  public Object visitSingleCase(SingleCase ast, Object obj) {
+    return null;
+  }
+
+  public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj) {
+    return null;
+  }
+
+  public Object visitMultipleThen(MultipleThen ast, Object obj) {
+    return null;
+  }
+
+  public Object visitMultipleCase(MultipleCase ast, Object obj) {
+    return null;
+  }
+
+  // Expressions
+  public Object visitArrayExpression(ArrayExpression ast, Object o) {
+    ast.type.visit(this, null);
+    return ast.AA.visit(this, o);
+  }
+
+  public Object visitBinaryExpression(BinaryExpression ast, Object o) {
+    Frame frame = (Frame) o;
+    Integer valSize = (Integer) ast.type.visit(this, null);
+    int valSize1 = ((Integer) ast.E1.visit(this, frame)).intValue();
+    Frame frame1 = new Frame(frame, valSize1);
+    int valSize2 = ((Integer) ast.E2.visit(this, frame1)).intValue();
+    Frame frame2 = new Frame(frame.level, valSize1 + valSize2);
+    ast.O.visit(this, frame2);
+    return valSize;
+  }
+
+  public Object visitCallExpression(CallExpression ast, Object o) {
+    Frame frame = (Frame) o;
+    Integer valSize = (Integer) ast.type.visit(this, null);
+    Integer argsSize = (Integer) ast.APS.visit(this, frame);
+    ast.I.visit(this, new Frame(frame.level, argsSize));
+    return valSize;
+  }
+
+  public Object visitCharacterExpression(CharacterExpression ast,
+      Object o) {
+    Frame frame = (Frame) o;
+    Integer valSize = (Integer) ast.type.visit(this, null);
+    emit(Machine.LOADLop, 0, 0, ast.CL.spelling.charAt(1));
+    return valSize;
+  }
 
   public Object visitEmptyExpression(EmptyExpression ast, Object o) {
     return new Integer(0);
@@ -336,7 +338,7 @@ public final class Encoder implements Visitor {
     return valSize;
   }
 
-  public Object visitRecordExpression(RecordExpression ast, Object o){
+  public Object visitRecordExpression(RecordExpression ast, Object o) {
     ast.type.visit(this, null);
     return ast.RA.visit(this, o);
   }
@@ -356,10 +358,9 @@ public final class Encoder implements Visitor {
     return valSize;
   }
 
-
   // Declarations
   public Object visitBinaryOperatorDeclaration(BinaryOperatorDeclaration ast,
-					       Object o){
+      Object o) {
     return new Integer(0);
   }
 
@@ -368,13 +369,13 @@ public final class Encoder implements Visitor {
     int extraSize = 0;
 
     if (ast.E instanceof CharacterExpression) {
-        CharacterLiteral CL = ((CharacterExpression) ast.E).CL;
-        ast.entity = new KnownValue(Machine.characterSize,
-                                 characterValuation(CL.spelling));
+      CharacterLiteral CL = ((CharacterExpression) ast.E).CL;
+      ast.entity = new KnownValue(Machine.characterSize,
+          characterValuation(CL.spelling));
     } else if (ast.E instanceof IntegerExpression) {
-        IntegerLiteral IL = ((IntegerExpression) ast.E).IL;
-        ast.entity = new KnownValue(Machine.integerSize,
-				 Integer.parseInt(IL.spelling));
+      IntegerLiteral IL = ((IntegerExpression) ast.E).IL;
+      ast.entity = new KnownValue(Machine.integerSize,
+          Integer.parseInt(IL.spelling));
     } else {
       int valSize = ((Integer) ast.E.visit(this, frame)).intValue();
       ast.entity = new UnknownValue(valSize, frame.level, frame.size);
@@ -411,8 +412,8 @@ public final class Encoder implements Visitor {
     int argsSize = 0;
 
     emit(Machine.JUMPop, 0, Machine.CBr, 0);
-    ast.entity = new KnownRoutine (Machine.closureSize, frame.level,
-                                nextInstrAddr);
+    ast.entity = new KnownRoutine(Machine.closureSize, frame.level,
+        nextInstrAddr);
     writeTableDetails(ast);
     if (frame.level == Machine.maxRoutineLevel)
       reporter.reportRestriction("can't nest routines so deeply");
@@ -432,16 +433,17 @@ public final class Encoder implements Visitor {
     int extraSize1, extraSize2;
 
     extraSize1 = ((Integer) ast.D1.visit(this, frame)).intValue();
-    Frame frame1 = new Frame (frame, extraSize1);
+    Frame frame1 = new Frame(frame, extraSize1);
     extraSize2 = ((Integer) ast.D2.visit(this, frame1)).intValue();
     return new Integer(extraSize1 + extraSize2);
   }
+
   public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
     Frame frame = (Frame) o;
     int extraSize1, extraSize2;
 
     extraSize1 = ((Integer) ast.D1.visit(this, frame)).intValue();
-    Frame frame1 = new Frame (frame, extraSize1);
+    Frame frame1 = new Frame(frame, extraSize1);
     extraSize2 = ((Integer) ast.D2.visit(this, frame1)).intValue();
     return new Integer(extraSize1 + extraSize2);
   }
@@ -453,7 +455,7 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitUnaryOperatorDeclaration(UnaryOperatorDeclaration ast,
-					      Object o) {
+      Object o) {
     return new Integer(0);
   }
 
@@ -468,10 +470,9 @@ public final class Encoder implements Visitor {
     return new Integer(extraSize);
   }
 
-
   // Array Aggregates
   public Object visitMultipleArrayAggregate(MultipleArrayAggregate ast,
-					    Object o) {
+      Object o) {
     Frame frame = (Frame) o;
     int elemSize = ((Integer) ast.E.visit(this, frame)).intValue();
     Frame frame1 = new Frame(frame, elemSize);
@@ -483,28 +484,26 @@ public final class Encoder implements Visitor {
     return ast.E.visit(this, o);
   }
 
-
   // Record Aggregates
   public Object visitMultipleRecordAggregate(MultipleRecordAggregate ast,
-					     Object o) {
+      Object o) {
     Frame frame = (Frame) o;
     int fieldSize = ((Integer) ast.E.visit(this, frame)).intValue();
-    Frame frame1 = new Frame (frame, fieldSize);
+    Frame frame1 = new Frame(frame, fieldSize);
     int recordSize = ((Integer) ast.RA.visit(this, frame1)).intValue();
     return new Integer(fieldSize + recordSize);
   }
 
   public Object visitSingleRecordAggregate(SingleRecordAggregate ast,
-					   Object o) {
+      Object o) {
     return ast.E.visit(this, o);
   }
-
 
   // Formal Parameters
   public Object visitConstFormalParameter(ConstFormalParameter ast, Object o) {
     Frame frame = (Frame) o;
     int valSize = ((Integer) ast.T.visit(this, null)).intValue();
-    ast.entity = new UnknownValue (valSize, frame.level, -frame.size - valSize);
+    ast.entity = new UnknownValue(valSize, frame.level, -frame.size - valSize);
     writeTableDetails(ast);
     return new Integer(valSize);
   }
@@ -512,8 +511,8 @@ public final class Encoder implements Visitor {
   public Object visitFuncFormalParameter(FuncFormalParameter ast, Object o) {
     Frame frame = (Frame) o;
     int argsSize = Machine.closureSize;
-    ast.entity = new UnknownRoutine (Machine.closureSize, frame.level,
-				  -frame.size - argsSize);
+    ast.entity = new UnknownRoutine(Machine.closureSize, frame.level,
+        -frame.size - argsSize);
     writeTableDetails(ast);
     return new Integer(argsSize);
   }
@@ -521,8 +520,8 @@ public final class Encoder implements Visitor {
   public Object visitProcFormalParameter(ProcFormalParameter ast, Object o) {
     Frame frame = (Frame) o;
     int argsSize = Machine.closureSize;
-    ast.entity = new UnknownRoutine (Machine.closureSize, frame.level,
-				  -frame.size - argsSize);
+    ast.entity = new UnknownRoutine(Machine.closureSize, frame.level,
+        -frame.size - argsSize);
     writeTableDetails(ast);
     return new Integer(argsSize);
   }
@@ -530,20 +529,19 @@ public final class Encoder implements Visitor {
   public Object visitVarFormalParameter(VarFormalParameter ast, Object o) {
     Frame frame = (Frame) o;
     ast.T.visit(this, null);
-    ast.entity = new UnknownAddress (Machine.addressSize, frame.level,
-				  -frame.size - Machine.addressSize);
+    ast.entity = new UnknownAddress(Machine.addressSize, frame.level,
+        -frame.size - Machine.addressSize);
     writeTableDetails(ast);
     return new Integer(Machine.addressSize);
   }
 
-
   public Object visitEmptyFormalParameterSequence(
-	 EmptyFormalParameterSequence ast, Object o) {
+      EmptyFormalParameterSequence ast, Object o) {
     return new Integer(0);
   }
 
   public Object visitMultipleFormalParameterSequence(
- 	 MultipleFormalParameterSequence ast, Object o) {
+      MultipleFormalParameterSequence ast, Object o) {
     Frame frame = (Frame) o;
     int argsSize1 = ((Integer) ast.FPS.visit(this, frame)).intValue();
     Frame frame1 = new Frame(frame, argsSize1);
@@ -552,14 +550,13 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitSingleFormalParameterSequence(
-	 SingleFormalParameterSequence ast, Object o) {
-    return ast.FP.visit (this, o);
+      SingleFormalParameterSequence ast, Object o) {
+    return ast.FP.visit(this, o);
   }
-
 
   // Actual Parameters
   public Object visitConstActualParameter(ConstActualParameter ast, Object o) {
-    return ast.E.visit (this, o);
+    return ast.E.visit(this, o);
   }
 
   public Object visitFuncActualParameter(FuncActualParameter ast, Object o) {
@@ -572,7 +569,7 @@ public final class Encoder implements Visitor {
     } else if (ast.I.decl.entity instanceof UnknownRoutine) {
       ObjectAddress address = ((UnknownRoutine) ast.I.decl.entity).address;
       emit(Machine.LOADop, Machine.closureSize, displayRegister(frame.level,
-           address.level), address.displacement);
+          address.level), address.displacement);
     } else if (ast.I.decl.entity instanceof PrimitiveRoutine) {
       int displacement = ((PrimitiveRoutine) ast.I.decl.entity).displacement;
       // static link, code address
@@ -592,7 +589,7 @@ public final class Encoder implements Visitor {
     } else if (ast.I.decl.entity instanceof UnknownRoutine) {
       ObjectAddress address = ((UnknownRoutine) ast.I.decl.entity).address;
       emit(Machine.LOADop, Machine.closureSize, displayRegister(frame.level,
-           address.level), address.displacement);
+          address.level), address.displacement);
     } else if (ast.I.decl.entity instanceof PrimitiveRoutine) {
       int displacement = ((PrimitiveRoutine) ast.I.decl.entity).displacement;
       // static link, code address
@@ -607,26 +604,24 @@ public final class Encoder implements Visitor {
     return new Integer(Machine.addressSize);
   }
 
-
   public Object visitEmptyActualParameterSequence(
-	 EmptyActualParameterSequence ast, Object o) {
+      EmptyActualParameterSequence ast, Object o) {
     return new Integer(0);
   }
 
   public Object visitMultipleActualParameterSequence(
-	 MultipleActualParameterSequence ast, Object o) {
+      MultipleActualParameterSequence ast, Object o) {
     Frame frame = (Frame) o;
     int argsSize1 = ((Integer) ast.AP.visit(this, frame)).intValue();
-    Frame frame1 = new Frame (frame, argsSize1);
+    Frame frame1 = new Frame(frame, argsSize1);
     int argsSize2 = ((Integer) ast.APS.visit(this, frame1)).intValue();
     return new Integer(argsSize1 + argsSize2);
   }
 
   public Object visitSingleActualParameterSequence(
-	 SingleActualParameterSequence ast, Object o) {
-    return ast.AP.visit (this, o);
+      SingleActualParameterSequence ast, Object o) {
+    return ast.AP.visit(this, o);
   }
-
 
   // Type Denoters
   public Object visitAnyTypeDenoter(AnyTypeDenoter ast, Object o) {
@@ -666,7 +661,7 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitSimpleTypeDenoter(SimpleTypeDenoter ast,
-					   Object o) {
+      Object o) {
     return new Integer(0);
   }
 
@@ -689,15 +684,14 @@ public final class Encoder implements Visitor {
     return new Integer(typeSize);
   }
 
-
   public Object visitMultipleFieldTypeDenoter(MultipleFieldTypeDenoter ast,
-					      Object o) {
+      Object o) {
     int offset = ((Integer) o).intValue();
     int fieldSize;
 
     if (ast.entity == null) {
       fieldSize = ((Integer) ast.T.visit(this, null)).intValue();
-      ast.entity = new Field (fieldSize, offset);
+      ast.entity = new Field(fieldSize, offset);
       writeTableDetails(ast);
     } else
       fieldSize = ast.entity.size;
@@ -708,20 +702,19 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitSingleFieldTypeDenoter(SingleFieldTypeDenoter ast,
-					    Object o) {
+      Object o) {
     int offset = ((Integer) o).intValue();
     int fieldSize;
 
     if (ast.entity == null) {
       fieldSize = ((Integer) ast.T.visit(this, null)).intValue();
-      ast.entity = new Field (fieldSize, offset);
+      ast.entity = new Field(fieldSize, offset);
       writeTableDetails(ast);
     } else
       fieldSize = ast.entity.size;
 
     return new Integer(fieldSize);
   }
-
 
   // Literals, Identifiers and Operators
   public Object visitCharacterLiteral(CharacterLiteral ast, Object o) {
@@ -733,11 +726,11 @@ public final class Encoder implements Visitor {
     if (ast.decl.entity instanceof KnownRoutine) {
       ObjectAddress address = ((KnownRoutine) ast.decl.entity).address;
       emit(Machine.CALLop, displayRegister(frame.level, address.level),
-	   Machine.CBr, address.displacement);
+          Machine.CBr, address.displacement);
     } else if (ast.decl.entity instanceof UnknownRoutine) {
       ObjectAddress address = ((UnknownRoutine) ast.decl.entity).address;
       emit(Machine.LOADop, Machine.closureSize, displayRegister(frame.level,
-           address.level), address.displacement);
+          address.level), address.displacement);
       emit(Machine.CALLIop, 0, 0, 0);
     } else if (ast.decl.entity instanceof PrimitiveRoutine) {
       int displacement = ((PrimitiveRoutine) ast.decl.entity).displacement;
@@ -759,12 +752,12 @@ public final class Encoder implements Visitor {
     Frame frame = (Frame) o;
     if (ast.decl.entity instanceof KnownRoutine) {
       ObjectAddress address = ((KnownRoutine) ast.decl.entity).address;
-      emit(Machine.CALLop, displayRegister (frame.level, address.level),
-	   Machine.CBr, address.displacement);
+      emit(Machine.CALLop, displayRegister(frame.level, address.level),
+          Machine.CBr, address.displacement);
     } else if (ast.decl.entity instanceof UnknownRoutine) {
       ObjectAddress address = ((UnknownRoutine) ast.decl.entity).address;
       emit(Machine.LOADop, Machine.closureSize, displayRegister(frame.level,
-           address.level), address.displacement);
+          address.level), address.displacement);
       emit(Machine.CALLIop, 0, 0, 0);
     } else if (ast.decl.entity instanceof PrimitiveRoutine) {
       int displacement = ((PrimitiveRoutine) ast.decl.entity).displacement;
@@ -778,13 +771,12 @@ public final class Encoder implements Visitor {
     return null;
   }
 
-
   // Value-or-variable names
   public Object visitDotVname(DotVname ast, Object o) {
     Frame frame = (Frame) o;
     RuntimeEntity baseObject = (RuntimeEntity) ast.V.visit(this, frame);
     ast.offset = ast.V.offset + ((Field) ast.I.decl.entity).fieldOffset;
-                   // I.decl points to the appropriate record field
+    // I.decl points to the appropriate record field
     ast.indexed = ast.V.indexed;
     return baseObject;
   }
@@ -815,7 +807,7 @@ public final class Encoder implements Visitor {
       if (elemSize != 1) {
         emit(Machine.LOADLop, 0, 0, elemSize);
         emit(Machine.CALLop, Machine.SBr, Machine.PBr,
-             Machine.multDisplacement);
+            Machine.multDisplacement);
       }
       if (ast.indexed)
         emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.addDisplacement);
@@ -825,13 +817,12 @@ public final class Encoder implements Visitor {
     return baseObject;
   }
 
-
   // Programs
   public Object visitProgram(Program ast, Object o) {
     return ast.C.visit(this, o);
   }
 
-  public Encoder (ErrorReporter reporter) {
+  public Encoder(ErrorReporter reporter) {
     this.reporter = reporter;
     nextInstrAddr = Machine.CB;
     elaborateStdEnvironment();
@@ -842,16 +833,16 @@ public final class Encoder implements Visitor {
   // Generates code to run a program.
   // showingTable is true iff entity description details
   // are to be displayed.
-  public final void encodeRun (Program theAST, boolean showingTable) {
+  public final void encodeRun(Program theAST, boolean showingTable) {
     tableDetailsReqd = showingTable;
-    //startCodeGeneration();
-    theAST.visit(this, new Frame (0, 0));
+    // startCodeGeneration();
+    theAST.visit(this, new Frame(0, 0));
     emit(Machine.HALTop, 0, 0, 0);
   }
 
   // Decides run-time representation of a standard constant.
-  private final void elaborateStdConst (Declaration constDeclaration,
-					int value) {
+  private final void elaborateStdConst(Declaration constDeclaration,
+      int value) {
 
     if (constDeclaration instanceof ConstDeclaration) {
       ConstDeclaration decl = (ConstDeclaration) constDeclaration;
@@ -862,21 +853,21 @@ public final class Encoder implements Visitor {
   }
 
   // Decides run-time representation of a standard routine.
-  private final void elaborateStdPrimRoutine (Declaration routineDeclaration,
-                                          int routineOffset) {
-    routineDeclaration.entity = new PrimitiveRoutine (Machine.closureSize, routineOffset);
+  private final void elaborateStdPrimRoutine(Declaration routineDeclaration,
+      int routineOffset) {
+    routineDeclaration.entity = new PrimitiveRoutine(Machine.closureSize, routineOffset);
     writeTableDetails(routineDeclaration);
   }
 
-  private final void elaborateStdEqRoutine (Declaration routineDeclaration,
-                                          int routineOffset) {
-    routineDeclaration.entity = new EqualityRoutine (Machine.closureSize, routineOffset);
+  private final void elaborateStdEqRoutine(Declaration routineDeclaration,
+      int routineOffset) {
+    routineDeclaration.entity = new EqualityRoutine(Machine.closureSize, routineOffset);
     writeTableDetails(routineDeclaration);
   }
 
-  private final void elaborateStdRoutine (Declaration routineDeclaration,
-                                          int routineOffset) {
-    routineDeclaration.entity = new KnownRoutine (Machine.closureSize, 0, routineOffset);
+  private final void elaborateStdRoutine(Declaration routineDeclaration,
+      int routineOffset) {
+    routineDeclaration.entity = new KnownRoutine(Machine.closureSize, 0, routineOffset);
     writeTableDetails(routineDeclaration);
   }
 
@@ -920,17 +911,17 @@ public final class Encoder implements Visitor {
     int addr;
 
     try {
-      objectFile = new FileOutputStream (objectName);
-      objectStream = new DataOutputStream (objectFile);
+      objectFile = new FileOutputStream(objectName);
+      objectStream = new DataOutputStream(objectFile);
 
       addr = Machine.CB;
       for (addr = Machine.CB; addr < nextInstrAddr; addr++)
         Machine.code[addr].write(objectStream);
       objectFile.close();
     } catch (FileNotFoundException s) {
-      System.err.println ("Error opening object file: " + s);
+      System.err.println("Error opening object file: " + s);
     } catch (IOException s) {
-      System.err.println ("Error writing object file: " + s);
+      System.err.println("Error writing object file: " + s);
     }
   }
 
@@ -948,11 +939,11 @@ public final class Encoder implements Visitor {
   private int nextInstrAddr;
 
   // Appends an instruction, with the given fields, to the object code.
-  private void emit (int op, int n, int r, int d) {
+  private void emit(int op, int n, int r, int d) {
     Instruction nextInstr = new Instruction();
     if (n > 255) {
-        reporter.reportRestriction("length of operand can't exceed 255 words");
-        n = 255; // to allow code generation to continue
+      reporter.reportRestriction("length of operand can't exceed 255 words");
+      n = 255; // to allow code generation to continue
     }
     nextInstr.op = op;
     nextInstr.n = n;
@@ -961,36 +952,36 @@ public final class Encoder implements Visitor {
     if (nextInstrAddr == Machine.PB)
       reporter.reportRestriction("too many instructions for code segment");
     else {
-        Machine.code[nextInstrAddr] = nextInstr;
-        nextInstrAddr = nextInstrAddr + 1;
+      Machine.code[nextInstrAddr] = nextInstr;
+      nextInstrAddr = nextInstrAddr + 1;
     }
   }
 
   // Patches the d-field of the instruction at address addr.
-  private void patch (int addr, int d) {
+  private void patch(int addr, int d) {
     Machine.code[addr].d = d;
   }
 
   // DATA REPRESENTATION
 
-  public int characterValuation (String spelling) {
-  // Returns the machine representation of the given character literal.
+  public int characterValuation(String spelling) {
+    // Returns the machine representation of the given character literal.
     return spelling.charAt(1);
-      // since the character literal is of the form 'x'}
+    // since the character literal is of the form 'x'}
   }
 
   // REGISTERS
 
   // Returns the register number appropriate for object code at currentLevel
   // to address a data object at objectLevel.
-  private int displayRegister (int currentLevel, int objectLevel) {
+  private int displayRegister(int currentLevel, int objectLevel) {
     if (objectLevel == 0)
       return Machine.SBr;
     else if (currentLevel - objectLevel <= 6)
       return Machine.LBr + currentLevel - objectLevel; // LBr|L1r|...|L6r
     else {
       reporter.reportRestriction("can't access data more than 6 levels out");
-      return Machine.L6r;  // to allow code generation to continue
+      return Machine.L6r; // to allow code generation to continue
     }
   }
 
@@ -1013,17 +1004,17 @@ public final class Encoder implements Visitor {
       ObjectAddress address = ((KnownAddress) baseObject).address;
       if (V.indexed) {
         emit(Machine.LOADAop, 0, displayRegister(frame.level, address.level),
-             address.displacement + V.offset);
+            address.displacement + V.offset);
         emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.addDisplacement);
         emit(Machine.STOREIop, valSize, 0, 0);
       } else {
         emit(Machine.STOREop, valSize, displayRegister(frame.level,
-	     address.level), address.displacement + V.offset);
+            address.level), address.displacement + V.offset);
       }
     } else if (baseObject instanceof UnknownAddress) {
       ObjectAddress address = ((UnknownAddress) baseObject).address;
       emit(Machine.LOADop, Machine.addressSize, displayRegister(frame.level,
-           address.level), address.displacement);
+          address.level), address.displacement);
       if (V.indexed)
         emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.addDisplacement);
       if (V.offset != 0) {
@@ -1054,22 +1045,21 @@ public final class Encoder implements Visitor {
       int value = ((KnownValue) baseObject).value;
       emit(Machine.LOADLop, 0, 0, value);
     } else if ((baseObject instanceof UnknownValue) ||
-               (baseObject instanceof KnownAddress)) {
-      ObjectAddress address = (baseObject instanceof UnknownValue) ?
-                              ((UnknownValue) baseObject).address :
-                              ((KnownAddress) baseObject).address;
+        (baseObject instanceof KnownAddress)) {
+      ObjectAddress address = (baseObject instanceof UnknownValue) ? ((UnknownValue) baseObject).address
+          : ((KnownAddress) baseObject).address;
       if (V.indexed) {
         emit(Machine.LOADAop, 0, displayRegister(frame.level, address.level),
-             address.displacement + V.offset);
+            address.displacement + V.offset);
         emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.addDisplacement);
         emit(Machine.LOADIop, valSize, 0, 0);
       } else
         emit(Machine.LOADop, valSize, displayRegister(frame.level,
-	     address.level), address.displacement + V.offset);
+            address.level), address.displacement + V.offset);
     } else if (baseObject instanceof UnknownAddress) {
       ObjectAddress address = ((UnknownAddress) baseObject).address;
       emit(Machine.LOADop, Machine.addressSize, displayRegister(frame.level,
-           address.level), address.displacement);
+          address.level), address.displacement);
       if (V.indexed)
         emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.addDisplacement);
       if (V.offset != 0) {
@@ -1086,20 +1076,20 @@ public final class Encoder implements Visitor {
   // frameSize is the anticipated size of the local stack frame when
   // the variable is addressed at run-time.
 
-  private void encodeFetchAddress (Vname V, Frame frame) {
+  private void encodeFetchAddress(Vname V, Frame frame) {
 
     RuntimeEntity baseObject = (RuntimeEntity) V.visit(this, frame);
     // If indexed = true, code will have been generated to load an index value.
     if (baseObject instanceof KnownAddress) {
       ObjectAddress address = ((KnownAddress) baseObject).address;
       emit(Machine.LOADAop, 0, displayRegister(frame.level, address.level),
-           address.displacement + V.offset);
+          address.displacement + V.offset);
       if (V.indexed)
         emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.addDisplacement);
     } else if (baseObject instanceof UnknownAddress) {
       ObjectAddress address = ((UnknownAddress) baseObject).address;
-      emit(Machine.LOADop, Machine.addressSize,displayRegister(frame.level,
-           address.level), address.displacement);
+      emit(Machine.LOADop, Machine.addressSize, displayRegister(frame.level,
+          address.level), address.displacement);
       if (V.indexed)
         emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.addDisplacement);
       if (V.offset != 0) {
@@ -1109,118 +1099,173 @@ public final class Encoder implements Visitor {
     }
   }
 
-    @Override
-    public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitForFromCommand(ForFromCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitForFromCommand(ForFromCommand aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitDoCommandAST(DoCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitDoCommandAST(DoCommand aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
+    int jumpAddr, repeatAddr;
+    Frame frame = (Frame) o;
+    // Evaluar E1 y E2
+    aThis.ForFrom.E.visit(this, frame);
+    aThis.TC.E.visit(this, frame);
 
-    @Override
-    public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    jumpAddr = nextInstrAddr; // Jump a la evaluacion de la condicion
+    emit(Machine.JUMPop, 0, Machine.CBr, 0);
+    repeatAddr = nextInstrAddr;
 
-    @Override
-    public Object visitUntilCommand(UntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    aThis.Do.C.visit(this, frame);
 
-    @Override
-    public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    emit(Machine.CALLop, 0, Machine.PBr, Machine.succDisplacement); // Call succ
 
-    @Override
-    public Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    int evaluate = nextInstrAddr;
+    patch(jumpAddr, evaluate);
 
-    @Override
-    public Object visitUntilEndCommand(UntilEndCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    emit(Machine.LOADop, 2, Machine.STr, -2);
+    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.geDisplacement);
 
-    @Override
-    public Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repeatAddr);
 
-    @Override
-    public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    emit(Machine.POPop, 0, 0, 2);
 
-    @Override
-    public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    return null;
 
-    @Override
-    public Object visitForInCommand(ForInCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  }
 
-    @Override
-    public Object visitForInDoCommand(ForInDo aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitToCommandAST(ToCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitUntilCommand(UntilCommand aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitThenCommandAST(ThenCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitLeaveIdentifier(LeaveIdentifier aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitUntilEndCommand(UntilEndCommand aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitNextIdentifier(NextIdentifier aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitReturnCommand(ReturnCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitRecDeclaration(RecDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitForInCommand(ForInCommand aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 
-    @Override
-    public Object visitCompoundSingleDeclaration(CompoundSingleDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  @Override
+  public Object visitForInDoCommand(ForInDo aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
+
+  @Override
+  public Object visitToCommandAST(ToCommand aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
+
+  @Override
+  public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
+        Frame frame = (Frame) o;
+        int extraSize = 0;
+        extraSize = (Integer) aThis.E.visit(this, frame);
+        emit(Machine.PUSHop, 0, 0, extraSize);
+        aThis.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
+        writeTableDetails(aThis);
+        Integer valSize = (Integer) aThis.E.visit(this, frame);
+        ObjectAddress address = ((KnownAddress) aThis.entity).address;
+        emit(Machine.STOREop, valSize, displayRegister(frame.level,
+                address.level), address.displacement);
+        return new Integer(extraSize);
+  }
+
+  @Override
+  public Object visitThenCommandAST(ThenCommand aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
+
+  @Override
+  public Object visitLeaveIdentifier(LeaveIdentifier aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
+
+  @Override
+  public Object visitNextIdentifier(NextIdentifier aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
+
+  @Override
+  public Object visitReturnCommand(ReturnCommand aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
+
+  @Override
+  public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
+
+  @Override
+  public Object visitRecDeclaration(RecDeclaration aThis, Object o) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
+
+  @Override
+  public Object visitCompoundSingleDeclaration(CompoundSingleDeclaration aThis, Object o) {
+    return aThis.dAST.visit(this, o);
+  }
 }
