@@ -1118,7 +1118,7 @@ public final class Checker implements Visitor {
       idTable.enter("", loop);
     }
 
-    idTable.enter(aThis.ForFrom.I.spelling, aThis.ForFrom); // ingresa el id del for
+    idTable.enter(aThis.ForFrom.I.spelling, aThis.ForFrom); // ingresa el id del for con la primera expresion
     if (aThis.ForFrom.duplicated)
       reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
 

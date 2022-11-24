@@ -238,6 +238,10 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitSelectCommand(SelectCommand ast, Object obj) {
+    Frame frame = (Frame) obj;
+    // se evalua la expresion selectora
+    //int expression = (Integer) ast.expression.visit(this, frame);
+    
     return null;
   }
 
@@ -723,7 +727,9 @@ public final class Encoder implements Visitor {
 
   public Object visitIdentifier(Identifier ast, Object o) {
     Frame frame = (Frame) o;
-    if (ast.decl.entity instanceof KnownRoutine) {
+    if (ast.decl == null) { //para la primera pasada del rec
+        emit(Machine.CALLop, 0, Machine.CBr, 0);
+    } else if (ast.decl.entity instanceof KnownRoutine) {
       ObjectAddress address = ((KnownRoutine) ast.decl.entity).address;
       emit(Machine.CALLop, displayRegister(frame.level, address.level),
           Machine.CBr, address.displacement);
@@ -740,7 +746,7 @@ public final class Encoder implements Visitor {
       int displacement = ((EqualityRoutine) ast.decl.entity).displacement;
       emit(Machine.LOADLop, 0, 0, frame.size / 2);
       emit(Machine.CALLop, Machine.SBr, Machine.PBr, displacement);
-    }
+    } 
     return null;
   }
 
@@ -1101,8 +1107,9 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      Frame frame = (Frame) o;
+      aThis.WhileVar.visit(this, frame);
+      return null;
   }
 
   @Override
@@ -1113,35 +1120,46 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitDoCommandAST(DoCommand aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     Frame frame = (Frame) o;
+    aThis.C.visit(this, frame);
+    return null;
   }
 
   @Override
   public Object visitForFromAST1(ForFromAST1 aThis, Object o) {
-    int jumpAddr, repeatAddr;
     Frame frame = (Frame) o;
     // Evaluar E1 y E2
-    aThis.ForFrom.E.visit(this, frame);
-    aThis.TC.E.visit(this, frame);
-
-    jumpAddr = nextInstrAddr; // Jump a la evaluacion de la condicion
-    emit(Machine.JUMPop, 0, Machine.CBr, 0);
+    int last = (Integer) aThis.TC.E.visit(this, frame);
+    frame = new Frame(frame, last);
+    
+    int first = (Integer) aThis.ForFrom.E.visit(this, frame);
+    //emit(Machine.PUSHop, 0,0, first);
+    //aThis.ForFrom.I.entity = new UnknownValue(first, frame.level, frame.size);
+    aThis.ForFrom.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
+    //int size = (Integer) aThis.ForFrom.E.visit(this, frame);
+    ObjectAddress address = ((KnownAddress) aThis.ForFrom.entity).address;
+    //emit(Machine.STOREop, first, displayRegister(frame.level, address.level), address.displacement);
+    frame = new Frame(frame, first);
+    
+    int jumpAddr, repeatAddr;
+    jumpAddr = nextInstrAddr; // Jump a la condicion
+    emit(Machine.JUMPop, 0, Machine.SBr, 0);
     repeatAddr = nextInstrAddr;
-
+    
+    //emit(Machine.LOADop, 1, Machine.SBr, 1);
     aThis.Do.C.visit(this, frame);
-
-    emit(Machine.CALLop, 0, Machine.PBr, Machine.succDisplacement); // Call succ
+    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.succDisplacement); // Call succ
+    
 
     int evaluate = nextInstrAddr;
     patch(jumpAddr, evaluate);
+    
+    emit(Machine.LOADop, 1, Machine.STr, -1);
+    emit(Machine.LOADop, 1, Machine.STr, -3);
+    emit(Machine.CALLop, 0, Machine.PBr, Machine.leDisplacement);
+    emit(Machine.JUMPIFop, Machine.trueRep, Machine.SBr, repeatAddr);
 
-    emit(Machine.LOADop, 2, Machine.STr, -2);
-    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.geDisplacement);
-
-    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repeatAddr);
-
-    emit(Machine.POPop, 0, 0, 2);
+    emit(Machine.POPop, 0, 0, first+last);
 
     return null;
 
@@ -1149,14 +1167,24 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Frame frame = (Frame) o;
+    aThis.UntilVar.visit(this, frame);
+    return null;
   }
 
   @Override
   public Object visitUntilCommand(UntilCommand aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Frame frame = (Frame) o;
+    int jumpAddr, loopAddr;
+
+    jumpAddr = nextInstrAddr;
+    emit(Machine.JUMPop, 0, Machine.CBr, 0);
+    loopAddr = nextInstrAddr;
+    aThis.C.visit(this, frame);
+    patch(jumpAddr, nextInstrAddr);
+    aThis.E.visit(this, frame);
+    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
+    return null;
   }
 
   @Override
@@ -1167,8 +1195,14 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitLoopWhileEndCommand(LoopWhileEndAST aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Frame frame = (Frame) o;
+    int loopAddr;
+
+    loopAddr = nextInstrAddr;
+    aThis.C.visit(this, frame);
+    aThis.WhileV.E.visit(this, frame);
+    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
+    return null;
   }
 
   @Override
@@ -1179,32 +1213,104 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Frame frame = (Frame) o;
+    int loopAddr;
+
+    loopAddr = nextInstrAddr;
+    aThis.C.visit(this, frame);
+    aThis.UntilEnd.E.visit(this, frame);
+    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
+    return null;
   }
 
   @Override
   public Object visitForFromWhile(LoopForFromWhile aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Frame frame = (Frame) o;
+    // Evaluar E1 y E2
+    int last = (Integer) aThis.E.E.visit(this, frame);
+    frame = new Frame(frame, last);
+    
+    int first = (Integer) aThis.ForFrom.E.visit(this, frame);
+    aThis.ForFrom.I.entity = new UnknownValue(first, frame.level, frame.size);
+    frame = new Frame(frame, first);
+    
+    int jumpAddr, repeatAddr, comAddr;
+    jumpAddr = nextInstrAddr; // Jump a la condicion
+    emit(Machine.JUMPop, 0, Machine.SBr, jumpAddr);
+    
+    //emit(Machine.LOADop, 1, Machine.SBr, 1);
+    comAddr = nextInstrAddr;
+    aThis.whileV.C.visit(this, frame);
+    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.succDisplacement); // Call succ
+    
+    patch(jumpAddr, nextInstrAddr);
+    
+    emit(Machine.LOADop, 1, Machine.STr, -1);
+    emit(Machine.LOADop, 1, Machine.STr, -3);
+    emit(Machine.CALLop, 0, Machine.PBr, Machine.leDisplacement);
+    repeatAddr = nextInstrAddr;
+    emit(Machine.JUMPIFop, Machine.falseRep, Machine.SBr, repeatAddr);
+    
+    emit(Machine.LOADop, 1, Machine.STr, -1);
+    int whileT = (Integer) aThis.whileV.E.visit(this, frame);
+    emit(Machine.JUMPIFop, Machine.trueRep, Machine.SBr, comAddr);
+    
+    patch(repeatAddr, nextInstrAddr);
+    
+    emit(Machine.POPop, 0, 0, first+last);
+
+    return null;
   }
 
   @Override
   public Object visitForFromUntil(LoopForFromUntil aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Frame frame = (Frame) o;
+    // Evaluar E1 y E2
+    int last = (Integer) aThis.E.E.visit(this, frame);
+    frame = new Frame(frame, last);
+    
+    int first = (Integer) aThis.ForFrom.E.visit(this, frame);
+    aThis.ForFrom.I.entity = new UnknownValue(first, frame.level, frame.size);
+    frame = new Frame(frame, first);
+    
+    int jumpAddr, repeatAddr, comAddr;
+    jumpAddr = nextInstrAddr; // Jump a la condicion
+    emit(Machine.JUMPop, 0, Machine.SBr, jumpAddr);
+    
+    //emit(Machine.LOADop, 1, Machine.SBr, 1);
+    comAddr = nextInstrAddr;
+    aThis.untilV.C.visit(this, frame);
+    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.succDisplacement); // Call succ
+    
+    patch(jumpAddr, nextInstrAddr);
+    
+    emit(Machine.LOADop, 1, Machine.STr, -1);
+    emit(Machine.LOADop, 1, Machine.STr, -3);
+    emit(Machine.CALLop, 0, Machine.PBr, Machine.leDisplacement);
+    repeatAddr = nextInstrAddr;
+    emit(Machine.JUMPIFop, Machine.falseRep, Machine.SBr, repeatAddr);
+    
+    emit(Machine.LOADop, 1, Machine.STr, -1);
+    int untilT = (Integer) aThis.untilV.E.visit(this, frame);
+    emit(Machine.JUMPIFop, Machine.falseRep, Machine.SBr, comAddr);
+    
+    patch(repeatAddr, nextInstrAddr);
+    
+    emit(Machine.POPop, 0, 0, first+last);
+
+    return null;
   }
 
   @Override
   public Object visitForInCommand(ForInCommand aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    return null;
   }
 
   @Override
   public Object visitForInDoCommand(ForInDo aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Frame frame = (Frame) o;
+     
+    return null;
   }
 
   @Override
@@ -1254,18 +1360,29 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Frame frame = (Frame) o;
+    int sizeD1, sizeD2;
+    
+    sizeD1 = (Integer) aThis.D1.visit(this, frame);
+    Frame frame1 = new Frame(frame, sizeD1);
+    sizeD2 = (Integer) aThis.D2.visit(this, frame1);
+    
+    return sizeD1+sizeD2;
   }
 
   @Override
   public Object visitRecDeclaration(RecDeclaration aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Frame frame = (Frame) o;
+    int intrAddr, sizeD;
+    intrAddr = nextInstrAddr; // se guarda la dirección para realizar de nuevo el visit
+    aThis.dAST.visit(this, frame);
+    nextInstrAddr = intrAddr; // para realizar de nuevo el visit y rellenar lo necesario
+    sizeD = (Integer) aThis.dAST.visit(this, frame);
+    return sizeD;
   }
 
   @Override
   public Object visitCompoundSingleDeclaration(CompoundSingleDeclaration aThis, Object o) {
-    return aThis.dAST.visit(this, o);
+    return (Integer) aThis.dAST.visit(this, o);
   }
 }

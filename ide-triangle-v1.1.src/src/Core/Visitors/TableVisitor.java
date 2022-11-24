@@ -771,14 +771,14 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 
     @Override
     public Object visitLoopCommandAST1(LoopCommandAST1 aThis, Object o) { // Autor : Valeria Chinchilla
-        aThis.I.visit(this, null);
+        //aThis.I.visit(this, null);
         aThis.WhileVar.visit(this, null);
         return(null);
     }
 
     @Override
     public Object visitForFromCommand(ForFromCommand aThis, Object o) { // Autor : Valeria Chinchilla
-        aThis.I.visit(this, null);
+        //aThis.I.visit(this, null);
         aThis.E.visit(this, null);      
         return(null);
     }
@@ -802,7 +802,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 
     @Override
     public Object visitLoopUntilDoAST(LoopUntilDoAST aThis, Object o) { // Autor : Valeria Chinchilla
-        aThis.I.visit(this, null);
+        //aThis.I.visit(this, null);
         aThis.UntilVar.visit(this, null);
       
         return(null);
@@ -839,7 +839,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 
     @Override
     public Object visitLoopUntilEndCommand(LoopUntilEndAST aThis, Object o) { // Autor : Valeria Chinchilla
-        aThis.I.visit(this, null);
+        //aThis.I.visit(this, null);
         aThis.C.visit(this, null);
         aThis.UntilEnd.visit(this, null);
       
@@ -848,7 +848,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 
     @Override
     public Object visitForFromWhile(LoopForFromWhile aThis, Object o) { // Autor : Valeria Chinchilla
-        aThis.I.visit(this, null);
+        //aThis.I.visit(this, null);
         aThis.E.visit(this, null);
         aThis.ForFrom.visit(this, null);
         aThis.whileV.visit(this, null);
@@ -858,7 +858,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 
     @Override
     public Object visitForFromUntil(LoopForFromUntil aThis, Object o) { // Autor : Valeria Chinchilla
-        aThis.I.visit(this, null);
+        //aThis.I.visit(this, null);
         aThis.E.visit(this, null);
         aThis.ForFrom.visit(this, null);
         aThis.untilV.visit(this, null);
@@ -876,7 +876,7 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 
     @Override
     public Object visitForInDoCommand(ForInDo aThis, Object o) { // Autor : Valeria Chinchilla
-        aThis.I.visit(this, null);
+        //aThis.I.visit(this, null);
         aThis.forAST.visit(this, null);
         aThis.C.visit(this, null);
       
