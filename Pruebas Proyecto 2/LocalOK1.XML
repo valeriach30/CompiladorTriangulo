@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<LocalDeclaration>
+<SequentialDeclaration>
+<CompoundSingleDeclaration>
+<VarDeclarationInit>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+<Identifier value='a'>
+</Identifier>
+</VarDeclarationInit>
+</CompoundSingleDeclaration>
+<CompoundSingleDeclaration>
+<ConstDeclaration>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+<Identifier value='b'>
+</Identifier>
+</ConstDeclaration>
+</CompoundSingleDeclaration>
+</SequentialDeclaration>
+<SequentialDeclaration>
+<CompoundSingleDeclaration>
+<ProcDeclaration>
+<EmptyFormalParameterSequence>
+</EmptyFormalParameterSequence>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</ProcDeclaration>
+</CompoundSingleDeclaration>
+<CompoundSingleDeclaration>
+<FuncDeclaration>
+<IntTypeDenoter>
+</IntTypeDenoter>
+<EmptyFormalParameterSequence>
+</EmptyFormalParameterSequence>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='b'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '+'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '2'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</FuncDeclaration>
+</CompoundSingleDeclaration>
+</SequentialDeclaration>
+</LocalDeclaration>
+<SequentialCommand>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='P'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallCommand>
+<CallCommand>
+<Identifier value='puteol'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallCommand>
+</SequentialCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CallExpression>
+<Identifier value='m'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</SequentialCommand>
+</LetCommand>
+</Program>

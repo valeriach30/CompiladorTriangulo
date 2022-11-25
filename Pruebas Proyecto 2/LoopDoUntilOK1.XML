@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<CompoundSingleDeclaration>
+<VarDeclaration>
+<IntTypeDenoter>
+</IntTypeDenoter>
+</VarDeclaration>
+</CompoundSingleDeclaration>
+<SequentialCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</AssignCommand>
+<LoopCommand>
+<DoCommand>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '+'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</AssignCommand>
+</SequentialCommand>
+</DoCommand>
+<UntilCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='x'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&gt;'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '5'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</UntilCommand>
+</LoopCommand>
+</SequentialCommand>
+</LetCommand>
+</Program>

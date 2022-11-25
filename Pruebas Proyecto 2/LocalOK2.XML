@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<LocalDeclaration>
+<CompoundSingleDeclaration>
+<ConstDeclaration>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+<Identifier value='a'>
+</Identifier>
+</ConstDeclaration>
+</CompoundSingleDeclaration>
+<SequentialDeclaration>
+<LocalDeclaration>
+<CompoundSingleDeclaration>
+<ConstDeclaration>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '+'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+<Identifier value='b'>
+</Identifier>
+</ConstDeclaration>
+</CompoundSingleDeclaration>
+<CompoundSingleDeclaration>
+<ConstDeclaration>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='b'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '+'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</BinaryExpression>
+<Identifier value='c'>
+</Identifier>
+</ConstDeclaration>
+</CompoundSingleDeclaration>
+</LocalDeclaration>
+<CompoundSingleDeclaration>
+<ConstDeclaration>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '+'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='c'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</BinaryExpression>
+<Identifier value='d'>
+</Identifier>
+</ConstDeclaration>
+</CompoundSingleDeclaration>
+</SequentialDeclaration>
+</LocalDeclaration>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='d'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</Program>
