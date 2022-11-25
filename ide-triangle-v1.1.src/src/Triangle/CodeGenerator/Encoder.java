@@ -1133,12 +1133,7 @@ public final class Encoder implements Visitor {
     frame = new Frame(frame, last);
     
     int first = (Integer) aThis.ForFrom.E.visit(this, frame);
-    //emit(Machine.PUSHop, 0,0, first);
-    //aThis.ForFrom.I.entity = new UnknownValue(first, frame.level, frame.size);
-    aThis.ForFrom.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
-    //int size = (Integer) aThis.ForFrom.E.visit(this, frame);
-    ObjectAddress address = ((KnownAddress) aThis.ForFrom.entity).address;
-    //emit(Machine.STOREop, first, displayRegister(frame.level, address.level), address.displacement);
+    aThis.ForFrom.entity = new UnknownValue(first, frame.level, frame.size);
     frame = new Frame(frame, first);
     
     int jumpAddr, repeatAddr;
@@ -1146,7 +1141,7 @@ public final class Encoder implements Visitor {
     emit(Machine.JUMPop, 0, Machine.SBr, 0);
     repeatAddr = nextInstrAddr;
     
-    //emit(Machine.LOADop, 1, Machine.SBr, 1);
+    
     aThis.Do.C.visit(this, frame);
     emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.succDisplacement); // Call succ
     
@@ -1189,8 +1184,7 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitWhileEndCommand(WhileEndCommand aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    return null; //No es necesario implementarlo pues se visita la expresion desde el visit de loop while end
   }
 
   @Override
@@ -1207,8 +1201,7 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitUntilEndCommand(UntilEndCommand aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    return null; //No es necesario implementarlo pues se visita la expresion desde el visit de loop until end
   }
 
   @Override
@@ -1231,19 +1224,18 @@ public final class Encoder implements Visitor {
     frame = new Frame(frame, last);
     
     int first = (Integer) aThis.ForFrom.E.visit(this, frame);
-    aThis.ForFrom.I.entity = new UnknownValue(first, frame.level, frame.size);
+    aThis.ForFrom.entity = new UnknownValue(first, frame.level, frame.size);
     frame = new Frame(frame, first);
     
-    int jumpAddr, repeatAddr, comAddr;
-    jumpAddr = nextInstrAddr; // Jump a la condicion
-    emit(Machine.JUMPop, 0, Machine.SBr, jumpAddr);
+    int comAddr, repeatAddr, jmpAddr;
+    jmpAddr = nextInstrAddr;
+    emit(Machine.JUMPop, 0, Machine.SBr, 0);
     
-    //emit(Machine.LOADop, 1, Machine.SBr, 1);
     comAddr = nextInstrAddr;
     aThis.whileV.C.visit(this, frame);
     emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.succDisplacement); // Call succ
     
-    patch(jumpAddr, nextInstrAddr);
+    patch(jmpAddr, nextInstrAddr);
     
     emit(Machine.LOADop, 1, Machine.STr, -1);
     emit(Machine.LOADop, 1, Machine.STr, -3);
@@ -1251,8 +1243,7 @@ public final class Encoder implements Visitor {
     repeatAddr = nextInstrAddr;
     emit(Machine.JUMPIFop, Machine.falseRep, Machine.SBr, repeatAddr);
     
-    emit(Machine.LOADop, 1, Machine.STr, -1);
-    int whileT = (Integer) aThis.whileV.E.visit(this, frame);
+    aThis.whileV.E.visit(this, frame);
     emit(Machine.JUMPIFop, Machine.trueRep, Machine.SBr, comAddr);
     
     patch(repeatAddr, nextInstrAddr);
@@ -1270,19 +1261,18 @@ public final class Encoder implements Visitor {
     frame = new Frame(frame, last);
     
     int first = (Integer) aThis.ForFrom.E.visit(this, frame);
-    aThis.ForFrom.I.entity = new UnknownValue(first, frame.level, frame.size);
+    aThis.ForFrom.entity = new UnknownValue(first, frame.level, frame.size);
     frame = new Frame(frame, first);
     
-    int jumpAddr, repeatAddr, comAddr;
-    jumpAddr = nextInstrAddr; // Jump a la condicion
-    emit(Machine.JUMPop, 0, Machine.SBr, jumpAddr);
+    int comAddr, repeatAddr, jmpAddr;
+    jmpAddr = nextInstrAddr;
+    emit(Machine.JUMPop, 0, Machine.SBr, 0);
     
-    //emit(Machine.LOADop, 1, Machine.SBr, 1);
     comAddr = nextInstrAddr;
     aThis.untilV.C.visit(this, frame);
     emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.succDisplacement); // Call succ
     
-    patch(jumpAddr, nextInstrAddr);
+    patch(jmpAddr, nextInstrAddr);
     
     emit(Machine.LOADop, 1, Machine.STr, -1);
     emit(Machine.LOADop, 1, Machine.STr, -3);
@@ -1290,8 +1280,7 @@ public final class Encoder implements Visitor {
     repeatAddr = nextInstrAddr;
     emit(Machine.JUMPIFop, Machine.falseRep, Machine.SBr, repeatAddr);
     
-    emit(Machine.LOADop, 1, Machine.STr, -1);
-    int untilT = (Integer) aThis.untilV.E.visit(this, frame);
+    aThis.untilV.E.visit(this, frame);
     emit(Machine.JUMPIFop, Machine.falseRep, Machine.SBr, comAddr);
     
     patch(repeatAddr, nextInstrAddr);
@@ -1322,16 +1311,10 @@ public final class Encoder implements Visitor {
   @Override
   public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
         Frame frame = (Frame) o;
-        int extraSize = 0;
-        extraSize = (Integer) aThis.E.visit(this, frame);
-        emit(Machine.PUSHop, 0, 0, extraSize);
+        int size = (Integer) aThis.E.visit(this, frame);
         aThis.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
         writeTableDetails(aThis);
-        Integer valSize = (Integer) aThis.E.visit(this, frame);
-        ObjectAddress address = ((KnownAddress) aThis.entity).address;
-        emit(Machine.STOREop, valSize, displayRegister(frame.level,
-                address.level), address.displacement);
-        return new Integer(extraSize);
+        return size;
   }
 
   @Override
@@ -1362,23 +1345,24 @@ public final class Encoder implements Visitor {
   public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
     Frame frame = (Frame) o;
     int sizeD1, sizeD2;
-    
+    int inicio = nextInstrAddr;
+    aThis.D1.visit(this, frame);
+    aThis.D2.visit(this, frame);
+    nextInstrAddr = inicio;
     sizeD1 = (Integer) aThis.D1.visit(this, frame);
-    Frame frame1 = new Frame(frame, sizeD1);
-    sizeD2 = (Integer) aThis.D2.visit(this, frame1);
-    
+    sizeD2 = (Integer) aThis.D2.visit(this, frame);
     return sizeD1+sizeD2;
   }
 
   @Override
   public Object visitRecDeclaration(RecDeclaration aThis, Object o) {
     Frame frame = (Frame) o;
-    int intrAddr, sizeD;
-    intrAddr = nextInstrAddr; // se guarda la dirección para realizar de nuevo el visit
-    aThis.dAST.visit(this, frame);
-    nextInstrAddr = intrAddr; // para realizar de nuevo el visit y rellenar lo necesario
-    sizeD = (Integer) aThis.dAST.visit(this, frame);
-    return sizeD;
+    //int intrAddr, sizeD;
+    //intrAddr = nextInstrAddr; // se guarda la dirección para realizar de nuevo el visit
+    int size = (Integer) aThis.dAST.visit(this, frame);
+    //nextInstrAddr = intrAddr; // para realizar de nuevo el visit y rellenar lo necesario
+    //sizeD = (Integer) aThis.dAST.visit(this, frame);
+    return size;
   }
 
   @Override
