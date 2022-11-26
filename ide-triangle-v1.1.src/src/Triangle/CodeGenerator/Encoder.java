@@ -128,6 +128,7 @@ import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 import Triangle.AbstractSyntaxTrees.WhileEndCommand;
+import java.util.Arrays;
 
 public final class Encoder implements Visitor {
 
@@ -727,7 +728,7 @@ public final class Encoder implements Visitor {
 
   public Object visitIdentifier(Identifier ast, Object o) {
     Frame frame = (Frame) o;
-    if (ast.decl == null) { //para la primera pasada del rec
+    if (ast.decl.entity == null) { //para la primera pasada del rec
         emit(Machine.CALLop, 0, Machine.CBr, 0);
     } else if (ast.decl.entity instanceof KnownRoutine) {
       ObjectAddress address = ((KnownRoutine) ast.decl.entity).address;
@@ -1292,20 +1293,57 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitForInCommand(ForInCommand aThis, Object o) {
+    Frame frame = (Frame) o;
+    /*int sizeofIL = (Integer) aThis.E.visit(this, frame);
+    int sizeOfType = (Integer) ((ArrayTypeDenoter) aThis.E.type).T.visit(this, frame);
+    if (aThis.E instanceof VnameExpression) {
+        emit (Machine. POPop, 0, 0, sizeofIL);
+        emit (Machine. PUSHop, 0, 0, sizeOfType);
+        aThis.entity = new KnownAddress (sizeOfType, frame.level, frame.size); 
+        encodeFetchAddress(((VnameExpression) aThis.E).V, frame);
+        emit (Machine. LOADLop, 0, 0, (sizeofIL-sizeOfType));
+        emit (Machine. CALLop, Machine.SBr, Machine. PBr, Machine.addDisplacement); 
+        encodeFetchAddress(((VnameExpression) aThis.E).V, frame);
+        sizeofIL = 0;
+    }else{
+        aThis.E.entity =  new UnknownValue(sizeofIL, frame.level, frame.size);
+        emit (Machine. PUSHop, 0, 0, sizeOfType);
+        aThis.entity = new KnownAddress(sizeOfType, frame.level, (frame.size + sizeofIL));
+        emit (Machine.LOADAop, 0, displayRegister (frame.level, ((UnknownValue) aThis.E.entity).address.level), ((UnknownValue) aThis.E.entity).address.displacement+(sizeofIL-sizeOfType)); 
+        emit (Machine.LOADAop, 0, displayRegister (frame.level, ((UnknownValue) aThis.E.entity).address.level), ((UnknownValue) aThis.E.entity).address.displacement);
+    }
+    return new Integer[] {sizeofIL, sizeOfType};*/
     return null;
   }
 
   @Override
   public Object visitForInDoCommand(ForInDo aThis, Object o) {
     Frame frame = (Frame) o;
-     
+    /*Integer [] sizes = (Integer []) aThis.forAST.visit(this, frame);
+    int repeatAddr = nextInstrAddr;
+    emit (Machine.LOADop, Machine.addressSize, Machine.STr, -1*(Machine.addressSize));
+    emit(Machine.LOADIop, sizes[1], 0, 0);
+    emit (Machine.STOREop, sizes[1], Machine.STr, -1*(2*Machine.addressSize + 2*sizes[1]));
+    aThis.C.visit(this, frame);
+    emit (Machine. LOADLop, 0, 0, sizes[1]);
+    emit (Machine.CALLop, Machine.SBr, Machine. PBr, Machine.addDisplacement);
+    emit (Machine.LOADop, 2*Machine.addressSize, Machine.STr, -1*(2*Machine.addressSize));
+    emit (Machine.CALLop, Machine. SBr, Machine. PBr, Machine.geDisplacement);
+    emit (Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repeatAddr);
+    emit (Machine.POPop, 0, 0, (sizes[0]+sizes[1]+2));*/
+    
+    int sizeArr, sizeType;
+    sizeArr = (Integer) aThis.forAST.E.visit(this, frame);
+    sizeType = (Integer) ((ArrayTypeDenoter) aThis.forAST.E.type).T.visit(this, frame);
+    aThis.forAST.entity = new KnownAddress(sizeType, frame.level, frame.size);
+    
     return null;
+
   }
 
   @Override
   public Object visitToCommandAST(ToCommand aThis, Object o) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                   // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    return null; // no se visita directamente, si no en los for from
   }
 
   @Override
@@ -1344,29 +1382,27 @@ public final class Encoder implements Visitor {
   @Override
   public Object visitSequentialDeclarationProcFuncs(SequentialDeclarationProcFuncs aThis, Object o) {
     Frame frame = (Frame) o;
-    int sizeD1, sizeD2;
-    int inicio = nextInstrAddr;
-    aThis.D1.visit(this, frame);
-    aThis.D2.visit(this, frame);
-    nextInstrAddr = inicio;
+    int sizeD1, sizeD2, inicio;
+    inicio = nextInstrAddr; 
     sizeD1 = (Integer) aThis.D1.visit(this, frame);
-    sizeD2 = (Integer) aThis.D2.visit(this, frame);
+    Frame newFrame = new Frame(frame, sizeD1);
+    sizeD2 = (Integer) aThis.D2.visit(this, newFrame);
     return sizeD1+sizeD2;
   }
 
   @Override
   public Object visitRecDeclaration(RecDeclaration aThis, Object o) {
     Frame frame = (Frame) o;
-    //int intrAddr, sizeD;
-    //intrAddr = nextInstrAddr; // se guarda la dirección para realizar de nuevo el visit
-    int size = (Integer) aThis.dAST.visit(this, frame);
-    //nextInstrAddr = intrAddr; // para realizar de nuevo el visit y rellenar lo necesario
-    //sizeD = (Integer) aThis.dAST.visit(this, frame);
-    return size;
+    int intrAddr, sizeD;
+    intrAddr = nextInstrAddr; // se guarda la dirección para realizar de nuevo el visit
+    aThis.dAST.visit(this, frame);
+    nextInstrAddr = intrAddr; // para realizar de nuevo el visit y rellenar lo necesario
+    sizeD = (Integer) aThis.dAST.visit(this, frame);
+    return sizeD;
   }
 
   @Override
   public Object visitCompoundSingleDeclaration(CompoundSingleDeclaration aThis, Object o) {
-    return (Integer) aThis.dAST.visit(this, o);
+    return (Integer) aThis.dAST.visit(this, (Frame)o);
   }
 }
