@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<LetCommand>
+<SequentialDeclaration>
+<CompoundSingleDeclaration>
+<ConstDeclaration>
+<IntegerExpression>
+<IntegerLiteral value= '10'>
+</IntegerLiteral>
+</IntegerExpression>
+<Identifier value='b'>
+</Identifier>
+</ConstDeclaration>
+</CompoundSingleDeclaration>
+<CompoundSingleDeclaration>
+<VarDeclarationInit>
+<IntegerExpression>
+<IntegerLiteral value= '15'>
+</IntegerLiteral>
+</IntegerExpression>
+<Identifier value='a'>
+</Identifier>
+</VarDeclarationInit>
+</CompoundSingleDeclaration>
+</SequentialDeclaration>
+<LoopCommand>
+<WhileCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value='&gt;'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='b'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</BinaryExpression>
+<DoCommand>
+<SequentialCommand>
+<CallCommand>
+<Identifier value='putint'>
+</Identifier>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value='a'>
+</Identifier>
+</SimpleVname>
+</VnameExpression>
+<Operator value= '-'>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+</AssignCommand>
+</SequentialCommand>
+</DoCommand>
+</WhileCommand>
+</LoopCommand>
+</LetCommand>
+</Program>

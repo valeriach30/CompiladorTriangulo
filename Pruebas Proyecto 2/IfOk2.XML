@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program>
+<IfCommand>
+<BinaryExpression>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+<Operator value= '='>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '1'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='puteol'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallCommand>
+<IfCommand>
+<BinaryExpression>
+<IntegerExpression>
+<IntegerLiteral value= '2'>
+</IntegerLiteral>
+</IntegerExpression>
+<Operator value= '='>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '2'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='puteol'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallCommand>
+<IfCommand>
+<BinaryExpression>
+<IntegerExpression>
+<IntegerLiteral value= '3'>
+</IntegerLiteral>
+</IntegerExpression>
+<Operator value= '='>
+<BinaryOperatorDeclaration>
+</BinaryOperatorDeclaration>
+</Operator>
+<IntegerExpression>
+<IntegerLiteral value= '3'>
+</IntegerLiteral>
+</IntegerExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value='puteol'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallCommand>
+<CallCommand>
+<Identifier value='puteol'>
+</Identifier>
+<EmptyActualParameterSequence>
+</EmptyActualParameterSequence>
+</CallCommand>
+</IfCommand>
+</IfCommand>
+</IfCommand>
+</Program>
