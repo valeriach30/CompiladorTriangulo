@@ -52,6 +52,7 @@ public final class Checker implements Visitor {
           "", ast.position);
     if (cType.equals(o) == false)
       reporter.reportError("All literals must be the same kind", "", ast.position);
+    
     return null;
   }
 
@@ -833,14 +834,19 @@ public final class Checker implements Visitor {
       ast.type = ((VarFormalParameter) binding).T;
       ast.variable = true;
     } else if (binding instanceof VarDeclarationInit) { // Se agrega para var init
-      ast.type = ((VarDeclarationInit) binding).T;
+      ast.type = ((VarDeclarationInit) binding).E.type;
       ast.variable = true; // Se agrega como una variable
     } else if (binding instanceof ForFromCommand) {
       ast.type = ((ForFromCommand) binding).E.type;
       ast.variable = false; // Se agrega como una variable
     } else if (binding instanceof ForInCommand) {
+<<<<<<< Updated upstream
       ast.type = ((ForInCommand) binding).E.type;
       ast.variable = false; // Se agrega como una variable
+=======
+      ast.type = ((ArrayTypeDenoter) ((ForInCommand)binding).E.type).T; // Se cambió para arreglar un error
+      ast.variable = false; // Se agrega como una variable              // que ocurría en el code generator
+>>>>>>> Stashed changes
     } else
       reporter.reportError("\"%\" is not a const or var identifier",
           ast.I.spelling, ast.I.position);
@@ -1312,7 +1318,6 @@ public final class Checker implements Visitor {
     if (aThis.forAST.duplicated)
       reporter.reportError("identifier \"%\" already declared", 
           aThis.forAST.I.spelling, aThis.forAST.position);
-
     aThis.C.visit(this, null); // com
     idTable.closeScope();
     return null;

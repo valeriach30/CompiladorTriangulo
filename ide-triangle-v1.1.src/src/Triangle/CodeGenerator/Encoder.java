@@ -359,7 +359,7 @@ public final class Encoder implements Visitor {
   public Object visitVnameExpression(VnameExpression ast, Object o) {
     Frame frame = (Frame) o;
     Integer valSize = (Integer) ast.type.visit(this, null);
-    encodeFetch(ast.V, frame, valSize.intValue());
+    encodeFetch(ast.V, frame, valSize);
     return valSize;
   }
 
@@ -1293,50 +1293,33 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitForInCommand(ForInCommand aThis, Object o) {
-    Frame frame = (Frame) o;
-    /*int sizeofIL = (Integer) aThis.E.visit(this, frame);
-    int sizeOfType = (Integer) ((ArrayTypeDenoter) aThis.E.type).T.visit(this, frame);
-    if (aThis.E instanceof VnameExpression) {
-        emit (Machine. POPop, 0, 0, sizeofIL);
-        emit (Machine. PUSHop, 0, 0, sizeOfType);
-        aThis.entity = new KnownAddress (sizeOfType, frame.level, frame.size); 
-        encodeFetchAddress(((VnameExpression) aThis.E).V, frame);
-        emit (Machine. LOADLop, 0, 0, (sizeofIL-sizeOfType));
-        emit (Machine. CALLop, Machine.SBr, Machine. PBr, Machine.addDisplacement); 
-        encodeFetchAddress(((VnameExpression) aThis.E).V, frame);
-        sizeofIL = 0;
-    }else{
-        aThis.E.entity =  new UnknownValue(sizeofIL, frame.level, frame.size);
-        emit (Machine. PUSHop, 0, 0, sizeOfType);
-        aThis.entity = new KnownAddress(sizeOfType, frame.level, (frame.size + sizeofIL));
-        emit (Machine.LOADAop, 0, displayRegister (frame.level, ((UnknownValue) aThis.E.entity).address.level), ((UnknownValue) aThis.E.entity).address.displacement+(sizeofIL-sizeOfType)); 
-        emit (Machine.LOADAop, 0, displayRegister (frame.level, ((UnknownValue) aThis.E.entity).address.level), ((UnknownValue) aThis.E.entity).address.displacement);
-    }
-    return new Integer[] {sizeofIL, sizeOfType};*/
-    return null;
+    return null; //se visita cada parte en el forInDoCommand
   }
 
   @Override
   public Object visitForInDoCommand(ForInDo aThis, Object o) {
     Frame frame = (Frame) o;
-    /*Integer [] sizes = (Integer []) aThis.forAST.visit(this, frame);
+    
+    int sizeofArray = (Integer) aThis.forAST.E.visit(this, frame);
+    int sizeOfType = (Integer) ((ArrayTypeDenoter) aThis.forAST.E.type).T.visit(this, frame);
+    
+    aThis.forAST.E.entity =  new UnknownValue(sizeofArray, frame.level, frame.size);
+    emit (Machine. PUSHop, 0, 0, sizeOfType);
+    aThis.forAST.entity = new KnownAddress(sizeOfType, frame.level, frame.size+sizeofArray);
+    emit (Machine.LOADLop, 0, Machine.STr, sizeofArray-sizeOfType); 
+    emit (Machine.LOADLop, 0, Machine.STr, 0);
+    
     int repeatAddr = nextInstrAddr;
-    emit (Machine.LOADop, Machine.addressSize, Machine.STr, -1*(Machine.addressSize));
-    emit(Machine.LOADIop, sizes[1], 0, 0);
-    emit (Machine.STOREop, sizes[1], Machine.STr, -1*(2*Machine.addressSize + 2*sizes[1]));
+    emit (Machine.LOADop, 1, Machine.STr, -1);
+    emit(Machine.LOADIop, sizeOfType, 0, 0);
+    emit (Machine.STOREop, sizeOfType, Machine.STr, -1*(2 + 2*sizeOfType));
     aThis.C.visit(this, frame);
-    emit (Machine. LOADLop, 0, 0, sizes[1]);
+    emit (Machine. LOADLop, 0, 0, sizeOfType);
     emit (Machine.CALLop, Machine.SBr, Machine. PBr, Machine.addDisplacement);
-    emit (Machine.LOADop, 2*Machine.addressSize, Machine.STr, -1*(2*Machine.addressSize));
+    emit (Machine.LOADop, 2, Machine.STr, -2);
     emit (Machine.CALLop, Machine. SBr, Machine. PBr, Machine.geDisplacement);
     emit (Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repeatAddr);
-    emit (Machine.POPop, 0, 0, (sizes[0]+sizes[1]+2));*/
-    
-    int sizeArr, sizeType;
-    sizeArr = (Integer) aThis.forAST.E.visit(this, frame);
-    sizeType = (Integer) ((ArrayTypeDenoter) aThis.forAST.E.type).T.visit(this, frame);
-    aThis.forAST.entity = new KnownAddress(sizeType, frame.level, frame.size);
-    
+    emit (Machine.POPop, 0, 0, (sizeofArray+sizeOfType+2));
     return null;
 
   }
@@ -1348,11 +1331,26 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
-        Frame frame = (Frame) o;
+        /*Frame frame = (Frame) o;
         int size = (Integer) aThis.E.visit(this, frame);
         aThis.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
         writeTableDetails(aThis);
-        return size;
+        return size;*/
+        Frame frame = (Frame) o;
+    int extraSize; // puede omitirse y usar valSize abajo; preferimos ser consistentes con Watt & Brown
+
+    // ast.E.visit genera instrucciones TAM para evaluar la expresión,
+    // eso aumenta el tamaño de la pila; no hay que hacer PUSH.
+    // ¿Cuánto crece la pila?
+    // la pila crece en el tamaño que ocupa un dato del tipo de la expresión E
+    // los datos quedarán entre data [ST - valSize] y data [ST - 1]
+    int valSize = ((Integer) aThis.E.visit(this, frame)).intValue(); 
+    // (frame.level, frame.size) conforman la dirección (relativa) donde comienza la nueva variable
+    aThis.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
+    // la variable necesta extraSize palabras de almacenamiento. Lo informamos.
+    extraSize = valSize;
+    writeTableDetails(aThis);
+    return new Integer(extraSize);
   }
 
   @Override
