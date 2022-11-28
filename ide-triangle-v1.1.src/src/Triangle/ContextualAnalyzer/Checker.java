@@ -840,13 +840,8 @@ public final class Checker implements Visitor {
       ast.type = ((ForFromCommand) binding).E.type;
       ast.variable = false; // Se agrega como una variable
     } else if (binding instanceof ForInCommand) {
-<<<<<<< Updated upstream
-      ast.type = ((ForInCommand) binding).E.type;
-      ast.variable = false; // Se agrega como una variable
-=======
       ast.type = ((ArrayTypeDenoter) ((ForInCommand)binding).E.type).T; // Se cambió para arreglar un error
       ast.variable = false; // Se agrega como una variable              // que ocurría en el code generator
->>>>>>> Stashed changes
     } else
       reporter.reportError("\"%\" is not a const or var identifier",
           ast.I.spelling, ast.I.position);
@@ -1258,9 +1253,7 @@ public final class Checker implements Visitor {
     if (aThis.ForFrom.duplicated)
       reporter.reportError("identifier \"%\" already declared", aThis.I.spelling, aThis.position);
 
-    aThis.whileV.E.visit(this, null);
-    aThis.whileV.C.visit(this, null);
-    //aThis.whileV.visit(this, null); // while exp do command (exp3)
+    aThis.whileV.visit(this, null); // while exp do command (exp3)
     idTable.closeScope(); // Se cierra el scope.
     return null;
   }
