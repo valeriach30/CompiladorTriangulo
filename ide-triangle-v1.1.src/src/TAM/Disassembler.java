@@ -221,6 +221,8 @@ public class Disassembler {
 	break;
       case Machine.disposeDisplacement:
 	System.out.print ("dispose ");
+      case Machine.INDEXcheck:
+        System.out.print ("index   ");
 	break;
     }
   }
@@ -324,6 +326,9 @@ public class Disassembler {
 
       case Machine.HALTop:
         System.out.print ("HALT  ");
+        break;
+      case Machine.CASEerror:
+        System.out.print ("CERROR");
     }
   }
 

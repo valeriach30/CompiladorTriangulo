@@ -40,7 +40,7 @@ public final class StdEnvironment {
       addDecl, subtractDecl, multiplyDecl, divideDecl, moduloDecl,
       equalDecl, unequalDecl, lessDecl, notlessDecl, greaterDecl, notgreaterDecl;
 
-  public static ProcDeclaration getDecl, putDecl, getintDecl, putintDecl, geteolDecl, puteolDecl;
+  public static ProcDeclaration getDecl, putDecl, getintDecl, putintDecl, geteolDecl, puteolDecl, indexCheck;
 
   public static FuncDeclaration chrDecl, ordDecl, eolDecl, eofDecl;
 

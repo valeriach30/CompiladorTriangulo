@@ -838,10 +838,10 @@ public final class Checker implements Visitor {
       ast.variable = true; // Se agrega como una variable
     } else if (binding instanceof ForFromCommand) {
       ast.type = ((ForFromCommand) binding).E.type;
-      ast.variable = false; // Se agrega como una variable
+      ast.variable = false; 
     } else if (binding instanceof ForInCommand) {
       ast.type = ((ArrayTypeDenoter) ((ForInCommand)binding).E.type).T; // Se cambió para arreglar un error
-      ast.variable = false; // Se agrega como una variable              // que ocurría en el code generator
+      ast.variable = false;                                              // que ocurría en el code generator
     } else
       reporter.reportError("\"%\" is not a const or var identifier",
           ast.I.spelling, ast.I.position);

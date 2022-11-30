@@ -128,19 +128,19 @@ import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 import Triangle.AbstractSyntaxTrees.WhileEndCommand;
-import java.util.Arrays;
 
 public final class Encoder implements Visitor {
 
   // Commands
+  @Override
   public Object visitAssignCommand(AssignCommand ast, Object o) {
     Frame frame = (Frame) o;
     Integer valSize = (Integer) ast.E.visit(this, frame);
-    encodeStore(ast.V, new Frame(frame, valSize.intValue()),
-        valSize.intValue());
+    encodeStore(ast.V, new Frame(frame, valSize), valSize);
     return null;
   }
 
+  @Override
   public Object visitCallCommand(CallCommand ast, Object o) {
     Frame frame = (Frame) o;
     Integer argsSize = (Integer) ast.APS.visit(this, frame);
@@ -148,16 +148,16 @@ public final class Encoder implements Visitor {
     return null;
   }
 
+  @Override
   public Object visitEmptyCommand(EmptyCommand ast, Object o) {
-    emit(Machine.HALTop, 0, 0, 0);
-    return null;
+    return 0;
   }
 
+  @Override
   public Object visitIfCommand(IfCommand ast, Object o) {
     Frame frame = (Frame) o;
     int jumpifAddr, jumpAddr;
-
-    Integer valSize = (Integer) ast.E.visit(this, frame);
+    ast.E.visit(this, frame);
     jumpifAddr = nextInstrAddr;
     emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, 0);
     ast.C1.visit(this, frame);
@@ -169,27 +169,31 @@ public final class Encoder implements Visitor {
     return null;
   }
 
+  @Override
   public Object visitLetCommand(LetCommand ast, Object o) {
     Frame frame = (Frame) o;
-    int extraSize = ((Integer) ast.D.visit(this, frame)).intValue();
+    int extraSize = ((Integer) ast.D.visit(this, frame));
     ast.C.visit(this, new Frame(frame, extraSize));
     if (extraSize > 0)
       emit(Machine.POPop, 0, 0, extraSize);
     return null;
   }
 
+    @Override
   public Object visitSequentialCommand(SequentialCommand ast, Object o) {
     ast.C1.visit(this, o);
     ast.C2.visit(this, o);
     return null;
   }
 
+  @Override
   public Object visitSequentialCases(SequentialCases ast, Object o) {
     ast.C1.visit(this, o);
     ast.C2.visit(this, o);
     return null;
   }
 
+  @Override
   public Object visitWhileCommand(WhileCommand ast, Object o) {
     Frame frame = (Frame) o;
     int jumpAddr, loopAddr;
@@ -206,87 +210,214 @@ public final class Encoder implements Visitor {
 
   // Se dejo declarado el CaseLiteralCommand para los siguientes proyectos.
   // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  @Override
   public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object O) {
-    return null;
+    Frame frame = (Frame) O;
+    //verifica si es un IL o un CL
+    if(ast.CL != null){
+        //es caracter
+        emit(Machine.LOADLop, 0, 0, ast.CL.spelling.charAt(1));
+        //emit();
+    }else{
+        //es entero
+        emit(Machine.LOADLop, 0, 0, Integer.parseInt(ast.IL.spelling));
+    }
+    return 1;
   }
 
   // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  @Override
   public Object visitCaseRangeCommand(CaseRangeCommand ast, Object O) {
-    return null;
+    Frame frame = (Frame) O;
+    int size,jmpaddr;
+    //decide si es rango o no
+    if(ast.TC == null){
+        //no es rango
+        jmpaddr = nextInstrAddr;
+        //se duplica el tope de la pila
+        emit(Machine.LOADop, 1, Machine.STr, -1);
+        //se carga la literal
+        size = (int) ast.CLC.visit(this, frame);
+        emit(Machine.LOADLop, 0, 0, size);
+        //se comparan
+        emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.eqDisplacement);
+        //si son diferente se hace el jump a lo que sigue
+        emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, nextInstrAddr);
+    }else{
+        //es rango
+        jmpaddr = nextInstrAddr;
+        //se duplica el tope
+        emit(Machine.LOADop, 1, Machine.STr, -1);
+        //se carga la primera literal
+        size = (int) ast.CLC.visit(this, frame);
+        //Se verifica que sea mayor o igual 
+        emit(Machine.CALLop, 0, 0, Machine.geDisplacement);
+        //salta a lo que sigue si no se cumple
+        emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, nextInstrAddr);
+        //se vuelve a duplicar el tope
+        emit(Machine.LOADop, 1, Machine.STr, -1);
+        //se carga la segunda literal
+        size = size + (int) ast.TC.visit(this, frame);
+        //se compara que sea menor o igual
+        emit(Machine.CALLop, 0, 0, Machine.leDisplacement);
+        //salta a lo que sigue si no se cumple
+        emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, nextInstrAddr);
+    }
+    //lo que le sigue a esto es el comando que se visita en el visitCaseCommand
+    return 1;
   }
 
   // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  @Override
   public Object visitToCommandLiteralAST(ToCommandLiteral ast, Object obj) {
     return null;
   }
 
   // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  @Override
   public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj) {
     return null;
   }
 
   // Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
+  @Override
   public Object visitCaseLiterals(CaseLiterals ast, Object obj) {
-    return null;
+    Frame frame = (Frame) obj;
+    int size;
+    //Se decide si son varias literales o una sola
+    if(ast.SCRCL != null){
+        //Es una sola
+        size = (int) ast.SCRCL.visit(this, frame);
+    }else{
+        //son varias
+        size = (int) ast.MCRCL.visit(this, frame);
+    }
+    return size;
   }
 
+  @Override
   public Object visitCaseCommand(CaseCommand ast, Object obj) {
-    return null;
+    Frame frame = (Frame) obj;
+    // Visita el case literals
+    int size = (int) ast.CL.visit(this, frame);
+    int jmpAddr = nextInstrAddr;
+    //Se visita el comando
+    ast.C.visit(this, frame);
+    //patch(jmpAddr-1, nextInstrAddr);
+      System.out.println(jmpAddr-1);
+    return size;
   }
 
+   
+    @Override
   public Object visitCasesCommand(CasesCommand ast, Object obj) {
-    return null;
+    Frame frame = (Frame) obj;
+    int size = 0;
+    if(ast.singleCase != null){
+        size = (int) ast.singleCase.visit(this, frame);
+    }else if(ast.multipleCase != null){
+        size = (int) ast.multipleCase.visit(this, frame);
+    }
+    return size;
   }
 
+  @Override
   public Object visitSelectCommand(SelectCommand ast, Object obj) {
     Frame frame = (Frame) obj;
-    // se evalua la expresion selectora
-    //int expression = (Integer) ast.expression.visit(this, frame);
-    
+    /*// se evalua la expresion selectora
+    int expression = (Integer) ast.expression.visit(this, frame);
+    int jmpAddr = nextInstrAddr;
+    //se evaluan los cases
+    int cases = (Integer) ast.cases.visit(this, frame);
+    //Se hace un patch para el jump del else
+    jmpAddr = nextInstrAddr;
+    emit(Machine.JUMPop, 0, Machine.CBr, jmpAddr);
+    patch(jmpAddr-1, nextInstrAddr);
+    //Se revisa si hay un else
+    if(ast.command != null){
+        ast.command.visit(this, frame);
+    }else{
+        emit(Machine.CASEerror, 0, 0, 0);
+    }
+    patch(jmpAddr, nextInstrAddr);
+    emit(Machine.POPop, 0, 0, expression);*/
     return null;
   }
 
+  @Override
   public Object visitSingleCaseRange(SingleCaseRange ast, Object obj) {
-    return null;
+    Frame frame = (Frame) obj;
+    int size;
+    //visita el case range
+    size = (int) ast.CRCSCR.visit(this, frame);
+    return size;
   }
 
+    @Override
   public Object visitSingleThen(SingleThen ast, Object obj) {
     return null;
   }
-
+    @Override
   public Object visitSingleCase(SingleCase ast, Object obj) {
-    return null;
+    Frame frame = (Frame) obj;
+    return (int) ast.SC.visit(this, frame);
   }
 
+  @Override
   public Object visitMultipleCaseRange(MultipleCaseRange ast, Object obj) {
-    return null;
+    Frame frame = (Frame) obj;
+    int size;
+    //verifica si es el ultimo o hay mas
+    if(ast.CRCMCR2 == null){
+        //es el ultimo
+        size = (int) ast.CRCMCR.visit(this, frame);
+    }else{
+        size = (int) ast.CRCMCR.visit(this, frame);
+        size = size + (int) ast.CRCMCR2.visit(this, frame);
+    }
+    return 1;
   }
 
+  @Override
   public Object visitMultipleThen(MultipleThen ast, Object obj) {
     return null;
   }
 
+  @Override
   public Object visitMultipleCase(MultipleCase ast, Object obj) {
-    return null;
+    Frame frame = (Frame) obj;
+    int size;
+    //revisa si hay mas
+    if(ast.MCC2 == null){
+        //no hay
+        size = (int) ast.MCC.visit(this, frame);
+    }else{
+        size = (int) ast.MCC.visit(this, frame);
+        size = size + (int) ast.MCC2.visit(this, frame);
+    }
+    return size;
   }
 
   // Expressions
+  @Override
   public Object visitArrayExpression(ArrayExpression ast, Object o) {
     ast.type.visit(this, null);
     return ast.AA.visit(this, o);
   }
 
+  @Override
   public Object visitBinaryExpression(BinaryExpression ast, Object o) {
     Frame frame = (Frame) o;
     Integer valSize = (Integer) ast.type.visit(this, null);
-    int valSize1 = ((Integer) ast.E1.visit(this, frame)).intValue();
+    int valSize1 = ((Integer) ast.E1.visit(this, frame));
     Frame frame1 = new Frame(frame, valSize1);
-    int valSize2 = ((Integer) ast.E2.visit(this, frame1)).intValue();
+    int valSize2 = ((Integer) ast.E2.visit(this, frame1));
     Frame frame2 = new Frame(frame.level, valSize1 + valSize2);
     ast.O.visit(this, frame2);
     return valSize;
   }
 
+  @Override
   public Object visitCallExpression(CallExpression ast, Object o) {
     Frame frame = (Frame) o;
     Integer valSize = (Integer) ast.type.visit(this, null);
@@ -295,6 +426,7 @@ public final class Encoder implements Visitor {
     return valSize;
   }
 
+  @Override
   public Object visitCharacterExpression(CharacterExpression ast,
       Object o) {
     Frame frame = (Frame) o;
@@ -797,7 +929,7 @@ public final class Encoder implements Visitor {
   public Object visitSubscriptVname(SubscriptVname ast, Object o) {
     Frame frame = (Frame) o;
     RuntimeEntity baseObject;
-    int elemSize, indexSize;
+    int elemSize, indexSize, index;
 
     baseObject = (RuntimeEntity) ast.V.visit(this, frame);
     ast.offset = ast.V.offset;
@@ -806,16 +938,27 @@ public final class Encoder implements Visitor {
     if (ast.E instanceof IntegerExpression) {
       IntegerLiteral IL = ((IntegerExpression) ast.E).IL;
       ast.offset = ast.offset + Integer.parseInt(IL.spelling) * elemSize;
+      index = Integer.parseInt(IL.spelling);
+      emit(Machine.LOADLop, 0, 0, ast.V.offset + index*elemSize); //indice
+      emit(Machine.LOADLop, 0, 0, ast.V.offset); //cota inferior
+      emit(Machine.LOADLop, 0, 0, ast.V.type.entity.size); //cota superior
+      emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.INDEXcheck); //chequeo
+      emit(Machine.POPop, 0, 0, 3);//limpia la pila
     } else {
       // v-name is indexed by a proper expression, not a literal
       if (ast.indexed)
         frame.size = frame.size + Machine.integerSize;
-      indexSize = ((Integer) ast.E.visit(this, frame)).intValue();
+      index = ((Integer) ast.E.visit(this, frame)).intValue();
       if (elemSize != 1) {
         emit(Machine.LOADLop, 0, 0, elemSize);
         emit(Machine.CALLop, Machine.SBr, Machine.PBr,
             Machine.multDisplacement);
       }
+      //La cota superior es el tope de la pila donde esta el resultado de la expresion
+      emit(Machine.LOADLop, 0, 0, ast.V.offset); //cota inferior
+      emit(Machine.LOADLop, 0, 0, ast.V.type.entity.size); //cotasuperior
+      emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.INDEXcheck); //chequeo
+      emit(Machine.POPop, 0, 0, 2); //deja la pila como estaba con el resultado de la expresion en el tope
       if (ast.indexed)
         emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.addDisplacement);
       else
@@ -1249,7 +1392,7 @@ public final class Encoder implements Visitor {
     
     patch(repeatAddr, nextInstrAddr);
     
-    emit(Machine.POPop, 0, 0, first+last);
+    emit(Machine.POPop, 0, 0, first+last+1);
 
     return null;
   }
@@ -1286,7 +1429,7 @@ public final class Encoder implements Visitor {
     
     patch(repeatAddr, nextInstrAddr);
     
-    emit(Machine.POPop, 0, 0, first+last);
+    emit(Machine.POPop, 0, 0, first+last+1);
 
     return null;
   }
@@ -1306,18 +1449,23 @@ public final class Encoder implements Visitor {
     aThis.forAST.E.entity =  new UnknownValue(sizeofArray, frame.level, frame.size);
     emit (Machine. PUSHop, 0, 0, sizeOfType);
     aThis.forAST.entity = new KnownAddress(sizeOfType, frame.level, frame.size+sizeofArray);
-    emit (Machine.LOADLop, 0, Machine.STr, sizeofArray-sizeOfType); 
-    emit (Machine.LOADLop, 0, Machine.STr, 0);
+    emit (Machine.LOADAop, 0, displayRegister(frame.level, //Carga el tamaño de la pila - tamaño del tipo
+            ((UnknownValue) aThis.forAST.E.entity).address.level), //tomando en cuenta la posicion en la que empieza
+            ((UnknownValue) aThis.forAST.E.entity).address.displacement + sizeofArray-sizeOfType); //el arreglo en la pila
+    emit (Machine.LOADAop, 0, displayRegister(frame.level, //Carga la posicion en la que empieza la pila
+            ((UnknownValue) aThis.forAST.E.entity).address.level), 
+            ((UnknownValue) aThis.forAST.E.entity).address.displacement);
     
+    frame = new Frame(frame, sizeOfType+sizeofArray+2);
     int repeatAddr = nextInstrAddr;
     emit (Machine.LOADop, 1, Machine.STr, -1);
     emit(Machine.LOADIop, sizeOfType, 0, 0);
     emit (Machine.STOREop, sizeOfType, Machine.STr, -1*(2 + 2*sizeOfType));
     aThis.C.visit(this, frame);
     emit (Machine. LOADLop, 0, 0, sizeOfType);
-    emit (Machine.CALLop, Machine.SBr, Machine. PBr, Machine.addDisplacement);
+    emit (Machine.CALLop, Machine.SBr, Machine.PBr, Machine.addDisplacement);
     emit (Machine.LOADop, 2, Machine.STr, -2);
-    emit (Machine.CALLop, Machine. SBr, Machine. PBr, Machine.geDisplacement);
+    emit (Machine.CALLop, Machine.SBr, Machine.PBr, Machine.geDisplacement);
     emit (Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repeatAddr);
     emit (Machine.POPop, 0, 0, (sizeofArray+sizeOfType+2));
     return null;
@@ -1331,26 +1479,11 @@ public final class Encoder implements Visitor {
 
   @Override
   public Object visitVarDeclarationInit(VarDeclarationInit aThis, Object o) {
-        /*Frame frame = (Frame) o;
-        int size = (Integer) aThis.E.visit(this, frame);
-        aThis.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
-        writeTableDetails(aThis);
-        return size;*/
-        Frame frame = (Frame) o;
-    int extraSize; // puede omitirse y usar valSize abajo; preferimos ser consistentes con Watt & Brown
-
-    // ast.E.visit genera instrucciones TAM para evaluar la expresión,
-    // eso aumenta el tamaño de la pila; no hay que hacer PUSH.
-    // ¿Cuánto crece la pila?
-    // la pila crece en el tamaño que ocupa un dato del tipo de la expresión E
-    // los datos quedarán entre data [ST - valSize] y data [ST - 1]
-    int valSize = ((Integer) aThis.E.visit(this, frame)).intValue(); 
-    // (frame.level, frame.size) conforman la dirección (relativa) donde comienza la nueva variable
+    Frame frame = (Frame) o;
+    int size = (Integer) aThis.E.visit(this, frame);
     aThis.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
-    // la variable necesta extraSize palabras de almacenamiento. Lo informamos.
-    extraSize = valSize;
     writeTableDetails(aThis);
-    return new Integer(extraSize);
+    return size;
   }
 
   @Override

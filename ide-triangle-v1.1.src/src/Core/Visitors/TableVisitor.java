@@ -149,14 +149,17 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   public Object visitCasesCommand(CasesCommand ast, Object o) { 
-      ast.singleCase.visit(this, null);
-      ast.multipleCase.visit(this, null);
+      if(ast.multipleCase == null)
+        ast.singleCase.visit(this, null);
+      else
+        ast.multipleCase.visit(this, null);
       return(null);
   }
   
   public Object visitSelectCommand(SelectCommand ast, Object o) { 
       ast.cases.visit(this, null);
-      ast.command.visit(this, null);
+      if(ast.command != null)
+         ast.command.visit(this, null);
       ast.expression.visit(this, null);
       return(null);
   }
@@ -201,8 +204,10 @@ public class TableVisitor implements Visitor {
   }
 //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
 public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object o) { 
-    ast.CL.visit(this, null);
-    ast.IL.visit(this, null);
+    if(ast.CL != null)
+        ast.CL.visit(this, null);
+    else
+        ast.IL.visit(this, null);
       
     return(null);
 }
@@ -210,7 +215,8 @@ public Object visitCaseLiteralCommand(CaseLiteralCommand ast, Object o) {
 //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
 public Object visitCaseRangeCommand(CaseRangeCommand ast, Object o) { 
     ast.CLC.visit(this, null);
-    ast.TC.visit(this, null);
+    if(ast.TC != null)
+        ast.TC.visit(this, null);
     return(null);
  }
 //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
@@ -227,9 +233,11 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
 
 //Autores: Kevin Rodriguez, Hilary Castro, Gabriel Fallas
  public Object visitCaseLiterals(CaseLiterals ast, Object o) { 
+    if(ast.MCRCL != null)
       ast.MCRCL.visit(this, null);
+    else
       ast.SCRCL.visit(this, null);
-      return(null);
+    return(null);
   }
  
  public Object visitThenCommandAST(ThenCommand aThis, Object o) { // Autor : Kevin Rodriguez
@@ -573,8 +581,12 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
   }
   
   public Object visitMultipleCaseRange(MultipleCaseRange ast, Object o) { 
-      ast.CRCMCR.visit(this, null);
-      ast.CRCMCR2.visit(this, null);
+      if(ast.CRCMCR2 == null)
+        ast.CRCMCR.visit(this, null);
+      else{
+          ast.CRCMCR.visit(this, null);
+          ast.CRCMCR2.visit(this, null);
+      }
       
       return(null);
   }
@@ -587,9 +599,13 @@ public Object visitBarCommandCaseRange(BarCommandCaseRange ast, Object obj){
       return(null);
   }
   
-  public Object visitMultipleCase(MultipleCase ast, Object o) { 
-      ast.MCC.visit(this, null);
-      ast.MCC2.visit(this, null);
+  public Object visitMultipleCase(MultipleCase ast, Object o) {
+      if(ast.MCC2 == null)
+        ast.MCC.visit(this, null);
+      else{
+          ast.MCC.visit(this, null);
+          ast.MCC2.visit(this, null);
+      }
       
       return(null);
   }

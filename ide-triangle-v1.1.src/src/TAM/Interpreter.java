@@ -44,7 +44,7 @@ public class Interpreter {
   final static int
     running = 0, halted = 1, failedDataStoreFull = 2, failedInvalidCodeAddress = 3,
     failedInvalidInstruction = 4, failedOverflow = 5, failedZeroDivide = 6,
-    failedIOError = 7, ArrayIndexOutOfBonds = 8;
+    failedIOError = 7, ArrayIndexOutOfBonds = 8, CaseError = 9;
 
   static long
     accumulator;
@@ -206,10 +206,13 @@ public class Interpreter {
       case failedIOError:
         System.out.println("Program has failed due to an IO error.");
         break;
-      case ArrayIndexOutOfBonds:
+      case ArrayIndexOutOfBonds: //arrays
         System.out.println("Program has failed due to an array out of bonds");
+        break;
+      case CaseError:
+        System.out.println("Program has failed due to a case command");
     }
-    if (status != halted)
+    if (status != halted && status != ArrayIndexOutOfBonds)
       dump();
   }
 
@@ -239,9 +242,9 @@ public class Interpreter {
     eq = true;
     index = 0;
     while (eq && (index < size))
-      if (data[addr1 + index] == data[addr2 + index])
+      if (data[addr1 + index] == data[addr2 + index]){
         index = index + 1;
-      else
+      }else
         eq = false;
     return eq;
   }
@@ -430,6 +433,10 @@ public class Interpreter {
       case Machine.disposeDisplacement:
         ST = ST - 1; // no action taken at present
         break;
+      case Machine.INDEXcheck: //Nuevo para los array
+        if(data[ST-1] <= data[ST-3] || data[ST-2] > data[ST-3])
+            status = ArrayIndexOutOfBonds;
+        break;
     }
   }
 
@@ -569,13 +576,12 @@ public class Interpreter {
           else
             CP = CP + 1;
           break;
-        case Machine.INDEXcheck: //Nuevo para los array
-            if(data[ST-1] <= data[ST-3] || data[ST-2] > data[ST-3])
-                status = ArrayIndexOutOfBonds;
-            break;
         case Machine.HALTop:
           status = halted;
           break;
+        case Machine.CASEerror:
+            status = CaseError;
+            break;
       }
       if ((CP < CB) || (CP >= CT))
         status = failedInvalidCodeAddress;

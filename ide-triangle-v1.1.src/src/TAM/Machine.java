@@ -51,7 +51,7 @@ public final class Machine {
     JUMPIop = 13,
     JUMPIFop = 14,
     HALTop = 15,
-    INDEXcheck = 16;
+    CASEerror = 16;
 
 
 
@@ -134,6 +134,7 @@ public final class Machine {
     getintDisplacement = 25,
     putintDisplacement = 26,
     newDisplacement = 27,
-    disposeDisplacement = 28;
+    disposeDisplacement = 28,
+    INDEXcheck = 29;
 
 }
